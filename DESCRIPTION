@@ -1,0 +1,37 @@
+Package: twocpcont
+Type: Package
+Title: Noniterative Closed-Form Sample Size for Trials with Two
+    Co-Primary Continuous Endpoints
+Version: 0.1.0
+Authors@R:
+    person("Gosuke", "Homma",
+           email = "my.name.is.gosuke@gmail.com",
+           role = c("aut", "cre"))
+Description: Provides a noniterative, closed-form sample size formula
+    for two-group superiority clinical trials with two co-primary
+    continuous endpoints under the known-variance assumption. The
+    closed-form expression is derived by combining Plackett's identity
+    with Gauss-Legendre quadrature for the correlation integral and two
+    analytic Taylor linearizations of the resulting power equation. A
+    conventional sequential-search method based on the bivariate normal
+    distribution is also implemented for benchmarking. The closed-form
+    structure further yields two analytic design quantities: a maximum
+    achievable reduction rate of the required sample size through
+    correlation adjustment, and a threshold effect-size ratio
+    identifying configurations in which the precise value of the
+    between-endpoint correlation has negligible impact on the required
+    sample size.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Depends:
+    R (>= 4.0.0)
+Imports:
+    pbivnorm,
+    stats
+Suggests:
+    ggplot2,
+    testthat (>= 3.0.0)
+URL: https://github.com/gosukehommaEX/twocpcont
+BugReports: https://github.com/gosukehommaEX/twocpcont/issues
+Config/roxygen2/version: 8.0.0
+Config/testthat/edition: 3

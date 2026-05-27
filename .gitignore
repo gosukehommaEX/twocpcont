@@ -1,0 +1,30 @@
+# R / RStudio
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.Rapp.history
+
+# Compiled / built package artifacts
+*.tar.gz
+*.tgz
+*.zip
+*.Rcheck/
+
+# pkgdown / Meta
+docs/
+Meta/
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Outputs not tracked in repo (manuscript reproducibility runs)
+inst/reproduce/table_and_figure_manuscript/
