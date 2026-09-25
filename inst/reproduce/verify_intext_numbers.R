@@ -1,12 +1,13 @@
 # ============================================================
-# In-text numerical-claim verification for Sections 3 and 4
+# In-text numerical-claim verification
 # ------------------------------------------------------------
 # Verifies every concrete number that appears in the body text
-# of Section 3 (Numerical investigation) and Section 4 (Real
-# trial example) of the manuscript.  Table and figure contents
-# themselves are produced by run_table_and_figure_manuscript.R
-# and are not re-checked here; only the numbers cited inside
-# the prose of those two sections are tested.
+# of Section 2.4 (reduction in sample size due to correlation),
+# Section 3 (numerical investigation) and Section 4 (real trial
+# example) of the manuscript.  The Discussion repeats numbers
+# from Section 3, which are covered by the Section 3 checks.
+# Table and figure contents themselves are produced by
+# run_table_and_figure_manuscript.R and are not re-checked here.
 #
 # Each claim is a separate PASS / FAIL line so that any drift
 # between manuscript prose and code output is immediately
@@ -74,42 +75,96 @@ section <- function(s) {
   log_msg(msg)
 }
 
-# Settings shared across Section 3
-alpha <- 0.025
-beta  <- 0.20
+# Settings shared across Sections 2 and 3
+alpha     <- 0.025
+power_set <- c(0.80, 0.85, 0.90)
+
+# ============================================================
+# SECTION 2.4: Maximum reduction rate and threshold
+# ============================================================
+section("Section 2.4 (Maximum reduction rate and threshold effect size ratio)")
+
+# (2.4-1) Rmax(1, 0.20) approximately 23.8%
+Rmax_1_80 <- r_max(kappa = 1, alpha = alpha, beta = 0.20) * 100
+record("(2.4-1) Rmax(1, 1-beta = 0.80) approximately 23.8%",
+       abs(Rmax_1_80 - 23.8) < 0.05,
+       sprintf("Rmax = %.4f%%", Rmax_1_80))
+
+# (2.4-2) The root of the rho = 0 equation lies in
+#         [z_alpha + z_beta, z_alpha + u_p]
+z_alpha <- qnorm(1 - alpha)
+in_bracket <- TRUE
+for (b in 1 - power_set) {
+  z_beta <- qnorm(1 - b)
+  u_p    <- qnorm(sqrt(1 - b))
+  for (k in seq(1, 3, by = 0.05)) {
+    lam0 <- (z_alpha + z_beta) / sqrt(1 - r_max(kappa = k, alpha = alpha,
+                                                 beta = b))
+    in_bracket <- in_bracket && lam0 >= z_alpha + z_beta - 1e-10 &&
+      lam0 <= z_alpha + u_p + 1e-10
+  }
+}
+record("(2.4-2) Root of the rho = 0 equation lies in [z_a + z_b, z_a + u_p]",
+       in_bracket, "kappa in [1, 3], 1-beta in {0.80, 0.85, 0.90}")
+
+# (2.4-3) Rmax is non-increasing in kappa
+mono_k <- all(sapply(1 - power_set, function(b) {
+  v <- sapply(seq(1, 3, by = 0.01), r_max, alpha = alpha, beta = b)
+  all(diff(v) <= 1e-12)
+}))
+record("(2.4-3) Rmax(kappa, beta) is non-increasing in kappa", mono_k,
+       "kappa in [1, 3] by 0.01")
+
+# (2.4-4) Closed-form and exact Rmax differ by less than 1e-4
+diff_max <- max(sapply(c(0.30, 0.20, 0.15, 0.13, 0.10), function(b) {
+  k_seq <- seq(1, 3, by = 0.001)
+  max(abs(sapply(k_seq, r_max, alpha = alpha, beta = b, exact = TRUE) -
+            sapply(k_seq, r_max, alpha = alpha, beta = b, exact = FALSE)))
+}))
+record("(2.4-4) Closed-form and exact Rmax differ by less than 1e-4",
+       diff_max < 1e-4,
+       sprintf("max |difference| = %.2e", diff_max))
+
+# (2.4-5) kappa_star(0.05, 1-beta = 0.80) approximately 1.37
+ks_05_80 <- kappa_star(epsilon = 0.05, alpha = alpha, beta = 0.20)
+record("(2.4-5) kappa_star(eps = 0.05, 1-beta = 0.80) approximately 1.37",
+       abs(ks_05_80 - 1.37) < 0.005,
+       sprintf("kappa_star = %.4f", ks_05_80))
+
+# (2.4-6) kappa_star is the exact inverse of Rmax
+inv_err <- max(sapply(1 - power_set, function(b) {
+  sapply(c(0.05, 0.10, 0.15), function(e) {
+    abs(r_max(kappa = kappa_star(epsilon = e, alpha = alpha, beta = b),
+              alpha = alpha, beta = b) - e)
+  })
+}))
+record("(2.4-6) Rmax(kappa_star(eps)) = eps", inv_err < 1e-10,
+       sprintf("max |Rmax - eps| = %.2e", inv_err))
 
 # ============================================================
 # SECTION 3.1: Setting
 # ============================================================
-section("Section 3.1 (Setting): effect-size ratios kappa per pattern")
+section("Section 3.1 (Setting)")
 
-# (3.1-1) kappa = 1.0 for (0.3, 0.3, 1, 1)
-k_a <- max(0.3 / 1, 0.3 / 1) / min(0.3 / 1, 0.3 / 1)
-record("(3.1-1) kappa = 1.0 for (delta1, delta2, sd1, sd2) = (0.3, 0.3, 1, 1)",
-       abs(k_a - 1.0) < 0.05,
-       sprintf("kappa = %.4f", k_a))
+kappa_of <- function(d1, d2, s1, s2) {
+  max(d1 / s1, d2 / s2) / min(d1 / s1, d2 / s2)
+}
+k_vals <- c(kappa_of(0.3, 0.3, 1, 1), kappa_of(0.7, 0.5, 1, 1),
+            kappa_of(0.3, 0.3, 1, 1.5), kappa_of(0.7, 0.5, 1, 1.5))
+record("(3.1-1) kappa = 1.0, 1.4, 1.5, 2.1 for the four (delta, sigma) pairs",
+       all(abs(k_vals - c(1.0, 1.4, 1.5, 2.1)) < 0.05),
+       sprintf("kappa = %s", paste(sprintf("%.4f", k_vals), collapse = ", ")))
 
-# (3.1-2) kappa = 1.4 for (0.7, 0.5, 1, 1)
-k_b <- max(0.7 / 1, 0.5 / 1) / min(0.7 / 1, 0.5 / 1)
-record("(3.1-2) kappa = 1.4 for (delta1, delta2, sd1, sd2) = (0.7, 0.5, 1, 1)",
-       abs(k_b - 1.4) < 0.05,
-       sprintf("kappa = %.4f", k_b))
+# (3.1-2) Equal allocation minimizes N (1/n1 + 1/n2 at fixed N)
+N_fix  <- 600
+n1_seq <- 1:(N_fix - 1)
+record("(3.1-2) 1/n1 + 1/n2 at fixed N is minimized at n1 = n2",
+       n1_seq[which.min(1 / n1_seq + 1 / (N_fix - n1_seq))] == N_fix / 2,
+       sprintf("N = %d", N_fix))
 
-# (3.1-3) kappa = 1.5 for (0.3, 0.3, 1, 1.5)
-k_c <- max(0.3 / 1, 0.3 / 1.5) / min(0.3 / 1, 0.3 / 1.5)
-record("(3.1-3) kappa = 1.5 for (delta1, delta2, sd1, sd2) = (0.3, 0.3, 1, 1.5)",
-       abs(k_c - 1.5) < 0.05,
-       sprintf("kappa = %.4f", k_c))
-
-# (3.1-4) kappa = 2.1 for (0.7, 0.5, 1, 1.5)
-k_d <- max(0.7 / 1, 0.5 / 1.5) / min(0.7 / 1, 0.5 / 1.5)
-record("(3.1-4) kappa = 2.1 for (delta1, delta2, sd1, sd2) = (0.7, 0.5, 1, 1.5)",
-       abs(k_d - 2.1) < 0.05,
-       sprintf("kappa = %.4f", k_d))
-
-# ============================================================
-# Helper: compute Table 2 grid for downstream checks
-# ============================================================
+# ------------------------------------------------------------
+# Helper: compute the 96-cell grid of Table 2
+# ------------------------------------------------------------
 scenarios <- list(
   list(delta1 = 0.3, delta2 = 0.3, sd1 = 1, sd2 = 1.0, r = 1),
   list(delta1 = 0.3, delta2 = 0.3, sd1 = 1, sd2 = 1.0, r = 2),
@@ -123,225 +178,175 @@ scenarios <- list(
 rho_vals <- c(0.0, 0.3, 0.5, 0.8)
 
 rows <- list()
-for (sc in scenarios) {
-  for (rho in rho_vals) {
-    ss_p <- twocpcont_ss(delta1 = sc$delta1, delta2 = sc$delta2,
-                         sd1 = sc$sd1, sd2 = sc$sd2, rho = rho,
-                         r = sc$r, alpha = alpha, beta = beta,
-                         method = "univariate")
-    pw_p <- twocpcont_power(n1 = ss_p$n1, n2 = ss_p$n2,
-                            delta1 = sc$delta1, delta2 = sc$delta2,
-                            sd1 = sc$sd1, sd2 = sc$sd2, rho = rho,
-                            alpha = alpha, method = "bivariate")
-    rows[[length(rows) + 1L]] <- list(
-      delta1 = sc$delta1, delta2 = sc$delta2,
-      sd1 = sc$sd1, sd2 = sc$sd2, r = sc$r, rho = rho,
-      n1 = ss_p$n1, n2 = ss_p$n2, N = ss_p$N,
-      power = pw_p$powerCoprimary
-    )
+for (pw in power_set) {
+  for (sc in scenarios) {
+    for (rho in rho_vals) {
+      ss_p <- twocpcont_ss(delta1 = sc$delta1, delta2 = sc$delta2,
+                           sd1 = sc$sd1, sd2 = sc$sd2, rho = rho,
+                           r = sc$r, alpha = alpha, beta = 1 - pw,
+                           method = "univariate")
+      ss_c <- twocpcont_ss(delta1 = sc$delta1, delta2 = sc$delta2,
+                           sd1 = sc$sd1, sd2 = sc$sd2, rho = rho,
+                           r = sc$r, alpha = alpha, beta = 1 - pw,
+                           method = "bivariate")
+      pw_p <- twocpcont_power(n1 = ss_p$n1, n2 = ss_p$n2,
+                              delta1 = sc$delta1, delta2 = sc$delta2,
+                              sd1 = sc$sd1, sd2 = sc$sd2, rho = rho,
+                              alpha = alpha, method = "bivariate")
+      rows[[length(rows) + 1L]] <- list(
+        power = pw, delta1 = sc$delta1, delta2 = sc$delta2,
+        sd1 = sc$sd1, sd2 = sc$sd2, r = sc$r, rho = rho,
+        n2 = ss_p$n2, N = ss_p$N, N_conv = ss_c$N,
+        pow = pw_p$powerCoprimary
+      )
+    }
   }
 }
-df32 <- do.call(rbind, lapply(rows, as.data.frame))
+grid <- do.call(rbind, lapply(rows, as.data.frame))
 
-# Helper: locate one row of df32
-get_row <- function(d1, d2, s1, s2, rr, rho_val) {
-  idx <- df32$delta1 == d1 & df32$delta2 == d2 &
-         df32$sd1 == s1 & df32$sd2 == s2 &
-         df32$r == rr & abs(df32$rho - rho_val) < 1e-9
-  df32[idx, , drop = FALSE]
+# Helper: N_prop for one pattern over rho
+N_over_rho <- function(d1, d2, s1, s2, rr, pw) {
+  d <- grid[grid$delta1 == d1 & grid$delta2 == d2 & grid$sd1 == s1 &
+              grid$sd2 == s2 & grid$r == rr & grid$power == pw, ]
+  d$N[order(d$rho)]
 }
+red_pct <- function(N_vec) (N_vec[1] - N_vec[length(N_vec)]) / N_vec[1] * 100
+
+record("(3.1-3) The grid has 96 combinations", nrow(grid) == 96L,
+       sprintf("rows = %d", nrow(grid)))
 
 # ============================================================
 # SECTION 3.2: Sample size comparison and achieved power
 # ============================================================
 section("Section 3.2 (Sample size comparison and achieved power)")
 
-# (3.2-1) Power range approximately [0.8000, 0.8078]
-pw_min <- min(df32$power)
-pw_max <- max(df32$power)
-record("(3.2-1) Achieved power range [0.8000, 0.8078]",
-       abs(pw_min - 0.8000) < 0.0001 && abs(pw_max - 0.8078) < 0.0001,
-       sprintf("[%.4f, %.4f]", pw_min, pw_max))
+n_match <- sapply(power_set, function(pw) {
+  sum(grid$N[grid$power == pw] == grid$N_conv[grid$power == pw])
+})
+record("(3.2-1) Matches: 32 / 32 at 0.80 and 0.85, 31 / 32 at 0.90",
+       all(n_match == c(32L, 32L, 31L)),
+       sprintf("matches = %s", paste(n_match, collapse = ", ")))
 
-# (3.2-2) Maximum power 0.8078 occurs at
-#         (delta1, delta2, sd1, sd2, r, rho) = (0.7, 0.5, 1, 1, 2, 0.5)
-row_argmax <- df32[which.max(df32$power), ]
-ok_max <- (row_argmax$delta1 == 0.7 && row_argmax$delta2 == 0.5 &&
-           row_argmax$sd1    == 1   && row_argmax$sd2    == 1   &&
-           row_argmax$r      == 2   && abs(row_argmax$rho - 0.5) < 1e-9 &&
-           abs(row_argmax$power - 0.8078) < 0.0001)
-record("(3.2-2) Maximum power 0.8078 at (0.7, 0.5, 1, 1, 2, 0.5)",
-       ok_max,
-       sprintf("(d1, d2, s1, s2, r, rho) = (%.1f, %.1f, %.0f, %.0f, %d, %.1f), power = %.4f",
-               row_argmax$delta1, row_argmax$delta2,
-               row_argmax$sd1, row_argmax$sd2,
-               row_argmax$r, row_argmax$rho, row_argmax$power))
+mis <- grid[grid$N != grid$N_conv, ]
+ok_mis <- nrow(mis) == 1L && mis$delta1 == 0.3 && mis$delta2 == 0.3 &&
+  mis$sd1 == 1 && mis$sd2 == 1 && mis$r == 1 && mis$rho == 0.5 &&
+  mis$power == 0.90 && mis$N == 556 && mis$N_conv == 558
+record("(3.2-2) Mismatch at (0.3, 0.3, 1, 1, 1, 0.5), 0.90: N = 556 vs 558",
+       ok_mis,
+       sprintf("N_prop = %s, N_conv = %s",
+               paste(mis$N, collapse = ", "),
+               paste(mis$N_conv, collapse = ", ")))
 
-# (3.2-3) At the argmax, n2 = 49
-record("(3.2-3) At the max-power cell, n2 = 49",
-       row_argmax$n2 == 49L,
-       sprintf("n2 = %d", row_argmax$n2))
+# (3.2-3) Continuous n2: exact 278.0009, closed form 277.9970
+lam_exact <- uniroot(function(lam) {
+  pbivnorm::pbivnorm(lam - z_alpha, lam - z_alpha, rho = 0.5) - 0.90
+}, lower = 2, upper = 5, tol = 1e-14)$root
+n2_exact <- 2 / 0.3 ^ 2 * lam_exact ^ 2
+# Closed-form continuous n2 from Algorithm 2 (kappa = 1, so w* = 1/2)
+lam0  <- z_alpha + qnorm(0.90 ^ 0.5)
+pk    <- plackett_gl_full(lam0 - z_alpha, lam0 - z_alpha, 0.5, 1)
+P_at  <- pnorm(lam0 - z_alpha) ^ 2 + pk$I_GL
+P_1   <- 2 * dnorm(lam0 - z_alpha) * pnorm(lam0 - z_alpha) + pk$I_GL_1
+u0    <- lam0 - z_alpha
+P_2   <- -2 * u0 * dnorm(u0) * pnorm(u0) + 2 * dnorm(u0) ^ 2 + pk$I_GL_2
+lam_cf <- lam0 + (-P_1 + sqrt(P_1 ^ 2 - 2 * P_2 * (P_at - 0.90))) / P_2
+n2_cf  <- 2 / 0.3 ^ 2 * lam_cf ^ 2
+record("(3.2-3) Continuous n2: exact 278.0009, closed form 277.9970",
+       abs(n2_exact - 278.0009) < 5e-5 && abs(n2_cf - 277.9970) < 5e-5,
+       sprintf("exact = %.4f, closed form = %.4f", n2_exact, n2_cf))
+record("(3.2-4) Approximation error in n2 about 0.004",
+       abs((n2_exact - n2_cf) - 0.004) < 0.0005,
+       sprintf("difference = %.5f", n2_exact - n2_cf))
 
-# (3.2-4) Pattern (0.3, 0.3, 1, 1, 1): rho = 0 -> N = 460
-row_460 <- get_row(0.3, 0.3, 1, 1, 1, 0.0)
-record("(3.2-4) Pattern (0.3, 0.3, 1, 1, 1) at rho = 0 gives N = 460",
-       nrow(row_460) == 1L && row_460$N == 460L,
-       sprintf("N = %d", row_460$N))
+record("(3.2-5) Achieved power at N = 556 is 0.8999989 (short by about 1e-6)",
+       abs(mis$pow - 0.8999989) < 5e-8 && abs(0.90 - mis$pow - 1e-6) < 1e-7,
+       sprintf("power = %.7f, shortfall = %.2e", mis$pow, 0.90 - mis$pow))
 
-# (3.2-5) Same pattern: rho = 0.8 -> N = 408
-row_408 <- get_row(0.3, 0.3, 1, 1, 1, 0.8)
-record("(3.2-5) Pattern (0.3, 0.3, 1, 1, 1) at rho = 0.8 gives N = 408",
-       nrow(row_408) == 1L && row_408$N == 408L,
-       sprintf("N = %d", row_408$N))
+ok_rows <- grid[grid$N == grid$N_conv, ]
+rng <- sapply(power_set, function(pw) {
+  range(ok_rows$pow[ok_rows$power == pw])
+})
+record("(3.2-6) Other 95: achieved power >= target",
+       all(ok_rows$pow >= ok_rows$power),
+       sprintf("min(power - target) = %.2e", min(ok_rows$pow - ok_rows$power)))
+record(paste0("(3.2-7) Ranges [0.8000, 0.8078], [0.8501, 0.8544], ",
+              "[0.9000, 0.9040]"),
+       all(abs(round(rng, 4) - rbind(c(0.8000, 0.8501, 0.9000),
+                                     c(0.8078, 0.8544, 0.9040))) < 1e-9),
+       sprintf("%s", paste(sprintf("[%.4f, %.4f]", rng[1, ], rng[2, ]),
+                           collapse = ", ")))
 
-# (3.2-6) Reduction from 460 to 408 ~ 11%
-red_pct_a <- (460 - 408) / 460 * 100
-record("(3.2-6) Reduction from 460 to 408 is approximately 11%",
-       abs(red_pct_a - 11) < 1,
-       sprintf("reduction = %.2f%%", red_pct_a))
+N_k1_80 <- N_over_rho(0.3, 0.3, 1, 1, 1, 0.80)
+N_k1_90 <- N_over_rho(0.3, 0.3, 1, 1, 1, 0.90)
+record("(3.2-8) kappa = 1, 1-beta = 0.80: 460 -> 408 (about 11%)",
+       N_k1_80[1] == 460 && N_k1_80[4] == 408 &&
+         abs(red_pct(N_k1_80) - 11) < 0.5,
+       sprintf("%d -> %d, %.2f%%", N_k1_80[1], N_k1_80[4], red_pct(N_k1_80)))
+record("(3.2-9) kappa = 1, 1-beta = 0.90: 574 -> 530 (about 8%)",
+       N_k1_90[1] == 574 && N_k1_90[4] == 530 &&
+         abs(red_pct(N_k1_90) - 8) < 0.5,
+       sprintf("%d -> %d, %.2f%%", N_k1_90[1], N_k1_90[4], red_pct(N_k1_90)))
 
-# (3.2-7) Pattern (0.7, 0.5, 1, 1.5, 1) at all 4 rho values -> N = 284
-rows_kp <- df32[df32$delta1 == 0.7 & df32$delta2 == 0.5 &
-                df32$sd1 == 1 & df32$sd2 == 1.5 & df32$r == 1, ]
-record("(3.2-7) Pattern (0.7, 0.5, 1, 1.5, 1) yields N = 284 at all four rho",
-       nrow(rows_kp) == 4L && all(rows_kp$N == 284L),
-       sprintf("N values: %s",
-               paste(rows_kp$N, collapse = ", ")))
-
-# (3.2-8) Intermediate patterns: kappa = 1.4 -> reduction ~ 3-4%
-get_red <- function(d1, d2, s1, s2, rr) {
-  r0  <- get_row(d1, d2, s1, s2, rr, 0.0)$N
-  r08 <- get_row(d1, d2, s1, s2, rr, 0.8)$N
-  (r0 - r08) / r0 * 100
-}
-red_k14_a <- get_red(0.7, 0.5, 1, 1, 1)
-red_k14_b <- get_red(0.7, 0.5, 1, 1, 2)
-record("(3.2-8) kappa = 1.4 patterns: reduction in 3-4% range",
-       red_k14_a >= 2.5 && red_k14_a <= 4.5 &&
-       red_k14_b >= 2.5 && red_k14_b <= 4.5,
-       sprintf("(0.7, 0.5, 1, 1, 1): %.2f%%, (0.7, 0.5, 1, 1, 2): %.2f%%",
-               red_k14_a, red_k14_b))
-
-# (3.2-9) kappa = 1.5 patterns: reduction ~ 2%
-red_k15_a <- get_red(0.3, 0.3, 1, 1.5, 1)
-red_k15_b <- get_red(0.3, 0.3, 1, 1.5, 2)
-record("(3.2-9) kappa = 1.5 patterns: reduction approximately 2%",
-       red_k15_a >= 1.0 && red_k15_a <= 3.0 &&
-       red_k15_b >= 1.0 && red_k15_b <= 3.0,
-       sprintf("(0.3, 0.3, 1, 1.5, 1): %.2f%%, (0.3, 0.3, 1, 1.5, 2): %.2f%%",
-               red_k15_a, red_k15_b))
-
-# (3.2-10) Monotonically non-increasing in rho for every pattern
-all_mono <- all(sapply(scenarios, function(sc) {
-  Ns <- sapply(rho_vals, function(rr) {
-    get_row(sc$delta1, sc$delta2, sc$sd1, sc$sd2, sc$r, rr)$N
-  })
-  all(diff(Ns) <= 0L)
+const_k21 <- all(sapply(power_set, function(pw) {
+  length(unique(N_over_rho(0.7, 0.5, 1, 1.5, 1, pw))) == 1L
 }))
-record("(3.2-10) N is monotonically non-increasing in rho for all 8 patterns",
-       all_mono,
-       "")
+record("(3.2-10) kappa = 2.1, r = 1: N constant in rho at all three powers",
+       const_k21, "")
+
+red_mid <- unlist(lapply(power_set, function(pw) {
+  c(red_pct(N_over_rho(0.7, 0.5, 1, 1, 1, pw)),
+    red_pct(N_over_rho(0.7, 0.5, 1, 1, 2, pw)),
+    red_pct(N_over_rho(0.3, 0.3, 1, 1.5, 1, pw)),
+    red_pct(N_over_rho(0.3, 0.3, 1, 1.5, 2, pw)))
+}))
+record("(3.2-11) kappa = 1.4 and 1.5: reduction at most 4%",
+       max(red_mid) <= 4 + 1e-9,
+       sprintf("max reduction = %.2f%%", max(red_mid)))
+
+mono_all <- all(sapply(power_set, function(pw) {
+  all(sapply(scenarios, function(sc) {
+    all(diff(N_over_rho(sc$delta1, sc$delta2, sc$sd1, sc$sd2, sc$r,
+                        pw)) <= 0)
+  }))
+}))
+record("(3.2-12) N_prop non-increasing in rho in all 24 series", mono_all, "")
 
 # ============================================================
-# SECTION 3.3: R_max and kappa_star
+# SECTION 3.3: Maximum reduction rate and threshold
 # ============================================================
-section("Section 3.3 (R_max and kappa_star)")
+section("Section 3.3 (Maximum reduction rate and threshold effect size ratio)")
 
-# (3.3-1) R_max(kappa = 1, 1 - beta = 0.70) = 28.63%
-Rmax_1_pwr70 <- r_max(kappa = 1, alpha = 0.025, beta = 0.30) * 100
-record("(3.3-1) R_max(1, 1-beta = 0.70) approximately 28.63%",
-       abs(Rmax_1_pwr70 - 28.63) < 0.01,
-       sprintf("R_max = %.4f%%", Rmax_1_pwr70))
+Rmax_1 <- sapply(1 - power_set, function(b) {
+  r_max(kappa = 1, alpha = alpha, beta = b) * 100
+})
+record("(3.3-1) Rmax(1) = 23.8%, 21.3%, 18.6% at 0.80, 0.85, 0.90",
+       all(abs(Rmax_1 - c(23.8, 21.3, 18.6)) < 0.05),
+       sprintf("%s", paste(sprintf("%.4f%%", Rmax_1), collapse = ", ")))
 
-# (3.3-2) R_max(kappa = 1, 1 - beta = 0.80) = 23.85%
-Rmax_1_pwr80 <- r_max(kappa = 1, alpha = 0.025, beta = 0.20) * 100
-record("(3.3-2) R_max(1, 1-beta = 0.80) approximately 23.85%",
-       abs(Rmax_1_pwr80 - 23.85) < 0.01,
-       sprintf("R_max = %.4f%%", Rmax_1_pwr80))
+inc_cs <- (1 / (1 - r_max(kappa = 1, alpha = alpha, beta = 0.10)) - 1) * 100
+record("(3.3-2) 1 / (1 - Rmax(1, 0.10)) - 1 approximately 22.8%",
+       abs(inc_cs - 22.8) < 0.05,
+       sprintf("increase = %.4f%%", inc_cs))
 
-# (3.3-3) R_max(kappa = 1, 1 - beta = 0.90) = 18.57%
-Rmax_1_pwr90 <- r_max(kappa = 1, alpha = 0.025, beta = 0.10) * 100
-record("(3.3-3) R_max(1, 1-beta = 0.90) approximately 18.57%",
-       abs(Rmax_1_pwr90 - 18.57) < 0.01,
-       sprintf("R_max = %.4f%%", Rmax_1_pwr90))
+ks <- sapply(c(0.05, 0.15), function(e) {
+  sapply(c(0.20, 0.10), function(b) kappa_star(e, alpha = alpha, beta = b))
+})
+record(paste0("(3.3-3) kappa_star: 1.37 -> 1.13 at 0.80, ",
+              "1.24 -> 1.05 at 0.90"),
+       all(abs(ks - rbind(c(1.37, 1.13), c(1.24, 1.05))) < 0.005),
+       sprintf("0.80: %.4f -> %.4f; 0.90: %.4f -> %.4f",
+               ks[1, 1], ks[1, 2], ks[2, 1], ks[2, 2]))
 
-# (3.3-4) R_max crosses 5% at kappa approximately 1.50 (beta = 0.30)
-ks_5pct_b30 <- kappa_star(epsilon = 0.05, alpha = 0.025, beta = 0.30)
-record("(3.3-4) R_max(kappa, 1-beta = 0.70) = 5% at kappa approximately 1.50",
-       abs(ks_5pct_b30 - 1.50) < 0.01,
-       sprintf("kappa_star = %.4f", ks_5pct_b30))
+ks_05_max <- max(sapply(1 - power_set, function(b) {
+  kappa_star(0.05, alpha = alpha, beta = b)
+}))
+record("(3.3-4) kappa_star(0.05) <= 1.4 at all three target powers",
+       ks_05_max <= 1.4,
+       sprintf("max kappa_star(0.05) = %.4f", ks_05_max))
 
-# (3.3-5) R_max crosses 5% at kappa approximately 1.37 (beta = 0.20)
-ks_5pct_b20 <- kappa_star(epsilon = 0.05, alpha = 0.025, beta = 0.20)
-record("(3.3-5) R_max(kappa, 1-beta = 0.80) = 5% at kappa approximately 1.37",
-       abs(ks_5pct_b20 - 1.37) < 0.01,
-       sprintf("kappa_star = %.4f", ks_5pct_b20))
-
-# (3.3-6) R_max crosses 5% at kappa approximately 1.24 (beta = 0.10)
-ks_5pct_b10 <- kappa_star(epsilon = 0.05, alpha = 0.025, beta = 0.10)
-record("(3.3-6) R_max(kappa, 1-beta = 0.90) = 5% at kappa approximately 1.24",
-       abs(ks_5pct_b10 - 1.24) < 0.01,
-       sprintf("kappa_star = %.4f", ks_5pct_b10))
-
-# (3.3-7) R_max crosses 1% at kappa approximately 1.79 (beta = 0.30)
-ks_1pct_b30 <- kappa_star(epsilon = 0.01, alpha = 0.025, beta = 0.30)
-record("(3.3-7) R_max(kappa, 1-beta = 0.70) = 1% at kappa approximately 1.79",
-       abs(ks_1pct_b30 - 1.79) < 0.01,
-       sprintf("kappa_star = %.4f", ks_1pct_b30))
-
-# (3.3-8) R_max crosses 1% at kappa approximately 1.61 (beta = 0.20)
-ks_1pct_b20 <- kappa_star(epsilon = 0.01, alpha = 0.025, beta = 0.20)
-record("(3.3-8) R_max(kappa, 1-beta = 0.80) = 1% at kappa approximately 1.61",
-       abs(ks_1pct_b20 - 1.61) < 0.01,
-       sprintf("kappa_star = %.4f", ks_1pct_b20))
-
-# (3.3-9) R_max crosses 1% at kappa approximately 1.44 (beta = 0.10)
-ks_1pct_b10 <- kappa_star(epsilon = 0.01, alpha = 0.025, beta = 0.10)
-record("(3.3-9) R_max(kappa, 1-beta = 0.90) = 1% at kappa approximately 1.44",
-       abs(ks_1pct_b10 - 1.44) < 0.01,
-       sprintf("kappa_star = %.4f", ks_1pct_b10))
-
-# (3.3-10) Table 3 reference: kappa_star(eps = 0.005, 1-beta = 0.80) = 1.700
-ks_t3_a <- kappa_star(epsilon = 0.005, alpha = 0.025, beta = 0.20)
-record("(3.3-10) kappa_star(eps = 0.005, 1-beta = 0.80) approximately 1.700",
-       abs(ks_t3_a - 1.700) < 0.001,
-       sprintf("kappa_star = %.4f", ks_t3_a))
-
-# (3.3-11) kappa_star(eps = 0.050, 1-beta = 0.80) = 1.369
-ks_t3_b <- kappa_star(epsilon = 0.050, alpha = 0.025, beta = 0.20)
-record("(3.3-11) kappa_star(eps = 0.050, 1-beta = 0.80) approximately 1.369",
-       abs(ks_t3_b - 1.369) < 0.001,
-       sprintf("kappa_star = %.4f", ks_t3_b))
-
-# (3.3-12) kappa_star(eps = 0.005, 1-beta = 0.90) = 1.512
-ks_t3_c <- kappa_star(epsilon = 0.005, alpha = 0.025, beta = 0.10)
-record("(3.3-12) kappa_star(eps = 0.005, 1-beta = 0.90) approximately 1.512",
-       abs(ks_t3_c - 1.512) < 0.001,
-       sprintf("kappa_star = %.4f", ks_t3_c))
-
-# (3.3-13) kappa_star(eps = 0.050, 1-beta = 0.90) = 1.239
-ks_t3_d <- kappa_star(epsilon = 0.050, alpha = 0.025, beta = 0.10)
-record("(3.3-13) kappa_star(eps = 0.050, 1-beta = 0.90) approximately 1.239",
-       abs(ks_t3_d - 1.239) < 0.001,
-       sprintf("kappa_star = %.4f", ks_t3_d))
-
-# (3.3-14) All 12 (epsilon, 1 - beta) combinations: kappa_star in [1.24, 1.89]
-eps_set <- c(0.005, 0.010, 0.020, 0.050)
-pwr_set <- c(0.70, 0.80, 0.90)
-all_ks <- numeric(0)
-for (p in pwr_set) {
-  for (e in eps_set) {
-    all_ks <- c(all_ks, kappa_star(epsilon = e, alpha = 0.025, beta = 1 - p))
-  }
-}
-record("(3.3-14) Across all 12 (eps, 1-beta), kappa_star in [1.24, 1.89]",
-       min(all_ks) >= 1.235 && max(all_ks) <= 1.895,
-       sprintf("range [%.4f, %.4f]", min(all_ks), max(all_ks)))
-
-# (3.3-15) Universal upper bound R_max(1, 1-beta = 0.80) approximately 23.85%
-record("(3.3-15) Universal upper bound R_max(1, 1-beta = 0.80) = 23.85% (same as 3.3-2)",
-       abs(Rmax_1_pwr80 - 23.85) < 0.01,
-       sprintf("R_max = %.4f%%", Rmax_1_pwr80))
+record("(3.3-5) Rmax(1, 0.20) about 24% (upper bound at 1-beta = 0.80)",
+       abs(Rmax_1[1] - 24) < 0.5,
+       sprintf("Rmax = %.4f%%", Rmax_1[1]))
 
 # ============================================================
 # SECTION 4: Real trial example (Doody / EXPEDITION 1)

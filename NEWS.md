@@ -64,6 +64,9 @@
 - `tools/make_supplement.R` builds the flat code supplement of the
   manuscript from the package sources and checks that the copies are
   identical.
+- `verify_intext_numbers.R` now checks the numbers cited in Sections
+  2.4, 3 and 4 of the revised manuscript, including the 96-cell grid of
+  Table 2 and the exact definition of the maximum reduction rate.
 - `tools/sync_manuscript_assets.R` copies the generated tables and
   figures into the folder of the manuscript and checks that the copies
   are identical.
