@@ -52,13 +52,26 @@
   `create_table_and_figure_manuscript.R` performs no numerical
   computation.
 - `inst/reproduce/README.txt` describes the package layout.
+- The numerical study now uses target powers 0.80, 0.85 and 0.90 (96
+  cells in Table 2, which reports N_conv, N_prop and the achieved power
+  for each target power and marks achieved powers below the target).
+  Figures 1 and 2 use the same three powers, and Table 3 uses the
+  tolerances 0.05, 0.10 and 0.15.
+- Each table file written by `create_table_and_figure_manuscript.R`
+  is now a complete table environment with caption, label and table
+  notes (threeparttable), with the numbers in the captions taken from
+  the cached results. The manuscript only needs `\input{}`.
+- `tools/make_supplement.R` builds the flat code supplement of the
+  manuscript from the package sources and checks that the copies are
+  identical.
 
 ## Infrastructure
 
 - Added `.gitattributes` to normalize line endings, and excluded
   `.Rhistory`, `.RData` and `.gitattributes` from the package build.
-- The output folders of the reproduction scripts are excluded from git
-  and from the package build.
+- The output folders of the reproduction scripts and `tools/` are
+  excluded from the package build; the output folders are also
+  excluded from git.
 
 # twocpcont 0.1.0
 

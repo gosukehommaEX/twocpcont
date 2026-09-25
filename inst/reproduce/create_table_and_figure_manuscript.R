@@ -12,6 +12,12 @@
 #   figure1_anchor_weight.{pdf,eps}   : Anchor weight w* vs kappa
 #   figure2_reduction_curve.{pdf,eps} : R_max(kappa) at three power levels
 #
+# Each table file is a complete table environment (caption, label,
+# tabular and table notes), so that the manuscript only needs
+# \input{table1_gl_nodes} etc.  The manuscript preamble must load the
+# threeparttable package.  Captions refer to equation labels of the
+# manuscript (eq:kappa_star) and to the bibliography key Doody2014.
+#
 # This script does not perform any numerical computation; it only
 # formats results and draws figures.
 #
@@ -82,6 +88,44 @@ theme_article <- theme_bw(base_size = 10) +
         strip.background = element_rect(fill = "grey92", colour = NA),
         strip.text       = element_text(size = 9))
 
+# ------------------------------------------------------------
+# Common table helper: wrap a tabular in a complete table environment
+# with caption, label and optional table notes, and write it to file.
+# Each element of notes is a complete \item line.
+# ------------------------------------------------------------
+write_table_env <- function(tabular, file_out, caption, label,
+                            notes = NULL, size = "\\small",
+                            tabcolsep = NULL) {
+  lines <- c(
+    "\\begin{table}[ht]",
+    "\\centering",
+    size,
+    if (!is.null(tabcolsep)) {
+      sprintf("\\setlength{\\tabcolsep}{%s}", tabcolsep)
+    },
+    sprintf("\\caption{%s}", caption),
+    sprintf("\\label{%s}", label),
+    "\\begin{threeparttable}",
+    tabular,
+    if (!is.null(notes)) {
+      c("\\begin{tablenotes}", "\\footnotesize", notes,
+        "\\end{tablenotes}")
+    },
+    "\\end{threeparttable}",
+    "\\end{table}"
+  )
+  writeLines(lines, file_out)
+  cat(sprintf("Wrote: %s\n", basename(file_out)))
+}
+
+# Format a vector of numbers as "$a$, $b$, and $c$" for captions.  Each
+# number is set in math mode separately, so that "and" stays in text.
+fmt_list <- function(x, fmt) {
+  s <- paste0("$", sprintf(fmt, x), "$")
+  if (length(s) <= 2L) return(paste(s, collapse = " and "))
+  paste0(paste(s[-length(s)], collapse = ", "), ", and ", s[length(s)])
+}
+
 # Common color/linetype scheme used in Figure 1 and Figure 2
 color_set    <- c("#1B9E77", "#444444", "#E7298A")
 linetype_set <- c("dashed",  "solid",   "dotdash")
@@ -99,60 +143,118 @@ tab1_lines <- c(
 for (i in seq_len(gl_nodes_n)) {
   tab1_lines <- c(
     tab1_lines,
-    sprintf("%d & %+.10f & %.10f \\\\", i,
+    # Math mode so that negative nodes are typeset with a minus sign
+    sprintf("%d & $%+.10f$ & $%.10f$ \\\\", i,
             gl_obj$x[i], gl_obj$w[i])
   )
 }
 tab1_lines <- c(tab1_lines, "\\hline", "\\end{tabular}")
-writeLines(tab1_lines, out_path("table1_gl_nodes.tex"))
-cat("Wrote: table1_gl_nodes.tex\n")
+write_table_env(
+  tab1_lines, out_path("table1_gl_nodes.tex"),
+  caption = sprintf(paste0("Nodes ($x_i$) and weights ($w_i$) of the ",
+                           "%d-point Gauss--Legendre quadrature on ",
+                           "$[-1, 1]$, computed by the Golub--Welsch ",
+                           "algorithm."), gl_nodes_n),
+  label = "tab:gl_nodes", size = "\\normalsize"
+)
 
 # ============================================================
 # Table 2: Sample size comparison
 # ============================================================
-build_ss_tex <- function(df, file_out) {
+build_ss_tex <- function(df, power_set, file_out,
+                         alpha = table2_obj$alpha,
+                         gl_nodes = table2_obj$gl_nodes) {
+  # One row per (pattern, rho); for each target power, the columns are
+  # N_conv, N_prop and the achieved power of N_prop.  A dagger marks
+  # achieved powers below the target.
+  n_pow <- length(power_set)
   lines <- c(
-    "\\begin{tabular}{cccccrrrr}",
+    sprintf("\\begin{tabular}{cccc%s}",
+            paste(rep("rrr", n_pow), collapse = "")),
     "\\hline",
+    paste0(" & & & & ",
+           paste(sprintf("\\multicolumn{3}{c}{$1 - \\beta = %.2f$}",
+                         power_set), collapse = " & "),
+           " \\\\"),
+    paste(sprintf("\\cline{%d-%d}", 5 + 3 * (seq_len(n_pow) - 1),
+                  7 + 3 * (seq_len(n_pow) - 1)), collapse = " "),
     paste0("$(\\delta_1, \\delta_2)$ & $(\\sigma_1, \\sigma_2)$ & ",
            "$r$ & $\\rho$ & ",
-           "$N_{\\rm conv}$ & $N_{\\rm prop}$ & diff & power \\\\"),
+           paste(rep("$N_{\\rm conv}$ & $N_{\\rm prop}$ & power", n_pow),
+                 collapse = " & "),
+           " \\\\"),
     "\\hline"
   )
+  keys <- unique(df[, c("delta1", "delta2", "sd1", "sd2", "r", "rho")])
   prev_key <- ""
-  for (i in seq_len(nrow(df))) {
+  for (i in seq_len(nrow(keys))) {
+    k <- keys[i, ]
     cur_key <- sprintf("%s|%s|%s|%s|%s",
-                       df$delta1[i], df$delta2[i],
-                       df$sd1[i], df$sd2[i], df$r[i])
+                       k$delta1, k$delta2, k$sd1, k$sd2, k$r)
     if (cur_key != prev_key) {
-      delta_str <- sprintf("(%.1f, %.1f)", df$delta1[i], df$delta2[i])
-      sd_str    <- sprintf("(%.1f, %.1f)", df$sd1[i],    df$sd2[i])
-      r_str     <- sprintf("%d", as.integer(df$r[i]))
+      delta_str <- sprintf("(%.1f, %.1f)", k$delta1, k$delta2)
+      sd_str    <- sprintf("(%.1f, %.1f)", k$sd1, k$sd2)
+      r_str     <- sprintf("%d", as.integer(k$r))
     } else {
       delta_str <- ""
       sd_str    <- ""
       r_str     <- ""
     }
     prev_key <- cur_key
-    diff_str <- if (df$diff[i] == 0L) "0" else sprintf("%+d", df$diff[i])
-    lines <- c(lines, sprintf(
-      "%s & %s & %s & %.1f & %d & %d & %s & %.4f \\\\",
-      delta_str, sd_str, r_str, df$rho[i],
-      df$N_conv[i], df$N_prop[i], diff_str, df$pow[i]
-    ))
+    cells <- sapply(power_set, function(pw) {
+      d <- df[df$delta1 == k$delta1 & df$delta2 == k$delta2 &
+                df$sd1 == k$sd1 & df$sd2 == k$sd2 & df$r == k$r &
+                df$rho == k$rho & abs(df$power - pw) < 1e-9, ]
+      if (nrow(d) != 1L) stop("Table 2: cell not found or not unique.")
+      mark <- if (d$pow < pw) "$^{\\dagger}$" else ""
+      sprintf("%d & %d & %.4f%s", d$N_conv, d$N_prop, d$pow, mark)
+    })
+    lines <- c(lines, sprintf("%s & %s & %s & %.1f & %s \\\\",
+                              delta_str, sd_str, r_str, k$rho,
+                              paste(cells, collapse = " & ")))
   }
   lines <- c(lines, "\\hline", "\\end{tabular}")
-  writeLines(lines, file_out)
-  cat(sprintf("Wrote: %s\n", basename(file_out)))
+
+  caption <- sprintf(paste0(
+    "Total sample size ($N$) of the conventional iterative method ",
+    "($N_{\\rm conv}$) and the proposed closed-form formula ",
+    "($N_{\\rm prop}$), and the achieved co-primary power at ",
+    "$N_{\\rm prop}$, for target powers $1 - \\beta$ of %s. The ",
+    "significance level is $\\alpha = %s$ (one-sided)."),
+    fmt_list(power_set, "%.2f"), format(alpha))
+  notes <- sprintf(paste0(
+    "\\item[] Achieved power is the bivariate normal power at the ",
+    "group sizes $(n_1, n_2)$ of the proposed formula, computed with ",
+    "the \\texttt{pbivnorm} package. The proposed formula uses the ",
+    "%d-point Gauss--Legendre rule."), gl_nodes)
+  short <- df[df$pow < df$power, ]
+  if (nrow(short) > 0L) {
+    detail <- sprintf(paste0(
+      "at $(\\delta_1, \\delta_2, \\sigma_1, \\sigma_2, r, \\rho) = ",
+      "(%.1f, %.1f, %.1f, %.1f, %d, %.1f)$ and $1 - \\beta = %.2f$, the ",
+      "achieved power at $N_{\\rm prop} = %d$ is %.7f, whereas ",
+      "$N_{\\rm conv} = %d$"),
+      short$delta1, short$delta2, short$sd1, short$sd2,
+      as.integer(short$r), short$rho, short$power,
+      as.integer(short$N_prop), short$pow, as.integer(short$N_conv))
+    notes <- c(notes, paste0(
+      "\\item[$\\dagger$] Achieved power below the target: ",
+      paste(detail, collapse = "; "), "."))
+  }
+  write_table_env(lines, file_out, caption = caption,
+                  label = "tab:ss_comparison", notes = notes,
+                  size = "\\footnotesize", tabcolsep = "4pt")
 }
-build_ss_tex(table2_obj$data, out_path("table2_sample_size_comparison.tex"))
+build_ss_tex(table2_obj$data, table2_obj$power_set,
+             out_path("table2_sample_size_comparison.tex"))
 write.csv(table2_obj$data, out_path("table2_sample_size_comparison.csv"),
           row.names = FALSE)
 
 # ============================================================
 # Table 3: Threshold kappa_star for selected tolerances
 # ============================================================
-build_kstar_tex <- function(df, file_out) {
+build_kstar_tex <- function(df, file_out,
+                            alpha = kappa_star_obj$alpha) {
   power_set   <- sort(unique(df$power))
   epsilon_set <- sort(unique(df$epsilon))
   ncol_eps    <- length(epsilon_set)
@@ -160,7 +262,7 @@ build_kstar_tex <- function(df, file_out) {
   col_spec <- paste0("c", paste(rep("r", ncol_eps), collapse = ""))
   header   <- paste(
     "$1 - \\beta$",
-    paste(sprintf("$\\epsilon = %.3f$", epsilon_set),
+    paste(sprintf("$\\epsilon = %.2f$", epsilon_set),
           collapse = " & "),
     sep = " & "
   )
@@ -181,8 +283,17 @@ build_kstar_tex <- function(df, file_out) {
     ))
   }
   lines <- c(lines, "\\hline", "\\end{tabular}")
-  writeLines(lines, file_out)
-  cat(sprintf("Wrote: %s\n", basename(file_out)))
+
+  caption <- sprintf(paste0(
+    "Threshold effect size ratio $\\kappa^{*}(\\epsilon, \\beta)$ ",
+    "in~(\\ref{eq:kappa_star}), above which the maximum reduction rate ",
+    "satisfies $R_{\\max}(\\kappa, \\beta) \\leq \\epsilon$, for ",
+    "tolerances $\\epsilon$ of %s and target powers $1 - \\beta$ of %s. ",
+    "The significance level is $\\alpha = %s$ (one-sided)."),
+    fmt_list(epsilon_set, "%.2f"), fmt_list(power_set, "%.2f"),
+    format(alpha))
+  write_table_env(lines, file_out, caption = caption,
+                  label = "tab:kappa_star")
 }
 build_kstar_tex(kappa_star_obj$data, out_path("table3_kappa_star.tex"))
 write.csv(kappa_star_obj$data, out_path("table3_kappa_star.csv"),
@@ -228,8 +339,19 @@ build_real_example_tex <- function(obj, file_out) {
     ))
   }
   lines <- c(lines, "\\hline", "\\end{tabular}")
-  writeLines(lines, file_out)
-  cat(sprintf("Wrote: %s\n", basename(file_out)))
+
+  caption <- sprintf(paste0(
+    "Design assumptions and sample sizes for EXPEDITION~1, the Phase~III ",
+    "trial of solanezumab for mild-to-moderate Alzheimer's disease ",
+    "reported by~\\cite{Doody2014}. The upper block lists the design ",
+    "parameters from the trial protocol, with overall power ",
+    "$1 - \\beta = %.2f$. The lower block reports the total sample size ",
+    "$N$ of the conventional iterative method ($N_{\\rm conv}$) and the ",
+    "proposed closed-form formula ($N_{\\rm prop}$) for %d values of ",
+    "$\\rho$. At $\\rho = 0$, the proposed formula gives $N = %d$."),
+    1 - obj$beta, nrow(d), as.integer(d$N_prop[d$rho == 0]))
+  write_table_env(lines, file_out, caption = caption,
+                  label = "tab:real_example")
 }
 build_real_example_tex(table4_obj, out_path("table4_real_example.tex"))
 write.csv(table4_obj$data, out_path("table4_real_example.csv"),
@@ -278,15 +400,15 @@ df_fig2$R_pct <- df_fig2$R_max * 100
 
 p2 <- ggplot(df_fig2, aes(x = kappa, y = R_pct,
                           linetype = target, colour = target)) +
-  geom_hline(yintercept = c(1, 5),
+  geom_hline(yintercept = c(5, 10, 15),
              linetype = "dotted", colour = "#888888",
              linewidth = 0.4) +
   geom_line(linewidth = 0.6) +
   scale_linetype_manual(values = linetype_set, labels = target_labels) +
   scale_colour_manual(values = color_set, labels = target_labels) +
   scale_x_continuous(breaks = seq(1.0, 2.0, by = 0.2)) +
-  scale_y_continuous(limits = c(0, 30),
-                     breaks = seq(0, 30, by = 5)) +
+  scale_y_continuous(limits = c(0, 25),
+                     breaks = seq(0, 25, by = 5)) +
   labs(x = expression(kappa),
        y = expression(R[max] * " (%)")) +
   theme_article +

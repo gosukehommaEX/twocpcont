@@ -55,14 +55,18 @@ out_path <- function(name) file.path(output_dir, name)
 # ------------------------------------------------------------
 # Global settings
 # ------------------------------------------------------------
-alpha    <- 0.025
-beta     <- 0.2
-gl_nodes <- 5L   # Number of Gauss-Legendre quadrature points
+alpha     <- 0.025
+power_set <- c(0.80, 0.85, 0.90)  # Target overall powers 1 - beta
+gl_nodes  <- 5L   # Number of Gauss-Legendre quadrature points
 
-# Scenario design for Table 2: 8 patterns (2 delta x 2 sigma x 2 r) x 4 rho
+# Scenario design for Table 2: 8 patterns (2 delta x 2 sigma x 2 r)
+# x 4 rho x 3 target powers = 96 cells
 # - delta:  (0.3, 0.3) for delta1 = delta2; (0.7, 0.5) for delta1 > delta2
 # - sigma:  (1, 1)     for sigma1 = sigma2; (1, 1.5)   for sigma1 < sigma2
-# - r:      1 or 2
+# - r:      1 or 2.  Because the standard deviations are common to the
+#           two groups, equal allocation minimizes N for any (sigma1,
+#           sigma2); r = 2 represents designs that allocate more patients
+#           to one group for reasons other than efficiency.
 scenarios <- list(
   list(delta1 = 0.3, delta2 = 0.3, sd1 = 1, sd2 = 1.0, r = 1),
   list(delta1 = 0.3, delta2 = 0.3, sd1 = 1, sd2 = 1.0, r = 2),
@@ -116,7 +120,7 @@ w_star_fun <- function(kappa, beta, alpha) {
 }
 
 kappa_seq_w <- seq(1, 4, length.out = 301)
-power_set_w <- c(0.70, 0.80, 0.90)
+power_set_w <- power_set
 
 df_w <- do.call(rbind, lapply(power_set_w, function(pw) {
   data.frame(
@@ -142,7 +146,7 @@ cat(sprintf("  Saved: anchor_weight.rds (elapsed %.3f s)\n", t3_elapsed))
 # ------------------------------------------------------------
 # Helper: one cell of the Table 2 grid
 # ------------------------------------------------------------
-compute_cell <- function(sc, rho) {
+compute_cell <- function(sc, rho, beta) {
 
   ss_conv <- twocpcont_ss(
     delta1 = sc$delta1, delta2 = sc$delta2,
@@ -172,6 +176,8 @@ compute_cell <- function(sc, rho) {
     sd2    = sc$sd2,
     r      = sc$r,
     rho    = rho,
+    # Rounded so that the value matches power_set exactly
+    power  = round(1 - beta, 10),
     N_conv = ss_conv$N,
     N_prop = ss_prop$N,
     diff   = ss_prop$N - ss_conv$N,
@@ -182,12 +188,15 @@ compute_cell <- function(sc, rho) {
 # ------------------------------------------------------------
 # Table 2: Sample size comparison
 # ------------------------------------------------------------
-cat("\n--- Computing Table 2 (32 cells) ---\n")
+cat(sprintf("\n--- Computing Table 2 (%d cells) ---\n",
+            length(scenarios) * length(rho_vals) * length(power_set)))
 t2_start <- Sys.time()
 rows_known <- list()
-for (sc in scenarios) {
-  for (rho in rho_vals) {
-    rows_known[[length(rows_known) + 1L]] <- compute_cell(sc, rho)
+for (pw in power_set) {
+  for (sc in scenarios) {
+    for (rho in rho_vals) {
+      rows_known[[length(rows_known) + 1L]] <- compute_cell(sc, rho, 1 - pw)
+    }
   }
 }
 t2_elapsed <- as.numeric(difftime(Sys.time(), t2_start, units = "secs"))
@@ -197,7 +206,7 @@ df_known <- do.call(rbind, lapply(rows_known, as.data.frame))
 table2_obj <- list(
   data       = df_known,
   alpha      = alpha,
-  beta       = beta,
+  power_set  = power_set,
   gl_nodes   = gl_nodes,
   elapsed    = t2_elapsed,
   computed   = Sys.time(),
@@ -214,7 +223,6 @@ cat("\n--- Computing R_max(kappa) curve data ---\n")
 t4_start <- Sys.time()
 
 kappa_seq <- seq(1.0, 2.0, length.out = 201)
-power_set <- c(0.70, 0.80, 0.90)
 beta_set  <- 1 - power_set
 
 rows_rmax <- list()
@@ -249,7 +257,7 @@ cat(sprintf("  Saved: reduction_curve.rds (elapsed %.3f s)\n", t4_elapsed))
 cat("\n--- Computing kappa_star table ---\n")
 t5_start <- Sys.time()
 
-epsilon_set <- c(0.005, 0.010, 0.020, 0.050)
+epsilon_set <- c(0.05, 0.10, 0.15)
 rows_kstar <- list()
 for (p in power_set) {
   for (eps in epsilon_set) {
@@ -365,18 +373,26 @@ cat(sprintf("  Saved: table4_real_example.rds (elapsed %.3f s)\n",
 # Final summary
 # ------------------------------------------------------------
 cat("\n----- Summary -----\n")
-cat(sprintf("Table 2: match (diff = 0) %d / %d, power range [%.4f, %.4f]\n",
-            sum(df_known$diff == 0L), nrow(df_known),
-            min(df_known$pow), max(df_known$pow)))
+for (pw in power_set) {
+  d <- df_known[df_known$power == pw, ]
+  cat(sprintf(paste0("Table 2 (1-beta = %.2f): match (diff = 0) %d / %d, ",
+                     "achieved power range [%.7f, %.7f]\n"),
+              pw, sum(d$diff == 0L), nrow(d), min(d$pow), max(d$pow)))
+}
+d_short <- df_known[df_known$pow < df_known$power, ]
+if (nrow(d_short) > 0L) {
+  cat("Table 2: cells in which N_prop falls short of the target power:\n")
+  print(d_short, row.names = FALSE, digits = 8)
+}
 cat(sprintf("R_max range: kappa = 1, 1-beta = 0.80 -> %.2f%%; ",
             df_rmax$R_max[df_rmax$kappa == 1.0 &
                             df_rmax$power == 0.80] * 100))
 df_rmax_80 <- df_rmax[df_rmax$power == 0.80, ]
 cat(sprintf("kappa = 1.5 -> %.2f%%\n",
             df_rmax_80$R_max[which.min(abs(df_rmax_80$kappa - 1.5))] * 100))
-cat(sprintf("kappa_star(eps = 0.01, 1-beta = 0.80) = %.4f\n",
+cat(sprintf("kappa_star(eps = 0.05, 1-beta = 0.80) = %.4f\n",
             df_kstar$kappa_star[df_kstar$power == 0.80 &
-                                  df_kstar$epsilon == 0.010]))
+                                  df_kstar$epsilon == 0.05]))
 cat(sprintf("Table 4: rho = 0 reproduces N = %d (Doody 2014 planned 1000)\n",
             df_t4$N_prop[df_t4$rho == 0]))
 cat(sprintf("Table 4: kappa = %.3f, R_max upper bound = %.2f%%\n",

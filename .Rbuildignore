@@ -18,3 +18,4 @@
 ^Thumbs\.db$
 ^inst/reproduce/table_and_figure_manuscript$
 ^inst/reproduce/verify_intext_numbers_manuscript$
+^tools$
