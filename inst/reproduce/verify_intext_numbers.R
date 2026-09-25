@@ -311,6 +311,11 @@ mono_all <- all(sapply(power_set, function(pw) {
 }))
 record("(3.2-12) N_prop non-increasing in rho in all 24 series", mono_all, "")
 
+r2 <- grid[grid$r == 2, ]
+record("(3.2-13) All 48 combinations with r = 2 give identical N",
+       nrow(r2) == 48L && all(r2$N == r2$N_conv),
+       sprintf("rows = %d, matches = %d", nrow(r2), sum(r2$N == r2$N_conv)))
+
 # ============================================================
 # SECTION 3.3: Maximum reduction rate and threshold
 # ============================================================
