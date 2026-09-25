@@ -28,3 +28,4 @@ Thumbs.db
 
 # Outputs not tracked in repo (manuscript reproducibility runs)
 inst/reproduce/table_and_figure_manuscript/
+inst/reproduce/verify_intext_numbers_manuscript/

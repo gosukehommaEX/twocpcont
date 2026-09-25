@@ -79,8 +79,6 @@
 #' # Boundary handling at rho = 1
 #' plackett_gl_full(u_w = 1.25, u_s = 1.25, rho = 1, kappa = 1)
 #'
-#' @keywords internal
-#'
 #' @export
 plackett_gl_full <- function(u_w, u_s, rho, kappa, gl_nodes = 5L) {
 

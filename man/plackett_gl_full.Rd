@@ -93,4 +93,3 @@ plackett_gl_full(u_w = 0.84, u_s = 0.84, rho = 0.3, kappa = 1,
 plackett_gl_full(u_w = 1.25, u_s = 1.25, rho = 1, kappa = 1)
 
 }
-\keyword{internal}

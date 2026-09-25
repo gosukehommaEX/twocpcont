@@ -19,16 +19,13 @@ closed form by two analytic Taylor linearizations. The package also
 implements the conventional sequential-search method based on the
 bivariate normal distribution for benchmarking purposes.
 
-Beyond the sample size itself, the closed-form structure yields two
-analytic design quantities that are not directly available from the
-conventional iterative method:
+The package also provides two design summaries:
 
-- a maximum reduction rate giving a closed-form upper bound on the
-  fractional sample size reduction attainable through correlation
-  adjustment, and
-- a threshold effect-size ratio identifying design configurations in
-  which the precise value of the between-endpoint correlation has
-  negligible impact on the required sample size.
+- the maximum reduction rate, an upper bound on the fractional sample
+  size reduction attainable through correlation adjustment, and
+- a threshold effect-size ratio above which the between-endpoint
+  correlation changes the required sample size by at most a
+  user-specified fraction.
 
 ## Installation
 
@@ -108,7 +105,10 @@ in the accompanying manuscript are bundled with the package under
 system.file("reproduce", package = "twocpcont")
 ```
 
-A `README.txt` in that directory explains the execution order.
+Copy the scripts to a writable working directory and run them there,
+because they write their outputs into subfolders of the working
+directory. A `README.txt` in that directory explains the execution
+order.
 
 ## Author
 

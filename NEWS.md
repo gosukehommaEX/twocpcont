@@ -1,3 +1,52 @@
+# twocpcont (development version)
+
+## Bug fixes
+
+- The unit test comparing `twocpcont_power()` across the two methods
+  compared `NULL` with `NULL`, because `$power` partially matches three
+  columns. It now compares the `powerCoprimary` column.
+
+## Tests
+
+- The single test file `test-twocpcont.R` was replaced by one test file
+  per function (8 files, 61 tests). New tests cover the analytic
+  derivatives and the boundary limits of `plackett_gl_full()`, the
+  exactness of the Gauss-Legendre rule, agreement of the two methods
+  on the 32-cell grid of the numerical study at 80%, 85% and 90%
+  power, invariance of the sample size to the order and the scale of
+  the endpoints, the monotonicity of `r_max()` and `kappa_star()`, and
+  the consistency of `kappa_star()` with `r_max()`.
+- At 90% power, the closed-form formula gives N = 556 instead of 558
+  for the cell (0.3, 0.3, 1, 1, r = 1, rho = 0.5), where the exact
+  continuous n2 is 278.0009. This boundary case is recorded in the
+  tests.
+
+## Documentation
+
+- The Description field and `README.md` no longer claim that the
+  maximum reduction rate and the threshold effect-size ratio are
+  unavailable from iterative methods.
+- `plackett_gl_full()` is no longer marked as internal, since it is
+  exported.
+
+## Reproducibility
+
+- The scripts under `inst/reproduce/` now load the installed package
+  when the R source files are not found in the working directory, so
+  they run both from the package and from the flat code supplement.
+- The anchor weight curve for Figure 1 is now computed in
+  `run_table_and_figure_manuscript.R`, so that
+  `create_table_and_figure_manuscript.R` performs no numerical
+  computation.
+- `inst/reproduce/README.txt` describes the package layout.
+
+## Infrastructure
+
+- Added `.gitattributes` to normalize line endings, and excluded
+  `.Rhistory`, `.RData` and `.gitattributes` from the package build.
+- The output folders of the reproduction scripts are excluded from git
+  and from the package build.
+
 # twocpcont 0.1.0
 
 Initial release.
@@ -20,7 +69,7 @@ Initial release.
 - `plackett_gl_full()` evaluates the Plackett correlation integral and
   its first two derivatives via Gauss-Legendre quadrature.
 - `GL_nodes_and_weights()` returns the Gauss-Legendre nodes and weights
-  on the interval `[0, rho]` for any positive integer number of nodes
+  on the interval `[-1, 1]` for any positive integer number of nodes
   (default: 5).
 - `print` methods are provided for objects of class `"twocpcont_ss"`
   and `"twocpcont_power"`.

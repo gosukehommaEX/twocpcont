@@ -16,7 +16,8 @@
 # formats results and draws figures.
 #
 # Before running this script, set the working directory to the folder
-# that contains the "table_and_figure_manuscript/" subdirectory.
+# that contains the "table_and_figure_manuscript/" subdirectory, that
+# is, the folder in which run_table_and_figure_manuscript.R was run.
 
 # ------------------------------------------------------------
 # Packages
@@ -41,6 +42,7 @@ out_path <- function(name) file.path(output_dir, name)
 # ------------------------------------------------------------
 required_rds <- c(
   "gl_nodes.rds",
+  "anchor_weight.rds",
   "table2_sample_size_comparison.rds",
   "reduction_curve.rds",
   "kappa_star_table.rds",
@@ -54,6 +56,7 @@ if (length(missing_rds) > 0) {
 }
 
 gl_obj         <- readRDS(out_path("gl_nodes.rds"))
+anchor_obj     <- readRDS(out_path("anchor_weight.rds"))
 table2_obj     <- readRDS(out_path("table2_sample_size_comparison.rds"))
 reduction_obj  <- readRDS(out_path("reduction_curve.rds"))
 kappa_star_obj <- readRDS(out_path("kappa_star_table.rds"))
@@ -234,35 +237,13 @@ write.csv(table4_obj$data, out_path("table4_real_example.csv"),
 
 # ============================================================
 # Figure 1: Anchor weight w* as a function of kappa
-# Implements eq. (eq:w_star) directly:
-#   w_star = 1/2 + (kappa - 1) (u_p + z_alpha) phi(u_p) /
-#                  [(1 + kappa) |2 log p| p]
+# (curve computed in run_table_and_figure_manuscript.R)
 # ============================================================
-w_star_fun <- function(kappa, beta = 0.2, alpha = 0.025) {
-  z_alpha <- qnorm(1 - alpha)
-  target  <- 1 - beta
-  p       <- sqrt(target)
-  u_p     <- qnorm(p)
-  phi_u_p <- dnorm(u_p)
-  L_abs   <- abs(2 * log(p))
-  w <- 0.5 +
-    (kappa - 1) * (u_p + z_alpha) * phi_u_p /
-    ((1 + kappa) * L_abs * p)
-  pmin(1, pmax(0, w))
-}
+power_set <- anchor_obj$power_set
 
-kappa_seq <- seq(1, 4, length.out = 301)
-power_set <- c(0.70, 0.80, 0.90)
-beta_set  <- 1 - power_set
-
-df_fig1 <- do.call(rbind, lapply(seq_along(beta_set), function(k) {
-  data.frame(
-    kappa  = kappa_seq,
-    w_star = w_star_fun(kappa_seq, beta = beta_set[k]),
-    target = factor(sprintf("%.2f", power_set[k]),
-                    levels = sprintf("%.2f", power_set))
-  )
-}))
+df_fig1 <- anchor_obj$data
+df_fig1$target <- factor(sprintf("%.2f", df_fig1$power),
+                         levels = sprintf("%.2f", power_set))
 
 target_labels <- lapply(power_set, function(p) {
   bquote(1 - beta == .(sprintf("%.2f", p)))
@@ -321,6 +302,9 @@ cat("\n----- Cached computation metadata -----\n")
 cat(sprintf("Table 1 elapsed: %.3f s (%s)\n",
             gl_obj$elapsed,
             format(gl_obj$computed, "%Y-%m-%d %H:%M:%S")))
+cat(sprintf("Anchor weight curve elapsed: %.3f s (%s)\n",
+            anchor_obj$elapsed,
+            format(anchor_obj$computed, "%Y-%m-%d %H:%M:%S")))
 cat(sprintf("Table 2 elapsed: %.2f s (%s)\n",
             table2_obj$elapsed,
             format(table2_obj$computed, "%Y-%m-%d %H:%M:%S")))

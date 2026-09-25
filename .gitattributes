@@ -1,0 +1,4 @@
+# Normalize line endings in the repository to LF.
+# RStudio on Windows may rewrite files such as twocpcont.Rproj with CRLF;
+# this prevents such rewrites from appearing as changes.
+* text=auto eol=lf

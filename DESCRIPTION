@@ -2,7 +2,7 @@ Package: twocpcont
 Type: Package
 Title: Noniterative Closed-Form Sample Size for Trials with Two
     Co-Primary Continuous Endpoints
-Version: 0.1.0
+Version: 0.1.0.9000
 Authors@R:
     person("Gosuke", "Homma",
            email = "my.name.is.gosuke@gmail.com",
@@ -14,13 +14,12 @@ Description: Provides a noniterative, closed-form sample size formula
     with Gauss-Legendre quadrature for the correlation integral and two
     analytic Taylor linearizations of the resulting power equation. A
     conventional sequential-search method based on the bivariate normal
-    distribution is also implemented for benchmarking. The closed-form
-    structure further yields two analytic design quantities: a maximum
-    achievable reduction rate of the required sample size through
-    correlation adjustment, and a threshold effect-size ratio
-    identifying configurations in which the precise value of the
-    between-endpoint correlation has negligible impact on the required
-    sample size.
+    distribution is also implemented for benchmarking. Two design
+    summaries are also provided: the maximum reduction rate of the
+    required sample size that correlation adjustment can achieve, and a
+    threshold effect-size ratio above which the between-endpoint
+    correlation changes the required sample size by at most a
+    user-specified fraction.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Depends:

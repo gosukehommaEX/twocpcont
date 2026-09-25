@@ -13,9 +13,10 @@
 # visible.
 #
 # How to use:
-#   Place this script in the same directory as the R source
-#   files for the twocpcont package and run from that directory.
-#   Edit src_dir below if the source files live elsewhere.
+#   Set the working directory to a writable folder that contains
+#   this script.  If the R source files of twocpcont are also in
+#   that folder, they are used; otherwise the installed twocpcont
+#   package is used.
 #
 # Output:
 #   In addition to printing to the console, a copy of the full
@@ -23,8 +24,6 @@
 #   "verify_intext_numbers_manuscript/verify_intext_numbers_log.txt"
 #   (the folder is created automatically if it does not exist).
 # ============================================================
-
-src_dir <- "."
 
 # ------------------------------------------------------------
 # Output directory for the log file
@@ -40,17 +39,23 @@ log_path <- out_path("verify_intext_numbers_log.txt")
 cat("", file = log_path, append = FALSE)
 log_msg <- function(msg) cat(msg, file = log_path, append = TRUE)
 
+# ------------------------------------------------------------
+# Load the functions.  When the R source files of twocpcont are in
+# the working directory (layout of the flat code supplement), they
+# are sourced; otherwise the installed twocpcont package is used.
+# ------------------------------------------------------------
 src_files <- c("GL_nodes_and_weights.R",
                "plackett_gl_full.R",
                "twocpcont_power.R",
                "twocpcont_ss.R",
+               "print_twocpcont_ss.R",
+               "print_twocpcont_power.R",
                "r_max.R",
                "kappa_star.R")
-
-for (f in src_files) {
-  fp <- file.path(src_dir, f)
-  if (!file.exists(fp)) stop(sprintf("Source file not found: %s", fp))
-  source(fp)
+if (all(file.exists(src_files))) {
+  for (f in src_files) source(f)
+} else {
+  library(twocpcont)
 }
 
 # Track results

@@ -4,6 +4,9 @@
 ^README\.Rmd$
 ^\.github$
 ^\.gitignore$
+^\.gitattributes$
+^\.Rhistory$
+^\.RData$
 ^cran-comments\.md$
 ^revdep$
 ^doc$
@@ -13,3 +16,5 @@
 ^pkgdown$
 ^\.DS_Store$
 ^Thumbs\.db$
+^inst/reproduce/table_and_figure_manuscript$
+^inst/reproduce/verify_intext_numbers_manuscript$

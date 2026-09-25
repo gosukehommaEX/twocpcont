@@ -8,6 +8,7 @@
 #
 # Output files (under table_and_figure_manuscript/):
 #   gl_nodes.rds                : Table 1 raw data
+#   anchor_weight.rds           : Figure 1 (anchor weight w*) data
 #   table2_sample_size_comparison.rds   : Table 2 raw data
 #   reduction_curve.rds         : Figure 2 (R_max curve) data
 #   kappa_star_table.rds        : Table 3 (kappa_star) raw data
@@ -16,21 +17,29 @@
 # Companion script create_table_and_figure_manuscript.R reads these
 # .rds files and writes LaTeX tables and PDF figures.
 #
-# Before running this script, set the working directory to the folder
-# that contains all R source files, e.g.,
-#   setwd("C:/path/to/twocpcont/R")
+# Before running this script, set the working directory to a writable
+# folder that contains this script.  If the R source files of
+# twocpcont are also in that folder, they are used; otherwise the
+# installed twocpcont package is used.
 
 # ------------------------------------------------------------
-# Source the R functions from the current working directory.
+# Load the functions.  When the R source files of twocpcont are in
+# the working directory (layout of the flat code supplement), they
+# are sourced; otherwise the installed twocpcont package is used.
 # ------------------------------------------------------------
-source("GL_nodes_and_weights.R")
-source("plackett_gl_full.R")
-source("twocpcont_power.R")
-source("twocpcont_ss.R")
-source("print_twocpcont_ss.R")
-source("print_twocpcont_power.R")
-source("r_max.R")
-source("kappa_star.R")
+src_files <- c("GL_nodes_and_weights.R",
+               "plackett_gl_full.R",
+               "twocpcont_power.R",
+               "twocpcont_ss.R",
+               "print_twocpcont_ss.R",
+               "print_twocpcont_power.R",
+               "r_max.R",
+               "kappa_star.R")
+if (all(file.exists(src_files))) {
+  for (f in src_files) source(f)
+} else {
+  library(twocpcont)
+}
 
 library(pbivnorm)
 
@@ -84,6 +93,51 @@ gl_obj <- list(
 )
 saveRDS(gl_obj, out_path("gl_nodes.rds"))
 cat(sprintf("  Saved: gl_nodes.rds (elapsed %.3f s)\n", t1_elapsed))
+
+# ------------------------------------------------------------
+# Figure 1 data: anchor weight w* as a function of kappa
+# Implements eq. (eq:w_star) directly:
+#   w_star = 1/2 + (kappa - 1) (u_p + z_alpha) phi(u_p) /
+#                  [(1 + kappa) |2 log p| p]
+# ------------------------------------------------------------
+cat("\n--- Computing anchor weight curve (Figure 1) ---\n")
+t3_start <- Sys.time()
+
+w_star_fun <- function(kappa, beta, alpha) {
+  z_alpha <- qnorm(1 - alpha)
+  p       <- sqrt(1 - beta)
+  u_p     <- qnorm(p)
+  phi_u_p <- dnorm(u_p)
+  L_abs   <- abs(2 * log(p))
+  w <- 0.5 +
+    (kappa - 1) * (u_p + z_alpha) * phi_u_p /
+    ((1 + kappa) * L_abs * p)
+  pmin(1, pmax(0, w))
+}
+
+kappa_seq_w <- seq(1, 4, length.out = 301)
+power_set_w <- c(0.70, 0.80, 0.90)
+
+df_w <- do.call(rbind, lapply(power_set_w, function(pw) {
+  data.frame(
+    kappa  = kappa_seq_w,
+    power  = pw,
+    w_star = w_star_fun(kappa_seq_w, beta = 1 - pw, alpha = alpha)
+  )
+}))
+t3_elapsed <- as.numeric(difftime(Sys.time(), t3_start, units = "secs"))
+
+anchor_obj <- list(
+  data       = df_w,
+  alpha      = alpha,
+  power_set  = power_set_w,
+  kappa_seq  = kappa_seq_w,
+  elapsed    = t3_elapsed,
+  computed   = Sys.time(),
+  R_version  = R.version.string
+)
+saveRDS(anchor_obj, out_path("anchor_weight.rds"))
+cat(sprintf("  Saved: anchor_weight.rds (elapsed %.3f s)\n", t3_elapsed))
 
 # ------------------------------------------------------------
 # Helper: one cell of the Table 2 grid
@@ -317,9 +371,9 @@ cat(sprintf("Table 2: match (diff = 0) %d / %d, power range [%.4f, %.4f]\n",
 cat(sprintf("R_max range: kappa = 1, 1-beta = 0.80 -> %.2f%%; ",
             df_rmax$R_max[df_rmax$kappa == 1.0 &
                             df_rmax$power == 0.80] * 100))
+df_rmax_80 <- df_rmax[df_rmax$power == 0.80, ]
 cat(sprintf("kappa = 1.5 -> %.2f%%\n",
-            df_rmax$R_max[which.min(abs(df_rmax$kappa - 1.5)) +
-                            which(df_rmax$power == 0.80)[1] - 1] * 100))
+            df_rmax_80$R_max[which.min(abs(df_rmax_80$kappa - 1.5))] * 100))
 cat(sprintf("kappa_star(eps = 0.01, 1-beta = 0.80) = %.4f\n",
             df_kstar$kappa_star[df_kstar$power == 0.80 &
                                   df_kstar$epsilon == 0.010]))
