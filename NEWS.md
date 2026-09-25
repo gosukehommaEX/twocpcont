@@ -64,6 +64,9 @@
 - `tools/make_supplement.R` builds the flat code supplement of the
   manuscript from the package sources and checks that the copies are
   identical.
+- `tools/sync_manuscript_assets.R` copies the generated tables and
+  figures into the folder of the manuscript and checks that the copies
+  are identical.
 
 ## Infrastructure
 
