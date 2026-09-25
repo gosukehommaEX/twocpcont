@@ -32,11 +32,13 @@ test_that("kappa_star solves the exact rho = 0 relation", {
   }
 })
 
-test_that("kappa_star is consistent with r_max", {
+test_that("kappa_star is the exact inverse of r_max", {
   for (beta in c(0.3, 0.2, 0.15, 0.1)) {
     for (eps in c(0.005, 0.01, 0.02, 0.05, 0.1, 0.15)) {
       ks <- kappa_star(epsilon = eps, beta = beta)
-      expect_equal(r_max(kappa = ks, beta = beta), eps, tolerance = 1e-3)
+      expect_equal(r_max(kappa = ks, beta = beta), eps, tolerance = 1e-8)
+      expect_equal(r_max(kappa = ks, beta = beta, exact = FALSE), eps,
+                   tolerance = 1e-3)
     }
   }
 })

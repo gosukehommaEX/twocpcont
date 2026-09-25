@@ -36,7 +36,10 @@
 #'          {z_\alpha + z_\beta + \nu}.}
 #' This is a fully closed-form expression involving only the standard
 #' normal cumulative distribution function and its inverse; no iteration
-#' is required.
+#' is required.  Because the same exact \eqn{\rho = 0} relation defines
+#' \code{\link{r_max}} with \code{exact = TRUE} (the default),
+#' \code{r_max(kappa_star(epsilon, alpha, beta), alpha, beta)} returns
+#' \eqn{\epsilon} up to rounding error.
 #'
 #' \strong{Interpretation.}  For typical design choices, the threshold
 #' is moderate.  For example, at \eqn{1 - \beta = 0.80} and

@@ -4,7 +4,7 @@
 \alias{r_max}
 \title{Maximum Reduction Rate in Sample Size Due to Between-Endpoint Correlation}
 \usage{
-r_max(kappa, alpha = 0.025, beta = 0.2)
+r_max(kappa, alpha = 0.025, beta = 0.2, exact = TRUE)
 }
 \arguments{
 \item{kappa}{Effect size ratio \eqn{\gamma_s / \gamma_w \geq 1}.}
@@ -12,6 +12,15 @@ r_max(kappa, alpha = 0.025, beta = 0.2)
 \item{alpha}{One-sided significance level (default: 0.025).}
 
 \item{beta}{Target type II error rate (default: 0.2 for 80\% power).}
+
+\item{exact}{Logical; if \code{TRUE} (default), the noncentrality
+parameter at \eqn{\rho = 0} is the exact root of
+\eqn{\Phi(\lambda - z_\alpha) \Phi(\kappa \lambda - z_\alpha)
+= 1 - \beta}, found by \code{\link[stats]{uniroot}}.  If
+\code{FALSE}, the closed-form approximation of the sample size
+formula (anchor plus quadratic Taylor correction) is used, and no
+iteration is required.  The two agree to about \eqn{10^{-5}} on the
+reduction-rate scale.}
 }
 \value{
 Numeric scalar; the maximum reduction rate
@@ -26,6 +35,9 @@ defined as
 \deqn{R(\rho; \kappa, \beta) = 1 - N(\rho) / N(0)
   = 1 - (\lambda_w^{*}(\rho))^2 / (\lambda_w^{*}(0))^2,}
 and its maximum is attained in the limit \eqn{\rho \to 1}.
+By default, \eqn{\lambda_w^{*}(0)} is the exact solution of the
+\eqn{\rho = 0} power equation; the closed-form approximation used in
+the sample size formula is available with \code{exact = FALSE}.
 }
 \details{
 \strong{Derivation.}  As \eqn{\rho \to 1}, the bivariate normal
@@ -37,6 +49,22 @@ equation therefore reduces to \eqn{\Phi(\lambda_w - z_\alpha)
 \eqn{\lambda_w^{*}(\kappa, \beta, 1) = z_\alpha + z_\beta},
 independent of \eqn{\kappa}.
 
+At \eqn{\rho = 0}, the power equation factorizes as
+\eqn{\Phi(\lambda_w - z_\alpha) \Phi(\kappa \lambda_w - z_\alpha)
+= 1 - \beta}.  Its root \eqn{\lambda_w^{*}(\kappa, \beta, 0)} lies in
+\eqn{[z_\alpha + z_\beta, z_\alpha + \Phi^{-1}(\sqrt{1 - \beta})]},
+and
+\deqn{R_{\max}(\kappa, \beta)
+  = 1 - \frac{(z_\alpha + z_\beta)^{2}}
+        {[\lambda_w^{*}(\kappa, \beta, 0)]^{2}}.}
+With \code{exact = TRUE}, the root is computed numerically.  When
+\eqn{\kappa} is so large that
+\eqn{\Phi(\kappa (z_\alpha + z_\beta) - z_\alpha)} equals 1 in
+double precision, the root is \eqn{z_\alpha + z_\beta} and 0 is
+returned.  \code{\link{kappa_star}} is the exact inverse of
+\eqn{R_{\max}} computed in this way.
+
+\strong{Closed-form approximation (\code{exact = FALSE}).}
 At \eqn{\rho = 0}, the Plackett correlation integral
 \eqn{I_{\mathrm{GL}}} and both of its derivatives vanish, so the
 quadratic Taylor correction coefficients of the closed-form formula
@@ -56,22 +84,25 @@ and the closed-form noncentrality parameter at \eqn{\rho = 0} is
 \deqn{\lambda_w^{*}(\kappa, \beta, 0) = \lambda_w^{(0)}
   + \frac{- P_1 + \sqrt{P_1^{2} - 2 P_2 [P(\lambda_w^{(0)}) - (1 - \beta)]}}
          {P_2}.}
-Combining the two limits yields the closed-form expression
-\deqn{R_{\max}(\kappa, \beta)
-  = 1 - \frac{(z_\alpha + z_\beta)^{2}}
-        {[\lambda_w^{*}(\kappa, \beta, 0)]^{2}}.}
-No iteration is required.
+Substituting this value into the expression for
+\eqn{R_{\max}(\kappa, \beta)} above requires no iteration.
 
-\strong{At \eqn{\kappa = 1}.}  Since \eqn{w^{*} = 1 / 2} and the
-linear Taylor equation is exact,
+\strong{At \eqn{\kappa = 1}.}  The exact root is
+\eqn{\lambda_w^{*}(1, \beta, 0) = z_\alpha + \Phi^{-1}(\sqrt{1 - \beta})}.
+The closed-form approximation returns the same value, because
+\eqn{w^{*} = 1 / 2}, the linear Taylor equation is exact,
 \eqn{P(\lambda_w^{(0)}) - (1 - \beta) = 0} and the quadratic
-correction vanishes, giving
-\eqn{\lambda_w^{*}(1, \beta, 0) = z_\alpha + \Phi^{-1}(\sqrt{1 - \beta})}
-and
+correction vanishes.  Hence
 \deqn{R_{\max}(1, \beta) = 1 - \frac{(z_\alpha + z_\beta)^{2}}
-  {[z_\alpha + \Phi^{-1}(\sqrt{1 - \beta})]^{2}}.}
-This is also a universal upper bound on \eqn{R_{\max}(\kappa, \beta)}
-over all \eqn{\kappa \geq 1}.
+  {[z_\alpha + \Phi^{-1}(\sqrt{1 - \beta})]^{2}}}
+for both values of \code{exact}.
+
+\strong{Monotonicity in \eqn{\kappa}.}  For fixed \eqn{\lambda}, the
+left-hand side of the \eqn{\rho = 0} equation increases in
+\eqn{\kappa}, so the exact root decreases in \eqn{\kappa} and
+\eqn{R_{\max}(\kappa, \beta)} is non-increasing in \eqn{\kappa}.
+\eqn{R_{\max}(1, \beta)} is therefore an upper bound on
+\eqn{R_{\max}(\kappa, \beta)} over all \eqn{\kappa \geq 1}.
 }
 \examples{
 # At kappa = 1 and 1 - beta = 0.80, R_max is about 23.8\%.
@@ -79,6 +110,9 @@ r_max(kappa = 1.0, alpha = 0.025, beta = 0.2)
 
 # For kappa = 1.5 with the same power, R_max is about 2.3\%.
 r_max(kappa = 1.5, alpha = 0.025, beta = 0.2)
+
+# Closed-form approximation without root finding
+r_max(kappa = 1.5, alpha = 0.025, beta = 0.2, exact = FALSE)
 
 }
 \seealso{

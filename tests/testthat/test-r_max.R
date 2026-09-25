@@ -19,19 +19,21 @@ test_that("r_max at kappa = 1 has the explicit form", {
   }
 })
 
-test_that("r_max uses alpha = 0.025 and beta = 0.2 by default", {
+test_that("r_max uses alpha = 0.025, beta = 0.2, exact = TRUE by default", {
   expect_equal(r_max(kappa = 1.3), r_max(kappa = 1.3, alpha = 0.025,
-                                         beta = 0.2))
+                                         beta = 0.2, exact = TRUE))
 })
 
 test_that("r_max is non-increasing in kappa and bounded by r_max(1)", {
   kappa_seq <- seq(1, 10, by = 0.01)
   for (beta in c(0.3, 0.2, 0.13, 0.1)) {
-    vals <- sapply(kappa_seq, r_max, beta = beta)
-    # Allow for rounding at the order of machine precision
-    expect_true(all(diff(vals) <= 1e-12))
-    expect_true(all(vals >= -1e-12))
-    expect_true(all(vals <= r_max(kappa = 1, beta = beta)))
+    for (ex in c(TRUE, FALSE)) {
+      vals <- sapply(kappa_seq, r_max, beta = beta, exact = ex)
+      # Allow for rounding at the order of machine precision
+      expect_true(all(diff(vals) <= 1e-12))
+      expect_true(all(vals >= -1e-12))
+      expect_true(all(vals <= r_max(kappa = 1, beta = beta) + 1e-12))
+    }
   }
 })
 
@@ -48,6 +50,39 @@ test_that("r_max reproduces the Doody 2014 example (about 4.6%)", {
                tolerance = 0.01)
 })
 
+test_that("r_max with exact = TRUE solves the rho = 0 equation", {
+  z_alpha <- qnorm(1 - 0.025)
+  for (beta in c(0.3, 0.2, 0.1)) {
+    for (kappa in c(1.05, 1.3, 1.6, 2.5)) {
+      z_beta <- qnorm(1 - beta)
+      lam <- (z_alpha + z_beta) / sqrt(1 - r_max(kappa, beta = beta))
+      expect_equal(pnorm(lam - z_alpha) * pnorm(kappa * lam - z_alpha),
+                   1 - beta, tolerance = 1e-10)
+    }
+  }
+})
+
+test_that("r_max: exact and closed-form versions agree closely", {
+  kappa_seq <- seq(1, 3, by = 0.05)
+  for (beta in c(0.3, 0.2, 0.15, 0.13, 0.1)) {
+    v_exact  <- sapply(kappa_seq, r_max, beta = beta, exact = TRUE)
+    v_approx <- sapply(kappa_seq, r_max, beta = beta, exact = FALSE)
+    expect_lt(max(abs(v_exact - v_approx)), 5e-5)
+  }
+  expect_equal(r_max(1, beta = 0.2, exact = FALSE),
+               r_max(1, beta = 0.2, exact = TRUE), tolerance = 1e-12)
+})
+
+test_that("r_max with exact = TRUE returns 0 for very large kappa", {
+  expect_identical(r_max(kappa = 10, beta = 0.2), 0)
+})
+
 test_that("r_max rejects kappa < 1", {
   expect_error(r_max(kappa = 0.9), "kappa must be >= 1")
+})
+
+test_that("r_max rejects an invalid exact argument", {
+  expect_error(r_max(kappa = 1.2, exact = NA), "exact must be")
+  expect_error(r_max(kappa = 1.2, exact = "yes"), "exact must be")
+  expect_error(r_max(kappa = 1.2, exact = c(TRUE, FALSE)), "exact must be")
 })

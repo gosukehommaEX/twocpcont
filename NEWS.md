@@ -1,5 +1,18 @@
 # twocpcont (development version)
 
+## Changes
+
+- `r_max()` gains an argument `exact`. With `exact = TRUE` (the new
+  default), the noncentrality parameter at rho = 0 is the exact root of
+  the factorized power equation, found by `uniroot()`, so that
+  `kappa_star()` is the exact inverse of `r_max()`. With
+  `exact = FALSE`, the closed-form approximation of version 0.1.0 is
+  used. The two agree to within 5e-5 on the reduction-rate scale and
+  coincide at kappa = 1.
+- The documentation of `r_max()` now derives the monotonicity of
+  R_max in kappa, which makes R_max(1, beta) an upper bound over all
+  kappa >= 1.
+
 ## Bug fixes
 
 - The unit test comparing `twocpcont_power()` across the two methods
@@ -9,7 +22,7 @@
 ## Tests
 
 - The single test file `test-twocpcont.R` was replaced by one test file
-  per function (8 files, 61 tests). New tests cover the analytic
+  per function (8 files, 65 tests). New tests cover the analytic
   derivatives and the boundary limits of `plackett_gl_full()`, the
   exactness of the Gauss-Legendre rule, agreement of the two methods
   on the 32-cell grid of the numerical study at 80%, 85% and 90%
