@@ -31,3 +31,9 @@ test_that("print.twocpcont_ss accepts the digits argument", {
                      rho = 0.35, method = "univariate")
   expect_output(print(ss, digits = 2), "0.35")
 })
+
+test_that("print.twocpcont_ss labels delta1 and delta2 as mean differences", {
+  ss <- twocpcont_ss(delta1 = 0.7, delta2 = 0.5, sd1 = 1, sd2 = 1.5,
+                     rho = 0.35, method = "univariate")
+  expect_output(print(ss), "Mean difference \\(d1, d2\\) : 0.7000, 0.5000")
+})

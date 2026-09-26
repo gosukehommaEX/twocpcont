@@ -34,3 +34,9 @@ test_that("print.twocpcont_power accepts the digits argument", {
                         method = "univariate")
   expect_output(print(pw, digits = 2), "Co-primary power")
 })
+
+test_that("print.twocpcont_power labels delta1 and delta2 as mean differences", {
+  pw <- twocpcont_power(n1 = 100, n2 = 100, delta1 = 1.8, delta2 = 3.1,
+                        sd1 = 9, sd2 = 12, rho = 0.5)
+  expect_output(print(pw), "Mean difference \\(d1, d2\\) : 1.800, 3.100")
+})

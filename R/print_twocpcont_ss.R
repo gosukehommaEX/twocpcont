@@ -45,7 +45,7 @@ print.twocpcont_ss <- function(x, digits = 4, ...) {
 
   # All labels that will appear in output
   all_labels <- c(
-    "Effect size (d1, d2)",
+    "Mean difference (d1, d2)",
     "Std. deviation (s1, s2)",
     "Correlation (rho)",
     "Allocation ratio (r)",
@@ -92,7 +92,7 @@ print.twocpcont_ss <- function(x, digits = 4, ...) {
   cat(sep, "\n")
 
   cat("  [Design]\n")
-  row("Effect size (d1, d2)",    fmt(x$delta1), fmt(x$delta2))
+  row("Mean difference (d1, d2)", fmt(x$delta1), fmt(x$delta2))
   row("Std. deviation (s1, s2)", fmt(x$sd1),    fmt(x$sd2))
   row("Correlation (rho)",       fmt(x$rho))
   row("Allocation ratio (r)",    fmt(x$r))

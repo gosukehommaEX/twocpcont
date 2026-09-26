@@ -16,6 +16,10 @@
   value of n2 before the ceiling operation, c (lambda_w*)^2, when
   `method = "univariate"` (`NA` when `method = "bivariate"`). The
   existing columns and the computed sample sizes are unchanged.
+- The print methods of `twocpcont_ss()` and `twocpcont_power()` label
+  `delta1` and `delta2` as "Mean difference" instead of "Effect size",
+  because "effect size" denotes the standardized effect size
+  delta / sd elsewhere in the package and the manuscript.
 - The published tables of the constant C_2 in Sozu et al. (2015,
   Tables 4.3 and 4.4) are included as
   `inst/extdata/sozu2015_C2_table.csv`, and
@@ -31,7 +35,7 @@
 ## Tests
 
 - The single test file `test-twocpcont.R` was replaced by one test file
-  per function (8 files, 71 tests). New tests cover the analytic
+  per function (8 files, 73 tests). New tests cover the analytic
   derivatives and the boundary limits of `plackett_gl_full()`, the
   exactness of the Gauss-Legendre rule, agreement of the two methods
   on the 32-cell grid of the numerical study at 80%, 85% and 90%

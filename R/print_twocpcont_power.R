@@ -48,7 +48,7 @@ print.twocpcont_power <- function(x, digits = 4, ...) {
   # All labels that will appear in output
   all_labels <- c(
     "Sample size (n1, n2)",
-    "Effect size (d1, d2)",
+    "Mean difference (d1, d2)",
     "Std. deviation (s1, s2)",
     "Correlation (rho)",
     "Significance level",
@@ -91,7 +91,7 @@ print.twocpcont_power <- function(x, digits = 4, ...) {
 
   cat("  [Design]\n")
   row("Sample size (n1, n2)",    fmt(x$n1),     fmt(x$n2))
-  row("Effect size (d1, d2)",    fmt(x$delta1), fmt(x$delta2))
+  row("Mean difference (d1, d2)", fmt(x$delta1), fmt(x$delta2))
   row("Std. deviation (s1, s2)", fmt(x$sd1),    fmt(x$sd2))
   row("Correlation (rho)",       fmt(x$rho))
   row("Significance level",      fmt(x$alpha))
