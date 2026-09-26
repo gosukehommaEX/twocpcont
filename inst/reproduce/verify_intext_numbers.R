@@ -513,6 +513,45 @@ record("(3.3-11) Starting value attains the target in all 96 cells (downward sea
        length(start_ok) == 96L && all(start_ok),
        sprintf("cells = %d, downward = %d", length(start_ok), sum(start_ok)))
 
+# (3.3-12) The discriminant of eq. (13) is nonnegative in every design of
+#          Sections 3 and 4: the 96 cells of Table 2, the 210 tabulated
+#          designs of Sozu et al. (2015), the four EXPEDITION 1 designs,
+#          and the rho = 0 designs behind the closed-form R_max (kappa in
+#          [1, 3] by 0.001, 1-beta in {0.70, 0.80, 0.85, 0.87, 0.90}).
+disc_fun <- function(k, rr, tp) {
+  p     <- sqrt(tp)
+  u_p   <- qnorm(p)
+  w     <- 0.5 + (k - 1) * (u_p + z_alpha) * dnorm(u_p) /
+    ((1 + k) * abs(2 * log(p)) * p)
+  w     <- min(1, max(0, w))
+  lam0  <- z_alpha + qnorm(tp ^ w)
+  u_w   <- lam0 - z_alpha
+  u_s   <- k * lam0 - z_alpha
+  pk    <- plackett_gl_full(u_w, u_s, rr, k, gl_nodes = 5L)
+  P_at  <- pnorm(u_w) * pnorm(u_s) + pk$I_GL
+  P_1   <- dnorm(u_w) * pnorm(u_s) + k * dnorm(u_s) * pnorm(u_w) + pk$I_GL_1
+  P_2   <- -u_w * dnorm(u_w) * pnorm(u_s) +
+    2 * k * dnorm(u_w) * dnorm(u_s) -
+    k ^ 2 * u_s * dnorm(u_s) * pnorm(u_w) + pk$I_GL_2
+  P_1 ^ 2 - 2 * P_2 * (P_at - tp)
+}
+disc_grid <- mapply(function(d1, d2, s1, s2, rr, tp) {
+  disc_fun(kappa_of(d1, d2, s1, s2), rr, tp)
+}, grid$delta1, grid$delta2, grid$sd1, grid$sd2, grid$rho, grid$power)
+disc_pub <- mapply(disc_fun, pub$gamma1, pub$rho, pub$power)
+disc_trial <- sapply(c(0, 0.3, 0.5, 0.8), function(rr) {
+  disc_fun(k_trial, rr, 0.87)
+})
+disc_rho0 <- unlist(lapply(c(0.70, 0.80, 0.85, 0.87, 0.90), function(tp) {
+  sapply(seq(1, 3, by = 0.001), disc_fun, rr = 0, tp = tp)
+}))
+disc_all <- c(disc_grid, disc_pub, disc_trial, disc_rho0)
+record("(3.3-12) Discriminant of eq. (13) is nonnegative in all designs of Sections 3 and 4",
+       length(disc_grid) == 96L && length(disc_pub) == 210L &&
+         all(disc_all >= 0),
+       sprintf("designs = %d, min discriminant = %.4f", length(disc_all),
+               min(disc_all)))
+
 # ============================================================
 # SECTION 3.4: Maximum reduction rate and threshold
 # ============================================================
