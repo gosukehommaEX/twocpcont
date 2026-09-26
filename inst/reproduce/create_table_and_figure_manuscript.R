@@ -348,8 +348,8 @@ build_real_example_tex <- function(obj, file_out) {
 
   caption <- sprintf(paste0(
     "Design assumptions and sample sizes for EXPEDITION~1, the Phase~III ",
-    "trial of solanezumab for mild-to-moderate Alzheimer's disease ",
-    "reported by~\\cite{Doody2014}. The upper block lists the design ",
+    "trial of solanezumab for mild-to-moderate Alzheimer's disease",
+    "~\\citep{Doody2014}. The upper block lists the design ",
     "parameters from the trial protocol, with overall power ",
     "$1 - \\beta = %.2f$. The lower block reports the total sample size ",
     "$N$ of the conventional iterative method ($N_{\\rm conv}$) and the ",
