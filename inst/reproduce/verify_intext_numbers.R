@@ -81,6 +81,40 @@ alpha     <- 0.025
 power_set <- c(0.80, 0.85, 0.90)
 
 # ============================================================
+# SECTION 1: Introduction
+# ============================================================
+section("Section 1 (Introduction)")
+
+record("(1-1) Product of two marginal powers 0.8^2 = 0.64",
+       abs(0.8 ^ 2 - 0.64) < 1e-12,
+       sprintf("0.8^2 = %.4f", 0.8 ^ 2))
+
+# ============================================================
+# SECTION 2.3 and Appendix B: accuracy of the 5-point rule
+# ============================================================
+section("Section 2.3 and Appendix B (Gauss-Legendre approximation)")
+
+# (2.3-1) |I - I_GL| < 1e-5 for |rho| <= 0.8.  The exact Plackett integral
+#         is computed by adaptive quadrature over a grid of (a, b, rho)
+#         that covers the arguments arising in this article.
+plackett_exact <- function(a, b, rho) {
+  integrate(function(t) {
+    exp(-(a ^ 2 + b ^ 2 - 2 * t * a * b) / (2 * (1 - t ^ 2))) /
+      (2 * pi * sqrt(1 - t ^ 2))
+  }, lower = 0, upper = rho, rel.tol = 1e-12, abs.tol = 1e-15)$value
+}
+gl_grid <- expand.grid(a = seq(-1, 4, by = 0.25), b = seq(-1, 8, by = 0.25),
+                       rho = seq(-0.8, 0.8, by = 0.1))
+gl_err <- mapply(function(a, b, rho) {
+  abs(plackett_exact(a, b, rho) -
+        plackett_gl_full(a, b, rho, kappa = 1, gl_nodes = 5L)$I_GL)
+}, gl_grid$a, gl_grid$b, gl_grid$rho)
+record("(2.3-1) 5-point rule: |I - I_GL| < 1e-5 for |rho| <= 0.8",
+       max(gl_err) < 1e-5,
+       sprintf("grid points = %d, max error = %.2e", nrow(gl_grid),
+               max(gl_err)))
+
+# ============================================================
 # SECTION 2.4: Maximum reduction rate and threshold
 # ============================================================
 section("Section 2.4 (Maximum reduction rate and threshold effect size ratio)")
@@ -215,6 +249,10 @@ red_pct <- function(N_vec) (N_vec[1] - N_vec[length(N_vec)]) / N_vec[1] * 100
 
 record("(3.1-3) The grid has 96 combinations", nrow(grid) == 96L,
        sprintf("rows = %d", nrow(grid)))
+
+record("(3.1-4) Computations performed in R version 4.6.0",
+       paste(R.version$major, R.version$minor, sep = ".") == "4.6.0",
+       R.version.string)
 
 # ============================================================
 # SECTION 3.2: Sample size comparison and achieved power
@@ -373,6 +411,24 @@ record("(3.3-8) The closed form evaluates Phi2 at no point",
        all(ev$n_phi2_prop == 0L),
        sprintf("max count = %d", max(ev$n_phi2_prop)))
 
+record("(3.3-9) Tables: 2 powers, 15 ratios in [1.00, 2.00], 7 correlations",
+       setequal(unique(pub$power), c(0.80, 0.90)) &&
+         length(unique(pub$gamma1)) == 15L &&
+         abs(min(pub$gamma1) - 1) < 1e-9 && abs(max(pub$gamma1) - 2) < 1e-9 &&
+         setequal(unique(pub$rho), c(0, 0.2, 0.3, 0.5, 0.7, 0.8, 0.95)),
+       sprintf("powers = %s; ratios = %d; correlations = %s",
+               paste(unique(pub$power), collapse = ", "),
+               length(unique(pub$gamma1)),
+               paste(unique(pub$rho), collapse = ", ")))
+
+k_trial <- (3.1 / 12) / (1.8 / 9)
+record("(3.3-10) EXPEDITION 1 (0.87, 1.292) is not covered by the tables",
+       all(abs(unique(pub$power) - 0.87) > 1e-9) &&
+         all(abs(unique(pub$gamma1) - k_trial) > 1e-3),
+       sprintf("kappa = %.4f between tabulated %.2f and %.2f", k_trial,
+               max(pub$gamma1[pub$gamma1 < k_trial]),
+               min(pub$gamma1[pub$gamma1 > k_trial])))
+
 # ============================================================
 # SECTION 3.4: Maximum reduction rate and threshold
 # ============================================================
@@ -443,8 +499,8 @@ record("(4-2) delta2 / sd2 = 3.1 / 12 approximately 0.258",
 
 # (4-3) kappa = 1.29
 kappa_doody <- (3.1 / 12) / (1.8 / 9)
-record("(4-3) Doody example: kappa = 1.29",
-       abs(kappa_doody - 1.29) < 0.005,
+record("(4-3) Doody example: kappa = 1.292",
+       abs(kappa_doody - 1.292) < 0.0005,
        sprintf("kappa = %.4f", kappa_doody))
 
 # (4-4) Marginal-power product 0.89 * 0.98 = 0.87 (within rounding)
