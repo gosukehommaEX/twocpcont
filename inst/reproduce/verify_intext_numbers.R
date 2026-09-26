@@ -714,6 +714,32 @@ record("(4-13) Continuous reduction at rho = 0.8 about 3.9%, below R_max and 4.0
        sprintf("continuous = %.4f%%, integer = %.2f%%, R_max = %.4f%%",
                red_cont, red_doody, Rmax_doody))
 
+# (4-13a) The protocol's table of marginal powers (Table LZAM.4:
+#         81/85/89% for effect size 0.20 and 94/96/98% for 0.25 at
+#         400/450/500 patients per group, two-sided 0.05) agrees with
+#         0.25 and not with 3.1 / 12
+prot_pow <- function(es) {
+  round(100 * pnorm(es * sqrt(c(400, 450, 500) / 2) - qnorm(0.975)))
+}
+record("(4-13a) Protocol power table agrees with ES 0.25, not with 3.1/12",
+       all(prot_pow(0.20) == c(81, 85, 89)) &&
+         all(prot_pow(0.25) == c(94, 96, 98)) &&
+         any(prot_pow(3.1 / 12) != c(94, 96, 98)),
+       sprintf("0.20: %s; 0.25: %s; 3.1/12: %s",
+               paste(prot_pow(0.20), collapse = "/"),
+               paste(prot_pow(0.25), collapse = "/"),
+               paste(prot_pow(3.1 / 12), collapse = "/")))
+
+# (4-13b) With the rounded effect size 0.25, kappa = 1.25 lies below
+#         kappa_star(0.05, 0.13) and R_max is about 6.0%
+kappa_round <- 0.25 / 0.20
+Rmax_round  <- r_max(kappa = kappa_round, alpha = 0.025, beta = 0.13) * 100
+record("(4-13b) ES 0.25: kappa = 1.25 < kappa_star(0.05), R_max about 6.0%",
+       abs(kappa_round - 1.25) < 1e-12 &&
+         kappa_round < kappa_star(epsilon = 0.05, alpha = 0.025, beta = 0.13) &&
+         abs(round(Rmax_round, 1) - 6.0) < 1e-9,
+       sprintf("kappa = %.4f, R_max = %.4f%%", kappa_round, Rmax_round))
+
 # (4-14) kappa_star(eps = 0.05, 1-beta = 0.87) approximately 1.28
 ks_doody_05 <- kappa_star(epsilon = 0.05, alpha = 0.025, beta = 0.13)
 record("(4-14) kappa_star(eps = 0.05, 1-beta = 0.87) approximately 1.28",
