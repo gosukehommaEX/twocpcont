@@ -4,8 +4,9 @@
 # Verifies every concrete number that appears in the body text
 # of Section 2.4 (reduction in sample size due to correlation),
 # Section 3 (numerical investigation) and Section 4 (real trial
-# example) of the manuscript.  The Discussion repeats numbers
-# from Section 3, which are covered by the Section 3 checks.
+# example) of the manuscript.  The Discussion mostly repeats numbers
+# from Sections 3 and 4, which are covered by those checks; its one
+# new number is checked in the Section 5 block.
 # Table and figure contents themselves are produced by
 # run_table_and_figure_manuscript.R and are not re-checked here.
 #
@@ -312,26 +313,87 @@ record("(3.2-13) All 48 combinations with r = 2 give identical N",
        sprintf("rows = %d, matches = %d", nrow(r2), sum(r2$N == r2$N_conv)))
 
 # ============================================================
-# SECTION 3.3: Maximum reduction rate and threshold
+# SECTION 3.3: Comparison with published tables and computational cost
+# (reads the rds files written by run_table_and_figure_manuscript.R)
 # ============================================================
-section("Section 3.3 (Maximum reduction rate and threshold effect size ratio)")
+section("Section 3.3 (Comparison with published tables and computational cost)")
+
+pub <- readRDS(file.path("table_and_figure_manuscript",
+                         "published_table_comparison.rds"))$sozu
+lo  <- pub$rho <= 0.8
+hi  <- !lo
+
+record("(3.3-1) Exact root reproduces all 210 tabulated values",
+       nrow(pub) == 210L && all(abs(pub$dev_exact) < 1e-9),
+       sprintf("rows = %d, matches = %d", nrow(pub),
+               sum(abs(pub$dev_exact) < 1e-9)))
+
+record("(3.3-2) rho <= 0.8: closed form agrees with 177 of 180, others differ by 0.001",
+       sum(lo) == 180L && sum(abs(pub$dev_cf[lo]) < 1e-9) == 177L &&
+         all(abs(abs(pub$dev_cf[lo & abs(pub$dev_cf) > 1e-9]) - 0.001) < 1e-9),
+       sprintf("rows = %d, matches = %d", sum(lo),
+               sum(abs(pub$dev_cf[lo]) < 1e-9)))
+
+max_err <- max(abs(pub$err_cf[lo]))
+record("(3.3-3) rho <= 0.8: largest |lambda_w* - exact root| below 4e-4",
+       max_err < 4e-4,
+       sprintf("max error = %.3e", max_err))
+
+rel_n2 <- max(abs(((pub$C2_cf[lo] + z_alpha) /
+                     (pub$C2_exact[lo] + z_alpha)) ^ 2 - 1)) * 100
+record("(3.3-4) rho <= 0.8: c (lambda_w*)^2 changes by less than 0.03%",
+       rel_n2 < 0.03,
+       sprintf("max relative change = %.4f%%", rel_n2))
+
+record("(3.3-5) rho = 0.95: 20 of 30 agree, largest difference 0.002",
+       sum(hi) == 30L && sum(abs(pub$dev_cf[hi]) < 1e-9) == 20L &&
+         abs(max(abs(pub$dev_cf[hi])) - 0.002) < 1e-9,
+       sprintf("rows = %d, matches = %d, max |dev| = %.3f", sum(hi),
+               sum(abs(pub$dev_cf[hi]) < 1e-9), max(abs(pub$dev_cf[hi]))))
+
+ev <- readRDS(file.path("table_and_figure_manuscript",
+                        "phi2_evaluations.rds"))$data
+record("(3.3-6) Phi2 evaluations of the conventional search: median 31.5, range 2 to 125",
+       nrow(ev) == 96L && abs(stats::median(ev$n_phi2_conv) - 31.5) < 1e-9 &&
+         min(ev$n_phi2_conv) == 2L && max(ev$n_phi2_conv) == 125L,
+       sprintf("cells = %d, median = %g, range = [%d, %d]", nrow(ev),
+               stats::median(ev$n_phi2_conv), min(ev$n_phi2_conv),
+               max(ev$n_phi2_conv)))
+
+ev_kappa <- mapply(kappa_of, ev$delta1, ev$delta2, ev$sd1, ev$sd2)
+top <- ev$n_phi2_conv == max(ev$n_phi2_conv)
+record("(3.3-7) Largest Phi2 counts occur at kappa = 1.5",
+       all(abs(ev_kappa[top] - 1.5) < 1e-9) &&
+         all(abs(ev_kappa[order(-ev$n_phi2_conv)[1:5]] - 1.5) < 1e-9),
+       sprintf("kappa of the five largest counts: %s",
+               paste(sprintf("%.2f", ev_kappa[order(-ev$n_phi2_conv)[1:5]]),
+                     collapse = ", ")))
+
+record("(3.3-8) The closed form evaluates Phi2 at no point",
+       all(ev$n_phi2_prop == 0L),
+       sprintf("max count = %d", max(ev$n_phi2_prop)))
+
+# ============================================================
+# SECTION 3.4: Maximum reduction rate and threshold
+# ============================================================
+section("Section 3.4 (Maximum reduction rate and threshold effect size ratio)")
 
 Rmax_1 <- sapply(1 - power_set, function(b) {
   r_max(kappa = 1, alpha = alpha, beta = b) * 100
 })
-record("(3.3-1) Rmax(1) = 23.8%, 21.3%, 18.6% at 0.80, 0.85, 0.90",
+record("(3.4-1) Rmax(1) = 23.8%, 21.3%, 18.6% at 0.80, 0.85, 0.90",
        all(abs(Rmax_1 - c(23.8, 21.3, 18.6)) < 0.05),
        sprintf("%s", paste(sprintf("%.4f%%", Rmax_1), collapse = ", ")))
 
 inc_cs <- (1 / (1 - r_max(kappa = 1, alpha = alpha, beta = 0.10)) - 1) * 100
-record("(3.3-2) 1 / (1 - Rmax(1, 0.10)) - 1 approximately 22.8%",
+record("(3.4-2) 1 / (1 - Rmax(1, 0.10)) - 1 approximately 22.8%",
        abs(inc_cs - 22.8) < 0.05,
        sprintf("increase = %.4f%%", inc_cs))
 
 ks <- sapply(c(0.05, 0.15), function(e) {
   sapply(c(0.20, 0.10), function(b) kappa_star(e, alpha = alpha, beta = b))
 })
-record(paste0("(3.3-3) kappa_star: 1.37 -> 1.13 at 0.80, ",
+record(paste0("(3.4-3) kappa_star: 1.37 -> 1.13 at 0.80, ",
               "1.24 -> 1.05 at 0.90"),
        all(abs(ks - rbind(c(1.37, 1.13), c(1.24, 1.05))) < 0.005),
        sprintf("0.80: %.4f -> %.4f; 0.90: %.4f -> %.4f",
@@ -340,13 +402,29 @@ record(paste0("(3.3-3) kappa_star: 1.37 -> 1.13 at 0.80, ",
 ks_05_max <- max(sapply(1 - power_set, function(b) {
   kappa_star(0.05, alpha = alpha, beta = b)
 }))
-record("(3.3-4) kappa_star(0.05) <= 1.4 at all three target powers",
+record("(3.4-4) kappa_star(0.05) <= 1.4 at all three target powers",
        ks_05_max <= 1.4,
        sprintf("max kappa_star(0.05) = %.4f", ks_05_max))
 
-record("(3.3-5) Rmax(1, 0.20) about 24% (upper bound at 1-beta = 0.80)",
+record("(3.4-5) Rmax(1, 0.20) about 24% (upper bound at 1-beta = 0.80)",
        abs(Rmax_1[1] - 24) < 0.5,
        sprintf("Rmax = %.4f%%", Rmax_1[1]))
+
+hw <- sapply(c(0.20, 0.15, 0.10), function(b) {
+  1 / (1 - r_max(kappa = 1, alpha = alpha, beta = b))
+})
+hw_formula <- sapply(c(0.20, 0.15, 0.10), function(b) {
+  ((z_alpha + qnorm(sqrt(1 - b))) / (z_alpha + qnorm(1 - b))) ^ 2
+})
+record("(3.4-6) Hung and Wang ratio 1 / (1 - Rmax(1)) = 1.31, 1.27, 1.23",
+       all(abs(hw - c(1.31, 1.27, 1.23)) < 0.005) &&
+         all(abs(hw - hw_formula) < 1e-10),
+       sprintf("%s", paste(sprintf("%.4f", hw), collapse = ", ")))
+
+Rmax_varga <- r_max(kappa = 0.5 / 0.4, alpha = alpha, beta = 0.20) * 100
+record("(3.4-7) Varga et al. example: Rmax(1.25, 0.20) approximately 9.1%",
+       abs(Rmax_varga - 9.1) < 0.05,
+       sprintf("Rmax = %.4f%%", Rmax_varga))
 
 # ============================================================
 # SECTION 4: Real trial example (Doody / EXPEDITION 1)
@@ -479,6 +557,17 @@ record("(4-17) Gain bound: R_max * 1000 approximately 46 patients",
 record("(4-18) R_max < 5% (so 'less than 5%' is correct)",
        Rmax_doody < 5.0,
        sprintf("R_max = %.4f%% (less than 5%%)", Rmax_doody))
+
+# ============================================================
+# SECTION 5: Discussion
+# ============================================================
+section("Section 5 (Discussion)")
+
+# (5-1) Schouten (1999): increment z_alpha^2 / 2 is about two patients
+incr_t <- qnorm(1 - 0.025) ^ 2 / 2
+record("(5-1) z_alpha^2 / 2 at alpha = 0.025 is about two patients",
+       round(incr_t) == 2,
+       sprintf("z_alpha^2 / 2 = %.4f", incr_t))
 
 # ============================================================
 # Final summary

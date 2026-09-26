@@ -13,6 +13,8 @@
 #   reduction_curve.rds         : Figure 2 (R_max curve) data
 #   kappa_star_table.rds        : Table 3 (kappa_star) raw data
 #   table4_real_example.rds     : Table 4 (real trial example) raw data
+#   phi2_evaluations.rds        : number of bivariate normal CDF
+#                                 evaluations per Table 2 cell
 #   published_table_comparison.rds : comparison with the published
 #                                 tables of Sozu et al. (2015) and with
 #                                 the ratio of Hung and Wang (2009)
@@ -218,6 +220,70 @@ table2_obj <- list(
 saveRDS(table2_obj, out_path("table2_sample_size_comparison.rds"))
 cat(sprintf("  Saved: table2_sample_size_comparison.rds (elapsed %.2f s)\n",
             t2_elapsed))
+
+# ------------------------------------------------------------
+# Number of bivariate normal CDF evaluations per Table 2 cell
+#
+# Every co-primary power evaluation of the conventional method calls
+# pbivnorm::pbivnorm() exactly once.  The calls are counted with
+# trace(), so that the count is taken from the implementation itself
+# rather than from a re-implementation of the search.  The same count
+# is taken for the closed form, which should make no call.  The count
+# does not depend on the computer.
+# ------------------------------------------------------------
+cat("\n--- Counting bivariate normal CDF evaluations (Table 2 cells) ---\n")
+t8_start <- Sys.time()
+
+phi2_counter <- new.env()
+phi2_counter$n <- 0L
+suppressMessages(trace("pbivnorm", where = asNamespace("pbivnorm"),
+                       tracer = quote(phi2_counter$n <- phi2_counter$n + 1L),
+                       print = FALSE))
+count_calls <- function(expr) {
+  phi2_counter$n <- 0L
+  force(expr)
+  phi2_counter$n
+}
+
+rows_eval <- list()
+for (pw in power_set) {
+  for (sc in scenarios) {
+    for (rho in rho_vals) {
+      n_conv <- count_calls(twocpcont_ss(
+        delta1 = sc$delta1, delta2 = sc$delta2,
+        sd1 = sc$sd1, sd2 = sc$sd2, rho = rho, r = sc$r,
+        alpha = alpha, beta = 1 - pw, method = "bivariate"))
+      n_prop <- count_calls(twocpcont_ss(
+        delta1 = sc$delta1, delta2 = sc$delta2,
+        sd1 = sc$sd1, sd2 = sc$sd2, rho = rho, r = sc$r,
+        alpha = alpha, beta = 1 - pw, method = "univariate",
+        gl_nodes = gl_nodes))
+      rows_eval[[length(rows_eval) + 1L]] <- list(
+        power  = pw,
+        delta1 = sc$delta1, delta2 = sc$delta2,
+        sd1    = sc$sd1,    sd2    = sc$sd2,
+        r      = sc$r,      rho    = rho,
+        n_phi2_conv = n_conv,
+        n_phi2_prop = n_prop
+      )
+    }
+  }
+}
+suppressMessages(untrace("pbivnorm", where = asNamespace("pbivnorm")))
+df_eval <- do.call(rbind, lapply(rows_eval, as.data.frame))
+t8_elapsed <- as.numeric(difftime(Sys.time(), t8_start, units = "secs"))
+
+phi2_obj <- list(
+  data       = df_eval,
+  alpha      = alpha,
+  power_set  = power_set,
+  gl_nodes   = gl_nodes,
+  elapsed    = t8_elapsed,
+  computed   = Sys.time(),
+  R_version  = R.version.string
+)
+saveRDS(phi2_obj, out_path("phi2_evaluations.rds"))
+cat(sprintf("  Saved: phi2_evaluations.rds (elapsed %.3f s)\n", t8_elapsed))
 
 # ------------------------------------------------------------
 # Figure 2 data: R_max(kappa) curve at three power levels
@@ -495,6 +561,11 @@ for (rr in list(df_pub$rho <= 0.8, df_pub$rho > 0.8)) {
               sum(abs(df_pub$dev_cf[rr]) < 1e-9), sum(rr),
               max(abs(df_pub$dev_cf[rr]))))
 }
+cat(sprintf(paste0("Bivariate normal CDF evaluations per cell: conventional ",
+                   "median %g, range [%d, %d]; closed form range [%d, %d]\n"),
+            stats::median(df_eval$n_phi2_conv),
+            min(df_eval$n_phi2_conv), max(df_eval$n_phi2_conv),
+            min(df_eval$n_phi2_prop), max(df_eval$n_phi2_prop)))
 cat(sprintf("Hung and Wang (2009) n / m1 at K = 2: %s\n",
             paste(sprintf("%.3f", df_hw$ratio_hw), collapse = ", ")))
 
