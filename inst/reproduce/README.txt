@@ -24,6 +24,10 @@ Reproduction scripts for the manuscript
       Checks the numbers cited in the text of the manuscript.
       Each check prints a PASS / FAIL line, and the log is
       written to the subfolder verify_intext_numbers_manuscript/.
+  appendix_software_example.R
+      Runs the software example of the appendix and writes the
+      code and its output (appendix_software_example.tex) into
+      table_and_figure_manuscript/.
 
 
 2. HOW TO REPRODUCE
@@ -34,7 +38,7 @@ Reproduction scripts for the manuscript
       install.packages(c("pbivnorm", "ggplot2", "remotes"))
       remotes::install_github("gosukehommaEX/twocpcont")
 
-(2) Copy the three scripts to a writable folder, because the
+(2) Copy the four scripts to a writable folder, because the
     scripts write their outputs into subfolders of the working
     directory.  The scripts are located at
 
@@ -45,8 +49,9 @@ Reproduction scripts for the manuscript
       source("run_table_and_figure_manuscript.R")
       source("create_table_and_figure_manuscript.R")
       source("verify_intext_numbers.R")
+      source("appendix_software_example.R")
 
-All PASS / FAIL lines printed by the last script should read
+All PASS / FAIL lines printed by verify_intext_numbers.R should read
 PASS.  The computations are deterministic, so no random seed is
 needed.
 

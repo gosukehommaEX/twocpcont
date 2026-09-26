@@ -49,7 +49,7 @@ file contains a single function, documented in roxygen2 format.
   print_twocpcont_ss.R
       print method for class "twocpcont_ss".
 
-The three files below are the reproduction scripts.
+The four files below are the reproduction scripts.
 
   run_table_and_figure_manuscript.R
       Performs all numerical computations and saves the results
@@ -62,6 +62,10 @@ The three files below are the reproduction scripts.
       Checks the numbers cited in the text of the manuscript.
       Each check prints a PASS / FAIL line, and the log is written
       to the subfolder verify_intext_numbers_manuscript/.
+  appendix_software_example.R
+      Runs the software example of the appendix and writes the
+      code and its output (appendix_software_example.tex) into
+      table_and_figure_manuscript/.
 
 The csv file below is read by run_table_and_figure_manuscript.R.
 
@@ -86,14 +90,15 @@ The csv file below is read by run_table_and_figure_manuscript.R.
       install.packages("pbivnorm")
       install.packages("ggplot2")
 
-(4) Run the three scripts in the following order:
+(4) Run the four scripts in the following order:
 
       source("run_table_and_figure_manuscript.R")
       source("create_table_and_figure_manuscript.R")
       source("verify_intext_numbers.R")
+      source("appendix_software_example.R")
 
 The scripts source the function files in Rcode/. All PASS / FAIL
-lines printed by the last script should read PASS. The
+lines printed by verify_intext_numbers.R should read PASS. The
 computations are deterministic, so no random seed is needed, and
 no manual edits to the scripts are required. All paths used in
 the scripts are relative.

@@ -570,6 +570,22 @@ record("(5-1) z_alpha^2 / 2 at alpha = 0.025 is about two patients",
        sprintf("z_alpha^2 / 2 = %.4f", incr_t))
 
 # ============================================================
+# APPENDIX E: Software implementation (claims in the prose around
+# the transcript written by appendix_software_example.R)
+# ============================================================
+section("Appendix E (Software implementation)")
+
+ss_app <- twocpcont_ss(delta1 = 1.8, delta2 = 3.1, sd1 = 9, sd2 = 12,
+                       rho = 0.5, r = 1, alpha = 0.025, beta = 0.13,
+                       method = "univariate")
+pw_app <- twocpcont_power(n1 = ss_app$n1, n2 = ss_app$n2,
+                          delta1 = 1.8, delta2 = 3.1, sd1 = 9, sd2 = 12,
+                          rho = 0.5, alpha = 0.025)$powerCoprimary
+record("(E-1) rho = 0.5: N = 980 (Table 4) and co-primary power >= 0.87",
+       ss_app$N == 980 && pw_app >= 0.87,
+       sprintf("N = %d, power = %.6f", ss_app$N, pw_app))
+
+# ============================================================
 # Final summary
 # ============================================================
 section("Summary")
