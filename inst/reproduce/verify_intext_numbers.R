@@ -242,15 +242,10 @@ lam_exact <- uniroot(function(lam) {
   pbivnorm::pbivnorm(lam - z_alpha, lam - z_alpha, rho = 0.5) - 0.90
 }, lower = 2, upper = 5, tol = 1e-14)$root
 n2_exact <- 2 / 0.3 ^ 2 * lam_exact ^ 2
-# Closed-form continuous n2 from Algorithm 2 (kappa = 1, so w* = 1/2)
-lam0  <- z_alpha + qnorm(0.90 ^ 0.5)
-pk    <- plackett_gl_full(lam0 - z_alpha, lam0 - z_alpha, 0.5, 1)
-P_at  <- pnorm(lam0 - z_alpha) ^ 2 + pk$I_GL
-P_1   <- 2 * dnorm(lam0 - z_alpha) * pnorm(lam0 - z_alpha) + pk$I_GL_1
-u0    <- lam0 - z_alpha
-P_2   <- -2 * u0 * dnorm(u0) * pnorm(u0) + 2 * dnorm(u0) ^ 2 + pk$I_GL_2
-lam_cf <- lam0 + (-P_1 + sqrt(P_1 ^ 2 - 2 * P_2 * (P_at - 0.90))) / P_2
-n2_cf  <- 2 / 0.3 ^ 2 * lam_cf ^ 2
+# Closed-form continuous n2 (before the ceiling) returned by twocpcont_ss()
+n2_cf <- twocpcont_ss(delta1 = 0.3, delta2 = 0.3, sd1 = 1, sd2 = 1,
+                      rho = 0.5, r = 1, alpha = 0.025, beta = 0.10,
+                      method = "univariate")$n2_cont
 record("(3.2-3) Continuous n2: exact 278.0009, closed form 277.9970",
        abs(n2_exact - 278.0009) < 5e-5 && abs(n2_cf - 277.9970) < 5e-5,
        sprintf("exact = %.4f, closed form = %.4f", n2_exact, n2_cf))

@@ -61,6 +61,10 @@ An object of class \code{"twocpcont_ss"} (which inherits from
   \item{n1}{Required sample size for group 1.}
   \item{n2}{Required sample size for group 2.}
   \item{N}{Total required sample size (\eqn{n_1 + n_2}).}
+  \item{n2_cont}{Closed-form value of \eqn{n_2} before the ceiling
+    operation, \eqn{c (\lambda_w^{*})^2}, when
+    \code{method = "univariate"}; \code{NA} when
+    \code{method = "bivariate"}.}
 }
 \description{
 Calculates the required sample size for a two-group superiority trial

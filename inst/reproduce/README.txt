@@ -55,7 +55,11 @@ plackett_gl_full.R, twocpcont_power.R, twocpcont_ss.R,
 print_twocpcont_ss.R, print_twocpcont_power.R, r_max.R and
 kappa_star.R) are placed in the same folder as the scripts, as in
 the code supplement of the manuscript, the scripts source them
-instead of loading the installed package.
+instead of loading the installed package.  In the same way,
+run_table_and_figure_manuscript.R reads sozu2015_C2_table.csv (the
+published tables of Sozu et al., 2015) from the working directory
+when present and from inst/extdata of the installed package
+otherwise.
 
 ================================================================
 End of README

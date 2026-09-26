@@ -27,7 +27,7 @@ test_that("twocpcont_ss returns an object of the correct class", {
   expect_s3_class(ss, "twocpcont_ss")
   expect_s3_class(ss, "data.frame")
   expect_named(ss, c("delta1", "delta2", "sd1", "sd2", "rho", "r", "alpha",
-                     "beta", "method", "n1", "n2", "N"))
+                     "beta", "method", "n1", "n2", "N", "n2_cont"))
   expect_equal(ss$N, ss$n1 + ss$n2)
 })
 
@@ -178,4 +178,70 @@ test_that("twocpcont_ss runs at the boundary values of rho", {
     expect_true(is.finite(ss$N))
     expect_gt(ss$N, 0)
   }
+})
+
+test_that("twocpcont_ss: n2 is the ceiling of n2_cont for the closed form", {
+  for (sc in scenarios) {
+    for (rho in rho_vals) {
+      ss <- ss_for(sc, rho, 0.2, "univariate")
+      expect_true(is.finite(ss$n2_cont))
+      expect_equal(ss$n2, ceiling(ss$n2_cont))
+    }
+  }
+  ss <- ss_for(scenarios[[1]], 0.5, 0.2, "bivariate")
+  expect_true(is.na(ss$n2_cont))
+})
+
+test_that("twocpcont_ss: n2_cont at the boundary cell is 277.9970", {
+  # Value quoted in Section 3.2 of the manuscript; the exact continuous
+  # solution 278.0009 is computed independently by uniroot()
+  ss <- twocpcont_ss(delta1 = 0.3, delta2 = 0.3, sd1 = 1, sd2 = 1,
+                     rho = 0.5, r = 1, alpha = 0.025, beta = 0.10,
+                     method = "univariate")
+  # Absolute differences: expect_equal() uses a relative tolerance
+  expect_lt(abs(ss$n2_cont - 277.9970), 5e-5)
+  z_a <- qnorm(1 - 0.025)
+  lam <- uniroot(function(l) {
+    pbivnorm::pbivnorm(l - z_a, l - z_a, rho = 0.5) - 0.90
+  }, lower = 2, upper = 5, tol = 1e-14)$root
+  expect_lt(abs(2 / 0.3 ^ 2 * lam ^ 2 - 278.0009), 5e-5)
+})
+
+# Published tables of the constant C_2 = lambda_w - z_alpha
+# (Sozu et al., 2015, Tables 4.3 and 4.4; alpha = 0.025, K = 2)
+sozu_tab <- utils::read.csv(system.file("extdata", "sozu2015_C2_table.csv",
+                                        package = "twocpcont"))
+
+test_that("Sozu et al. (2015) Tables 4.3 and 4.4 are read completely", {
+  expect_equal(nrow(sozu_tab), 210L)
+  expect_setequal(unique(sozu_tab$power), c(0.80, 0.90))
+  expect_equal(length(unique(sozu_tab$gamma1)), 15L)
+  expect_setequal(unique(sozu_tab$rho), c(0, 0.2, 0.3, 0.5, 0.7, 0.8, 0.95))
+})
+
+test_that("Exact root of the power equation reproduces Sozu et al. (2015)", {
+  # Independent check of the published tables (and of their transcription)
+  z_a <- qnorm(1 - 0.025)
+  C2_exact <- mapply(function(g, rh, pw) {
+    uniroot(function(l) {
+      pbivnorm::pbivnorm(l - z_a, g * l - z_a, rho = rh) - pw
+    }, lower = z_a, upper = z_a + 5, tol = 1e-12)$root - z_a
+  }, sozu_tab$gamma1, sozu_tab$rho, sozu_tab$power)
+  expect_equal(round(C2_exact, 3), sozu_tab$C2, tolerance = 1e-9)
+})
+
+test_that("Closed form reproduces Sozu et al. (2015) to the third decimal", {
+  # With delta_w = sd_w = 1 and r = 1, c = 2 and
+  # lambda_w* = sqrt(n2_cont / 2), so C_2 = sqrt(n2_cont / 2) - z_alpha
+  z_a <- qnorm(1 - 0.025)
+  C2_cf <- mapply(function(g, rh, pw) {
+    ss <- twocpcont_ss(delta1 = g, delta2 = 1, sd1 = 1, sd2 = 1,
+                       rho = rh, r = 1, alpha = 0.025, beta = 1 - pw,
+                       method = "univariate")
+    sqrt(ss$n2_cont / 2) - z_a
+  }, sozu_tab$gamma1, sozu_tab$rho, sozu_tab$power)
+  dev <- abs(round(C2_cf, 3) - sozu_tab$C2)
+  in_range <- sozu_tab$rho <= 0.8
+  expect_lte(max(dev[in_range]), 0.001 + 1e-9)
+  expect_lte(max(dev[!in_range]), 0.002 + 1e-9)
 })

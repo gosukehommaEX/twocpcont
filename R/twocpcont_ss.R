@@ -42,6 +42,10 @@
 #'   \item{n1}{Required sample size for group 1.}
 #'   \item{n2}{Required sample size for group 2.}
 #'   \item{N}{Total required sample size (\eqn{n_1 + n_2}).}
+#'   \item{n2_cont}{Closed-form value of \eqn{n_2} before the ceiling
+#'     operation, \eqn{c (\lambda_w^{*})^2}, when
+#'     \code{method = "univariate"}; \code{NA} when
+#'     \code{method = "bivariate"}.}
 #'
 #' @details
 #' \strong{Notation.} Let \eqn{w} index the weaker endpoint
@@ -189,9 +193,10 @@ twocpcont_ss <- function(delta1, delta2, sd1, sd2, rho,
 
     lam_w_star <- lam_w_0 + Delta_star
 
-    n2 <- ceiling(c_scale * lam_w_star ^ 2)
-    n1 <- ceiling(r * n2)
-    N  <- n1 + n2
+    n2_cont <- c_scale * lam_w_star ^ 2
+    n2      <- ceiling(n2_cont)
+    n1      <- ceiling(r * n2)
+    N       <- n1 + n2
 
   } else {
     # ============================================================
@@ -228,8 +233,9 @@ twocpcont_ss <- function(delta1, delta2, sd1, sd2, rho,
       }
     }
 
-    n1 <- ceiling(r * n2)
-    N  <- n1 + n2
+    n1      <- ceiling(r * n2)
+    N       <- n1 + n2
+    n2_cont <- NA_real_
 
   }
 
@@ -246,7 +252,8 @@ twocpcont_ss <- function(delta1, delta2, sd1, sd2, rho,
     method = method,
     n1     = n1,
     n2     = n2,
-    N      = N
+    N       = N,
+    n2_cont = n2_cont
   )
   class(result) <- c("twocpcont_ss", "data.frame")
 

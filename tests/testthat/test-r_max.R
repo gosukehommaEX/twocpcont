@@ -86,3 +86,21 @@ test_that("r_max rejects an invalid exact argument", {
   expect_error(r_max(kappa = 1.2, exact = "yes"), "exact must be")
   expect_error(r_max(kappa = 1.2, exact = c(TRUE, FALSE)), "exact must be")
 })
+
+test_that("r_max(1, beta) reproduces the sample size ratio of Hung and Wang (2009)", {
+  # Hung and Wang (2009, Section 3) give, for K independent endpoints with
+  # equal effect sizes, n / m1 = [{qnorm(1 - alpha) + qnorm((1 - beta)^(1/K))} /
+  # {qnorm(1 - alpha) + qnorm(1 - beta)}]^2, where m1 is the single-endpoint
+  # sample size.  For K = 2 this equals 1 / {1 - r_max(1, beta)}.
+  z_a <- qnorm(1 - 0.025)
+  for (beta in c(0.20, 0.15, 0.10)) {
+    ratio_hw <- ((z_a + qnorm(sqrt(1 - beta))) / (z_a + qnorm(1 - beta))) ^ 2
+    expect_equal(1 / (1 - r_max(1, alpha = 0.025, beta = beta)), ratio_hw,
+                 tolerance = 1e-10)
+  }
+  # Values at K = 2 read from Figure 1 of Hung and Wang (2009):
+  # about 1.31, 1.27, and 1.23 for power 0.80, 0.85, and 0.90
+  ratio <- sapply(c(0.20, 0.15, 0.10), function(b) 1 / (1 - r_max(1, beta = b)))
+  # Absolute difference: expect_equal() uses a relative tolerance
+  expect_lt(max(abs(ratio - c(1.31, 1.27, 1.23))), 0.01)
+})

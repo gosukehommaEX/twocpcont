@@ -12,6 +12,15 @@
 - The documentation of `r_max()` now derives the monotonicity of
   R_max in kappa, which makes R_max(1, beta) an upper bound over all
   kappa >= 1.
+- `twocpcont_ss()` returns a new column `n2_cont`, the closed-form
+  value of n2 before the ceiling operation, c (lambda_w*)^2, when
+  `method = "univariate"` (`NA` when `method = "bivariate"`). The
+  existing columns and the computed sample sizes are unchanged.
+- The published tables of the constant C_2 in Sozu et al. (2015,
+  Tables 4.3 and 4.4) are included as
+  `inst/extdata/sozu2015_C2_table.csv`, and
+  `run_table_and_figure_manuscript.R` compares them with the exact and
+  closed-form values.
 
 ## Bug fixes
 
@@ -22,7 +31,7 @@
 ## Tests
 
 - The single test file `test-twocpcont.R` was replaced by one test file
-  per function (8 files, 65 tests). New tests cover the analytic
+  per function (8 files, 71 tests). New tests cover the analytic
   derivatives and the boundary limits of `plackett_gl_full()`, the
   exactness of the Gauss-Legendre rule, agreement of the two methods
   on the 32-cell grid of the numerical study at 80%, 85% and 90%
@@ -33,6 +42,12 @@
   for the cell (0.3, 0.3, 1, 1, r = 1, rho = 0.5), where the exact
   continuous n2 is 278.0009. This boundary case is recorded in the
   tests.
+- Tests reproduce values published by other authors: the 210
+  tabulated values of C_2 in Sozu et al. (2015, Tables 4.3 and 4.4),
+  by the exact root (all 210 to three decimals) and by the closed form
+  (within 0.001 for rho <= 0.8 and 0.002 for rho = 0.95), and the
+  sample size ratio n / m1 of Hung and Wang (2009) for two endpoints,
+  which equals 1 / {1 - r_max(1, beta)}.
 
 ## Documentation
 

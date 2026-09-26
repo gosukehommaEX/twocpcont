@@ -11,6 +11,10 @@
 #   table4_real_example.tex           : Real trial example (Doody 2014)
 #   figure1_anchor_weight.{pdf,eps}   : Anchor weight w* vs kappa
 #   figure2_reduction_curve.{pdf,eps} : R_max(kappa) at three power levels
+#   published_table_comparison_sozu2015.csv : C_2 of Sozu et al. (2015)
+#                                       versus exact and closed-form values
+#   published_table_comparison_hungwang2009.csv : n / m1 of Hung and
+#                                       Wang (2009) versus r_max(1, beta)
 #
 # Each table file is a complete table environment (caption, label,
 # tabular and table notes), so that the manuscript only needs
@@ -52,7 +56,8 @@ required_rds <- c(
   "table2_sample_size_comparison.rds",
   "reduction_curve.rds",
   "kappa_star_table.rds",
-  "table4_real_example.rds"
+  "table4_real_example.rds",
+  "published_table_comparison.rds"
 )
 missing_rds <- required_rds[!file.exists(out_path(required_rds))]
 if (length(missing_rds) > 0) {
@@ -67,6 +72,7 @@ table2_obj     <- readRDS(out_path("table2_sample_size_comparison.rds"))
 reduction_obj  <- readRDS(out_path("reduction_curve.rds"))
 kappa_star_obj <- readRDS(out_path("kappa_star_table.rds"))
 table4_obj     <- readRDS(out_path("table4_real_example.rds"))
+published_obj  <- readRDS(out_path("published_table_comparison.rds"))
 
 # ------------------------------------------------------------
 # Common figure helper: save .pdf and .eps with cairo devices
@@ -418,6 +424,19 @@ save_fig(p2, "figure2_reduction_curve", width = 120, height = 90)
 cat("Wrote: figure2_reduction_curve.{pdf,eps}\n")
 
 # ============================================================
+# Comparison with published values (supplementary output, not a
+# manuscript table)
+# ============================================================
+write.csv(published_obj$sozu,
+          out_path("published_table_comparison_sozu2015.csv"),
+          row.names = FALSE)
+cat("Wrote: published_table_comparison_sozu2015.csv\n")
+write.csv(published_obj$hung_wang,
+          out_path("published_table_comparison_hungwang2009.csv"),
+          row.names = FALSE)
+cat("Wrote: published_table_comparison_hungwang2009.csv\n")
+
+# ============================================================
 # Reporting cached metadata
 # ============================================================
 cat("\n----- Cached computation metadata -----\n")
@@ -439,4 +458,7 @@ cat(sprintf("kappa_star table elapsed: %.3f s (%s)\n",
 cat(sprintf("Table 4 elapsed: %.3f s (%s)\n",
             table4_obj$elapsed,
             format(table4_obj$computed, "%Y-%m-%d %H:%M:%S")))
+cat(sprintf("Published table comparison elapsed: %.3f s (%s)\n",
+            published_obj$elapsed,
+            format(published_obj$computed, "%Y-%m-%d %H:%M:%S")))
 cat(sprintf("\nAll outputs written to: %s/\n", output_dir))

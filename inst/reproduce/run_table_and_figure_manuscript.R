@@ -13,6 +13,9 @@
 #   reduction_curve.rds         : Figure 2 (R_max curve) data
 #   kappa_star_table.rds        : Table 3 (kappa_star) raw data
 #   table4_real_example.rds     : Table 4 (real trial example) raw data
+#   published_table_comparison.rds : comparison with the published
+#                                 tables of Sozu et al. (2015) and with
+#                                 the ratio of Hung and Wang (2009)
 #
 # Companion script create_table_and_figure_manuscript.R reads these
 # .rds files and writes LaTeX tables and PDF figures.
@@ -370,6 +373,86 @@ cat(sprintf("  Saved: table4_real_example.rds (elapsed %.3f s)\n",
             t6_elapsed))
 
 # ------------------------------------------------------------
+# Comparison with published values
+#
+# (a) Sozu et al. (2015, Tables 4.3 and 4.4) tabulate the constant
+#     C_2 = lambda_w - z_alpha for alpha = 0.025, 1 - beta = 0.80 and
+#     0.90, 15 effect size ratios gamma1 and 7 correlations.  C_2 is
+#     computed here by (i) the exact root of the bivariate normal power
+#     equation and (ii) the closed form, through n2_cont of
+#     twocpcont_ss() with delta_w = sd_w = 1 and r = 1, so that c = 2
+#     and lambda_w* = sqrt(n2_cont / 2).
+# (b) Hung and Wang (2009, Section 3) give the ratio n / m1 of the
+#     two-endpoint sample size under equal effect sizes and
+#     independence to the single-endpoint sample size.  For K = 2 it
+#     equals 1 / {1 - r_max(1, beta)}.
+#
+# The published table is read from sozu2015_C2_table.csv, which is
+# taken from the working directory when present (flat code
+# supplement) and from the installed package otherwise.
+# ------------------------------------------------------------
+cat("\n--- Comparing with published tables ---\n")
+t7_start <- Sys.time()
+
+tab_file <- "sozu2015_C2_table.csv"
+if (!file.exists(tab_file)) {
+  tab_file <- system.file("extdata", "sozu2015_C2_table.csv",
+                          package = "twocpcont")
+}
+if (!nzchar(tab_file) || !file.exists(tab_file)) {
+  stop("sozu2015_C2_table.csv not found.")
+}
+sozu_tab <- utils::read.csv(tab_file)
+
+z_alpha <- qnorm(1 - alpha)
+C2_exact <- mapply(function(g, rh, pw) {
+  uniroot(function(l) {
+    pbivnorm(l - z_alpha, g * l - z_alpha, rho = rh) - pw
+  }, lower = z_alpha, upper = z_alpha + 5, tol = 1e-12)$root - z_alpha
+}, sozu_tab$gamma1, sozu_tab$rho, sozu_tab$power)
+C2_cf <- mapply(function(g, rh, pw) {
+  ss <- twocpcont_ss(delta1 = g, delta2 = 1, sd1 = 1, sd2 = 1,
+                     rho = rh, r = 1, alpha = alpha, beta = 1 - pw,
+                     method = "univariate", gl_nodes = gl_nodes)
+  sqrt(ss$n2_cont / 2) - z_alpha
+}, sozu_tab$gamma1, sozu_tab$rho, sozu_tab$power)
+
+df_pub <- data.frame(
+  table     = sozu_tab$table,
+  power     = sozu_tab$power,
+  gamma1    = sozu_tab$gamma1,
+  rho       = sozu_tab$rho,
+  C2_pub    = sozu_tab$C2,
+  C2_exact  = C2_exact,
+  C2_cf     = C2_cf,
+  dev_exact = round(round(C2_exact, 3) - sozu_tab$C2, 3),
+  dev_cf    = round(round(C2_cf, 3) - sozu_tab$C2, 3),
+  err_cf    = C2_cf - C2_exact
+)
+
+df_hw <- data.frame(power = power_set)
+df_hw$ratio_hw <- ((z_alpha + qnorm(sqrt(df_hw$power))) /
+                     (z_alpha + qnorm(df_hw$power))) ^ 2
+df_hw$ratio_rmax <- sapply(df_hw$power, function(pw) {
+  1 / (1 - r_max(kappa = 1, alpha = alpha, beta = 1 - pw))
+})
+
+t7_elapsed <- as.numeric(difftime(Sys.time(), t7_start, units = "secs"))
+
+published_obj <- list(
+  sozu       = df_pub,
+  hung_wang  = df_hw,
+  alpha      = alpha,
+  gl_nodes   = gl_nodes,
+  elapsed    = t7_elapsed,
+  computed   = Sys.time(),
+  R_version  = R.version.string
+)
+saveRDS(published_obj, out_path("published_table_comparison.rds"))
+cat(sprintf("  Saved: published_table_comparison.rds (elapsed %.3f s)\n",
+            t7_elapsed))
+
+# ------------------------------------------------------------
 # Final summary
 # ------------------------------------------------------------
 cat("\n----- Summary -----\n")
@@ -401,6 +484,19 @@ cat(sprintf("Table 4: kappa_star(eps = 0.01, 1-beta = 0.87) = %.4f\n",
             kappa_star_trial_eps01))
 cat(sprintf("Table 4: kappa_star(eps = 0.05, 1-beta = 0.87) = %.4f\n",
             kappa_star_trial_eps05))
+
+cat(sprintf(paste0("Sozu et al. (2015): exact C_2 matches %d / %d ",
+                   "published values to 3 decimals\n"),
+            sum(abs(df_pub$dev_exact) < 1e-9), nrow(df_pub)))
+for (rr in list(df_pub$rho <= 0.8, df_pub$rho > 0.8)) {
+  cat(sprintf(paste0("Sozu et al. (2015), rho in [%.2f, %.2f]: closed form ",
+                     "matches %d / %d, max |deviation| = %.3f\n"),
+              min(df_pub$rho[rr]), max(df_pub$rho[rr]),
+              sum(abs(df_pub$dev_cf[rr]) < 1e-9), sum(rr),
+              max(abs(df_pub$dev_cf[rr]))))
+}
+cat(sprintf("Hung and Wang (2009) n / m1 at K = 2: %s\n",
+            paste(sprintf("%.3f", df_hw$ratio_hw), collapse = ", ")))
 
 cat(sprintf("\nAll .rds files saved to: %s/\n", output_dir))
 cat("Run create_table_and_figure_manuscript.R next.\n")

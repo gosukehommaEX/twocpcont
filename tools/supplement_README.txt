@@ -24,7 +24,8 @@ is self-contained and does not require installing the package.
 
 README.txt   This file.
 
-Rcode/       Folder containing {{N_FILES}} R source files.
+Rcode/       Folder containing {{N_FILES}} R source files and one
+             csv file.
 
 The files below define the functions used in the analysis. Each
 file contains a single function, documented in roxygen2 format.
@@ -61,6 +62,13 @@ The three files below are the reproduction scripts.
       Checks the numbers cited in the text of the manuscript.
       Each check prints a PASS / FAIL line, and the log is written
       to the subfolder verify_intext_numbers_manuscript/.
+
+The csv file below is read by run_table_and_figure_manuscript.R.
+
+  sozu2015_C2_table.csv
+      Constant C_2 tabulated in Tables 4.3 and 4.4 of Sozu et al.
+      (2015), used to compare the exact and closed-form values
+      with the published tables.
 
 
 3. HOW TO REPRODUCE
