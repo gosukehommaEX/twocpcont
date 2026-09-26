@@ -109,10 +109,51 @@ gl_err <- mapply(function(a, b, rho) {
   abs(plackett_exact(a, b, rho) -
         plackett_gl_full(a, b, rho, kappa = 1, gl_nodes = 5L)$I_GL)
 }, gl_grid$a, gl_grid$b, gl_grid$rho)
-record("(2.3-1) 5-point rule: |I - I_GL| < 1e-5 for |rho| <= 0.8",
-       max(gl_err) < 1e-5,
+record("(2.3-1) 5-point rule: |I - I_GL| < 1e-5 on the 13209-point grid of Appendix B",
+       max(gl_err) < 1e-5 && nrow(gl_grid) == 13209L,
        sprintf("grid points = %d, max error = %.2e", nrow(gl_grid),
                max(gl_err)))
+
+# (2.3-2), (2.3-3) Anchor weight w* of eq. (8) against the exact root of
+#         F(w; kappa) = 0 in eq. (A2).  w* exceeds the exact root for
+#         1 < kappa <= 3 by at most about 0.09, and w* reaches one at
+#         kappa of about 1.41, 1.36 and 1.30 for 1-beta = 0.80, 0.85, 0.90.
+z_a_w <- qnorm(1 - alpha)
+w_star_fun <- function(k, tp) {
+  p   <- sqrt(tp)
+  u_p <- qnorm(p)
+  0.5 + (k - 1) * (u_p + z_a_w) * dnorm(u_p) /
+    ((1 + k) * abs(2 * log(p)) * p)
+}
+w_root_fun <- function(k, tp) {
+  if (k == 1) return(0.5)
+  f_w <- function(w) {
+    qnorm(tp ^ (1 - w)) - k * qnorm(tp ^ w) - (k - 1) * z_a_w
+  }
+  # F is increasing in w and tends to +Inf as w -> 1, but in double
+  # precision F(1 - 1e-12) can still be negative for large kappa; the
+  # root is then within 1e-12 of one.
+  if (f_w(1 - 1e-12) <= 0) return(1)
+  uniroot(f_w, lower = 0.5, upper = 1 - 1e-12, tol = 1e-13)$root
+}
+k_one <- sapply(power_set, function(tp) {
+  uniroot(function(k) w_star_fun(k, tp) - 1, lower = 1, upper = 3,
+          tol = 1e-10)$root
+})
+record("(2.3-2) w* reaches one at kappa = 1.41, 1.36, 1.30 (0.80, 0.85, 0.90)",
+       all(abs(round(k_one, 2) - c(1.41, 1.36, 1.30)) < 1e-9),
+       sprintf("kappa = %s", paste(sprintf("%.4f", k_one), collapse = ", ")))
+k_seq_w <- seq(1.001, 3, by = 0.001)
+w_gap <- sapply(power_set, function(tp) {
+  g <- sapply(k_seq_w, function(k) {
+    min(1, w_star_fun(k, tp)) - w_root_fun(k, tp)
+  })
+  c(min(g), max(g))
+})
+record("(2.3-3) 1 < kappa <= 3: w* exceeds the exact root, by at most about 0.09",
+       all(w_gap[1, ] > -1e-8) && abs(round(max(w_gap[2, ]), 2) - 0.09) < 1e-9,
+       sprintf("min gap = %.2e, max gap = %s", min(w_gap[1, ]),
+               paste(sprintf("%.4f", w_gap[2, ]), collapse = ", ")))
 
 # ============================================================
 # SECTION 2.4: Maximum reduction rate and threshold
@@ -175,6 +216,32 @@ inv_err <- max(sapply(1 - power_set, function(b) {
 }))
 record("(2.4-6) Rmax(kappa_star(eps)) = eps", inv_err < 1e-10,
        sprintf("max |Rmax - eps| = %.2e", inv_err))
+
+# (2.4-7) kappa_star = 1 when eps >= Rmax(1, beta) and > 1 otherwise
+ks_bound <- sapply(1 - power_set, function(b) {
+  r1 <- r_max(kappa = 1, alpha = alpha, beta = b)
+  c(kappa_star(r1, alpha = alpha, beta = b),
+    kappa_star(min(0.99, r1 + 0.05), alpha = alpha, beta = b),
+    kappa_star(r1 - 0.01, alpha = alpha, beta = b))
+})
+record("(2.4-7) kappa_star = 1 for eps >= Rmax(1, beta), > 1 for eps < Rmax(1, beta)",
+       all(abs(ks_bound[1:2, ] - 1) < 1e-8) && all(ks_bound[3, ] > 1),
+       sprintf("at Rmax(1): %s; just below: %s",
+               paste(sprintf("%.6f", ks_bound[1, ]), collapse = ", "),
+               paste(sprintf("%.4f", ks_bound[3, ]), collapse = ", ")))
+
+# (2.4-8) The argument (1 - beta) / Phi(z_beta + nu) of eq. (20) lies in
+#         (0, 1) for every eps in (0, 1)
+arg_ok <- all(sapply(1 - power_set, function(b) {
+  z_b <- qnorm(1 - b)
+  sapply(seq(0.001, 0.999, by = 0.001), function(e) {
+    nu  <- (z_alpha + z_b) * (1 / sqrt(1 - e) - 1)
+    arg <- (1 - b) / pnorm(z_b + nu)
+    arg > 0 && arg < 1
+  })
+}))
+record("(2.4-8) Argument of the quantile function in eq. (20) lies in (0, 1)",
+       arg_ok, "eps in [0.001, 0.999] by 0.001")
 
 # ============================================================
 # SECTION 3.1: Setting
@@ -429,6 +496,23 @@ record("(3.3-10) EXPEDITION 1 (0.87, 1.292) is not covered by the tables",
                max(pub$gamma1[pub$gamma1 < k_trial]),
                min(pub$gamma1[pub$gamma1 > k_trial])))
 
+# (3.3-11) For rho >= 0 the starting value (6) already attains the target
+#          power, so the search of Algorithm 1 proceeds downward
+start_ok <- sapply(seq_len(nrow(grid)), function(i) {
+  g <- grid[i, ]
+  z_b0 <- qnorm(sqrt(g$power))
+  n2_0 <- ceiling(max(g$sd1 ^ 2 * (1 + 1 / g$r) / g$delta1 ^ 2,
+                      g$sd2 ^ 2 * (1 + 1 / g$r) / g$delta2 ^ 2) *
+                    (z_alpha + z_b0) ^ 2)
+  twocpcont_power(n1 = ceiling(g$r * n2_0), n2 = n2_0,
+                  delta1 = g$delta1, delta2 = g$delta2,
+                  sd1 = g$sd1, sd2 = g$sd2, rho = g$rho,
+                  alpha = alpha)$powerCoprimary >= g$power
+})
+record("(3.3-11) Starting value attains the target in all 96 cells (downward search)",
+       length(start_ok) == 96L && all(start_ok),
+       sprintf("cells = %d, downward = %d", length(start_ok), sum(start_ok)))
+
 # ============================================================
 # SECTION 3.4: Maximum reduction rate and threshold
 # ============================================================
@@ -575,12 +659,21 @@ record("(4-12) Integer reduction 4.0% recovers roughly 87% of analytic ceiling",
        abs(ratio_recover - 0.87) < 0.03,
        sprintf("4.0 / R_max = %.4f (target 0.87)", ratio_recover))
 
-# (4-13) Remaining gap is approximately 0.6 percentage points
-#        (R_max - integer reduction = 4.6 - 4.0 = 0.6)
-gap_pp <- Rmax_doody - red_doody
-record("(4-13) Remaining gap = R_max - 4.0% approximately 0.6 pp",
-       abs(gap_pp - 0.6) < 0.1,
-       sprintf("gap = %.4f pp (target 0.6)", gap_pp))
+# (4-13) On the continuous scale of eq. (14), the reduction at rho = 0.8
+#        is about 3.9%; the gap to R_max is due to rho = 0.8 < 1, and the
+#        ceiling operation increases the realized (integer) reduction
+lam_doody <- function(rr) {
+  uniroot(function(lam) {
+    pbivnorm::pbivnorm(lam - z_alpha, kappa_doody * lam - z_alpha,
+                       rho = rr) - 0.87
+  }, lower = 2, upper = 6, tol = 1e-14)$root
+}
+red_cont <- (1 - lam_doody(0.8) ^ 2 / lam_doody(0) ^ 2) * 100
+record("(4-13) Continuous reduction at rho = 0.8 about 3.9%, below R_max and 4.0%",
+       abs(round(red_cont, 1) - 3.9) < 1e-9 && red_cont < Rmax_doody &&
+         red_cont < red_doody,
+       sprintf("continuous = %.4f%%, integer = %.2f%%, R_max = %.4f%%",
+               red_cont, red_doody, Rmax_doody))
 
 # (4-14) kappa_star(eps = 0.05, 1-beta = 0.87) approximately 1.28
 ks_doody_05 <- kappa_star(epsilon = 0.05, alpha = 0.025, beta = 0.13)
@@ -624,6 +717,18 @@ incr_t <- qnorm(1 - 0.025) ^ 2 / 2
 record("(5-1) z_alpha^2 / 2 at alpha = 0.025 is about two patients",
        round(incr_t) == 2,
        sprintf("z_alpha^2 / 2 = %.4f", incr_t))
+
+# (5-2) One power check with n2 increased by one gives the conventional
+#       sample size in the single shortfall of Section 3.2 (r = 1)
+n2_fix <- mis$n2 + 1
+N_plus <- ceiling(1 * n2_fix) + n2_fix
+pw_fix <- twocpcont_power(n1 = ceiling(1 * n2_fix), n2 = n2_fix,
+                          delta1 = 0.3, delta2 = 0.3, sd1 = 1, sd2 = 1,
+                          rho = 0.5, alpha = alpha)$powerCoprimary
+record("(5-2) Shortfall cell: n2 + 1 meets the target and gives N_conv = 558",
+       pw_fix >= 0.90 && N_plus == mis$N_conv,
+       sprintf("n2 = %d, N = %d, power = %.7f", as.integer(n2_fix),
+               as.integer(N_plus), pw_fix))
 
 # ============================================================
 # APPENDIX E: Software implementation (claims in the prose around

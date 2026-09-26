@@ -36,7 +36,11 @@
 #'          {z_\alpha + z_\beta + \nu}.}
 #' This is a fully closed-form expression involving only the standard
 #' normal cumulative distribution function and its inverse; no iteration
-#' is required.  Because the same exact \eqn{\rho = 0} relation defines
+#' is required.  The expression applies when
+#' \eqn{\epsilon < R_{\max}(1, \beta)} and then exceeds 1.  When
+#' \eqn{\epsilon \geq R_{\max}(1, \beta)}, every \eqn{\kappa \geq 1}
+#' satisfies \eqn{R_{\max}(\kappa, \beta) \leq \epsilon}, and the
+#' function returns 1.  Because the same exact \eqn{\rho = 0} relation defines
 #' \code{\link{r_max}} with \code{exact = TRUE} (the default),
 #' \code{r_max(kappa_star(epsilon, alpha, beta), alpha, beta)} returns
 #' \eqn{\epsilon} up to rounding error.
@@ -73,5 +77,7 @@ kappa_star <- function(epsilon, alpha = 0.025, beta = 0.2) {
   nu <- (z_alpha + z_beta) * (1 / sqrt(1 - epsilon) - 1)
   G  <- qnorm((1 - beta) / pnorm(z_beta + nu))
 
-  (z_alpha + G) / (z_alpha + z_beta + nu)
+  # The closed form falls below 1 when epsilon >= R_max(1, beta); the
+  # smallest admissible kappa is then 1.
+  max(1, (z_alpha + G) / (z_alpha + z_beta + nu))
 }

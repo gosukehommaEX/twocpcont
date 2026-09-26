@@ -53,6 +53,15 @@ test_that("kappa_star exceeds 1 and decreases in epsilon and in power", {
   expect_true(all(ks_90 < ks_80))
 })
 
+test_that("kappa_star equals 1 when epsilon is at least r_max(1)", {
+  for (beta in c(0.2, 0.1)) {
+    r1 <- r_max(kappa = 1, beta = beta)
+    expect_equal(kappa_star(epsilon = r1, beta = beta), 1, tolerance = 1e-8)
+    expect_identical(kappa_star(epsilon = 0.5, beta = beta), 1)
+    expect_gt(kappa_star(epsilon = r1 - 0.01, beta = beta), 1)
+  }
+})
+
 test_that("kappa_star rejects epsilon outside (0, 1)", {
   expect_error(kappa_star(epsilon = 0), "epsilon must lie in")
   expect_error(kappa_star(epsilon = 1), "epsilon must lie in")

@@ -143,7 +143,7 @@ gl_nodes_n <- length(gl_obj$x)
 tab1_lines <- c(
   "\\begin{tabular}{rrr}",
   "\\hline",
-  "$i$ & $x_i$ & $w_i$ \\\\",
+  "$i$ & $x_i$ & $\\omega_i$ \\\\",
   "\\hline"
 )
 for (i in seq_len(gl_nodes_n)) {
@@ -157,7 +157,7 @@ for (i in seq_len(gl_nodes_n)) {
 tab1_lines <- c(tab1_lines, "\\hline", "\\end{tabular}")
 write_table_env(
   tab1_lines, out_path("table1_gl_nodes.tex"),
-  caption = sprintf(paste0("Nodes ($x_i$) and weights ($w_i$) of the ",
+  caption = sprintf(paste0("Nodes ($x_i$) and weights ($\\omega_i$) of the ",
                            "%d-point Gauss--Legendre quadrature on ",
                            "$[-1, 1]$, computed by the Golub--Welsch ",
                            "algorithm."), gl_nodes_n),

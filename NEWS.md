@@ -28,6 +28,10 @@
 
 ## Bug fixes
 
+- `kappa_star()` returns 1 when `epsilon` is at least
+  `r_max(kappa = 1)`. The closed-form expression fell below 1 in that
+  case, although every kappa >= 1 then satisfies the tolerance.
+
 - The unit test comparing `twocpcont_power()` across the two methods
   compared `NULL` with `NULL`, because `$power` partially matches three
   columns. It now compares the `powerCoprimary` column.
@@ -35,7 +39,7 @@
 ## Tests
 
 - The single test file `test-twocpcont.R` was replaced by one test file
-  per function (8 files, 73 tests). New tests cover the analytic
+  per function (8 files, 74 tests). New tests cover the analytic
   derivatives and the boundary limits of `plackett_gl_full()`, the
   exactness of the Gauss-Legendre rule, agreement of the two methods
   on the 32-cell grid of the numerical study at 80%, 85% and 90%
