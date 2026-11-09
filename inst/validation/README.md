@@ -19,7 +19,9 @@ the scripts below; the numbers themselves are checked against the ledger by
 | `validate_claims_methods.R` | Section 2 and Section S2: accuracy of the 5-point Gauss-Legendre rule against adaptive quadrature, the anchor weight against the exact root of (S2), and the properties of `r_max()` and `kappa_star()` (closed form against `uniroot()`) |
 | `validate_claims_numerical.R` | Section 3: the combinations of Table 2 that meet the target power, monotonicity in the correlation, the direction of the conventional search, the sign of the discriminant of the correction term, and the deviations from the published tables |
 | `validate_claims_example.R` | Section 4, Section 5 and Section S5: Table 4, the thresholds of the example, the protocol's table of marginal powers, and the power checks |
+| `validate_error_decomposition.R` | Figures S1 and S2 and Table S2: the analytic P, P_1 and P_2 at the anchor against numerical derivatives, the steps from the anchor, the agreement of the quadratic correction with `twocpcont_ss()`, the roots of the power equations, and the sign of the discriminant of the correction term |
 
 Run from the package root after `devtools::load_all()` and
-`inst/scripts/data_generate_main.R`, e.g.
-`source("inst/validation/validate_claims_methods.R")`.
+`inst/scripts/data_generate_main.R` (and, for
+`validate_error_decomposition.R`, `inst/sup_info/data_generate_supplement.R`),
+e.g. `source("inst/validation/validate_claims_methods.R")`.

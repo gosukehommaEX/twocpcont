@@ -21,6 +21,7 @@
 # Outputs (relative to the package root)
 #   inst/scripts/results/figure1_anchor_weight.eps      Figure 1 (800 dpi EPS)
 #   inst/scripts/results/figure2_reduction_curve.eps    Figure 2 (800 dpi EPS)
+#   inst/scripts/results/figure3_reduction_rho.eps      Figure 3 (800 dpi EPS)
 #   inst/scripts/results/table1_gl_nodes.tex            Table 1
 #   inst/scripts/results/table2_sample_size_comparison.tex  Table 2
 #   inst/scripts/results/table3_kappa_star.tex          Table 3
@@ -71,6 +72,7 @@ reduction_obj  <- read_data("fig2_reduction_curve")
 kappa_star_obj <- read_data("tab3_kappa_star")
 table4_obj     <- read_data("tab4_real_example")
 published_obj  <- read_data("published_tables")
+reduction_rho_obj <- read_data("fig3_reduction_rho")
 
 # --------------------------------------------------------------------------- #
 # Plotting constants
@@ -418,24 +420,38 @@ target_labels <- lapply(power_set, function(p) {
   bquote(1 - beta == .(sprintf("%.2f", p)))
 })
 
-p1 <- ggplot(df_fig1, aes(x = kappa, y = w_star,
-                          linetype = target, colour = target)) +
+# Closed-form w* (solid) and the exact root of (S2) (dashed) for each
+# target power
+df_fig1_long <- rbind(
+  data.frame(kappa = df_fig1$kappa, target = df_fig1$target,
+             w = df_fig1$w_star, curve = "closed"),
+  data.frame(kappa = df_fig1$kappa, target = df_fig1$target,
+             w = df_fig1$w_root, curve = "exact")
+)
+df_fig1_long$curve <- factor(df_fig1_long$curve, levels = c("closed", "exact"))
+
+p1 <- ggplot(df_fig1_long, aes(x = kappa, y = w, colour = target,
+                               linetype = curve,
+                               group = interaction(target, curve))) +
   geom_hline(yintercept = c(0.5, 1.0),
              linetype = "dotted", colour = "#888888",
              linewidth = 0.4) +
   geom_line(linewidth = 0.6) +
-  scale_linetype_manual(values = linetype_set, labels = target_labels) +
   scale_colour_manual(values = color_set, labels = target_labels) +
+  scale_linetype_manual(values = c(closed = "solid", exact = "dashed"),
+                        labels = c(closed = expression(italic(w)^"*"),
+                                   exact = "Exact root")) +
   scale_x_continuous(breaks = seq(1, 4, by = 0.5)) +
   scale_y_continuous(limits = c(0.30, 1.05),
                      breaks = seq(0.3, 1.0, by = 0.1)) +
   labs(x = expression(kappa),
-       y = expression(italic(w)^"*")) +
+       y = expression(italic(w))) +
   theme_paper() +
   theme(legend.text      = element_text(size = 9),
-        legend.key.width = unit(1.0, "cm"))
+        legend.key.width = unit(1.0, "cm"),
+        legend.box       = "vertical")
 save_figure(p1, "figure1_anchor_weight", width = FIG_WIDTH,
-            height = FIG_HEIGHT)
+            height = 100 / 25.4)
 
 # ============================================================
 # Figure 2: R_max(kappa) curve at three power levels
@@ -462,6 +478,39 @@ p2 <- ggplot(df_fig2, aes(x = kappa, y = R_pct,
   theme(legend.text      = element_text(size = 9),
         legend.key.width = unit(1.0, "cm"))
 save_figure(p2, "figure2_reduction_curve", width = FIG_WIDTH,
+            height = FIG_HEIGHT)
+
+# ============================================================
+# Figure 3: reduction of the sample size on the continuous scale as a
+# function of rho, with its limit R_max as rho -> 1 (points at rho = 1)
+# (computed in data_generate_main.R)
+# ============================================================
+df_fig3  <- reduction_rho_obj$data
+lim_fig3 <- reduction_rho_obj$limit
+kappa_levels <- sprintf("%.1f", sort(unique(df_fig3$kappa)))
+df_fig3$kappa_f  <- factor(sprintf("%.1f", df_fig3$kappa),
+                           levels = kappa_levels)
+lim_fig3$kappa_f <- factor(sprintf("%.1f", lim_fig3$kappa),
+                           levels = kappa_levels)
+df_fig3$panel  <- sprintf("%.2f", df_fig3$power)
+lim_fig3$panel <- sprintf("%.2f", lim_fig3$power)
+# Okabe-Ito colours (colour-blind friendly)
+kappa_cols <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#0072B2",
+                "#D55E00")
+
+p3 <- ggplot(df_fig3, aes(x = rho, y = 100 * reduction, colour = kappa_f)) +
+  geom_line(linewidth = 0.6) +
+  geom_point(data = lim_fig3, aes(x = 1, y = 100 * R_max, colour = kappa_f),
+             size = 1.5) +
+  facet_grid(. ~ panel, labeller = label_bquote(cols = 1 - beta == .(panel))) +
+  scale_colour_manual(values = kappa_cols, name = expression(kappa)) +
+  scale_x_continuous(limits = c(0, 1), breaks = seq(0, 1, by = 0.2)) +
+  scale_y_continuous(limits = c(0, 25), breaks = seq(0, 25, by = 5)) +
+  labs(x = expression(rho), y = "Reduction in sample size (%)") +
+  theme_paper() +
+  theme(legend.title = element_text(size = 10),
+        legend.text  = element_text(size = 9))
+save_figure(p3, "figure3_reduction_rho", width = 160 / 25.4,
             height = FIG_HEIGHT)
 
 # =============================================================================
@@ -773,6 +822,21 @@ add_num("trial_gain_bound",
         table4_obj$R_max_pct / 100 * t4$N_prop[t4$rho == 0], 0,
         "R_max(1.292, 0.13) times N_prop at rho = 0 (patients)",
         "tab4_real_example.rds")
+
+# --------------------------------------------------------------------------- #
+# Figure 3: reduction on the continuous scale at kappa = 1, 1 - beta = 0.80
+# --------------------------------------------------------------------------- #
+d3 <- reduction_rho_obj$data
+red_at <- function(k, rr, pw) {
+  d3$reduction[abs(d3$kappa - k) < 1e-9 & abs(d3$rho - rr) < 1e-9 &
+                 abs(d3$power - pw) < 1e-9]
+}
+for (rr in c(0.3, 0.5, 0.8)) {
+  add_num(sprintf("red_cont_k1_rho%02.0f_80", 10 * rr), red_at(1, rr, 0.80),
+          3, sprintf(paste0("Reduction on the continuous scale, kappa = 1, ",
+                            "rho = %.1f, 1 - beta = 0.80"), rr),
+          "fig3_reduction_rho.rds: data")
+}
 
 ledger_df <- if (length(ledger) > 0L) do.call(rbind, ledger) else
   data.frame(key = character(0), value = numeric(0), digits = integer(0),

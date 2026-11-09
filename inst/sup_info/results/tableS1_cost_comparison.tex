@@ -1,0 +1,27 @@
+\begin{table}[ht]
+\centering
+\footnotesize
+\caption{Comparison of the sequential search, the Newton--Raphson algorithm of Sugimoto et al.~\cite{Sugimoto2012}, Brent's method and the proposed closed form on the 96 combinations of Table~2 of the main article. The columns give the number of evaluations of the bivariate normal distribution function $\Phi_2$ per design, the computing time per design, the number of combinations in which the total sample size $N$ equals that of the sequential search ($N_{\rm conv}$), and the largest relative error of the continuous $n_2$ over the 96 combinations. The significance level is $\alpha = 0.025$ (one-sided).}
+\label{tab:cost_comparison}
+\begin{threeparttable}
+\begin{tabular}{lrrrrr}
+\hline
+ & \multicolumn{2}{c}{Evaluations of $\Phi_2$} & Time per design & & Largest relative \\
+\cline{2-3}
+Method & Median & Range & (ms) & $N = N_{\rm conv}$ & error of $n_2$ \\
+\hline
+Sequential search & 31.5 & 2--125 & 38.1 & --- & --- \\
+Newton--Raphson algorithm &   20 & 8--21 & 1.84 & 96 & $1.0 \times 10^{-7}$ \\
+Brent's method (\texttt{uniroot}) &    7 & 4--8 & 0.933 & 96 & $1.2 \times 10^{-9}$ \\
+Proposed closed form & 0 & 0--0 & 1.29 & 95 & $2.2 \times 10^{-4}$ \\
+\hline
+\end{tabular}
+\begin{tablenotes}
+\footnotesize
+\item[] Evaluations of $\Phi_2$ were counted by tracing \texttt{pbivnorm::pbivnorm()}, which the other three methods call. The closed form evaluates no $\Phi_2$; it evaluates the bivariate normal density at the five Gauss--Legendre nodes. The Newton--Raphson algorithm made 0 to 4 updates; its stopping rule and step of the finite differences are those of Sugimoto et al. Brent's method solves the exact power equation for $\lambda_w$ with tolerance $10^{-8}$.
+\item[] Times are elapsed times on one computer with \texttt{R} version 4.6.1, averaged over $200$, $50$, $50$, and $5$ runs of the 96 combinations (closed form, Newton--Raphson algorithm, Brent's method, and sequential search), and include the construction of the output of each method.
+\item[] The relative error is $|\tilde n_2 / n_2 - 1|$, where $\tilde n_2$ is the value of $n_2$ before the ceiling operation and $n_2 = c\,\lambda_w^2$ with $\lambda_w$ the exact root of the power equation. The sequential search has no continuous $n_2$.
+\item[] At the 40 combinations of $\kappa \in \{1, 1.5, 2, 3\}$, $\rho \in \{-0.99, -0.9, 0.95, 0.99, 0.999\}$, and $1 - \beta \in \{0.8, 0.9\}$, the Newton--Raphson algorithm met its stopping rule in 40, with 0 to 4 updates, and the largest relative error of its continuous $n_2$ was $6.7 \times 10^{-8}$; that of the closed form was $1.9 \times 10^{-2}$.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

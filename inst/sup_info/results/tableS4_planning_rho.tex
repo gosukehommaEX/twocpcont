@@ -1,0 +1,29 @@
+\begin{table}[ht]
+\centering
+\footnotesize
+\caption{Co-primary power at the true correlation $\rho$ of the total sample size $N$ of the proposed closed form planned at the correlation $\rho_{\rm plan}$. Design A has $(\delta_1, \delta_2) = (0.3, 0.3)$, $(\sigma_1, \sigma_2) = (1, 1)$, and target power $1 - \beta = 0.80$; EXPEDITION~1 is the design of Table~4 of the main article, with $1 - \beta = 0.87$. Both have $r = 1$ and $\alpha = 0.025$ (one-sided).}
+\label{tab:planning_rho}
+\begin{threeparttable}
+\begin{tabular}{lrrrrrrr}
+\hline
+ & & & \multicolumn{5}{c}{Power at the true correlation} \\
+\cline{4-8}
+Design & $\rho_{\rm plan}$ & $N$ & $\rho = -0.3$ & $\rho = 0$ & $\rho = 0.3$ & $\rho = 0.5$ & $\rho = 0.8$ \\
+\hline
+A & 0 & 460 & 0.795$^{\dagger}$ & 0.802 & 0.814 & 0.826 & 0.850 \\
+ & 0.3 & 448 & 0.780$^{\dagger}$ & 0.788$^{\dagger}$ & 0.802 & 0.814 & 0.840 \\
+ & 0.5 & 436 & 0.764$^{\dagger}$ & 0.773$^{\dagger}$ & 0.788$^{\dagger}$ & 0.801 & 0.829 \\
+ & 0.8 & 408 & 0.723$^{\dagger}$ & 0.736$^{\dagger}$ & 0.753$^{\dagger}$ & 0.769$^{\dagger}$ & 0.801 \\
+\hline
+EXPEDITION~1 & 0 & 1000 & 0.869$^{\dagger}$ & 0.870 & 0.874 & 0.877 & 0.883 \\
+ & 0.3 & 990 & 0.865$^{\dagger}$ & 0.867$^{\dagger}$ & 0.870 & 0.874 & 0.880 \\
+ & 0.5 & 980 & 0.861$^{\dagger}$ & 0.863$^{\dagger}$ & 0.867$^{\dagger}$ & 0.870 & 0.877 \\
+ & 0.8 & 960 & 0.852$^{\dagger}$ & 0.855$^{\dagger}$ & 0.859$^{\dagger}$ & 0.863$^{\dagger}$ & 0.870 \\
+\hline
+\end{tabular}
+\begin{tablenotes}
+\footnotesize
+\item[$\dagger$] Power below the target power $1 - \beta$ of the design.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

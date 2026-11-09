@@ -78,3 +78,6 @@
 "trial_rmax_round",0.0598170163055815,3,"0.060","R_max(1.25, 0.13)","tab4_real_example.rds: R_max_round_pct"
 "trial_rmax_round_r0",0.0598170163055815,2,"0.06","R_max(1.25, 0.13), rounded to a whole percent","tab4_real_example.rds: R_max_round_pct"
 "trial_gain_bound",46.1834610957866,0,"46","R_max(1.292, 0.13) times N_prop at rho = 0 (patients)","tab4_real_example.rds"
+"red_cont_k1_rho03_80",0.0251801467999894,3,"0.025","Reduction on the continuous scale, kappa = 1, rho = 0.3, 1 - beta = 0.80","fig3_reduction_rho.rds: data"
+"red_cont_k1_rho05_80",0.0504251972678385,3,"0.050","Reduction on the continuous scale, kappa = 1, rho = 0.5, 1 - beta = 0.80","fig3_reduction_rho.rds: data"
+"red_cont_k1_rho08_80",0.111445073030912,3,"0.111","Reduction on the continuous scale, kappa = 1, rho = 0.8, 1 - beta = 0.80","fig3_reduction_rho.rds: data"

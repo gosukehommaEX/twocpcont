@@ -68,7 +68,13 @@ Information (Appendix A.2.1) of Sugimoto et al. (2012) for \eqn{K = 2}.
     that \code{CKsolution} obtains with \code{mvtnorm::qmvnorm}), found
     here by \code{\link[stats]{uniroot}} with tolerance \code{1e-6} on
     \eqn{[\Phi^{-1}(1 - \beta), \Phi^{-1}(1 - \beta / 2)]}, which
-    contains the root for every \eqn{\rho}.
+    contains the root for every \eqn{\rho}. The ends of this interval
+    are the roots at \eqn{\rho = 1} and \eqn{\rho = -1}. If, in double
+    precision, \eqn{\Phi_2(c, c; \rho) - (1 - \beta)} is at most 0 at the
+    upper end or at least 0 at the lower end, which happens when
+    \eqn{\rho} is close to \eqn{-1} or 1 (at \eqn{\rho = -0.99} its
+    exact value at the upper end is below \eqn{10^{-70}}), that end is
+    the initial value.
   \item At each step, \eqn{C_1 = \kappa C + z_\alpha (\kappa - 1)} and
     \eqn{G = 1 - \beta - \Phi_2(C_1, C; \rho)}. The iteration stops when
     \eqn{|G| <} \code{tol} and \eqn{G \leq 0}, so that the power at the

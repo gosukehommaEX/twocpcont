@@ -28,7 +28,7 @@
 # Outputs (relative to the package root)
 #   inst/scripts/data/tab1_gl_nodes.rds          Table 1 (Gauss-Legendre rule)
 #   inst/scripts/data/fig1_anchor_weight.rds     Figure 1 (anchor weight w*)
-#                                                and its exact counterpart
+#                                                and the exact root of (S2)
 #   inst/scripts/data/tab2_sample_size.rds       Table 2 (96 design cells)
 #   inst/scripts/data/phi2_evaluations.rds       Number of bivariate normal
 #                                                CDF evaluations per cell
@@ -37,6 +37,8 @@
 #   inst/scripts/data/tab4_real_example.rds      Table 4 (EXPEDITION 1)
 #   inst/scripts/data/published_tables.rds       Sozu et al. (2015) and
 #                                                Hung and Wang (2009)
+#   inst/scripts/data/fig3_reduction_rho.rds     Figure 3 (reduction of the
+#                                                sample size over rho)
 #   inst/scripts/data/csv/*.csv        Data frames of the .rds files as CSV
 #   inst/scripts/data/data_generate_main.log
 #   inst/scripts/data/sessionInfo_data_generate_main.txt
@@ -64,8 +66,10 @@ library(pbivnorm)
 # Parts of the computation to run. RUN can also be assigned before this
 # file is sourced to rerun only some parts, e.g.
 #   RUN <- c(tab1 = FALSE, fig1 = TRUE, tab2 = FALSE, phi2 = FALSE,
-#            fig2 = FALSE, tab3 = FALSE, tab4 = FALSE, pub = FALSE)
-RUN_PARTS <- c("tab1", "fig1", "tab2", "phi2", "fig2", "tab3", "tab4", "pub")
+#            fig2 = FALSE, tab3 = FALSE, tab4 = FALSE, pub = FALSE,
+#            fig3 = FALSE)
+RUN_PARTS <- c("tab1", "fig1", "tab2", "phi2", "fig2", "tab3", "tab4", "pub",
+               "fig3")
 if (!exists("RUN", inherits = FALSE)) {
   RUN <- c(tab1 = TRUE,   # Table 1
            fig1 = TRUE,   # Figure 1
@@ -74,7 +78,8 @@ if (!exists("RUN", inherits = FALSE)) {
            fig2 = TRUE,   # Figure 2
            tab3 = TRUE,   # Table 3
            tab4 = TRUE,   # Table 4
-           pub  = TRUE)   # published tables (Section 3.3)
+           pub  = TRUE,   # published tables (Section 3.3)
+           fig3 = TRUE)   # Figure 3
 }
 if (!is.logical(RUN) || !setequal(names(RUN), RUN_PARTS)) {
   stop("RUN must be a logical vector with the elements ",
@@ -203,6 +208,9 @@ SETTINGS <- list(
   kappa_gap   = seq(1.001, 3, by = 0.001),
   kappa_fig2  = seq(1.0, 2.0, length.out = 201),
   epsilon_set = c(0.05, 0.10, 0.15),
+  kappa_fig3  = c(1, 1.1, 1.2, 1.3, 1.5, 2),
+  rho_fig3    = seq(0, 0.99, by = 0.01),
+  power_fig3  = c(0.80, 0.90),
   varga       = c(es_w = 0.4, es_s = 0.5, power = 0.80),
   trial       = list(delta1 = trial_delta1, delta2 = trial_delta2,
                      sd1 = trial_sd1, sd2 = trial_sd2, alpha = trial_alpha,
@@ -253,16 +261,6 @@ if (RUN[["tab1"]]) {
 # =============================================================================
 if (RUN[["fig1"]]) {
   anchor_obj <- run_step("Figure 1 (anchor weight)", {
-    kappa_seq_w <- SETTINGS$kappa_fig1
-    df_w <- do.call(rbind, lapply(power_set, function(pw) {
-      data.frame(
-        kappa  = kappa_seq_w,
-        power  = pw,
-        w_star = pmin(1, pmax(0, w_star_unclipped(kappa_seq_w, beta = 1 - pw,
-                                                  alpha = alpha)))
-      )
-    }))
-
     # Exact root of F(w; kappa) = 0, eq. (S2). F is increasing in w and
     # tends to +Inf as w -> 1, but in double precision F(1 - 1e-12) can
     # still be negative for large kappa; the root is then within 1e-12 of
@@ -275,6 +273,18 @@ if (RUN[["fig1"]]) {
       if (f_w(1 - 1e-12) <= 0) return(1)
       uniroot(f_w, lower = 0.5, upper = 1 - 1e-12, tol = 1e-13)$root
     }
+
+    # w* (clipped to [0, 1]) and the exact root on the grid of Figure 1
+    kappa_seq_w <- SETTINGS$kappa_fig1
+    df_w <- do.call(rbind, lapply(power_set, function(pw) {
+      data.frame(
+        kappa  = kappa_seq_w,
+        power  = pw,
+        w_star = pmin(1, pmax(0, w_star_unclipped(kappa_seq_w, beta = 1 - pw,
+                                                  alpha = alpha))),
+        w_root = sapply(kappa_seq_w, w_root_fun, tp = pw)
+      )
+    }))
     df_gap <- do.call(rbind, lapply(power_set, function(pw) {
       k_seq  <- SETTINGS$kappa_gap
       w_cf   <- pmin(1, w_star_unclipped(k_seq, beta = 1 - pw, alpha = alpha))
@@ -644,6 +654,34 @@ if (RUN[["pub"]]) {
          gl_nodes = gl_nodes)
   })
   save_data(published_obj, "published_tables")
+}
+
+# =============================================================================
+# Figure 3: reduction of the sample size on the continuous scale,
+# R(rho; kappa, beta) = 1 - {lambda_w(rho) / lambda_w(0)}^2 of
+# eq. (eq:R_def), as a function of rho, with its limit R_max(kappa, beta)
+# as rho -> 1 (eq. (eq:Rmax)). lambda_w(rho) is the exact root of the power
+# equation (eq:power_biv).
+# =============================================================================
+if (RUN[["fig3"]]) {
+  reduction_rho_obj <- run_step("Figure 3 (reduction over rho)", {
+    grid3 <- expand.grid(rho = SETTINGS$rho_fig3, kappa = SETTINGS$kappa_fig3,
+                         power = SETTINGS$power_fig3)
+    grid3$lambda <- mapply(function(k, rr, pw) {
+      lambda_exact(k, rr, 1 - pw, alpha)
+    }, grid3$kappa, grid3$rho, grid3$power)
+    key  <- paste(grid3$kappa, grid3$power)
+    lam0 <- grid3$lambda[grid3$rho == 0]
+    names(lam0) <- key[grid3$rho == 0]
+    grid3$reduction <- 1 - grid3$lambda ^ 2 / lam0[key] ^ 2
+    limit <- expand.grid(kappa = SETTINGS$kappa_fig3,
+                         power = SETTINGS$power_fig3)
+    limit$R_max <- mapply(function(k, pw) {
+      r_max(kappa = k, alpha = alpha, beta = 1 - pw)
+    }, limit$kappa, limit$power)
+    list(data = grid3, limit = limit, alpha = alpha)
+  })
+  save_data(reduction_rho_obj, "fig3_reduction_rho")
 }
 
 # =============================================================================

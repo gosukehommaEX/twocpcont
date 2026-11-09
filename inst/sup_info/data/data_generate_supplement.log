@@ -1,0 +1,12 @@
+data_generate_supplement.R log -- 2026-11-09 15:26:56
+Error decomposition                              13.8 sec
+Saved inst/sup_info/data/error_decomposition.rds
+Accuracy over a wide grid                        38.3 sec
+Saved inst/sup_info/data/accuracy_grid.rds
+Comparison of the methods                        64.0 sec
+Saved inst/sup_info/data/cost_comparison.rds
+Allocation ratios                                 7.5 sec
+Saved inst/sup_info/data/allocation.rds
+EXPEDITION 1 sensitivity                          1.4 sec
+Saved inst/sup_info/data/expedition_sensitivity.rds
+All requested data written to 'inst/sup_info/data/'.

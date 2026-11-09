@@ -45,7 +45,13 @@
 #'     that \code{CKsolution} obtains with \code{mvtnorm::qmvnorm}), found
 #'     here by \code{\link[stats]{uniroot}} with tolerance \code{1e-6} on
 #'     \eqn{[\Phi^{-1}(1 - \beta), \Phi^{-1}(1 - \beta / 2)]}, which
-#'     contains the root for every \eqn{\rho}.
+#'     contains the root for every \eqn{\rho}. The ends of this interval
+#'     are the roots at \eqn{\rho = 1} and \eqn{\rho = -1}. If, in double
+#'     precision, \eqn{\Phi_2(c, c; \rho) - (1 - \beta)} is at most 0 at the
+#'     upper end or at least 0 at the lower end, which happens when
+#'     \eqn{\rho} is close to \eqn{-1} or 1 (at \eqn{\rho = -0.99} its
+#'     exact value at the upper end is below \eqn{10^{-70}}), that end is
+#'     the initial value.
 #'   \item At each step, \eqn{C_1 = \kappa C + z_\alpha (\kappa - 1)} and
 #'     \eqn{G = 1 - \beta - \Phi_2(C_1, C; \rho)}. The iteration stops when
 #'     \eqn{|G| <} \code{tol} and \eqn{G \leq 0}, so that the power at the
@@ -100,9 +106,25 @@ newton_ck <- function(kappa, rho, alpha = 0.025, beta = 0.2, ndel = 0.001,
   }
 
   # ---- Initial value: the solution for kappa = 1 ----
-  C <- uniroot(function(cc) Phi2(cc, cc) - target_power,
-               lower = qnorm(target_power), upper = qnorm(1 - beta / 2),
-               tol = 1e-6)$root
+  # The ends of the interval are the roots at rho = 1 and rho = -1. When
+  # rho is close to one of these limits, the function can have the same
+  # sign at both ends in double precision (at rho = -0.99 its exact value
+  # at the upper end is below 1e-70), and that end is the initial value.
+  # Otherwise the values at the two ends are passed to uniroot(), which
+  # then does not evaluate them again.
+  f_init  <- function(cc) Phi2(cc, cc) - target_power
+  c_lower <- qnorm(target_power)
+  c_upper <- qnorm(1 - beta / 2)
+  f_lower <- f_init(c_lower)
+  f_upper <- f_init(c_upper)
+  if (f_upper <= 0) {
+    C <- c_upper
+  } else if (f_lower >= 0) {
+    C <- c_lower
+  } else {
+    C <- uniroot(f_init, lower = c_lower, upper = c_upper,
+                 f.lower = f_lower, f.upper = f_upper, tol = 1e-6)$root
+  }
 
   # ---- Newton-Raphson updates ----
   iterations <- 0L

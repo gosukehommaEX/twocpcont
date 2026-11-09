@@ -1,0 +1,43 @@
+\begin{table}[ht]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Total sample size of the sequential search and of the proposed closed form, $N_{\rm conv}/N_{\rm prop}$, for allocation ratios $r$ of $0.25$, $0.5$, $1.5$, $2.5$, and $4$, with $n_2 = \lceil c\,(\lambda_w^{*})^2 \rceil$ and $n_1 = \lceil r\,n_2 \rceil$. The significance level is $\alpha = 0.025$ (one-sided).}
+\label{tab:allocation}
+\begin{threeparttable}
+\begin{tabular}{ccrrrrrrr}
+\hline
+ & & & \multicolumn{3}{c}{$1 - \beta = 0.80$} & \multicolumn{3}{c}{$1 - \beta = 0.90$} \\
+\cline{4-6} \cline{7-9}
+$(\delta_1, \delta_2)$ & $(\sigma_1, \sigma_2)$ & $r$ & $\rho = 0$ & $\rho = 0.5$ & $\rho = 0.8$ & $\rho = 0$ & $\rho = 0.5$ & $\rho = 0.8$ \\
+\hline
+(0.3, 0.3) & (1.0, 1.0) & 0.25 & 717/717 & 679/680 & 637/637 & 897/897 & 867/869$^{\dagger}$ & 827/829 \\
+ &  & 0.5 & 515/516 & 491/491 & 458/459 & 647/647 & 626/626$^{\dagger}$ & 596/597 \\
+ &  & 1.5 & 478/478 & 455/455 & 425/425 & 598/598 & 580/580 & 553/553 \\
+ &  & 2.5 & 564/564 & 536/536 & 501/501 & 704/704 & 683/683 & 651/651 \\
+ &  & 4 & 720/720 & 680/680 & 640/640 & 900/900 & 870/870 & 830/830 \\
+(0.3, 0.3) & (1.0, 1.5) & 0.25 & 1254/1255 & 1237/1239 & 1227/1228 & 1652/1652 & 1647/1647 & 1642/1643 \\
+ &  & 0.5 & 905/905 & 893/893 & 884/885 & 1190/1190 & 1185/1185 & 1184/1184 \\
+ &  & 1.5 & 838/838 & 828/828 & 820/820 & 1103/1103 & 1098/1098 & 1095/1095 \\
+ &  & 2.5 & 987/987 & 973/973 & 963/963 & 1295/1295 & 1292/1292 & 1288/1288 \\
+ &  & 4 & 1255/1255 & 1240/1240 & 1230/1230 & 1655/1655 & 1650/1650 & 1645/1645 \\
+(0.7, 0.5) & (1.0, 1.0) & 0.25 & 205/205 & 202/202 & 197/198 & 267/268 & 264/265 & 262/264 \\
+ &  & 0.5 & 149/149 & 146/146 & 143/143 & 192/192 & 191/191 & 191/191 \\
+ &  & 1.5 & 138/138 & 135/135 & 133/133 & 178/180 & 178/178 & 178/178 \\
+ &  & 2.5 & 161/161 & 158/158 & 158/158 & 210/210 & 210/210 & 207/207 \\
+ &  & 4 & 205/205 & 205/205 & 200/200 & 270/270 & 265/265 & 265/265 \\
+(0.7, 0.5) & (1.0, 1.5) & 0.25 & 442/443 & 442/443 & 442/443 & 592/592 & 592/592 & 592/592 \\
+ &  & 0.5 & 318/318 & 318/318 & 318/318 & 426/426 & 426/426 & 426/426 \\
+ &  & 1.5 & 295/295 & 295/295 & 295/295 & 395/395 & 395/395 & 395/395 \\
+ &  & 2.5 & 347/347 & 347/347 & 347/347 & 466/466 & 466/466 & 466/466 \\
+ &  & 4 & 445/445 & 445/445 & 445/445 & 595/595 & 595/595 & 595/595 \\
+\hline
+\end{tabular}
+\begin{tablenotes}
+\footnotesize
+\item[] $N_{\rm prop}$ differs from $N_{\rm conv}$ in 19 of the 120 combinations. Rounding the exact continuous $n_2 = c\,\lambda_w^2$ in the same way gives $N_{\rm prop}$ in 118 of the 120 combinations. This rounded total differs from $N_{\rm conv}$ in 20 combinations, because $n_1 = \lceil r\,n_2 \rceil$ can exceed $r\,n_2$ enough for a smaller $n_2$ to attain the target power.
+\item[] The power at $N_{\rm prop}$ exceeds the target by $0.00004$ to $0.00951$. The Newton--Raphson algorithm gives $N_{\rm conv}$ in 100 of the 120 combinations.
+\item[$\dagger$] $N_{\rm prop}$ differs from the total obtained by rounding the exact continuous $n_2$.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

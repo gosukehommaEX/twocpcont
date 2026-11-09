@@ -42,6 +42,11 @@
 
 ## Bug fixes
 
+- `newton_ck()` no longer stops with an error of `uniroot()` when rho is
+  close to -1 (e.g., rho = -0.99). The root for kappa = 1, the initial
+  value, then lies within rounding error of the upper end of its
+  interval, and that end is taken as the initial value. For the other
+  designs the initial value and the number of evaluations are unchanged.
 - `kappa_star()` returns 1 when `epsilon` is at least
   `r_max(kappa = 1)`. The closed-form expression fell below 1 in that
   case, although every kappa >= 1 then satisfies the tolerance.
@@ -123,6 +128,30 @@
   manuscript folders and checks the copies by MD5. It replaces
   `tools/sync_manuscript_assets.R` and `tools/make_supplement.R`, which
   are removed together with the flat code supplement.
+- Figure 1 shows the exact root of (S2) of the Supporting Information
+  together with the closed-form anchor weight w*. The new Figure 3
+  (part `fig3` of `data_generate_main.R`) shows the reduction of the
+  sample size on the continuous scale as a function of rho for six
+  values of kappa, with its limit R_max as rho -> 1.
+- `inst/sup_info/data_generate_supplement.R` gains the parts `decomp`,
+  `grid`, `cost`, `alloc` and `sens` (selected by `RUN_SI`), and
+  `table_and_figure_supplement.R` renders them as Tables S1 to S4 and
+  Figures S1 to S3 of the Supporting Information and writes the ledger
+  `inst/sup_info/results/supplement_numbers.csv`: the comparison of the
+  closed form with the sequential search, `newton_ck()` and `uniroot()`
+  (evaluations of the bivariate normal distribution function, computing
+  time, accuracy and convergence at extreme correlations), the error of
+  the continuous n2 by approximation step, the accuracy over a wide grid
+  of alpha, target power, kappa and rho, allocation ratios other than one
+  and two, and, for EXPEDITION 1, the sensitivity to the effect size of
+  ADCS-ADL and the power when the correlation assumed at the planning
+  stage differs from the true correlation. The output of Section S5 is
+  unchanged.
+- `inst/validation/validate_error_decomposition.R` checks the
+  computations behind Figures S1 and S2 and Table S2: the analytic P,
+  P_1 and P_2 against numerical derivatives, the agreement of the
+  quadratic correction with `twocpcont_ss()`, the roots of the power
+  equations, and the sign of the discriminant.
 
 ## Infrastructure
 

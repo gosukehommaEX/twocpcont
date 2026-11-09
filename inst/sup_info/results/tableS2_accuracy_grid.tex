@@ -1,0 +1,30 @@
+\begin{table}[ht]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Accuracy of the closed form over $\kappa$ from $1$ to $3$ in steps of $0.02$, target powers $1 - \beta$ from $0.70$ to $0.95$ in steps of $0.05$, and one-sided significance levels $\alpha$ of $0.005$, $0.01$, $0.025$, and $0.05$ (2424 designs for each $\rho$). The columns give the largest absolute error of the noncentrality parameter $\lambda_w^{*}$, the largest relative error $|\tilde n_2 / n_2 - 1|$ of the continuous $n_2$ for each $\alpha$, the largest absolute difference between the power at $\tilde n_2$ and the target power, and the smallest discriminant of the correction term.}
+\label{tab:accuracy_grid}
+\begin{threeparttable}
+\begin{tabular}{rrrrrrrr}
+\hline
+ & & \multicolumn{4}{c}{Largest relative error of $n_2$} & Largest power & Smallest \\
+\cline{3-6}
+$\rho$ & $\max|\lambda_w^{*} - \lambda_w|$ & $\alpha = 0.005$ & $\alpha = 0.01$ & $\alpha = 0.025$ & $\alpha = 0.05$ & difference & discriminant \\
+\hline
+-0.5 & $6.2 \times 10^{-5}$ & $2.5 \times 10^{-5}$ & $3.1 \times 10^{-5}$ & $3.3 \times 10^{-5}$ & $3.8 \times 10^{-5}$ & $1.5 \times 10^{-5}$ & 0.011 \\
+-0.3 & $6.0 \times 10^{-5}$ & $2.4 \times 10^{-5}$ & $3.0 \times 10^{-5}$ & $3.1 \times 10^{-5}$ & $3.4 \times 10^{-5}$ & $1.2 \times 10^{-5}$ & 0.011 \\
+0 & $4.9 \times 10^{-5}$ & $2.0 \times 10^{-5}$ & $2.5 \times 10^{-5}$ & $2.6 \times 10^{-5}$ & $2.5 \times 10^{-5}$ & $8.4 \times 10^{-6}$ & 0.011 \\
+0.3 & $2.8 \times 10^{-5}$ & $1.2 \times 10^{-5}$ & $1.4 \times 10^{-5}$ & $1.5 \times 10^{-5}$ & $1.6 \times 10^{-5}$ & $8.2 \times 10^{-6}$ & 0.011 \\
+0.5 & $1.3 \times 10^{-4}$ & $7.6 \times 10^{-5}$ & $8.2 \times 10^{-5}$ & $9.3 \times 10^{-5}$ & $1.0 \times 10^{-4}$ & $5.0 \times 10^{-5}$ & 0.011 \\
+0.8 & $8.8 \times 10^{-4}$ & $5.3 \times 10^{-4}$ & $5.7 \times 10^{-4}$ & $6.5 \times 10^{-4}$ & $7.4 \times 10^{-4}$ & $3.2 \times 10^{-4}$ & 0.011 \\
+0.9 & $1.7 \times 10^{-3}$ & $1.0 \times 10^{-3}$ & $1.1 \times 10^{-3}$ & $1.2 \times 10^{-3}$ & $1.4 \times 10^{-3}$ & $5.8 \times 10^{-4}$ & 0.011 \\
+0.95 & $2.9 \times 10^{-3}$ & $1.8 \times 10^{-3}$ & $2.0 \times 10^{-3}$ & $2.2 \times 10^{-3}$ & $2.6 \times 10^{-3}$ & $1.0 \times 10^{-3}$ & 0.01 \\
+0.99 & $1.2 \times 10^{-2}$ & $7.7 \times 10^{-3}$ & $8.4 \times 10^{-3}$ & $9.6 \times 10^{-3}$ & $1.1 \times 10^{-2}$ & $4.2 \times 10^{-3}$ & 0.0097 \\
+\hline
+\end{tabular}
+\begin{tablenotes}
+\footnotesize
+\item[] $\lambda_w$ and $n_2 = c\,\lambda_w^2$ are the exact values from the power equation with the bivariate normal distribution function, and $\tilde n_2 = c\,(\lambda_w^{*})^2$. The relative error does not depend on the mean differences, the standard deviations or the allocation ratio. The power at $\tilde n_2$ is the bivariate normal power at the noncentrality parameter $\lambda_w^{*}$.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

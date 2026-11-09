@@ -43,6 +43,23 @@ test_that("newton_ck meets its stopping rule near the exact root", {
   }
 })
 
+test_that("newton_ck converges at a correlation close to -1", {
+  # At rho = -0.99 the root for kappa = 1 lies within 1e-70 of
+  # qnorm(1 - beta / 2), the upper end of the interval of the initial
+  # value, so that the ends need not have opposite signs in double
+  # precision
+  z_a <- qnorm(1 - 0.025)
+  for (k in c(1, 2)) {
+    for (beta in c(0.2, 0.1)) {
+      ck <- newton_ck(kappa = k, rho = -0.99, alpha = 0.025, beta = beta)
+      pw <- pbivnorm::pbivnorm(k * ck$C + z_a * (k - 1), ck$C, rho = -0.99)
+      expect_true(ck$converged)
+      expect_gte(pw, 1 - beta)
+      expect_lt(pw - (1 - beta), 1e-5)
+    }
+  }
+})
+
 test_that("newton_ck counts the evaluations of the bivariate normal CDF", {
   ck <- newton_ck(kappa = 1.3, rho = 0.5, alpha = 0.025, beta = 0.2)
   # Three evaluations per update, one for the final check and at least
