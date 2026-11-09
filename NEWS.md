@@ -2,6 +2,20 @@
 
 ## Changes
 
+- New function `newton_ck()` computes the constant of the sample size
+  formula of Sugimoto et al. (2012) by their Newton-Raphson algorithm
+  (the R function `CKsolution` of their Supporting Information, for two
+  endpoints), with the bivariate normal distribution function of
+  `pbivnorm`. It returns the number of updates, the number of
+  evaluations of the bivariate normal distribution function and whether
+  the stopping rule was met. `twocpcont_ss()` gains
+  `method = "newton"`, which uses it.
+- The correction term of the closed-form formula is computed in the
+  equivalent form -2 C0 / (P_1 + sqrt(P_1^2 - 2 P_2 C0)), which remains
+  defined when P_2 is close to zero, in `twocpcont_ss()` and in
+  `r_max(exact = FALSE)`. If the discriminant were negative, the
+  first-order correction -C0 / P_1 is used with a warning. The computed
+  sample sizes are unchanged.
 - `r_max()` gains an argument `exact`. With `exact = TRUE` (the new
   default), the noncentrality parameter at rho = 0 is the exact root of
   the factorized power equation, found by `uniroot()`, so that
@@ -38,6 +52,10 @@
 
 ## Tests
 
+- Tests of `newton_ck()` and of `twocpcont_ss(method = "newton")`
+  reproduce the example of Sugimoto et al. (2012, Appendix A.2.1),
+  C = 0.9988124 and n = 142.93, and check the stopping rule against the
+  exact root.
 - The single test file `test-twocpcont.R` was replaced by one test file
   per function (8 files, 74 tests). New tests cover the analytic
   derivatives and the boundary limits of `plackett_gl_full()`, the

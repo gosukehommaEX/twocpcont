@@ -28,7 +28,8 @@ inst/sup_info/
   table_and_figure_supplement.R  rendering    -> results/appendix_software_example.tex,
                                                  results/supplement_numbers.csv
 inst/reproduce/                  reproduction of published values
-                                 (Sozu et al., 2015; Hung and Wang, 2009)
+                                 (Sozu et al., 2015; Hung and Wang, 2009;
+                                 Sugimoto et al., 2012)
 inst/validation/                 checks of the statements of the article that
                                  are not single numbers
 ```
@@ -43,6 +44,8 @@ source("inst/sup_info/data_generate_supplement.R")       # a few seconds
 source("inst/sup_info/table_and_figure_supplement.R")    # a few seconds
 source("inst/reproduce/reproduce_Sozu2015.R")            # a few seconds
 source("inst/reproduce/reproduce_HungWang2009.R")        # a few seconds
+source("inst/reproduce/reproduce_Sugimoto2012.R")        # a few seconds
+source("inst/validation/validate_newton_mvtnorm.R")      # less than 1 minute
 source("inst/validation/validate_claims_methods.R")      # about 1 minute
 source("inst/validation/validate_claims_numerical.R")    # about 1 minute
 source("inst/validation/validate_claims_example.R")      # a few seconds
@@ -76,4 +79,4 @@ the data file it is computed from.
 | Numbers in the text | `table_and_figure_manuscript.R` (`add_num()`, `add_diff()`) | `results/manuscript_numbers.csv` |
 | Code and output of Section S5 | `table_and_figure_supplement.R` | `inst/sup_info/data/software_example.rds` |
 | Statements in the text that are not single numbers (bounds, monotonicity, which combinations meet the target power) | `inst/validation/validate_claims_*.R` | `inst/validation/results/*.csv` |
-| Reproduction of the published values of Sozu et al. (2015) and Hung and Wang (2009) | `inst/reproduce/reproduce_*.R` | `inst/reproduce/results/*.csv` |
+| Reproduction of the published values of Sozu et al. (2015), Hung and Wang (2009) and Sugimoto et al. (2012) | `inst/reproduce/reproduce_*.R` | `inst/reproduce/results/*.csv` |

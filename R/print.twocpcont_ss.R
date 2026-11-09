@@ -37,11 +37,12 @@ print.twocpcont_ss <- function(x, digits = 4, ...) {
   }
 
   # --- Build label and value strings ---
-  method_label <- if (x$method == "bivariate") {
-    "Bivariate normal (conventional)"
-  } else {
+  method_label <- switch(
+    x$method,
+    bivariate  = "Bivariate normal (conventional)",
+    newton     = "Newton-Raphson (Sugimoto et al., 2012)",
     "Noniterative closed-form (proposed)"
-  }
+  )
 
   # All labels that will appear in output
   all_labels <- c(

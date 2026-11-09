@@ -43,6 +43,7 @@ remotes::install_github("gosukehommaEX/twocpcont", build_vignettes = TRUE)
 |---|---|
 | `twocpcont_ss()` | Required sample size by the proposed closed-form formula (`method = "univariate"`) or by the conventional sequential search (`method = "bivariate"`) |
 | `twocpcont_power()` | Marginal and co-primary power for given sample sizes |
+| `newton_ck()` | Constant of the formula of Sugimoto et al. (2012) by their Newton-Raphson algorithm (also `twocpcont_ss(method = "newton")`) |
 | `r_max()` | Maximum reduction rate of the sample size attainable through the correlation |
 | `kappa_star()` | Threshold effect-size ratio above which the reduction is at most a given tolerance |
 | `plackett_gl_full()` | Plackett correlation integral and its first two derivatives by Gauss-Legendre quadrature |
@@ -78,6 +79,19 @@ twocpcont_ss(
   r = 1,
   alpha = 0.025, beta = 0.2,
   method = "bivariate"
+)
+```
+
+The Newton-Raphson algorithm of Sugimoto et al. (2012):
+
+``` r
+twocpcont_ss(
+  delta1 = 1, delta2 = 1,
+  sd1 = 2, sd2 = 2,
+  rho = 0.5,
+  r = 1,
+  alpha = 0.025, beta = 0.2,
+  method = "newton"
 )
 ```
 

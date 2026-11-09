@@ -2,12 +2,13 @@
 #'
 #' Calculates the required sample size for a two-group superiority trial
 #' with two co-primary continuous endpoints under the known-variance
-#' assumption.  Two methods are available: the conventional sequential
-#' search using the bivariate normal distribution, and the proposed
-#' noniterative closed-form formula based on an anchor weight derived
-#' from a linear Taylor expansion of the marginal-power equation and a
-#' correction term derived from a quadratic Taylor expansion of the
-#' Plackett-approximated power function.
+#' assumption.  Three methods are available: the conventional sequential
+#' search using the bivariate normal distribution, the Newton-Raphson
+#' algorithm of Sugimoto et al. (2012), and the proposed noniterative
+#' closed-form formula based on an anchor weight derived from a linear
+#' Taylor expansion of the marginal-power equation and a correction term
+#' derived from a quadratic Taylor expansion of the Plackett-approximated
+#' power function.
 #'
 #' @param delta1 Mean difference for the first endpoint.
 #' @param delta2 Mean difference for the second endpoint.
@@ -22,7 +23,8 @@
 #'   \code{"bivariate"} (default) uses a sequential search with the
 #'   bivariate normal distribution (conventional benchmark);
 #'   \code{"univariate"} uses the proposed noniterative closed-form
-#'   formula.
+#'   formula; \code{"newton"} uses the Newton-Raphson algorithm of
+#'   Sugimoto et al. (2012), as implemented in \code{\link{newton_ck}}.
 #' @param gl_nodes Integer; number of Gauss-Legendre quadrature points
 #'   used in the Plackett correlation integral when
 #'   \code{method = "univariate"} (default: 5).  Ignored when
@@ -42,10 +44,11 @@
 #'   \item{n1}{Required sample size for group 1.}
 #'   \item{n2}{Required sample size for group 2.}
 #'   \item{N}{Total required sample size (\eqn{n_1 + n_2}).}
-#'   \item{n2_cont}{Closed-form value of \eqn{n_2} before the ceiling
-#'     operation, \eqn{c (\lambda_w^{*})^2}, when
-#'     \code{method = "univariate"}; \code{NA} when
-#'     \code{method = "bivariate"}.}
+#'   \item{n2_cont}{Value of \eqn{n_2} before the ceiling operation,
+#'     \eqn{c \lambda^2}, with \eqn{\lambda} the closed-form
+#'     \eqn{\lambda_w^{*}} when \code{method = "univariate"} and the
+#'     Newton-Raphson solution when \code{method = "newton"};
+#'     \code{NA} when \code{method = "bivariate"}.}
 #'
 #' @details
 #' \strong{Notation.} Let \eqn{w} index the weaker endpoint
@@ -81,11 +84,30 @@
 #'   2 P_2(\lambda_w^{(0)})
 #'   \{P(\lambda_w^{(0)}) - (1 - \beta)\}}}{P_2(\lambda_w^{(0)})},}
 #' where \eqn{P_1 = dP / d\lambda_w} and
-#' \eqn{P_2 = d^2 P / d\lambda_w^2}.  Setting
+#' \eqn{P_2 = d^2 P / d\lambda_w^2}.  The correction is computed in the
+#' equivalent form \eqn{\Delta^{*} = -2 \{P(\lambda_w^{(0)}) - (1 - \beta)\}
+#' / [P_1 + \{P_1^2 - 2 P_2 (P(\lambda_w^{(0)}) - (1 - \beta))\}^{1/2}]},
+#' which remains defined when \eqn{P_2} is close to zero.  If the
+#' discriminant under the square root were negative, the first-order
+#' correction \eqn{-\{P(\lambda_w^{(0)}) - (1 - \beta)\} / P_1} would be
+#' used with a warning.  Setting
 #' \eqn{\lambda_w^{*} = \lambda_w^{(0)} + \Delta^{*}}, the final sample
 #' size is \eqn{n_2 = \lceil c (\lambda_w^{*})^2 \rceil},
 #' \eqn{n_1 = \lceil r n_2 \rceil}, \eqn{N = n_1 + n_2}, with
 #' \eqn{c = \sigma_w^2 (1 + 1 / r) / \delta_w^2}.
+#'
+#' \strong{Newton-Raphson algorithm (\code{method = "newton"}):}
+#'
+#' The constant \eqn{C = \lambda_w - z_\alpha} of Sugimoto et al. (2012)
+#' is computed by \code{\link{newton_ck}}, and
+#' \eqn{n_2 = \lceil c (C + z_\alpha)^2 \rceil},
+#' \eqn{n_1 = \lceil r n_2 \rceil}.  A warning is given if the algorithm
+#' does not converge.
+#'
+#' @references
+#' Sugimoto T, Sozu T, Hamasaki T. A convenient formula for sample size
+#' calculations in clinical trials with multiple co-primary continuous
+#' endpoints. Pharmaceutical Statistics 2012; 11(2): 118-128.
 #'
 #' @examples
 #' # Bivariate normal sequential search (conventional benchmark)
@@ -115,14 +137,23 @@
 #'   method = "univariate", gl_nodes = 7
 #' )
 #'
-#' @seealso \code{\link{twocpcont_power}}
+#' # Newton-Raphson algorithm of Sugimoto et al. (2012)
+#' twocpcont_ss(
+#'   delta1 = 0.5, delta2 = 0.5,
+#'   sd1 = 1, sd2 = 1,
+#'   rho = 0.3, r = 1,
+#'   alpha = 0.025, beta = 0.2,
+#'   method = "newton"
+#' )
+#'
+#' @seealso \code{\link{twocpcont_power}}, \code{\link{newton_ck}}
 #'
 #' @importFrom stats qnorm pnorm dnorm
 #'
 #' @export
 twocpcont_ss <- function(delta1, delta2, sd1, sd2, rho,
                          r = 1, alpha = 0.025, beta = 0.2,
-                         method = c("bivariate", "univariate"),
+                         method = c("bivariate", "univariate", "newton"),
                          gl_nodes = 5L) {
 
   method       <- match.arg(method)
@@ -188,12 +219,31 @@ twocpcont_ss <- function(delta1, delta2, sd1, sd2, rho,
     # Positive square-root branch in eq. (eq:Delta_star).  At the
     # anchor, the Vieta product of the two roots is small while their
     # difference is of order |P_1| / |P_2|, so the positive branch
-    # selects the root with smaller absolute value.
-    Delta_star <- (-P_1 + sqrt(P_1 ^ 2 - 2 * P_2 * C0)) / P_2
+    # selects the root with smaller absolute value.  It is computed in
+    # the equivalent form -2 C0 / (P_1 + sqrt(P_1^2 - 2 P_2 C0)), which
+    # remains defined when P_2 is close to zero.
+    Delta_star <- .correction_term(C0, P_1, P_2)
 
     lam_w_star <- lam_w_0 + Delta_star
 
     n2_cont <- c_scale * lam_w_star ^ 2
+    n2      <- ceiling(n2_cont)
+    n1      <- ceiling(r * n2)
+    N       <- n1 + n2
+
+  } else if (method == "newton") {
+    # ============================================================
+    # method == "newton": Newton-Raphson algorithm of Sugimoto et al.
+    # (2012) for the constant C = lambda_w - z_alpha
+    # ============================================================
+
+    ck <- newton_ck(kappa = kappa, rho = rho, alpha = alpha, beta = beta)
+    if (!ck$converged) {
+      warning("The Newton-Raphson algorithm did not converge.",
+              call. = FALSE)
+    }
+
+    n2_cont <- c_scale * ck$lambda ^ 2
     n2      <- ceiling(n2_cont)
     n1      <- ceiling(r * n2)
     N       <- n1 + n2

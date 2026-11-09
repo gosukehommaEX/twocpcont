@@ -245,3 +245,47 @@ test_that("Closed form reproduces Sozu et al. (2015) to the third decimal", {
   expect_lte(max(dev[in_range]), 0.001 + 1e-9)
   expect_lte(max(dev[!in_range]), 0.002 + 1e-9)
 })
+
+# Newton-Raphson algorithm of Sugimoto et al. (2012)
+
+test_that("twocpcont_ss(method = 'newton') reproduces Sugimoto et al. (2012)", {
+  # Appendix A.2.1: delta = (0.4, 0.35), rho = 0.5, alpha = 0.025,
+  # 1 - beta = 0.8 and p = 1 give n = 142.93 -> 143 per group
+  ss <- twocpcont_ss(delta1 = 0.4, delta2 = 0.35, sd1 = 1, sd2 = 1,
+                     rho = 0.5, r = 1, alpha = 0.025, beta = 0.2,
+                     method = "newton")
+  expect_equal(round(ss$n2_cont, 2), 142.93, tolerance = 1e-12)
+  expect_equal(c(ss$n1, ss$n2, ss$N), c(143, 143, 286))
+  expect_equal(ss$method, "newton")
+})
+
+test_that("twocpcont_ss: Newton-Raphson gives the conventional N at 90% power", {
+  # The Newton-Raphson solution meets the target power, so it gives the
+  # conventional sample size also in the boundary cell, where the closed
+  # form gives 556 instead of 558
+  for (sc in scenarios) {
+    for (rho in rho_vals) {
+      N_new <- ss_for(sc, rho, 0.10, "newton")$N
+      N_uni <- ss_for(sc, rho, 0.10, "univariate")$N
+      is_boundary <- sc$d1 == 0.3 && sc$d2 == 0.3 && sc$s2 == 1 &&
+        sc$r == 1 && rho == 0.5
+      expect_equal(N_new, if (is_boundary) 558 else N_uni)
+    }
+  }
+})
+
+test_that("Doody 2014 example: Newton-Raphson gives the same N over rho", {
+  N_new <- sapply(c(0, 0.3, 0.5, 0.8), function(rr) {
+    twocpcont_ss(delta1 = 1.8, delta2 = 3.1, sd1 = 9, sd2 = 12,
+                 rho = rr, r = 1, alpha = 0.025, beta = 0.13,
+                 method = "newton")$N
+  })
+  expect_equal(N_new, c(1000, 990, 980, 960))
+})
+
+test_that("twocpcont_ss: n2 is the ceiling of n2_cont for Newton-Raphson", {
+  ss <- ss_for(scenarios[[4]], 0.3, 0.2, "newton")
+  expect_true(is.finite(ss$n2_cont))
+  expect_equal(ss$n2, ceiling(ss$n2_cont))
+  expect_equal(ss$n1, ceiling(2 * ss$n2))
+})

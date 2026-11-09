@@ -72,6 +72,10 @@
 #' \deqn{\lambda_w^{*}(\kappa, \beta, 0) = \lambda_w^{(0)}
 #'   + \frac{- P_1 + \sqrt{P_1^{2} - 2 P_2 [P(\lambda_w^{(0)}) - (1 - \beta)]}}
 #'          {P_2}.}
+#' The correction is computed in the equivalent form
+#' \eqn{-2 C_0 / (P_1 + \sqrt{P_1^{2} - 2 P_2 C_0})} with
+#' \eqn{C_0 = P(\lambda_w^{(0)}) - (1 - \beta)}, as in
+#' \code{\link{twocpcont_ss}}.
 #' Substituting this value into the expression for
 #' \eqn{R_{\max}(\kappa, \beta)} above requires no iteration.
 #'
@@ -173,11 +177,13 @@ r_max <- function(kappa, alpha = 0.025, beta = 0.2, exact = TRUE) {
          kappa ^ 2 * u_s_0 * phi_s * Phi_w +
          kappa * phi_s * phi_w
 
-  # Closed-form lambda_w*(rho = 0); at kappa = 1, C0 = 0 and Delta = 0
+  # Closed-form lambda_w*(rho = 0); at kappa = 1, C0 = 0 and Delta = 0.
+  # The correction is computed in the equivalent form
+  # -2 C0 / (P_1 + sqrt(P_1^2 - 2 P_2 C0)), as in twocpcont_ss().
   if (abs(C0) < .Machine$double.eps * 16) {
     lam_w_at_rho0 <- lam_w_0
   } else {
-    Delta_star    <- (-P_1 + sqrt(P_1 ^ 2 - 2 * P_2 * C0)) / P_2
+    Delta_star    <- .correction_term(C0, P_1, P_2)
     lam_w_at_rho0 <- lam_w_0 + Delta_star
   }
 

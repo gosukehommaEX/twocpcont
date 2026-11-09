@@ -12,7 +12,10 @@ trial with two co-primary continuous endpoints under the known-variance
 assumption, either by the noniterative closed-form formula
 (\code{\link{twocpcont_ss}} with \code{method = "univariate"}) or by the
 conventional sequential search based on the bivariate normal
-distribution (\code{method = "bivariate"}). The marginal and co-primary
+distribution (\code{method = "bivariate"}), and the constant of the
+formula of Sugimoto et al. (2012) is computed by their Newton-Raphson
+algorithm with \code{\link{newton_ck}} (\code{method = "newton"}).
+The marginal and co-primary
 powers for given sample sizes are computed by
 \code{\link{twocpcont_power}}. The two design summaries, the maximum
 reduction rate of the sample size attainable through the between-endpoint

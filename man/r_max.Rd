@@ -84,6 +84,10 @@ and the closed-form noncentrality parameter at \eqn{\rho = 0} is
 \deqn{\lambda_w^{*}(\kappa, \beta, 0) = \lambda_w^{(0)}
   + \frac{- P_1 + \sqrt{P_1^{2} - 2 P_2 [P(\lambda_w^{(0)}) - (1 - \beta)]}}
          {P_2}.}
+The correction is computed in the equivalent form
+\eqn{-2 C_0 / (P_1 + \sqrt{P_1^{2} - 2 P_2 C_0})} with
+\eqn{C_0 = P(\lambda_w^{(0)}) - (1 - \beta)}, as in
+\code{\link{twocpcont_ss}}.
 Substituting this value into the expression for
 \eqn{R_{\max}(\kappa, \beta)} above requires no iteration.
 

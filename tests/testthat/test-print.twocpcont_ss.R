@@ -16,6 +16,11 @@ test_that("print.twocpcont_ss shows the three sections and the method", {
   expect_true(any(grepl("Bivariate normal (conventional)", out_biv,
                         fixed = TRUE)))
   expect_true(any(grepl(paste0(": ", ss_uni$N, "$"), out_uni)))
+  ss_new <- twocpcont_ss(delta1 = 1, delta2 = 1, sd1 = 2, sd2 = 2,
+                         rho = 0.5, method = "newton")
+  out_new <- capture.output(print(ss_new))
+  expect_true(any(grepl("Newton-Raphson (Sugimoto et al., 2012)", out_new,
+                        fixed = TRUE)))
 })
 
 test_that("print.twocpcont_ss returns its argument invisibly", {

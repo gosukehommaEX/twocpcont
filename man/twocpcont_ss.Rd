@@ -13,7 +13,7 @@ twocpcont_ss(
   r = 1,
   alpha = 0.025,
   beta = 0.2,
-  method = c("bivariate", "univariate"),
+  method = c("bivariate", "univariate", "newton"),
   gl_nodes = 5L
 )
 }
@@ -39,7 +39,8 @@ allocation).}
 \code{"bivariate"} (default) uses a sequential search with the
 bivariate normal distribution (conventional benchmark);
 \code{"univariate"} uses the proposed noniterative closed-form
-formula.}
+formula; \code{"newton"} uses the Newton-Raphson algorithm of
+Sugimoto et al. (2012), as implemented in \code{\link{newton_ck}}.}
 
 \item{gl_nodes}{Integer; number of Gauss-Legendre quadrature points
 used in the Plackett correlation integral when
@@ -61,20 +62,22 @@ An object of class \code{"twocpcont_ss"} (which inherits from
   \item{n1}{Required sample size for group 1.}
   \item{n2}{Required sample size for group 2.}
   \item{N}{Total required sample size (\eqn{n_1 + n_2}).}
-  \item{n2_cont}{Closed-form value of \eqn{n_2} before the ceiling
-    operation, \eqn{c (\lambda_w^{*})^2}, when
-    \code{method = "univariate"}; \code{NA} when
-    \code{method = "bivariate"}.}
+  \item{n2_cont}{Value of \eqn{n_2} before the ceiling operation,
+    \eqn{c \lambda^2}, with \eqn{\lambda} the closed-form
+    \eqn{\lambda_w^{*}} when \code{method = "univariate"} and the
+    Newton-Raphson solution when \code{method = "newton"};
+    \code{NA} when \code{method = "bivariate"}.}
 }
 \description{
 Calculates the required sample size for a two-group superiority trial
 with two co-primary continuous endpoints under the known-variance
-assumption.  Two methods are available: the conventional sequential
-search using the bivariate normal distribution, and the proposed
-noniterative closed-form formula based on an anchor weight derived
-from a linear Taylor expansion of the marginal-power equation and a
-correction term derived from a quadratic Taylor expansion of the
-Plackett-approximated power function.
+assumption.  Three methods are available: the conventional sequential
+search using the bivariate normal distribution, the Newton-Raphson
+algorithm of Sugimoto et al. (2012), and the proposed noniterative
+closed-form formula based on an anchor weight derived from a linear
+Taylor expansion of the marginal-power equation and a correction term
+derived from a quadratic Taylor expansion of the Plackett-approximated
+power function.
 }
 \details{
 \strong{Notation.} Let \eqn{w} index the weaker endpoint
@@ -110,11 +113,25 @@ clipped to \eqn{[0, 1]}.  The anchor non-centrality is
   2 P_2(\lambda_w^{(0)})
   \{P(\lambda_w^{(0)}) - (1 - \beta)\}}}{P_2(\lambda_w^{(0)})},}
 where \eqn{P_1 = dP / d\lambda_w} and
-\eqn{P_2 = d^2 P / d\lambda_w^2}.  Setting
+\eqn{P_2 = d^2 P / d\lambda_w^2}.  The correction is computed in the
+equivalent form \eqn{\Delta^{*} = -2 \{P(\lambda_w^{(0)}) - (1 - \beta)\}
+/ [P_1 + \{P_1^2 - 2 P_2 (P(\lambda_w^{(0)}) - (1 - \beta))\}^{1/2}]},
+which remains defined when \eqn{P_2} is close to zero.  If the
+discriminant under the square root were negative, the first-order
+correction \eqn{-\{P(\lambda_w^{(0)}) - (1 - \beta)\} / P_1} would be
+used with a warning.  Setting
 \eqn{\lambda_w^{*} = \lambda_w^{(0)} + \Delta^{*}}, the final sample
 size is \eqn{n_2 = \lceil c (\lambda_w^{*})^2 \rceil},
 \eqn{n_1 = \lceil r n_2 \rceil}, \eqn{N = n_1 + n_2}, with
 \eqn{c = \sigma_w^2 (1 + 1 / r) / \delta_w^2}.
+
+\strong{Newton-Raphson algorithm (\code{method = "newton"}):}
+
+The constant \eqn{C = \lambda_w - z_\alpha} of Sugimoto et al. (2012)
+is computed by \code{\link{newton_ck}}, and
+\eqn{n_2 = \lceil c (C + z_\alpha)^2 \rceil},
+\eqn{n_1 = \lceil r n_2 \rceil}.  A warning is given if the algorithm
+does not converge.
 }
 \examples{
 # Bivariate normal sequential search (conventional benchmark)
@@ -144,7 +161,21 @@ twocpcont_ss(
   method = "univariate", gl_nodes = 7
 )
 
+# Newton-Raphson algorithm of Sugimoto et al. (2012)
+twocpcont_ss(
+  delta1 = 0.5, delta2 = 0.5,
+  sd1 = 1, sd2 = 1,
+  rho = 0.3, r = 1,
+  alpha = 0.025, beta = 0.2,
+  method = "newton"
+)
+
+}
+\references{
+Sugimoto T, Sozu T, Hamasaki T. A convenient formula for sample size
+calculations in clinical trials with multiple co-primary continuous
+endpoints. Pharmaceutical Statistics 2012; 11(2): 118-128.
 }
 \seealso{
-\code{\link{twocpcont_power}}
+\code{\link{twocpcont_power}}, \code{\link{newton_ck}}
 }

@@ -6,6 +6,7 @@ reference:
     contents:
       - twocpcont_ss
       - twocpcont_power
+      - newton_ck
       - print.twocpcont_ss
       - print.twocpcont_power
   - title: Design summaries

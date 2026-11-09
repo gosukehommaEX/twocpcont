@@ -15,7 +15,9 @@ Description: Provides a noniterative, closed-form sample size formula
     with Gauss-Legendre quadrature for the correlation integral and two
     analytic Taylor linearizations of the resulting power equation. A
     conventional sequential-search method based on the bivariate normal
-    distribution is also implemented for benchmarking. Two design
+    distribution and the Newton-Raphson algorithm of Sugimoto, Sozu and
+    Hamasaki (2012) <doi:10.1002/pst.505> are also implemented for
+    benchmarking. Two design
     summaries are also provided: the maximum reduction rate of the
     required sample size that correlation adjustment can achieve, and a
     threshold effect-size ratio above which the between-endpoint
@@ -31,6 +33,7 @@ Imports:
 Suggests:
     ggplot2,
     knitr,
+    mvtnorm,
     rmarkdown,
     testthat (>= 3.0.0)
 VignetteBuilder: knitr
