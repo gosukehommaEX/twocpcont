@@ -1,0 +1,101 @@
+---
+title: "Introduction to twocpcont"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to twocpcont}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+```
+
+```{r setup}
+library(twocpcont)
+```
+
+In a two-group superiority trial with two co-primary continuous endpoints,
+the treatment must be shown superior on both endpoints, each tested at the
+one-sided level `alpha`. With known variances, the co-primary power is a
+bivariate normal probability whose dependence on the sample size cannot be
+inverted analytically, so the required sample size is usually found by a
+search over candidate sample sizes. `twocpcont_ss()` gives it either by that
+search (`method = "bivariate"`) or by a noniterative closed-form formula
+(`method = "univariate"`), which needs only the univariate normal
+distribution and quantile functions.
+
+## Sample size and power
+
+The example uses the design assumptions of EXPEDITION 1, a Phase III trial of
+solanezumab in mild-to-moderate Alzheimer's disease (Doody et al., 2014):
+mean differences 1.8 and 3.1, standard deviations 9 and 12, one-sided
+significance level 0.025, overall power 0.87 and equal allocation. With a
+correlation of 0.5 between the endpoints, the closed form gives
+
+```{r}
+ss <- twocpcont_ss(delta1 = 1.8, delta2 = 3.1, sd1 = 9, sd2 = 12,
+                   rho = 0.5, r = 1, alpha = 0.025, beta = 0.13,
+                   method = "univariate")
+ss
+```
+
+and the co-primary power at this sample size, evaluated with the bivariate
+normal distribution, is
+
+```{r}
+pw <- twocpcont_power(n1 = ss$n1, n2 = ss$n2, delta1 = 1.8, delta2 = 3.1,
+                      sd1 = 9, sd2 = 12, rho = 0.5, alpha = 0.025)
+pw$powerCoprimary
+```
+
+The two methods can be compared over several correlations:
+
+```{r}
+rhos <- c(0, 0.3, 0.5, 0.8)
+N_prop <- sapply(rhos, function(rho) {
+  twocpcont_ss(delta1 = 1.8, delta2 = 3.1, sd1 = 9, sd2 = 12, rho = rho,
+               alpha = 0.025, beta = 0.13, method = "univariate")$N
+})
+N_conv <- sapply(rhos, function(rho) {
+  twocpcont_ss(delta1 = 1.8, delta2 = 3.1, sd1 = 9, sd2 = 12, rho = rho,
+               alpha = 0.025, beta = 0.13, method = "bivariate")$N
+})
+data.frame(rho = rhos, N_conv = N_conv, N_prop = N_prop)
+```
+
+The total sample size decreases from `r N_prop[1]` at a correlation of zero
+to `r N_prop[4]` at a correlation of 0.8.
+
+## How much can the correlation reduce the sample size?
+
+The maximum reduction rate `r_max()` bounds the relative reduction of the
+sample size, compared with a correlation of zero, that any nonnegative
+correlation can bring. It depends only on the significance level, the target
+power and the ratio `kappa` of the larger to the smaller standardized effect
+size:
+
+```{r}
+kappa <- (3.1 / 12) / (1.8 / 9)
+r_max(kappa, alpha = 0.025, beta = 0.13)
+```
+
+so, whatever the correlation, accounting for it can reduce the sample size
+of this design by at most `r round(100 * r_max(kappa, alpha = 0.025, beta = 0.13), 1)`%.
+The threshold effect-size ratio `kappa_star()` is the smallest `kappa` for
+which this bound is at most a chosen tolerance:
+
+```{r}
+kappa_star(epsilon = 0.05, alpha = 0.025, beta = 0.13)
+```
+
+Here `kappa` = `r round(kappa, 3)` exceeds the threshold
+`r round(kappa_star(epsilon = 0.05, alpha = 0.025, beta = 0.13), 3)` for a
+tolerance of 5%, so setting the correlation to zero costs at most 5% of the
+sample size.
+
+## Reference
+
+Doody RS, Thomas RG, Farlow M, et al. Phase 3 trials of solanezumab for
+mild-to-moderate Alzheimer's disease. *New England Journal of Medicine*
+2014; 370(4): 311-321. doi:10.1056/NEJMoa1312889

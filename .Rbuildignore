@@ -1,6 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^LICENSE\.md$
 ^README\.Rmd$
 ^\.github$
 ^\.gitignore$
@@ -16,6 +15,10 @@
 ^pkgdown$
 ^\.DS_Store$
 ^Thumbs\.db$
-^inst/reproduce/table_and_figure_manuscript$
-^inst/reproduce/verify_intext_numbers_manuscript$
-^tools$
+^inst/scripts/data$
+^inst/scripts/results$
+^inst/scripts/number_check_output\.txt$
+^inst/sup_info/data$
+^inst/sup_info/results$
+^inst/reproduce/results$
+^inst/validation/results$

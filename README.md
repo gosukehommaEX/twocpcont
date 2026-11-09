@@ -1,7 +1,7 @@
 # twocpcont
 
 <!-- badges: start -->
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: GPL (>= 2)](https://img.shields.io/badge/License-GPL%20%28%3E%3D%202%29-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
 <!-- badges: end -->
 
 `twocpcont` provides a noniterative, closed-form sample size formula
@@ -34,8 +34,19 @@ You can install the development version of `twocpcont` from
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("gosukehommaEX/twocpcont")
+remotes::install_github("gosukehommaEX/twocpcont", build_vignettes = TRUE)
 ```
+
+## Main functions
+
+| Function | Description |
+|---|---|
+| `twocpcont_ss()` | Required sample size by the proposed closed-form formula (`method = "univariate"`) or by the conventional sequential search (`method = "bivariate"`) |
+| `twocpcont_power()` | Marginal and co-primary power for given sample sizes |
+| `r_max()` | Maximum reduction rate of the sample size attainable through the correlation |
+| `kappa_star()` | Threshold effect-size ratio above which the reduction is at most a given tolerance |
+| `plackett_gl_full()` | Plackett correlation integral and its first two derivatives by Gauss-Legendre quadrature |
+| `GL_nodes_and_weights()` | Gauss-Legendre nodes and weights on `[-1, 1]` |
 
 ## Example
 
@@ -98,17 +109,19 @@ kappa_star(epsilon = 0.05, beta = 0.2)
 ## Reproducing the manuscript results
 
 The scripts that reproduce all numerical results, tables, and figures
-in the accompanying manuscript are bundled with the package under
-`inst/reproduce/`. After installation, the path can be obtained by:
+of the accompanying manuscript are in `inst/scripts/` (manuscript) and
+`inst/sup_info/` (Supporting Information) of the source package, with
+the reproduction of published values in `inst/reproduce/` and the
+checks of the statements of the manuscript in `inst/validation/`. Clone
+the repository, open `twocpcont.Rproj`, and run the scripts from the
+package root in the order given in `inst/scripts/README.md`, starting
+with:
 
 ``` r
-system.file("reproduce", package = "twocpcont")
+devtools::load_all()
+source("inst/scripts/data_generate_main.R")
+source("inst/scripts/table_and_figure_manuscript.R")
 ```
-
-Copy the scripts to a writable working directory and run them there,
-because they write their outputs into subfolders of the working
-directory. A `README.txt` in that directory explains the execution
-order.
 
 ## Author
 
@@ -117,5 +130,4 @@ Gosuke Homma
 
 ## License
 
-MIT (c) Gosuke Homma. See the `LICENSE` and `LICENSE.md` files for
-details.
+GPL (>= 2)

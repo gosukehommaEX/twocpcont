@@ -1,4 +1,4 @@
-# twocpcont (development version)
+# twocpcont 0.1.0.9000
 
 ## Changes
 
@@ -23,7 +23,7 @@
 - The published tables of the constant C_2 in Sozu et al. (2015,
   Tables 4.3 and 4.4) are included as
   `inst/extdata/sozu2015_C2_table.csv`, and
-  `run_table_and_figure_manuscript.R` compares them with the exact and
+  `inst/reproduce/reproduce_Sozu2015.R` compares them with the exact and
   closed-form values.
 
 ## Bug fixes
@@ -67,40 +67,57 @@
 
 ## Reproducibility
 
-- The scripts under `inst/reproduce/` now load the installed package
-  when the R source files are not found in the working directory, so
-  they run both from the package and from the flat code supplement.
-- The anchor weight curve for Figure 1 is now computed in
-  `run_table_and_figure_manuscript.R`, so that
-  `create_table_and_figure_manuscript.R` performs no numerical
-  computation.
-- `inst/reproduce/README.txt` describes the package layout.
-- The numerical study now uses target powers 0.80, 0.85 and 0.90 (96
+- The scripts for the accompanying article are organized as
+  `inst/scripts/` (article), `inst/sup_info/` (Supporting Information),
+  `inst/reproduce/` (published values) and `inst/validation/`
+  (statements of the article), as described in `inst/scripts/README.md`.
+  Computation (`data_generate_main.R`, `data_generate_supplement.R`) and
+  rendering (`table_and_figure_manuscript.R`,
+  `table_and_figure_supplement.R`) are separate scripts, run from the
+  package root. They replace `run_table_and_figure_manuscript.R`,
+  `create_table_and_figure_manuscript.R` and
+  `appendix_software_example.R`, and the computed values are unchanged.
+- The numerical study uses target powers 0.80, 0.85 and 0.90 (96
   cells in Table 2, which reports N_conv, N_prop and the achieved power
   for each target power and marks achieved powers below the target).
   Figures 1 and 2 use the same three powers, and Table 3 uses the
   tolerances 0.05, 0.10 and 0.15.
-- Each table file written by `create_table_and_figure_manuscript.R`
-  is now a complete table environment with caption, label and table
-  notes (threeparttable), with the numbers in the captions taken from
-  the cached results. The manuscript only needs `\input{}`.
-- `tools/make_supplement.R` builds the flat code supplement of the
-  manuscript from the package sources and checks that the copies are
-  identical.
-- `verify_intext_numbers.R` now checks the numbers cited in Sections
-  2.4, 3 and 4 of the revised manuscript, including the 96-cell grid of
-  Table 2 and the exact definition of the maximum reduction rate.
-- `tools/sync_manuscript_assets.R` copies the generated tables and
-  figures into the folder of the manuscript and checks that the copies
-  are identical.
+- Each table file is a complete table environment with caption, label
+  and table notes (threeparttable), with the numbers in the captions
+  taken from the saved results, and is written with LF line endings on
+  every operating system. The manuscript only needs `\input{}`.
+- Figures are saved only as 800 dpi EPS files (`cairo_ps` with
+  `fallback_resolution = 800`).
+- The numbers cited in the article are written by
+  `table_and_figure_manuscript.R` to the ledger
+  `inst/scripts/results/manuscript_numbers.csv`;
+  `inst/scripts/number_locations.csv` gives their positions in the
+  manuscript, and `inst/scripts/number_check.R` compares the two. The
+  statements of the article that are not single numbers are checked by
+  `inst/validation/validate_claims_methods.R`,
+  `validate_claims_numerical.R` and `validate_claims_example.R`. These
+  replace `verify_intext_numbers.R`.
+- `inst/reproduce/reproduce_Sozu2015.R` reproduces the 210 tabulated
+  values of C_2 in Sozu et al. (2015) value by value, and
+  `inst/reproduce/reproduce_HungWang2009.R` the sample size ratio of
+  Hung and Wang (2009).
+- `inst/scripts/copy_results.R` copies the figures and tables to the
+  manuscript folders and checks the copies by MD5. It replaces
+  `tools/sync_manuscript_assets.R` and `tools/make_supplement.R`, which
+  are removed together with the flat code supplement.
 
 ## Infrastructure
 
+- The license is GPL (>= 2) (previously MIT).
+- The files of the print methods are renamed
+  `R/print.twocpcont_ss.R` and `R/print.twocpcont_power.R`, and their
+  tests `test-print.twocpcont_ss.R` and `test-print.twocpcont_power.R`.
+- Added a package help page (`?twocpcont`), a vignette,
+  `_pkgdown.yml` and `cran-comments.md`.
 - Added `.gitattributes` to normalize line endings, and excluded
   `.Rhistory`, `.RData` and `.gitattributes` from the package build.
-- The output folders of the reproduction scripts and `tools/` are
-  excluded from the package build; the output folders are also
-  excluded from git.
+- The output folders of the scripts under `inst/` are kept in the
+  repository and excluded from the package build.
 
 # twocpcont 0.1.0
 

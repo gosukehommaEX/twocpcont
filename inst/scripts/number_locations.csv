@@ -1,0 +1,111 @@
+key,context,scale,note
+n_cells,Over {} design combinations,,Abstract
+n_match_total,"the iterative sample size in {}, and",,Abstract
+pub_lo_n,it reproduced the {} published tabulated constants,,Abstract
+intro_power_indep,$0.8^2 = {}$ when each endpoint,,Section 1
+n_cells,iterative search on {} design combinations,,Section 1
+pub_n,against the {} constants tabulated,,Section 1
+w_gap_max,by at most about ${}$ at these target powers,,Section 2.2.1
+w_one_kappa_80,"reaches one at $\kappa \approx {}$, $",,Section 2.2.1
+w_one_kappa_85,"\approx 1.41$, ${}$, and",,Section 2.2.1
+w_one_kappa_90,"1.36$, and ${}$ for",,Section 2.2.1
+rmax_k1_80,"$\Rmax(1, 0.20) \approx {}\%$",100,Section 2.4.1
+kstar_05_80,gives $\kappa^{*} \approx {}$. If the effect,,Section 2.4.2
+kstar_05_80,"is at least about ${}$, accounting",,Section 2.4.2
+kappa_p1,effect size ratios are $\kappa = {}$ for,,Section 3.1
+kappa_p2,"$\kappa = {}$ for $(0.7, 0.5, 1, 1)$",,Section 3.1
+kappa_p3,"$\kappa = {}$ for $(0.3, 0.3, 1, 1.5)$",,Section 3.1
+kappa_p4,"$\kappa = {}$ for $(0.7, 0.5, 1, 1.5)$",,Section 3.1
+n_cells,which gives {} combinations,,Section 3.1
+n_match_80_85,in all {} combinations at,,Section 3.2
+n_match_90,and in {} of the 32 combinations,,Section 3.2
+n_cells_per_power,and in 31 of the {} combinations,,Section 3.2
+mismatch_N_prop,total sample size is ${}$ and the conventional,,Section 3.2
+mismatch_N_conv,the conventional one is ${}$.,,Section 3.2
+mismatch_n2_exact,corresponds to $n_2 = {}$ before,,Section 3.2
+mismatch_n2_cf,"closed-form value is ${}$, so",,Section 3.2
+mismatch_n2_diff,approximation error of about ${}$ in,,Section 3.2
+mismatch_N_prop,achieved power at $N = {}$ is,,Section 3.2
+mismatch_power,"is ${}$, short of the target",,Section 3.2
+n_match_total,In the other {} combinations,,Section 3.2
+pow_min_80,ranges from ${}$ to,,Section 3.2
+pow_max_80,"to ${}$ at $1 - \beta = 0.80$, from",,Section 3.2
+pow_min_85,"0.80$, from ${}$ to",,Section 3.2
+pow_max_85,"to ${}$ at $0.85$, and from",,Section 3.2
+pow_min_90,and from ${}$ to $0.9040$,,Section 3.2
+pow_max_90,to ${}$ at $0.90$. The excess,,Section 3.2
+n_r2_match,All {} combinations with $r = 2$,,Section 3.2
+N_k1_80_rho0,size decreases from ${}$ at,,Section 3.2
+N_k1_80_rho8,to ${}$ at $\rho = 0.8$ when,,Section 3.2
+red_k1_80,"a reduction of about ${}\%$, and from",100,Section 3.2
+N_k1_90_rho0,"\%$, and from ${}$ to",,Section 3.2
+N_k1_90_rho8,"to ${}$, about",,Section 3.2
+red_k1_90,"about ${}\%$, when",100,Section 3.2
+kappa_p4,"1.5, 1)$ with $\kappa = {}$",,Section 3.2
+kappa_p2,For $\kappa = {}$ and,,Section 3.2
+kappa_p3,"and ${}$, the reduction from",,Section 3.2
+red_mid_max,is at most ${}\%$. In every pattern,100,Section 3.2
+pub_exact_match,reproduced all {} tabulated values,,Section 3.3
+pub_lo_n,For the {} values with,,Section 3.3
+pub_lo_match,agreed with {} and differed,,Section 3.3
+pub_hi_match,"article, {} of the 30 values",,Section 3.3
+pub_hi_n,20 of the {} values agreed,,Section 3.3
+pub_hi_maxdev,largest difference was ${}$.,,Section 3.3
+trial_kappa,"effect size ratio of ${}$, so its",,Section 3.3
+n_cells,over the {} combinations of Section,,Section 3.3
+phi2_median,a median of ${}$ and,,Section 3.3
+phi2_min,and ranged from ${}$ to,,Section 3.3
+phi2_max,to ${}$. The largest counts,,Section 3.3
+phi2_argmax_kappa,"occurred at $\kappa = {}$, where",,Section 3.3
+n_cells,the search in all {} combinations,,Section 3.3
+rmax_k1_80,$\Rmax$ equals ${}\%$,100,Section 3.4
+rmax_k1_85,"23.8\%$, ${}\%$, and",100,Section 3.4
+rmax_k1_90,"21.3\%$, and ${}\%$ for",100,Section 3.4
+cs_increase_90,\} - 1 \approx {}\%$,100,Section 3.4
+hw_ratio_80,"It is ${}$, $",,Section 3.4
+hw_ratio_85,"$1.31$, ${}$, and",,Section 3.4
+hw_ratio_90,"$1.27$, and ${}$ for",,Section 3.4
+kstar_05_80,threshold decreases from ${}$ at,,Section 3.4
+kstar_15_80,to ${}$ at $\epsilon = 0.15$,,Section 3.4
+kstar_05_90,0.90$ from ${}$ to,,Section 3.4
+kstar_15_90,to ${}$. Once the,,Section 3.4
+kstar_05_max,factor of about ${}$ or more,,Section 3.4
+red_k1_80,is about ${}\%$ at $\kappa = 1$ and zero,100,Section 3.4
+kappa_p4,zero at $\kappa = {}$.,,Section 3.4
+kappa_varga,"effect sizes give $\kappa = {}$, and",,Section 3.4
+rmax_varga,0.20) \approx {}\%$ confirms,100,Section 3.4
+rmax_k1_80,the bound is ${}\%$.,100,Section 3.4
+rmax_k1_80_r0,by more than about ${}\%$ relative,100,Section 3.4
+trial_es1,\delta_1 / \sigma_1 = {}$ and,,Section 4
+trial_es2,"\sigma_2 = {}$, giving",,Section 4
+trial_kappa,effect size ratio $\kappa = {}$. The protocol,,Section 4
+trial_power_product,"0.98 = {}$, which is the product",,Section 4
+trial_N_rho0,"N_{\rm prop} = {}$, which reproduces",,Section 4
+trial_N_rho0,monotonically from ${}$ to,,Section 4
+trial_N_rho8,"to ${}$, a reduction of",,Section 4
+trial_N_red,a reduction of ${}$ patients,,Section 4
+trial_red,patients or approximately ${}\%$.,100,Section 4
+trial_kappa,Evaluated at $\kappa = {}$ and,,Section 4
+trial_rmax,"$\Rmax$ is approximately ${}\%$, so the realized",100,Section 4
+trial_red_1,integer reduction of ${}\%$ at,100,Section 4
+trial_recover,recovers roughly ${}\%$ of,100,Section 4
+trial_red_cont,"$\rho = 0.8$ is ${}\%$, so the gap",100,Section 4
+trial_kstar_05,"threshold $\kappa^{*} \approx {}$, which is exceeded",,Section 4
+trial_kappa,"exceeded by $\kappa = {}$, so the",,Section 4
+trial_kappa_round,"ratio is $\kappa = {}$, below",,Section 4
+trial_rmax_round,and $\Rmax$ is approximately ${}\%$. Whether,100,Section 4
+trial_kstar_01,"0.01$ is $\kappa^{*} \approx {}$, which exceeds",,Section 4
+trial_kappa,which exceeds $\kappa = {}$ and shows,,Section 4
+trial_N_rho0,so $N = {}$ is an upper bound,,Section 4
+trial_gain_bound,approximately ${}$ patients out of,,Section 4
+trial_N_rho0,"patients out of ${}$, and this",,Section 4
+trial_rmax,by at most about ${}\%$ at,100,Section 4
+trial_kappa,\%$ at $\kappa = {}$ and about,,Section 4
+trial_rmax_round,and about ${}\%$ at,100,Section 4
+trial_kappa_round,6.0\%$ at $\kappa = {}$.,,Section 4
+n_match_total,sample size in {} of the 96,,Section 5
+n_cells,in 95 of the {} combinations of design,,Section 5
+trial_rmax_r0,exceed about ${}\%$ to,100,Section 5
+trial_rmax_round_r0,"\%$ to ${}\%$, depending",100,Section 5
+pub_hi_match,reproduced {} of the 30 tabulated,,Section 5
+pub_hi_n,reproduced 20 of the {} tabulated,,Section 5

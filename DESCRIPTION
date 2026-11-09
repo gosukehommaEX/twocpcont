@@ -6,7 +6,8 @@ Version: 0.1.0.9000
 Authors@R:
     person("Gosuke", "Homma",
            email = "my.name.is.gosuke@gmail.com",
-           role = c("aut", "cre"))
+           role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-6854-5627"))
 Description: Provides a noniterative, closed-form sample size formula
     for two-group superiority clinical trials with two co-primary
     continuous endpoints under the known-variance assumption. The
@@ -20,7 +21,7 @@ Description: Provides a noniterative, closed-form sample size formula
     threshold effect-size ratio above which the between-endpoint
     correlation changes the required sample size by at most a
     user-specified fraction.
-License: MIT + file LICENSE
+License: GPL (>= 2)
 Encoding: UTF-8
 Depends:
     R (>= 4.0.0)
@@ -29,7 +30,10 @@ Imports:
     stats
 Suggests:
     ggplot2,
+    knitr,
+    rmarkdown,
     testthat (>= 3.0.0)
+VignetteBuilder: knitr
 URL: https://github.com/gosukehommaEX/twocpcont
 BugReports: https://github.com/gosukehommaEX/twocpcont/issues
 Config/roxygen2/version: 8.0.0

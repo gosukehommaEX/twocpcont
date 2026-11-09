@@ -1,0 +1,555 @@
+==================================================================
+ Number check: manuscript versus ledger
+ 2026-11-09 12:52:07 JST
+==================================================================
+
+[1] Ledgers
+  inst/scripts/results/manuscript_numbers.csv (79 numbers, 2026-11-09 12:45:17)
+  PASS  the ledger is newer than its .rds files and its rendering script
+  inst/sup_info/results/supplement_numbers.csv (0 numbers, 2026-11-09 12:45:21)
+  PASS  the ledger is newer than its .rds files and its rendering script
+
+[2] Manuscript files and locations (110 rows in inst/scripts/number_locations.csv)
+  found     ../../Manuscript/Main_body/main.tex
+  found     ../../Manuscript/Supp_info/supporting_information.tex
+
+[3] Numbers at the registered locations
+   key                 location     in_text   recomputed  expected  status note
+   n_cells             main.tex:53  96        96          96        PASS       
+   n_match_total       main.tex:53  95        95          95        PASS       
+   pub_lo_n            main.tex:53  180       180         180       PASS       
+   intro_power_indep   main.tex:62  0.64      0.64        0.64      PASS       
+   n_cells             main.tex:68  96        96          96        PASS       
+   pub_n               main.tex:68  210       210         210       PASS       
+   w_gap_max           main.tex:170 0.09      0.09246254  0.09      PASS       
+   w_one_kappa_80      main.tex:170 1.41      1.41044     1.41      PASS       
+   w_one_kappa_85      main.tex:170 1.36      1.358456    1.36      PASS       
+   w_one_kappa_90      main.tex:170 1.30      1.3045      1.30      PASS       
+   rmax_k1_80          main.tex:238 23.8      23.8459     23.8      PASS       
+   kstar_05_80         main.tex:259 1.37      1.36926     1.37      PASS       
+   kstar_05_80         main.tex:259 1.37      1.36926     1.37      PASS       
+   kappa_p1            main.tex:266 1.0       1           1.0       PASS       
+   kappa_p2            main.tex:266 1.4       1.4         1.4       PASS       
+   kappa_p3            main.tex:266 1.5       1.5         1.5       PASS       
+   kappa_p4            main.tex:266 2.1       2.1         2.1       PASS       
+   n_cells             main.tex:266 96        96          96        PASS       
+   n_match_80_85       main.tex:270 32        32          32        PASS       
+   n_match_90          main.tex:270 31        31          31        PASS       
+   n_cells_per_power   main.tex:270 32        32          32        PASS       
+   mismatch_N_prop     main.tex:270 556       556         556       PASS       
+   mismatch_N_conv     main.tex:270 558       558         558       PASS       
+   mismatch_n2_exact   main.tex:270 278.0009  278.0009    278.0009  PASS       
+   mismatch_n2_cf      main.tex:270 277.9970  277.997     277.9970  PASS       
+   mismatch_n2_diff    main.tex:270 0.004     0.003907437 0.004     PASS       
+   mismatch_N_prop     main.tex:270 556       556         556       PASS       
+   mismatch_power      main.tex:270 0.8999989 0.8999989   0.8999989 PASS       
+   n_match_total       main.tex:270 95        95          95        PASS       
+   pow_min_80          main.tex:270 0.8000    0.800047    0.8000    PASS       
+   pow_max_80          main.tex:270 0.8078    0.8078282   0.8078    PASS       
+   pow_min_85          main.tex:270 0.8501    0.8500771   0.8501    PASS       
+   pow_max_85          main.tex:270 0.8544    0.8544131   0.8544    PASS       
+   pow_min_90          main.tex:270 0.9000    0.900035    0.9000    PASS       
+   pow_max_90          main.tex:270 0.9040    0.9039951   0.9040    PASS       
+   n_r2_match          main.tex:270 48        48          48        PASS       
+   N_k1_80_rho0        main.tex:272 460       460         460       PASS       
+   N_k1_80_rho8        main.tex:272 408       408         408       PASS       
+   red_k1_80           main.tex:272 11        11.30435    11        PASS       
+   N_k1_90_rho0        main.tex:272 574       574         574       PASS       
+   N_k1_90_rho8        main.tex:272 530       530         530       PASS       
+   red_k1_90           main.tex:272 8         7.665505    8         PASS       
+   kappa_p4            main.tex:272 2.1       2.1         2.1       PASS       
+   kappa_p2            main.tex:272 1.4       1.4         1.4       PASS       
+   kappa_p3            main.tex:272 1.5       1.5         1.5       PASS       
+   red_mid_max         main.tex:272 4         4           4         PASS       
+   pub_exact_match     main.tex:276 210       210         210       PASS       
+   pub_lo_n            main.tex:276 180       180         180       PASS       
+   pub_lo_match        main.tex:276 177       177         177       PASS       
+   pub_hi_match        main.tex:276 20        20          20        PASS       
+   pub_hi_n            main.tex:276 30        30          30        PASS       
+   pub_hi_maxdev       main.tex:276 0.002     0.002       0.002     PASS       
+   trial_kappa         main.tex:276 1.292     1.291667    1.292     PASS       
+   n_cells             main.tex:278 96        96          96        PASS       
+   phi2_median         main.tex:278 31.5      31.5        31.5      PASS       
+   phi2_min            main.tex:278 2         2           2         PASS       
+   phi2_max            main.tex:278 125       125         125       PASS       
+   phi2_argmax_kappa   main.tex:278 1.5       1.5         1.5       PASS       
+   n_cells             main.tex:278 96        96          96        PASS       
+   rmax_k1_80          main.tex:282 23.8      23.8459     23.8      PASS       
+   rmax_k1_85          main.tex:282 21.3      21.33148    21.3      PASS       
+   rmax_k1_90          main.tex:282 18.6      18.57095    18.6      PASS       
+   cs_increase_90      main.tex:282 22.8      22.8063     22.8      PASS       
+   hw_ratio_80         main.tex:282 1.31      1.313127    1.31      PASS       
+   hw_ratio_85         main.tex:282 1.27      1.271156    1.27      PASS       
+   hw_ratio_90         main.tex:282 1.23      1.228063    1.23      PASS       
+   kstar_05_80         main.tex:284 1.37      1.36926     1.37      PASS       
+   kstar_15_80         main.tex:284 1.13      1.132132    1.13      PASS       
+   kstar_05_90         main.tex:284 1.24      1.239413    1.24      PASS       
+   kstar_15_90         main.tex:284 1.05      1.046721    1.05      PASS       
+   kstar_05_max        main.tex:284 1.4       1.36926     1.4       PASS       
+   red_k1_80           main.tex:284 11        11.30435    11        PASS       
+   kappa_p4            main.tex:284 2.1       2.1         2.1       PASS       
+   kappa_varga         main.tex:284 1.25      1.25        1.25      PASS       
+   rmax_varga          main.tex:284 9.1       9.128052    9.1       PASS       
+   rmax_k1_80          main.tex:284 23.8      23.8459     23.8      PASS       
+   rmax_k1_80_r0       main.tex:286 24        23.8459     24        PASS       
+   trial_es1           main.tex:290 0.200     0.2         0.200     PASS       
+   trial_es2           main.tex:290 0.258     0.2583333   0.258     PASS       
+   trial_kappa         main.tex:290 1.292     1.291667    1.292     PASS       
+   trial_power_product main.tex:290 0.87      0.8722      0.87      PASS       
+   trial_N_rho0        main.tex:292 1000      1000        1000      PASS       
+   trial_N_rho0        main.tex:292 1000      1000        1000      PASS       
+   trial_N_rho8        main.tex:292 960       960         960       PASS       
+   trial_N_red         main.tex:292 40        40          40        PASS       
+   trial_red           main.tex:292 4         4           4         PASS       
+   trial_kappa         main.tex:294 1.292     1.291667    1.292     PASS       
+   trial_rmax          main.tex:294 4.6       4.618346    4.6       PASS       
+   trial_red_1         main.tex:294 4.0       4           4.0       PASS       
+   trial_recover       main.tex:294 87        86.61109    87        PASS       
+   trial_red_cont      main.tex:294 3.9       3.9367      3.9       PASS       
+   trial_kstar_05      main.tex:294 1.279     1.279183    1.279     PASS       
+   trial_kappa         main.tex:294 1.292     1.291667    1.292     PASS       
+   trial_kappa_round   main.tex:294 1.25      1.25        1.25      PASS       
+   trial_rmax_round    main.tex:294 6.0       5.981702    6.0       PASS       
+   trial_kstar_01      main.tex:294 1.494     1.494314    1.494     PASS       
+   trial_kappa         main.tex:294 1.292     1.291667    1.292     PASS       
+   trial_N_rho0        main.tex:296 1000      1000        1000      PASS       
+   trial_gain_bound    main.tex:296 46        46.18346    46        PASS       
+   trial_N_rho0        main.tex:296 1000      1000        1000      PASS       
+   trial_rmax          main.tex:296 4.6       4.618346    4.6       PASS       
+   trial_kappa         main.tex:296 1.292     1.291667    1.292     PASS       
+   trial_rmax_round    main.tex:296 6.0       5.981702    6.0       PASS       
+   trial_kappa_round   main.tex:296 1.25      1.25        1.25      PASS       
+   n_match_total       main.tex:302 95        95          95        PASS       
+   n_cells             main.tex:302 96        96          96        PASS       
+   trial_rmax_r0       main.tex:306 5         4.618346    5         PASS       
+   trial_rmax_round_r0 main.tex:306 6         5.981702    6         PASS       
+   pub_hi_match        main.tex:308 20        20          20        PASS       
+   pub_hi_n            main.tex:308 30        30          30        PASS       
+  PASS 110, FAIL 0, SKIP 0
+
+[4] Unregistered numbers (decimals and percentages not covered by number_locations.csv)
+   location                       number
+   main.tex:39                    0.80  
+   main.tex:39                    0.85  
+   main.tex:39                    0.90  
+   main.tex:39                    0.5   
+   main.tex:39                    1.0   
+   main.tex:39                    0.025 
+   main.tex:40                    0.80  
+   main.tex:40                    0.85  
+   main.tex:40                    0.90  
+   main.tex:40                    5     
+   main.tex:40                    10    
+   main.tex:40                    15    
+   main.tex:40                    0.025 
+   main.tex:53                    0.8   
+   main.tex:62                    0.8   
+   main.tex:62                    0.80  
+   main.tex:64                    0.025 
+   main.tex:64                    0.80  
+   main.tex:64                    0.90  
+   main.tex:95                    0.025 
+   main.tex:170                   0.80  
+   main.tex:170                   0.85  
+   main.tex:170                   0.90  
+   main.tex:182                   0.8   
+   main.tex:182                   0.95  
+   main.tex:238                   0.025 
+   main.tex:238                   0.80  
+   main.tex:238                   0.20  
+   main.tex:247                   0.025 
+   main.tex:247                   0.70  
+   main.tex:247                   0.80  
+   main.tex:247                   0.85  
+   main.tex:247                   0.87  
+   main.tex:247                   0.90  
+   main.tex:259                   0.025 
+   main.tex:259                   0.80  
+   main.tex:259                   0.05  
+   main.tex:259                   5     
+   main.tex:266                   0.025 
+   main.tex:266                   0.80  
+   main.tex:266                   0.85  
+   main.tex:266                   0.90  
+   main.tex:266                   0.3   
+   main.tex:266                   0.3   
+   main.tex:266                   0.7   
+   main.tex:266                   0.5   
+   main.tex:266                   1.5   
+   main.tex:266                   0.3   
+   main.tex:266                   0.3   
+   main.tex:266                   0.7   
+   main.tex:266                   0.5   
+   main.tex:266                   0.3   
+   main.tex:266                   0.3   
+   main.tex:266                   1.5   
+   main.tex:266                   0.7   
+   main.tex:266                   0.5   
+   main.tex:266                   1.5   
+   main.tex:266                   0.3   
+   main.tex:266                   0.5   
+   main.tex:266                   0.8   
+   main.tex:266                   4.6   
+   main.tex:270                   0.80  
+   main.tex:270                   0.85  
+   main.tex:270                   0.90  
+   main.tex:270                   0.3   
+   main.tex:270                   0.3   
+   main.tex:270                   0.5   
+   main.tex:270                   0.90  
+   main.tex:270                   0.80  
+   main.tex:270                   0.85  
+   main.tex:270                   0.90  
+   main.tex:272                   0.3   
+   main.tex:272                   0.3   
+   main.tex:272                   0.8   
+   main.tex:272                   0.80  
+   main.tex:272                   0.90  
+   main.tex:272                   0.7   
+   main.tex:272                   0.5   
+   main.tex:272                   1.5   
+   main.tex:272                   0.8   
+   main.tex:276                   0.025 
+   main.tex:276                   0.80  
+   main.tex:276                   0.90  
+   main.tex:276                   1.00  
+   main.tex:276                   2.00  
+   main.tex:276                   0.2   
+   main.tex:276                   0.3   
+   main.tex:276                   0.5   
+   main.tex:276                   0.7   
+   main.tex:276                   0.8   
+   main.tex:276                   0.95  
+   main.tex:276                   0.8   
+   main.tex:276                   0.03  
+   main.tex:276                   0.95  
+   main.tex:276                   0.87  
+   main.tex:282                   0.80  
+   main.tex:282                   0.85  
+   main.tex:282                   0.90  
+   main.tex:282                   90    
+   main.tex:282                   23    
+   main.tex:282                   0.10  
+   main.tex:282                   0.80  
+   main.tex:282                   0.85  
+   main.tex:282                   0.90  
+   main.tex:284                   0.05  
+   main.tex:284                   0.10  
+   main.tex:284                   0.15  
+   main.tex:284                   0.80  
+   main.tex:284                   0.05  
+   main.tex:284                   0.15  
+   main.tex:284                   0.90  
+   main.tex:284                   5     
+   main.tex:284                   0.80  
+   main.tex:284                   0.8   
+   main.tex:284                   0.4   
+   main.tex:284                   0.5   
+   main.tex:284                   80    
+   main.tex:284                   10    
+   main.tex:284                   1.25  
+   main.tex:284                   0.20  
+   main.tex:286                   0.80  
+   main.tex:290                   1.8   
+   main.tex:290                   3.1   
+   main.tex:290                   0.25  
+   main.tex:290                   0.25  
+   main.tex:290                   3.1   
+   main.tex:290                   0.05  
+   main.tex:290                   0.025 
+   main.tex:290                   0.89  
+   main.tex:290                   0.98  
+   main.tex:290                   0.89  
+   main.tex:290                   0.98  
+   main.tex:292                   0.87  
+   main.tex:292                   0.3   
+   main.tex:292                   0.5   
+   main.tex:292                   0.8   
+   main.tex:292                   0.87  
+   main.tex:292                   0.8   
+   main.tex:294                   0.87  
+   main.tex:294                   0.8   
+   main.tex:294                   0.8   
+   main.tex:294                   0.8   
+   main.tex:294                   0.05  
+   main.tex:294                   0.87  
+   main.tex:294                   5     
+   main.tex:294                   0.25  
+   main.tex:294                   0.05  
+   main.tex:294                   0.13  
+   main.tex:294                   5     
+   main.tex:294                   0.01  
+   main.tex:294                   1     
+   main.tex:302                   0.90  
+   main.tex:302                   0.8   
+   main.tex:306                   0.025 
+   main.tex:306                   0.80  
+   main.tex:306                   0.90  
+   main.tex:306                   0.8   
+   main.tex:306                   0.95  
+   main.tex:308                   0.025 
+   main.tex:308                   0.2   
+   main.tex:308                   0.4   
+   main.tex:308                   0.80  
+   main.tex:308                   0.025 
+   main.tex:308                   0.8   
+   main.tex:308                   0.95  
+   main.tex:308                   0.025 
+   main.tex:308                   0.95  
+   main.tex:322                   5.5   
+   supporting_information.tex:39  0.80  
+   supporting_information.tex:39  0.85  
+   supporting_information.tex:39  0.90  
+   supporting_information.tex:39  0.5   
+   supporting_information.tex:39  1.0   
+   supporting_information.tex:39  0.025 
+   supporting_information.tex:40  0.80  
+   supporting_information.tex:40  0.85  
+   supporting_information.tex:40  0.90  
+   supporting_information.tex:40  5     
+   supporting_information.tex:40  10    
+   supporting_information.tex:40  15    
+   supporting_information.tex:40  0.025 
+   supporting_information.tex:112 0.75  
+   supporting_information.tex:112 0.75  
+   supporting_information.tex:112 0.8   
+   supporting_information.tex:112 0.7   
+   supporting_information.tex:112 0.8   
+   supporting_information.tex:112 0.8   
+   supporting_information.tex:112 0.8   
+   supporting_information.tex:112 0.95  
+   supporting_information.tex:112 3.3   
+   supporting_information.tex:112 2.4   
+   supporting_information.tex:168 2.4   
+   supporting_information.tex:174 0.5   
+   supporting_information.tex:176 0.5   
+   supporting_information.tex:176 0.87  
+   snippet                                                                            
+    three target powers, $1 - \\beta = 0.80$, $0.85$, and $0.90$. The horizont        
+   arget powers, $1 - \\beta = 0.80$, $0.85$, and $0.90$. The horizontal dotte        
+   , $1 - \\beta = 0.80$, $0.85$, and $0.90$. The horizontal dotted lines mark        
+   izontal dotted lines mark $w^{*} = 0.5$ and $w^{*} = 1.0$. The significan          
+   es mark $w^{*} = 0.5$ and $w^{*} = 1.0$. The significance level is $\\alph         
+   he significance level is $\\alpha = 0.025$ (one-sided).}                           
+    three target powers, $1 - \\beta = 0.80$, $0.85$, and $0.90$. The horizont        
+   arget powers, $1 - \\beta = 0.80$, $0.85$, and $0.90$. The horizontal dotte        
+   , $1 - \\beta = 0.80$, $0.85$, and $0.90$. The horizontal dotted lines mark        
+   izontal dotted lines mark $\\Rmax = 5\\%$, $10\\%$, and $15\\%$. The signif        
+    dotted lines mark $\\Rmax = 5\\%$, $10\\%$, and $15\\%$. The significance l       
+   s mark $\\Rmax = 5\\%$, $10\\%$, and $15\\%$. The significance level is $\\al      
+   he significance level is $\\alpha = 0.025$ (one-sided).}                           
+   d constants for correlations up to 0.8 to within one unit in the third de          
+   he individual powers, for example $0.8^2 = 0.64$ when each endpoint has p          
+   .64$ when each endpoint has power $0.80$~\\cite{FDA2022}. When the endpoint        
+    the one-sided significance level $0.025$, target powers $0.80$ and $0.90$,        
+   ance level $0.025$, target powers $0.80$ and $0.90$, 15 effect size ratios         
+   $0.025$, target powers $0.80$ and $0.90$, 15 effect size ratios, and 7 cor         
+   d at the one-sided level $\\alpha = 0.025$, the conventional level for confi       
+   1.36$, and $1.30$ for $1 - \\beta = 0.80$, $0.85$, and $0.90$. For larger $        
+   nd $1.30$ for $1 - \\beta = 0.80$, $0.85$, and $0.90$. For larger $\\kappa$,       
+   r $1 - \\beta = 0.80$, $0.85$, and $0.90$. For larger $\\kappa$, the clippin       
+    throughout the range $|\\rho| \\leq 0.8$, which contains every correlation        
+   \\ref{sec:numerical} except $\\rho = 0.95$ in Section~\\ref{sec:published}, a      
+   For example, at $\\alpha = 0.025$ and $1 - \\beta = 0.80$, (\\ref{eq:              
+    $\\alpha = 0.025$ and $1 - \\beta = 0.80$, (\\ref{eq:Rmax_kappa1}) gives $\\R     
+   f{eq:Rmax_kappa1}) gives $\\Rmax(1, 0.20) \\approx 23.8\\%$. At fixed $\\lambd     
+   ho = 0$ is not zero. For $\\alpha = 0.025$, $\\kappa \\in [1, 3]$, and $1 - \\b    
+    \\in [1, 3]$, and $1 - \\beta \\in \\{0.70, 0.80, 0.85, 0.87, 0.90\\}$, the ma    
+   1, 3]$, and $1 - \\beta \\in \\{0.70, 0.80, 0.85, 0.87, 0.90\\}$, the maximum      
+   , and $1 - \\beta \\in \\{0.70, 0.80, 0.85, 0.87, 0.90\\}$, the maximum reduct     
+   $1 - \\beta \\in \\{0.70, 0.80, 0.85, 0.87, 0.90\\}$, the maximum reduction ra     
+   beta \\in \\{0.70, 0.80, 0.85, 0.87, 0.90\\}$, the maximum reduction rates ob      
+   pporting Information. At $\\alpha = 0.025$, $1 - \\beta = 0.80$, and $\\epsilo     
+    At $\\alpha = 0.025$, $1 - \\beta = 0.80$, and $\\epsilon = 0.05$, (\\ref{eq:     
+   1 - \\beta = 0.80$, and $\\epsilon = 0.05$, (\\ref{eq:kappa_star}) gives $\\ka     
+   e required sample size by at most $5\\%$ relative to the value at $\\rho           
+   sided significance level $\\alpha = 0.025$ and three target powers, $1 - \\be      
+    three target powers, $1 - \\beta = 0.80$, $0.85$, and $0.90$. Eight design        
+   arget powers, $1 - \\beta = 0.80$, $0.85$, and $0.90$. Eight design pattern        
+   , $1 - \\beta = 0.80$, $0.85$, and $0.90$. Eight design patterns were forme        
+   ences $(\\delta_1, \\delta_2) \\in \\{(0.3, 0.3),\\, (0.7, 0.5)\\}$, two pairs     
+    $(\\delta_1, \\delta_2) \\in \\{(0.3, 0.3),\\, (0.7, 0.5)\\}$, two pairs of st    
+   _1, \\delta_2) \\in \\{(0.3, 0.3),\\, (0.7, 0.5)\\}$, two pairs of standard de     
+   delta_2) \\in \\{(0.3, 0.3),\\, (0.7, 0.5)\\}$, two pairs of standard deviati      
+   a_1, \\sigma_2) \\in \\{(1, 1),\\, (1, 1.5)\\}$, and two allocation ratios $r      
+   , \\delta_2, \\sigma_1, \\sigma_2) = (0.3, 0.3, 1, 1)$, $\\kappa = 1.4$ for $      
+   lta_2, \\sigma_1, \\sigma_2) = (0.3, 0.3, 1, 1)$, $\\kappa = 1.4$ for $(0.7,       
+    0.3, 1, 1)$, $\\kappa = 1.4$ for $(0.7, 0.5, 1, 1)$, $\\kappa = 1.5$ for $        
+    1, 1)$, $\\kappa = 1.4$ for $(0.7, 0.5, 1, 1)$, $\\kappa = 1.5$ for $(0.3,        
+    0.5, 1, 1)$, $\\kappa = 1.5$ for $(0.3, 0.3, 1, 1.5)$, and $\\kappa = 2.1$        
+    1, 1)$, $\\kappa = 1.5$ for $(0.3, 0.3, 1, 1.5)$, and $\\kappa = 2.1$ for         
+    $\\kappa = 1.5$ for $(0.3, 0.3, 1, 1.5)$, and $\\kappa = 2.1$ for $(0.7, 0        
+   1, 1.5)$, and $\\kappa = 2.1$ for $(0.7, 0.5, 1, 1.5)$. Because the standa         
+   5)$, and $\\kappa = 2.1$ for $(0.7, 0.5, 1, 1.5)$. Because the standard de         
+    $\\kappa = 2.1$ for $(0.7, 0.5, 1, 1.5)$. Because the standard deviations         
+   n was varied over $\\rho \\in \\{0,\\, 0.3,\\, 0.5,\\, 0.8\\}$, which gives 96 c   
+   aried over $\\rho \\in \\{0,\\, 0.3,\\, 0.5,\\, 0.8\\}$, which gives 96 combinat   
+   ver $\\rho \\in \\{0,\\, 0.3,\\, 0.5,\\, 0.8\\}$, which gives 96 combinations of   
+   re performed in \\texttt{R} version 4.6.1~\\cite{R2026}.                           
+   ll 32 combinations at $1 - \\beta = 0.80$ and $0.85$, and in 31 of the 32 c        
+   nations at $1 - \\beta = 0.80$ and $0.85$, and in 31 of the 32 combinations        
+   he 32 combinations at $1 - \\beta = 0.90$. In the remaining combination, $(        
+   2, \\sigma_1, \\sigma_2, r, \\rho) = (0.3, 0.3, 1, 1, 1, 0.5)$ at $1 - \\beta      
+   igma_1, \\sigma_2, r, \\rho) = (0.3, 0.3, 1, 1, 1, 0.5)$ at $1 - \\beta = 0.       
+   _2, r, \\rho) = (0.3, 0.3, 1, 1, 1, 0.5)$ at $1 - \\beta = 0.90$, the propo        
+   .3, 1, 1, 1, 0.5)$ at $1 - \\beta = 0.90$, the proposed total sample size i        
+   .8000$ to $0.8078$ at $1 - \\beta = 0.80$, from $0.8501$ to $0.8544$ at $0.        
+   80$, from $0.8501$ to $0.8544$ at $0.85$, and from $0.9000$ to $0.9040$ at         
+    and from $0.9000$ to $0.9040$ at $0.90$. The excess over the target comes         
+   delta_2, \\sigma_1, \\sigma_2, r) = (0.3, 0.3, 1, 1, 1)$ with $\\kappa = 1$,       
+   _2, \\sigma_1, \\sigma_2, r) = (0.3, 0.3, 1, 1, 1)$ with $\\kappa = 1$, the        
+    at $\\rho = 0$ to $408$ at $\\rho = 0.8$ when $1 - \\beta = 0.80$, a reduct       
+    at $\\rho = 0.8$ when $1 - \\beta = 0.80$, a reduction of about $11\\%$, and      
+   0$, about $8\\%$, when $1 - \\beta = 0.90$. When the effect size ratio is la       
+    weaker endpoint. In the pattern $(0.7, 0.5, 1, 1.5, 1)$ with $\\kappa = 2         
+   er endpoint. In the pattern $(0.7, 0.5, 1, 1.5, 1)$ with $\\kappa = 2.1$,          
+   int. In the pattern $(0.7, 0.5, 1, 1.5, 1)$ with $\\kappa = 2.1$, the tota         
+   duction from $\\rho = 0$ to $\\rho = 0.8$ is at most $4\\%$. In every patter       
+   gimoto2012} for $K = 2$, $\\alpha = 0.025$, $1 - \\beta \\in \\{0.80, 0.90\\}$,    
+   $\\alpha = 0.025$, $1 - \\beta \\in \\{0.80, 0.90\\}$, 15 effect size ratios be    
+   a = 0.025$, $1 - \\beta \\in \\{0.80, 0.90\\}$, 15 effect size ratios between      
+   }$, 15 effect size ratios between $1.00$ and $2.00$, and the correlations          
+   ct size ratios between $1.00$ and $2.00$, and the correlations $0$, $0.2$,         
+   $2.00$, and the correlations $0$, $0.2$, $0.3$, $0.5$, $0.7$, $0.8$, and           
+    and the correlations $0$, $0.2$, $0.3$, $0.5$, $0.7$, $0.8$, and $0.95$.          
+   e correlations $0$, $0.2$, $0.3$, $0.5$, $0.7$, $0.8$, and $0.95$. In the          
+   lations $0$, $0.2$, $0.3$, $0.5$, $0.7$, $0.8$, and $0.95$. In the presen          
+    $0$, $0.2$, $0.3$, $0.5$, $0.7$, $0.8$, and $0.95$. In the present notat          
+   , $0.3$, $0.5$, $0.7$, $0.8$, and $0.95$. In the present notation, this co         
+   For the 180 values with $\\rho \\leq 0.8$, the closed-form value agreed wit        
+   ~(\\ref{eq:ss_final}) by less than $0.03\\%$. At $\\rho = 0.95$, outside the       
+    by less than $0.03\\%$. At $\\rho = 0.95$, outside the range used elsewhere       
+   as designed for a target power of $0.87$ with an effect size ratio of $1.2         
+   \\%$, and $18.6\\%$ for $1 - \\beta = 0.80$, $0.85$, and $0.90$, respectively      
+    $18.6\\%$ for $1 - \\beta = 0.80$, $0.85$, and $0.90$, respectively, and it       
+   r $1 - \\beta = 0.80$, $0.85$, and $0.90$, respectively, and it decreases q        
+   that, with equal effect sizes and $90\\%$ power, two co-primary endpoints          
+   imary endpoints can require up to $23\\%$ more patients than a single end          
+   ho \\to 1$, and $1 / \\{1 - \\Rmax(1, 0.10)\\} - 1 \\approx 22.8\\%$. The same q   
+   1.27$, and $1.23$ for $1 - \\beta = 0.80$, $0.85$, and $0.90$, in agreement        
+   nd $1.23$ for $1 - \\beta = 0.80$, $0.85$, and $0.90$, in agreement with Fi        
+   r $1 - \\beta = 0.80$, $0.85$, and $0.90$, in agreement with Figure~1 of Hu        
+   silon, \\beta)$ for $\\epsilon \\in \\{0.05,\\, 0.10,\\, 0.15\\}$. At $1 - \\beta  
+   beta)$ for $\\epsilon \\in \\{0.05,\\, 0.10,\\, 0.15\\}$. At $1 - \\beta = 0.80$,  
+   or $\\epsilon \\in \\{0.05,\\, 0.10,\\, 0.15\\}$. At $1 - \\beta = 0.80$, the thr  
+   , 0.10,\\, 0.15\\}$. At $1 - \\beta = 0.80$, the threshold decreases from $1.      
+   creases from $1.37$ at $\\epsilon = 0.05$ to $1.13$ at $\\epsilon = 0.15$, a       
+   n = 0.05$ to $1.13$ at $\\epsilon = 0.15$, and at $1 - \\beta = 0.90$ from $       
+   silon = 0.15$, and at $1 - \\beta = 0.90$ from $1.24$ to $1.05$. Once the s        
+   e required sample size by at most $5\\%$ at these target powers. This is           
+   comparison}, where at $1 - \\beta = 0.80$ the reduction from $\\rho = 0$ to        
+   duction from $\\rho = 0$ to $\\rho = 0.8$ is about $11\\%$ at $\\kappa = 1$ a      
+   at, for standardized effect sizes $0.4$ and $0.5$ and $80\\%$ power, the s         
+   andardized effect sizes $0.4$ and $0.5$ and $80\\%$ power, the sample size         
+    effect sizes $0.4$ and $0.5$ and $80\\%$ power, the sample size can be r          
+   size can be reduced by only about $10\\%$ when the correlation is close t          
+   s give $\\kappa = 1.25$, and $\\Rmax(1.25, 0.20) \\approx 9.1\\%$ confirms the     
+    $\\kappa = 1.25$, and $\\Rmax(1.25, 0.20) \\approx 9.1\\%$ confirms their fig     
+   pa$ and $\\rho$, so at $1 - \\beta = 0.80$ even a perfectly known correlatio       
+   eatment differences of $\\delta_1 = 1.8$ on ADAS-Cog11 and $\\delta_2 = 3.1        
+   1.8$ on ADAS-Cog11 and $\\delta_2 = 3.1$ on ADCS-ADL, with common standard         
+   scribes the second effect size as $0.25$, and its table of marginal powers         
+   le of marginal powers agrees with $0.25$ rather than with $3.1 / 12$. The          
+   rees with $0.25$ rather than with $3.1 / 12$. The consequence of this rou          
+   sided significance level $\\alpha = 0.05$ (i.e., one-sided significance lev        
+   sided significance level $\\alpha = 0.025$), equal allocation $r = 1$, and 5       
+   he marginal powers were stated as $0.89$ for ADAS-Cog11 and $0.98$ for ADC         
+   ated as $0.89$ for ADAS-Cog11 and $0.98$ for ADCS-ADL. The protocol then r         
+   ed an overall co-primary power of $0.89 \\times 0.98 = 0.87$, which is the         
+   l co-primary power of $0.89 \\times 0.98 = 0.87$, which is the product of t        
+   losed-form formula at $1 - \\beta = 0.87$ for four values of $\\rho$, namely       
+   our values of $\\rho$, namely $0$, $0.3$, $0.5$, and $0.8$. At $\\rho = 0$         
+   ues of $\\rho$, namely $0$, $0.3$, $0.5$, and $0.8$. At $\\rho = 0$ the clo        
+   o$, namely $0$, $0.3$, $0.5$, and $0.8$. At $\\rho = 0$ the closed-form fo         
+   ribed by the protocol. The target $0.87$ was itself obtained from the marg         
+   . As $\\rho$ increases from $0$ to $0.8$, the total sample size decreases          
+    $\\kappa = 1.292$ and $1 - \\beta = 0.87$, $\\Rmax$ is approximately $4.6\\%$     
+   er reduction of $4.0\\%$ at $\\rho = 0.8$ recovers roughly $87\\%$ of the an       
+   :R_def}), the reduction at $\\rho = 0.8$ is $3.9\\%$, so the gap to $\\Rmax$       
+   e gap to $\\Rmax$ is due to $\\rho = 0.8$ being below one, and the ceiling         
+   ref{eq:kappa_star}) at $\\epsilon = 0.05$ and $1 - \\beta = 0.87$ gives a th       
+   $\\epsilon = 0.05$ and $1 - \\beta = 0.87$ gives a threshold $\\kappa^{*} \\ap     
+    maximum reduction lies below the $5\\%$ tolerance at this $\\kappa$. The          
+   he protocol's rounded effect size $0.25$, the effect size ratio is $\\kappa        
+   $\\kappa = 1.25$, below $\\kappa^{*}(0.05, 0.13)$, and $\\Rmax$ is approximat      
+   a = 1.25$, below $\\kappa^{*}(0.05, 0.13)$, and $\\Rmax$ is approximately $6       
+    the maximum reduction lies below $5\\%$ therefore depends on how the ef           
+    the tighter tolerance $\\epsilon = 0.01$ is $\\kappa^{*} \\approx 1.494$, wh      
+    maximum reduction lies above the $1\\%$ tolerance.                                
+   power fell short of the target of $0.90$ by about $10^{-6}$. The formula a         
+   al.~\\cite{Sozu2015} for $\\rho \\leq 0.8$ to within one unit in the third d       
+   cy was examined here for $\\alpha = 0.025$, $0.80 \\leq 1 - \\beta \\leq 0.90$,    
+   amined here for $\\alpha = 0.025$, $0.80 \\leq 1 - \\beta \\leq 0.90$, and $0      
+    0.025$, $0.80 \\leq 1 - \\beta \\leq 0.90$, and $0 \\leq \\rho \\leq 0.8$, with   
+    \\leq 0.90$, and $0 \\leq \\rho \\leq 0.8$, with an additional comparison at      
+   n additional comparison at $\\rho = 0.95$ against the published tables. Its        
+   e, about two patients at $\\alpha = 0.025$, nearly always gives the exact sa       
+   standardized effect sizes between $0.2$ and $0.4$ with a target power of           
+   ed effect sizes between $0.2$ and $0.4$ with a target power of $0.80$ at           
+    and $0.4$ with a target power of $0.80$ at a one-sided level of $0.025$.          
+   of $0.80$ at a one-sided level of $0.025$. Adding such an increment to~(\\re       
+    by simulation. Third, for $\\rho > 0.8$ the accuracy of the formula was e         
+   rmula was examined only at $\\rho = 0.95$ against the published tables, and        
+   or significance levels other than $0.025$. At $\\rho = 0.95$, the closed for       
+   els other than $0.025$. At $\\rho = 0.95$, the closed form reproduced 20 of        
+   Claude Opus 5.5 (Anthropic) was used to assist in                                  
+    three target powers, $1 - \\beta = 0.80$, $0.85$, and $0.90$. The horizont        
+   arget powers, $1 - \\beta = 0.80$, $0.85$, and $0.90$. The horizontal dotte        
+   , $1 - \\beta = 0.80$, $0.85$, and $0.90$. The horizontal dotted lines mark        
+   izontal dotted lines mark $w^{*} = 0.5$ and $w^{*} = 1.0$. The significan          
+   es mark $w^{*} = 0.5$ and $w^{*} = 1.0$. The significance level is $\\alph         
+   he significance level is $\\alpha = 0.025$ (one-sided).}                           
+    three target powers, $1 - \\beta = 0.80$, $0.85$, and $0.90$. The horizont        
+   arget powers, $1 - \\beta = 0.80$, $0.85$, and $0.90$. The horizontal dotte        
+   , $1 - \\beta = 0.80$, $0.85$, and $0.90$. The horizontal dotted lines mark        
+   izontal dotted lines mark $\\Rmax = 5\\%$, $10\\%$, and $15\\%$. The signif        
+    dotted lines mark $\\Rmax = 5\\%$, $10\\%$, and $15\\%$. The significance l       
+   s mark $\\Rmax = 5\\%$, $10\\%$, and $15\\%$. The significance level is $\\al      
+   he significance level is $\\alpha = 0.025$ (one-sided).}                           
+   rature over the grid $a \\in \\{-1, -0.75, \\ldots, 4\\}$, $b \\in \\{-1, -0.75,   
+   -0.75, \\ldots, 4\\}$, $b \\in \\{-1, -0.75, \\ldots, 8\\}$, and $\\rho \\in \\{-0.
+   75, \\ldots, 8\\}$, and $\\rho \\in \\{-0.8, -0.7, \\ldots, 0.8\\}$ ($13209$ poi   
+   dots, 8\\}$, and $\\rho \\in \\{-0.8, -0.7, \\ldots, 0.8\\}$ ($13209$ points),     
+   nd $\\rho \\in \\{-0.8, -0.7, \\ldots, 0.8\\}$ ($13209$ points), which covers      
+   g in this article for $|\\rho| \\leq 0.8$, and was found to remain below $1        
+    throughout the range $|\\rho| \\leq 0.8$, which contains every correlation        
+   gation in Section~3 except $\\rho = 0.95$ in Section~3.3, and every correla        
+   ~3 except $\\rho = 0.95$ in Section~3.3, and every correlation used in the         
+    maximum reduction rate in Section~2.4.1 is defined through the exact pow          
+    > 1 - \\beta$. As noted in Section~2.4.2, (20) is used for $\\epsilon < \\R       
+   1 design of Section~4 with $\\rho = 0.5$.                                          
+    agrees with the value for $\\rho = 0.5$ in Table~4, and the co-primary po         
+   , is at least the target power of $0.87$. The call to \\texttt{sapply} repr        
+
+[5] Ledger keys not cited in the manuscript: 0 of 79 (for information)
+
+==================================================================
+ Result: ALL CHECKS PASSED; 195 unregistered number(s) to review
+==================================================================
+
+R version 4.6.1 (2026-06-24 ucrt)
+Platform: x86_64-w64-mingw32/x64
+Running under: Windows 11 x64 (build 26200)
+
+Matrix products: default
+  LAPACK version 3.12.1
+
+locale:
+[1] LC_COLLATE=Japanese_Japan.utf8  LC_CTYPE=Japanese_Japan.utf8    LC_MONETARY=Japanese_Japan.utf8
+[4] LC_NUMERIC=C                    LC_TIME=Japanese_Japan.utf8    
+
+time zone: Asia/Tokyo
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] twocpcont_0.1.0.9000 testthat_3.3.2      
+
+loaded via a namespace (and not attached):
+ [1] desc_1.4.3        R6_2.6.1          devtools_2.5.2    fastmap_1.2.0     magrittr_2.0.5    cachem_1.1.0     
+ [7] glue_1.8.1        memoise_2.0.1     pbivnorm_0.6.0    lifecycle_1.0.5   cli_3.6.6         sessioninfo_1.2.3
+[13] vctrs_0.7.3       pkgload_1.5.2     compiler_4.6.1    rprojroot_2.1.1   purrr_1.2.2       rstudioapi_0.18.0
+[19] tools_4.6.1       pkgbuild_1.4.8    brio_1.1.5        ellipsis_0.3.3    otel_0.2.0        rlang_1.3.0      
+[25] fs_2.1.0          usethis_3.2.1    

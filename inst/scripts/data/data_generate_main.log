@@ -1,0 +1,20 @@
+data_generate_main.R log -- 2026-11-09 12:44:03
+twocpcont 0.1.0.9000 loaded from C:/Users/i_lik/OneDrive/00_Amazon_drive/01_研究/11_Co-primary/03_My_research/04_Non_iterative_sample_size/Rpackage/twocpcont
+git commit bfa1576; modified tracked files: M .Rbuildignore; M .gitignore; M DESCRIPTION; D LICENSE; D LICENSE.md; M NEWS.md; D R/print_twocpcont_power.R; D R/print_twocpcont_ss.R; M README.md; D inst/reproduce/README.txt; D inst/reproduce/appendix_software_example.R; D inst/reproduce/create_table_and_figure_manuscript.R; D inst/reproduce/run_table_and_figure_manuscript.R; D inst/reproduce/verify_intext_numbers.R; M man/print.twocpcont_power.Rd; M man/print.twocpcont_ss.Rd; D tests/testthat/test-print_twocpcont_power.R; D tests/testthat/test-print_twocpcont_ss.R; D tools/make_supplement.R; D tools/supplement_README.txt; D tools/sync_manuscript_assets.R
+Table 1 (Gauss-Legendre rule)                     0.0 sec
+Saved inst/scripts/data/tab1_gl_nodes.rds
+Figure 1 (anchor weight)                          3.3 sec
+Saved inst/scripts/data/fig1_anchor_weight.rds
+Table 2 (96 cells)                               13.5 sec
+Saved inst/scripts/data/tab2_sample_size.rds
+Bivariate normal CDF evaluations                 13.0 sec
+Saved inst/scripts/data/phi2_evaluations.rds
+Figure 2 (reduction curve)                        4.3 sec
+Saved inst/scripts/data/fig2_reduction_curve.rds
+Table 3 (kappa_star)                              0.0 sec
+Saved inst/scripts/data/tab3_kappa_star.rds
+Table 4 (EXPEDITION 1)                            5.3 sec
+Saved inst/scripts/data/tab4_real_example.rds
+Published tables                                  5.2 sec
+Saved inst/scripts/data/published_tables.rds
+All requested data written to 'inst/scripts/data/'.

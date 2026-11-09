@@ -11,9 +11,11 @@
 *.zip
 *.Rcheck/
 
-# pkgdown / Meta
+# pkgdown / Meta / vignettes
 docs/
 Meta/
+doc/
+inst/doc/
 
 # OS-generated files
 .DS_Store
@@ -25,7 +27,3 @@ Thumbs.db
 *~
 .vscode/
 .idea/
-
-# Outputs not tracked in repo (manuscript reproducibility runs)
-inst/reproduce/table_and_figure_manuscript/
-inst/reproduce/verify_intext_numbers_manuscript/

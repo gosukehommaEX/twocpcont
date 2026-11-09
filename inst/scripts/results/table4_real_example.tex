@@ -1,0 +1,30 @@
+\begin{table}[ht]
+\centering
+\small
+\caption{Design assumptions and sample sizes for EXPEDITION~1, the Phase~III trial of solanezumab for mild-to-moderate Alzheimer's disease~\citep{Doody2014}. The upper block lists the design parameters from the trial protocol, with overall power $1 - \beta = 0.87$. The lower block reports the total sample size $N$ of the conventional iterative method ($N_{\rm conv}$) and the proposed closed-form formula ($N_{\rm prop}$) for 4 values of $\rho$. At $\rho = 0$, the proposed formula gives $N = 1000$.}
+\label{tab:real_example}
+\begin{threeparttable}
+\begin{tabular}{lrr}
+\hline
+ & ADAS-Cog11 & ADCS-ADL \\
+\hline
+Mean difference $\delta$ & 1.8 & 3.1 \\
+Standard deviation $\sigma$ & 9 & 12 \\
+Standardized effect size $\delta / \sigma$ & 0.2000 & 0.2583 \\
+\hline
+Effect-size ratio $\kappa$ & \multicolumn{2}{c}{1.2917} \\
+Significance level $\alpha$ (one-sided) & \multicolumn{2}{c}{0.025} \\
+Target overall power $1 - \beta$ & \multicolumn{2}{c}{0.87} \\
+Allocation ratio $r$ & \multicolumn{2}{c}{1} \\
+\hline
+\multicolumn{3}{c}{} \\[-1.8ex]
+$\rho$ & $N_{\rm conv}$ & $N_{\rm prop}$ \\
+\hline
+0.0 & 1000 & 1000 \\
+0.3 & 990 & 990 \\
+0.5 & 980 & 980 \\
+0.8 & 960 & 960 \\
+\hline
+\end{tabular}
+\end{threeparttable}
+\end{table}

@@ -1,0 +1,18 @@
+url: https://gosukehommaEX.github.io/twocpcont/
+template:
+  bootstrap: 5
+reference:
+  - title: Sample size and power
+    contents:
+      - twocpcont_ss
+      - twocpcont_power
+      - print.twocpcont_ss
+      - print.twocpcont_power
+  - title: Design summaries
+    contents:
+      - r_max
+      - kappa_star
+  - title: Gauss-Legendre approximation of the Plackett integral
+    contents:
+      - plackett_gl_full
+      - GL_nodes_and_weights
