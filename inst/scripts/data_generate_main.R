@@ -209,7 +209,9 @@ SETTINGS <- list(
   kappa_fig2  = seq(1.0, 2.0, length.out = 201),
   epsilon_set = c(0.05, 0.10, 0.15),
   kappa_fig3  = c(1, 1.1, 1.2, 1.3, 1.5, 2),
-  rho_fig3    = seq(0, 0.99, by = 0.01),
+  # rho near 1 is added because the reduction at kappa = 1 rises as
+  # sqrt(1 - rho) towards R_max
+  rho_fig3    = c(seq(0, 0.99, by = 0.01), 0.995, 0.999, 0.9999),
   power_fig3  = c(0.80, 0.90),
   varga       = c(es_w = 0.4, es_s = 0.5, power = 0.80),
   trial       = list(delta1 = trial_delta1, delta2 = trial_delta2,

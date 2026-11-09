@@ -243,10 +243,14 @@ tabS1 <- c(
 )
 for (i in seq_len(nrow(s1))) {
   m <- s1$method[i]
+  eval_range <- if (s1$eval_min[i] == s1$eval_max[i]) {
+    sprintf("%d", as.integer(s1$eval_min[i]))
+  } else {
+    sprintf("%d--%d", as.integer(s1$eval_min[i]), as.integer(s1$eval_max[i]))
+  }
   tabS1 <- c(tabS1, sprintf(
-    "%s & %s & %d--%d & %s & %s & %s \\\\",
-    METHOD_LABELS[[m]], fmt_sig(s1$eval_median[i], 3),
-    as.integer(s1$eval_min[i]), as.integer(s1$eval_max[i]),
+    "%s & %s & %s & %s & %s & %s \\\\",
+    METHOD_LABELS[[m]], fmt_sig(s1$eval_median[i], 3), eval_range,
     fmt_sig(s1$ms[i], 3),
     if (m == "bivariate") "---" else sprintf("%d", s1$n_match[i]),
     fmt_sci(s1$rel_max[i])))
@@ -382,9 +386,9 @@ for (rr in rho_set) {
   }, numeric(1L))
   tabS2 <- c(tabS2, sprintf(
     "%s & %s & %s & %s & %s \\\\",
-    sprintf("%g", rr), fmt_sci(max(abs(d$err_lambda))),
+    sprintf("$%g$", rr), fmt_sci(max(abs(d$err_lambda))),
     paste(fmt_sci(rel_by_alpha), collapse = " & "),
-    fmt_sci(max(abs(d$power_diff))), fmt_sig(min(d$disc), 2)))
+    fmt_sci(max(abs(d$power_diff))), fmt(min(d$disc), 4)))
 }
 tabS2 <- c(tabS2, "\\hline", "\\end{tabular}")
 
@@ -434,7 +438,7 @@ pS2 <- ggplot(dS2, aes(x = kappa, y = 100 * rel_n2, colour = power_lab)) +
   labs(x = expression(kappa),
        y = expression("Relative error of continuous " * italic(n)[2] *
                         " (%)")) +
-  guides(colour = guide_legend(nrow = 1)) +
+  guides(colour = guide_legend(nrow = 2)) +
   theme_paper() +
   theme(legend.text = element_text(size = 9))
 save_figure(pS2, "FigureS2_accuracy_grid", width = FIG_WIDTH,

@@ -1,22 +1,22 @@
-data_generate_main.R log -- 2026-11-09 15:26:32
+data_generate_main.R log -- 2026-11-09 15:54:37
 twocpcont 0.1.0.9000 loaded from C:/Users/i_lik/OneDrive/00_Amazon_drive/01_研究/11_Co-primary/03_My_research/04_Non_iterative_sample_size/Rpackage/twocpcont
-git commit 471b9fb; modified tracked files: M NEWS.md; M R/newton_ck.R; M inst/scripts/README.md; M inst/scripts/data/csv/fig1_anchor_weight_data.csv; M inst/scripts/data/data_generate_main.log; M inst/scripts/data/fig1_anchor_weight.rds; M inst/scripts/data/fig2_reduction_curve.rds; M inst/scripts/data/phi2_evaluations.rds; M inst/scripts/data/published_tables.rds; M inst/scripts/data/sessionInfo_data_generate_main.txt; M inst/scripts/data/tab1_gl_nodes.rds; M inst/scripts/data/tab2_sample_size.rds; M inst/scripts/data/tab3_kappa_star.rds; M inst/scripts/data/tab4_real_example.rds; M inst/scripts/data_generate_main.R; M inst/scripts/results/figure1_anchor_weight.eps; M inst/scripts/results/figure2_reduction_curve.eps; M inst/scripts/results/manuscript_numbers.csv; M inst/scripts/table_and_figure_manuscript.R; M inst/sup_info/data_generate_supplement.R; M inst/sup_info/table_and_figure_supplement.R; M inst/validation/README.md; M man/newton_ck.Rd; M tests/testthat/test-newton_ck.R
+git commit bfb472f; modified tracked files: M inst/scripts/data/data_generate_main.log; M inst/scripts/data_generate_main.R; M inst/sup_info/table_and_figure_supplement.R
 Table 1 (Gauss-Legendre rule)                     0.0 sec
 Saved inst/scripts/data/tab1_gl_nodes.rds
 Figure 1 (anchor weight)                          1.3 sec
 Saved inst/scripts/data/fig1_anchor_weight.rds
-Table 2 (96 cells)                                5.7 sec
+Table 2 (96 cells)                                4.1 sec
 Saved inst/scripts/data/tab2_sample_size.rds
-Bivariate normal CDF evaluations                  6.2 sec
+Bivariate normal CDF evaluations                  3.9 sec
 Saved inst/scripts/data/phi2_evaluations.rds
-Figure 2 (reduction curve)                        0.8 sec
+Figure 2 (reduction curve)                        0.7 sec
 Saved inst/scripts/data/fig2_reduction_curve.rds
 Table 3 (kappa_star)                              0.0 sec
 Saved inst/scripts/data/tab3_kappa_star.rds
-Table 4 (EXPEDITION 1)                            0.9 sec
+Table 4 (EXPEDITION 1)                            0.8 sec
 Saved inst/scripts/data/tab4_real_example.rds
-Published tables                                  1.7 sec
+Published tables                                  0.6 sec
 Saved inst/scripts/data/published_tables.rds
-Figure 3 (reduction over rho)                     2.0 sec
+Figure 3 (reduction over rho)                     0.8 sec
 Saved inst/scripts/data/fig3_reduction_rho.rds
 All requested data written to 'inst/scripts/data/'.
