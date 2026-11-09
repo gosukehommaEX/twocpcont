@@ -430,10 +430,11 @@ pS2 <- ggplot(dS2, aes(x = kappa, y = 100 * rel_n2, colour = power_lab)) +
   geom_hline(yintercept = 0, linetype = "dotted", colour = "#888888",
              linewidth = 0.4) +
   geom_line(linewidth = 0.5) +
-  # rho as a number, so that a negative value is set with a minus sign
+  # The labels are parsed as expressions, so that a negative rho is set with
+  # a minus sign (a number inserted by label_bquote() keeps the hyphen)
   facet_wrap(~ rho_lab, ncol = 3, scales = "free_y",
-             labeller = label_bquote(
-               rho == .(as.numeric(as.character(rho_lab))))) +
+             labeller = as_labeller(function(x) paste0("rho == ", x),
+                                    default = label_parsed)) +
   scale_colour_manual(values = OKABE_ITO[seq_along(power_set_grid)],
                       labels = power_labels_S2) +
   scale_x_continuous(breaks = seq(1, 3, by = 0.5)) +

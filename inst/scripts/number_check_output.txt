@@ -1,12 +1,12 @@
 ==================================================================
  Number check: manuscript versus ledger
- 2026-11-09 16:08:51 JST
+ 2026-11-09 16:21:58 JST
 ==================================================================
 
 [1] Ledgers
   inst/scripts/results/manuscript_numbers.csv (82 numbers, 2026-11-09 16:08:48)
   PASS  the ledger is newer than its .rds files and its rendering script
-  inst/sup_info/results/supplement_numbers.csv (56 numbers, 2026-11-09 16:08:51)
+  inst/sup_info/results/supplement_numbers.csv (56 numbers, 2026-11-09 16:21:58)
   PASS  the ledger is newer than its .rds files and its rendering script
 
 [2] Manuscript files and locations (110 rows in inst/scripts/number_locations.csv)
