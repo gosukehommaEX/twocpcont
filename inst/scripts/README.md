@@ -53,6 +53,7 @@ source("inst/validation/validate_claims_methods.R")      # about 1 minute
 source("inst/validation/validate_claims_numerical.R")    # about 1 minute
 source("inst/validation/validate_claims_example.R")      # a few seconds
 source("inst/validation/validate_error_decomposition.R") # less than 1 minute
+source("inst/validation/validate_claims_supplement.R")   # a few seconds
 source("inst/scripts/copy_results.R")
 source("inst/scripts/number_check.R")
 ```
@@ -82,10 +83,9 @@ the data file it is computed from.
 | Figure 1 (anchor weight) | `table_and_figure_manuscript.R` | `data/fig1_anchor_weight.rds` |
 | Figure 2 (maximum reduction rate) | `table_and_figure_manuscript.R` | `data/fig2_reduction_curve.rds` |
 | Figure 3 (reduction of the sample size over the correlation) | `table_and_figure_manuscript.R` | `data/fig3_reduction_rho.rds` |
-| Comparison with the published tables (Section 3.3) | `table_and_figure_manuscript.R` (ledger) | `data/published_tables.rds` |
-| Evaluations of the bivariate normal CDF (Section 3.3) | `table_and_figure_manuscript.R` (ledger) | `data/phi2_evaluations.rds` |
+| Comparison with the published tables (Section 3.4) | `table_and_figure_manuscript.R` (ledger) | `data/published_tables.rds` |
 | Numbers in the text | `table_and_figure_manuscript.R` (`add_num()`, `add_diff()`) | `results/manuscript_numbers.csv` |
-| Code and output of Section S5 | `table_and_figure_supplement.R` | `inst/sup_info/data/software_example.rds` |
+| Code and output of Section S9 | `table_and_figure_supplement.R` | `inst/sup_info/data/software_example.rds` |
 | Table S1 (comparison with the Newton-Raphson algorithm and Brent's method) | `table_and_figure_supplement.R` | `inst/sup_info/data/cost_comparison.rds` |
 | Figure S1 (error of the continuous n2 by approximation step) | `table_and_figure_supplement.R` | `inst/sup_info/data/error_decomposition.rds` |
 | Table S2 and Figure S2 (accuracy over a wide grid) | `table_and_figure_supplement.R` | `inst/sup_info/data/accuracy_grid.rds` |

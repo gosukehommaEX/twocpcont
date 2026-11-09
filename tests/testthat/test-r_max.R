@@ -1,6 +1,6 @@
 # Tests for r_max()
 
-test_that("r_max returns the values reported in Section 3.3", {
+test_that("r_max returns the values reported in Section 3.5", {
   expect_equal(r_max(kappa = 1, alpha = 0.025, beta = 0.3), 0.2863,
                tolerance = 1e-3)
   expect_equal(r_max(kappa = 1, alpha = 0.025, beta = 0.2), 0.2385,

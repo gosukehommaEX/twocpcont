@@ -3,15 +3,13 @@
 #
 # Checks of the statements of Section 3 (numerical investigation) of the
 # twocpcont article that are not single numbers: which design combinations
-# meet the target power, monotonicity in the correlation, the direction of
-# the conventional search, the sign of the discriminant of (eq:Delta_star),
-# bounds on the deviations from the published tables, and the structure of
-# those tables. The numbers cited in the text are checked against the ledger
-# by inst/scripts/number_check.R.
+# meet the target power, monotonicity in the correlation, the sign of the
+# discriminant of (eq:Delta_star), bounds on the deviations from the
+# published tables, and the structure of those tables. The numbers cited in
+# the text are checked against the ledger by inst/scripts/number_check.R.
 #
 # Claims about the results of Section 3 are checked on the data written by
-# inst/scripts/data_generate_main.R; the starting value of the search and the
-# discriminant are computed here.
+# inst/scripts/data_generate_main.R; the discriminant is computed here.
 #
 # Usage
 #   Open twocpcont.Rproj (the working directory must be the package root),
@@ -189,7 +187,7 @@ check("r2_all_identical",
       sprintf("cells = %d, identical = %d", sum(r2), sum(same[r2])))
 
 # =============================================================================
-# Section 3.3: published tables and computational cost
+# Section 3.4: published tables
 # =============================================================================
 pub <- read_scripts_data("published_tables")$sozu
 lo  <- pub$rho <= 0.8
@@ -244,36 +242,6 @@ check("expedition1_not_in_tables",
               max(sozu_tab$gamma1[sozu_tab$gamma1 < tab4$kappa]),
               min(sozu_tab$gamma1[sozu_tab$gamma1 > tab4$kappa])))
 
-ev <- read_scripts_data("phi2_evaluations")$data
-top5 <- order(-ev$n_phi2_conv)[1:5]
-check("phi2_largest_counts_at_kappa_1.5",
-      "The largest numbers of Phi2 evaluations occur at kappa = 1.5",
-      all(abs(ev$kappa[top5] - 1.5) < 1e-9),
-      sprintf("kappa of the five largest counts: %s",
-              paste(sprintf("%.2f", ev$kappa[top5]), collapse = ", ")))
-check("closed_form_no_phi2_evaluation",
-      "The closed form evaluates Phi2 at no point",
-      nrow(ev) == 96L && all(ev$n_phi2_prop == 0L),
-      sprintf("cells = %d, max count = %d", nrow(ev), max(ev$n_phi2_prop)))
-
-# For rho >= 0 the starting value (eq:n2_init) attains the target power, so
-# the search of Algorithm 1 proceeds downward
-start_ok <- sapply(seq_len(nrow(grid)), function(i) {
-  g <- grid[i, ]
-  z_b0 <- qnorm(sqrt(g$power))
-  n2_0 <- ceiling(max(g$sd1 ^ 2 * (1 + 1 / g$r) / g$delta1 ^ 2,
-                      g$sd2 ^ 2 * (1 + 1 / g$r) / g$delta2 ^ 2) *
-                    (z_alpha + z_b0) ^ 2)
-  twocpcont_power(n1 = ceiling(g$r * n2_0), n2 = n2_0,
-                  delta1 = g$delta1, delta2 = g$delta2,
-                  sd1 = g$sd1, sd2 = g$sd2, rho = g$rho,
-                  alpha = alpha)$powerCoprimary >= g$power
-})
-check("search_proceeds_downward",
-      "The starting value attains the target power in all combinations",
-      length(start_ok) == 96L && all(start_ok),
-      sprintf("cells = %d, downward = %d", length(start_ok), sum(start_ok)))
-
 # The discriminant of (eq:Delta_star) is nonnegative in every design of
 # Sections 3 and 4: the 96 cells of Table 2, the 210 tabulated designs of
 # Sozu et al. (2015), the four EXPEDITION 1 designs, and the rho = 0 designs
@@ -314,7 +282,7 @@ check("discriminant_nonnegative",
               min(disc_all)))
 
 # =============================================================================
-# Section 3.4: threshold effect size ratio
+# Section 3.5: threshold effect size ratio
 # =============================================================================
 kst <- read_scripts_data("tab3_kappa_star")$data
 ks05 <- kst$kappa_star[abs(kst$epsilon - 0.05) < 1e-9]

@@ -14,8 +14,5 @@
 "closed_form_n2_change_below_0.03pct","For rho <= 0.8, c (lambda_w*)^2 changes by less than 0.03%","PASS","max relative change = 0.0224%"
 "published_table_structure","The tables cover 1 - beta in {0.80, 0.90}, 15 effect size ratios between 1.00 and 2.00 and 7 correlations","PASS","powers = 0.8, 0.9; ratios = 15; correlations = 0, 0.2, 0.3, 0.5, 0.7, 0.8, 0.95"
 "expedition1_not_in_tables","The design of Section 4 (1 - beta = 0.87, kappa = 1.292) is not covered by the tables","PASS","kappa = 1.2917 between tabulated 1.25 and 1.30"
-"phi2_largest_counts_at_kappa_1.5","The largest numbers of Phi2 evaluations occur at kappa = 1.5","PASS","kappa of the five largest counts: 1.50, 1.50, 1.50, 1.50, 1.50"
-"closed_form_no_phi2_evaluation","The closed form evaluates Phi2 at no point","PASS","cells = 96, max count = 0"
-"search_proceeds_downward","The starting value attains the target power in all combinations","PASS","cells = 96, downward = 96"
 "discriminant_nonnegative","The discriminant of (eq:Delta_star) is nonnegative in every design of Sections 3 and 4","PASS","designs = 10315, min discriminant = 0.0299"
 "kstar_05_at_most_1.4","kappa_star(0.05, beta) is at most 1.4 at the three target powers","PASS","kappa_star(0.05) = 1.3693, 1.3050, 1.2394"

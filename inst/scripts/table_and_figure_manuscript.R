@@ -67,7 +67,6 @@ read_data <- function(name) {
 gl_obj         <- read_data("tab1_gl_nodes")
 anchor_obj     <- read_data("fig1_anchor_weight")
 table2_obj     <- read_data("tab2_sample_size")
-phi2_obj       <- read_data("phi2_evaluations")
 reduction_obj  <- read_data("fig2_reduction_curve")
 kappa_star_obj <- read_data("tab3_kappa_star")
 table4_obj     <- read_data("tab4_real_example")
@@ -712,7 +711,7 @@ add_num("n_r2_match", sum(same & d2$r == 2), 0,
         "tab2_sample_size.rds: data")
 
 # --------------------------------------------------------------------------- #
-# Section 3.3: published tables and computational cost
+# Section 3.4: published tables
 # --------------------------------------------------------------------------- #
 pub <- published_obj$sozu
 lo  <- pub$rho <= 0.8
@@ -735,22 +734,8 @@ add_num("pub_hi_maxdev", max(abs(pub$dev_cf[!lo])), 3,
         "Largest deviation of the closed form at rho = 0.95",
         "published_tables.rds: sozu")
 
-ev <- phi2_obj$data
-add_num("phi2_median", stats::median(ev$n_phi2_conv), 1,
-        "Median number of Phi2 evaluations of the conventional search",
-        "phi2_evaluations.rds: data")
-add_num("phi2_min", min(ev$n_phi2_conv), 0,
-        "Smallest number of Phi2 evaluations of the conventional search",
-        "phi2_evaluations.rds: data")
-add_num("phi2_max", max(ev$n_phi2_conv), 0,
-        "Largest number of Phi2 evaluations of the conventional search",
-        "phi2_evaluations.rds: data")
-add_num("phi2_argmax_kappa", ev$kappa[which.max(ev$n_phi2_conv)], 1,
-        "kappa of the combination with the largest number of evaluations",
-        "phi2_evaluations.rds: data")
-
 # --------------------------------------------------------------------------- #
-# Section 3.4: maximum reduction rate and threshold
+# Section 3.5: maximum reduction rate and threshold
 # --------------------------------------------------------------------------- #
 add_num("cs_increase_90", 1 / (1 - rmax_k1(0.90)) - 1, 3,
         "1 / {1 - R_max(1, 0.10)} - 1 (Chuang-Stein and Li)",

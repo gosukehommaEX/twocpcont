@@ -30,8 +30,6 @@
 #   inst/scripts/data/fig1_anchor_weight.rds     Figure 1 (anchor weight w*)
 #                                                and the exact root of (S2)
 #   inst/scripts/data/tab2_sample_size.rds       Table 2 (96 design cells)
-#   inst/scripts/data/phi2_evaluations.rds       Number of bivariate normal
-#                                                CDF evaluations per cell
 #   inst/scripts/data/fig2_reduction_curve.rds   Figure 2 (R_max curve)
 #   inst/scripts/data/tab3_kappa_star.rds        Table 3 (kappa_star)
 #   inst/scripts/data/tab4_real_example.rds      Table 4 (EXPEDITION 1)
@@ -65,20 +63,17 @@ library(pbivnorm)
 
 # Parts of the computation to run. RUN can also be assigned before this
 # file is sourced to rerun only some parts, e.g.
-#   RUN <- c(tab1 = FALSE, fig1 = TRUE, tab2 = FALSE, phi2 = FALSE,
-#            fig2 = FALSE, tab3 = FALSE, tab4 = FALSE, pub = FALSE,
-#            fig3 = FALSE)
-RUN_PARTS <- c("tab1", "fig1", "tab2", "phi2", "fig2", "tab3", "tab4", "pub",
-               "fig3")
+#   RUN <- c(tab1 = FALSE, fig1 = TRUE, tab2 = FALSE, fig2 = FALSE,
+#            tab3 = FALSE, tab4 = FALSE, pub = FALSE, fig3 = FALSE)
+RUN_PARTS <- c("tab1", "fig1", "tab2", "fig2", "tab3", "tab4", "pub", "fig3")
 if (!exists("RUN", inherits = FALSE)) {
   RUN <- c(tab1 = TRUE,   # Table 1
            fig1 = TRUE,   # Figure 1
            tab2 = TRUE,   # Table 2
-           phi2 = TRUE,   # bivariate normal CDF evaluations (Section 3.3)
            fig2 = TRUE,   # Figure 2
            tab3 = TRUE,   # Table 3
            tab4 = TRUE,   # Table 4
-           pub  = TRUE,   # published tables (Section 3.3)
+           pub  = TRUE,   # published tables (Section 3.4)
            fig3 = TRUE)   # Figure 3
 }
 if (!is.logical(RUN) || !setequal(names(RUN), RUN_PARTS)) {
@@ -386,66 +381,8 @@ if (RUN[["tab2"]]) {
 }
 
 # =============================================================================
-# Number of bivariate normal CDF evaluations per Table 2 cell
-#
-# Every co-primary power evaluation of the conventional method calls
-# pbivnorm::pbivnorm() exactly once.  The calls are counted with
-# trace(), so that the count is taken from the implementation itself
-# rather than from a re-implementation of the search.  The same count
-# is taken for the closed form, which should make no call.  The count
-# does not depend on the computer.
-# =============================================================================
-if (RUN[["phi2"]]) {
-  phi2_obj <- run_step("Bivariate normal CDF evaluations", {
-    phi2_counter <- new.env()
-    phi2_counter$n <- 0L
-    suppressMessages(trace("pbivnorm", where = asNamespace("pbivnorm"),
-                           tracer = quote(phi2_counter$n <-
-                                            phi2_counter$n + 1L),
-                           print = FALSE))
-    count_calls <- function(expr) {
-      phi2_counter$n <- 0L
-      force(expr)
-      phi2_counter$n
-    }
-
-    rows_eval <- list()
-    for (pw in power_set) {
-      for (sc in scenarios) {
-        for (rho in rho_vals) {
-          n_conv <- count_calls(twocpcont_ss(
-            delta1 = sc$delta1, delta2 = sc$delta2,
-            sd1 = sc$sd1, sd2 = sc$sd2, rho = rho, r = sc$r,
-            alpha = alpha, beta = 1 - pw, method = "bivariate"))
-          n_prop <- count_calls(twocpcont_ss(
-            delta1 = sc$delta1, delta2 = sc$delta2,
-            sd1 = sc$sd1, sd2 = sc$sd2, rho = rho, r = sc$r,
-            alpha = alpha, beta = 1 - pw, method = "univariate",
-            gl_nodes = gl_nodes))
-          rows_eval[[length(rows_eval) + 1L]] <- list(
-            power  = pw,
-            delta1 = sc$delta1, delta2 = sc$delta2,
-            sd1    = sc$sd1,    sd2    = sc$sd2,
-            r      = sc$r,      rho    = rho,
-            kappa  = max(sc$delta1 / sc$sd1, sc$delta2 / sc$sd2) /
-              min(sc$delta1 / sc$sd1, sc$delta2 / sc$sd2),
-            n_phi2_conv = n_conv,
-            n_phi2_prop = n_prop
-          )
-        }
-      }
-    }
-    suppressMessages(untrace("pbivnorm", where = asNamespace("pbivnorm")))
-    df_eval <- do.call(rbind, lapply(rows_eval, as.data.frame))
-    list(data = df_eval, alpha = alpha, power_set = power_set,
-         gl_nodes = gl_nodes)
-  })
-  save_data(phi2_obj, "phi2_evaluations")
-}
-
-# =============================================================================
 # Figure 2: R_max(kappa) curve at three power levels, and the values of
-# R_max cited in Section 3.4
+# R_max cited in Section 3.5
 # =============================================================================
 if (RUN[["fig2"]]) {
   reduction_obj <- run_step("Figure 2 (reduction curve)", {
@@ -595,7 +532,7 @@ if (RUN[["tab4"]]) {
 }
 
 # =============================================================================
-# Comparison with published values (Section 3.3)
+# Comparison with published values (Section 3.4)
 #
 # (a) Sozu et al. (2015, Tables 4.3 and 4.4) tabulate the constant
 #     C_2 = lambda_w - z_alpha for alpha = 0.025, 1 - beta = 0.80 and

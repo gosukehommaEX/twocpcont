@@ -2,11 +2,11 @@
 # validate_claims_example.R
 #
 # Checks of the statements of Section 4 (real trial example), Section 5
-# (discussion) and Section S5 of the Supporting Information (software) of
+# (discussion) and Section S9 of the Supporting Information (software) of
 # the twocpcont article that are not single numbers: monotonicity and
 # agreement of the two methods in Table 4, the position of the effect size
 # ratio relative to the thresholds, the protocol's table of marginal powers,
-# and the power checks described in the discussion and in Section S5. The
+# and the power checks described in the discussion and in Section S9. The
 # numbers cited in the text are checked against the ledger by
 # inst/scripts/number_check.R.
 #
@@ -159,7 +159,7 @@ check("shortfall_fixed_by_one_power_check",
       fix_ok, fix_detail)
 
 # =============================================================================
-# Section S5: software example (EXPEDITION 1 with rho = 0.5)
+# Section S9: software example (EXPEDITION 1 with rho = 0.5)
 # =============================================================================
 ss_app <- twocpcont_ss(delta1 = 1.8, delta2 = 3.1, sd1 = 9, sd2 = 12,
                        rho = 0.5, r = 1, alpha = 0.025, beta = 0.13,
@@ -168,7 +168,7 @@ pw_app <- twocpcont_power(n1 = ss_app$n1, n2 = ss_app$n2,
                           delta1 = 1.8, delta2 = 3.1, sd1 = 9, sd2 = 12,
                           rho = 0.5, alpha = 0.025)$powerCoprimary
 check("software_example_matches_table4",
-      paste0("In Section S5 the total sample size equals that of Table 4 at ",
+      paste0("In Section S9 the total sample size equals that of Table 4 at ",
              "rho = 0.5 and the co-primary power is at least 0.87"),
       ss_app$N == t4$N_prop[t4$rho == 0.5] && pw_app >= 0.87,
       sprintf("N = %d (Table 4: %d), power = %.6f", ss_app$N,

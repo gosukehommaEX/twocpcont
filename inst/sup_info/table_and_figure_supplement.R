@@ -15,7 +15,7 @@
 # Required packages: ggplot2
 #
 # Outputs (relative to the package root)
-#   inst/sup_info/results/appendix_software_example.tex   Section S5 (code
+#   inst/sup_info/results/appendix_software_example.tex   Section S9 (code
 #                                   and output in a verbatim environment;
 #                                   \input{appendix_software_example})
 #   inst/sup_info/results/tableS1_cost_comparison.tex     Table S1
@@ -164,7 +164,7 @@ write_table_env <- function(tabular, file_out, caption, label,
 near <- function(x, y) abs(x - y) < 1e-9
 
 # =============================================================================
-# Section S5: console transcript of the software example
+# Section S9: console transcript of the software example
 # =============================================================================
 software_example <- read_data("software_example")
 transcript <- software_example$transcript
@@ -664,7 +664,7 @@ save_figure(pS3, "FigureS3_expedition_sensitivity", width = FIG_WIDTH,
 # results/supplement_numbers.csv (same columns as manuscript_numbers.csv;
 # keys must differ from those of the manuscript). Percentages are entered
 # as fractions; number_locations.csv gives scale 100 where the text writes
-# them in percent. The numbers of Section S5 are printed in the transcript
+# them in percent. The numbers of Section S9 are printed in the transcript
 # itself, and the claims made about them in the text are checked by
 # inst/validation/validate_claims_example.R.
 # =============================================================================
@@ -692,7 +692,11 @@ add_num("cost_n", n_cost, 0, "Combinations compared in Table S1",
         "cost_comparison.rds: data")
 for (m in c("bivariate", "newton", "uniroot")) {
   nm <- c(bivariate = "conv", newton = "newton", uniroot = "uniroot")[[m]]
-  add_num(sprintf("cost_eval_%s_median", nm), s1_of(m, "eval_median"), 1,
+  # A median of integer counts is a whole number or ends in .5; the text
+  # writes it with as many decimals as it has
+  med <- s1_of(m, "eval_median")
+  add_num(sprintf("cost_eval_%s_median", nm), med,
+          if (med == round(med)) 0 else 1,
           sprintf("Median evaluations of Phi2 per design, %s", m),
           "cost_comparison.rds: data$n_phi2")
   add_num(sprintf("cost_eval_%s_min", nm), s1_of(m, "eval_min"), 0,
@@ -767,16 +771,19 @@ acc_lo <- acc[acc$rho <= 0.9, ]
 add_num("grid_rel_max_lo", max(abs(acc_lo$rel_n2)), 4,
         "Largest |relative error| of the continuous n2 for rho <= 0.9",
         "accuracy_grid.rds: data$rel_n2")
+# Digits as written in the text (0.26% at rho = 0.95, 1.1% at rho = 0.99)
+grid_rel_digits <- c("95" = 4, "99" = 3)
 for (rr in c(0.95, 0.99)) {
   add_num(sprintf("grid_rel_max_rho%02.0f", 100 * rr),
-          max(abs(acc$rel_n2[near(acc$rho, rr)])), 3,
+          max(abs(acc$rel_n2[near(acc$rho, rr)])),
+          grid_rel_digits[[sprintf("%02.0f", 100 * rr)]],
           sprintf("Largest |relative error| of the continuous n2, rho = %g",
                   rr), "accuracy_grid.rds: data$rel_n2")
 }
 add_num("grid_pow_max_lo", max(abs(acc_lo$power_diff)), 5,
         "Largest |power at the closed-form n2 - target| for rho <= 0.9",
         "accuracy_grid.rds: data$power_diff")
-add_num("grid_disc_min", min(acc$disc), 3,
+add_num("grid_disc_min", min(acc$disc), 2,
         "Smallest discriminant of the correction term over the grid",
         "accuracy_grid.rds: data$disc")
 add_num("grid_disc_neg", sum(acc$disc < 0), 0,

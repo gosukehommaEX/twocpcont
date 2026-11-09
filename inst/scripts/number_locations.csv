@@ -9,7 +9,7 @@ w_gap_max,by at most about ${}$ at these target powers,,Section 2.2.1
 w_one_kappa_80,"reaches one at $\kappa \approx {}$, $",,Section 2.2.1
 w_one_kappa_85,"\approx 1.41$, ${}$, and",,Section 2.2.1
 w_one_kappa_90,"1.36$, and ${}$ for",,Section 2.2.1
-rmax_k1_80,"$\Rmax(1, 0.20) \approx {}\%$",100,Section 2.4.1
+rmax_k1_80,"gives $\Rmax(1, 0.20) \approx {}\%$",100,Section 2.4.1
 kstar_05_80,gives $\kappa^{*} \approx {}$. If the effect,,Section 2.4.2
 kstar_05_80,"is at least about ${}$, accounting",,Section 2.4.2
 kappa_p1,effect size ratios are $\kappa = {}$ for,,Section 3.1
@@ -45,37 +45,32 @@ kappa_p4,"1.5, 1)$ with $\kappa = {}$",,Section 3.2
 kappa_p2,For $\kappa = {}$ and,,Section 3.2
 kappa_p3,"and ${}$, the reduction from",,Section 3.2
 red_mid_max,is at most ${}\%$. In every pattern,100,Section 3.2
-pub_exact_match,reproduced all {} tabulated values,,Section 3.3
-pub_lo_n,For the {} values with,,Section 3.3
-pub_lo_match,agreed with {} and differed,,Section 3.3
-pub_hi_match,"article, {} of the 30 values",,Section 3.3
-pub_hi_n,20 of the {} values agreed,,Section 3.3
-pub_hi_maxdev,largest difference was ${}$.,,Section 3.3
-trial_kappa,"effect size ratio of ${}$, so its",,Section 3.3
-n_cells,over the {} combinations of Section,,Section 3.3
-phi2_median,a median of ${}$ and,,Section 3.3
-phi2_min,and ranged from ${}$ to,,Section 3.3
-phi2_max,to ${}$. The largest counts,,Section 3.3
-phi2_argmax_kappa,"occurred at $\kappa = {}$, where",,Section 3.3
-n_cells,the search in all {} combinations,,Section 3.3
-rmax_k1_80,$\Rmax$ equals ${}\%$,100,Section 3.4
-rmax_k1_85,"23.8\%$, ${}\%$, and",100,Section 3.4
-rmax_k1_90,"21.3\%$, and ${}\%$ for",100,Section 3.4
-cs_increase_90,\} - 1 \approx {}\%$,100,Section 3.4
-hw_ratio_80,"It is ${}$, $",,Section 3.4
-hw_ratio_85,"$1.31$, ${}$, and",,Section 3.4
-hw_ratio_90,"$1.27$, and ${}$ for",,Section 3.4
-kstar_05_80,threshold decreases from ${}$ at,,Section 3.4
-kstar_15_80,to ${}$ at $\epsilon = 0.15$,,Section 3.4
-kstar_05_90,0.90$ from ${}$ to,,Section 3.4
-kstar_15_90,to ${}$. Once the,,Section 3.4
-kstar_05_max,factor of about ${}$ or more,,Section 3.4
-red_k1_80,is about ${}\%$ at $\kappa = 1$ and zero,100,Section 3.4
-kappa_p4,zero at $\kappa = {}$.,,Section 3.4
-kappa_varga,"effect sizes give $\kappa = {}$, and",,Section 3.4
-rmax_varga,0.20) \approx {}\%$ confirms,100,Section 3.4
-rmax_k1_80,the bound is ${}\%$.,100,Section 3.4
-rmax_k1_80_r0,by more than about ${}\%$ relative,100,Section 3.4
+pub_exact_match,reproduced all {} tabulated values,,Section 3.4
+pub_lo_n,For the {} values with,,Section 3.4
+pub_lo_match,agreed with {} and differed,,Section 3.4
+pub_hi_match,"0.95$, {} of the 30 values",,Section 3.4
+pub_hi_n,20 of the {} values agreed,,Section 3.4
+pub_hi_maxdev,largest difference was ${}$.,,Section 3.4
+trial_kappa,"effect size ratio of ${}$, so its",,Section 3.4
+n_cells,Over the {} combinations of Section,,Section 3.3
+rmax_k1_80,$\Rmax$ equals ${}\%$,100,Section 3.5
+rmax_k1_85,"23.8\%$, ${}\%$, and",100,Section 3.5
+rmax_k1_90,"21.3\%$, and ${}\%$ for",100,Section 3.5
+cs_increase_90,\} - 1 \approx {}\%$,100,Section 3.5
+hw_ratio_80,"It is ${}$, $",,Section 3.5
+hw_ratio_85,"$1.31$, ${}$, and",,Section 3.5
+hw_ratio_90,"$1.27$, and ${}$ for",,Section 3.5
+kstar_05_80,threshold decreases from ${}$ at,,Section 3.5
+kstar_15_80,to ${}$ at $\epsilon = 0.15$,,Section 3.5
+kstar_05_90,0.90$ from ${}$ to,,Section 3.5
+kstar_15_90,to ${}$. Once the,,Section 3.5
+kstar_05_max,factor of about ${}$ or more,,Section 3.5
+red_k1_80,is about ${}\%$ at $\kappa = 1$ and zero,100,Section 3.5
+kappa_p4,zero at $\kappa = {}$.,,Section 3.5
+kappa_varga,"effect sizes give $\kappa = {}$, and",,Section 3.5
+rmax_varga,0.20) \approx {}\%$ confirms,100,Section 3.5
+rmax_k1_80,the bound is ${}\%$.,100,Section 3.5
+rmax_k1_80_r0,by more than about ${}\%$ relative,100,Section 3.5
 trial_es1,\delta_1 / \sigma_1 = {}$ and,,Section 4
 trial_es2,"\sigma_2 = {}$, giving",,Section 4
 trial_kappa,effect size ratio $\kappa = {}$. The protocol,,Section 4
@@ -101,11 +96,382 @@ trial_gain_bound,approximately ${}$ patients out of,,Section 4
 trial_N_rho0,"patients out of ${}$, and this",,Section 4
 trial_rmax,by at most about ${}\%$ at,100,Section 4
 trial_kappa,\%$ at $\kappa = {}$ and about,,Section 4
-trial_rmax_round,and about ${}\%$ at,100,Section 4
+trial_rmax_round,1.292$ and about ${}\%$ at,100,Section 4
 trial_kappa_round,6.0\%$ at $\kappa = {}$.,,Section 4
 n_match_total,sample size in {} of the 96,,Section 5
 n_cells,in 95 of the {} combinations of design,,Section 5
 trial_rmax_r0,exceed about ${}\%$ to,100,Section 5
 trial_rmax_round_r0,"\%$ to ${}\%$, depending",100,Section 5
-pub_hi_match,reproduced {} of the 30 tabulated,,Section 5
-pub_hi_n,reproduced 20 of the {} tabulated,,Section 5
+grid_n,Over {} designs with correlations,,Abstract
+grid_rel_max_lo,was at most about {}\%. We also,100,Abstract
+grid_n,Over the {} designs of Section,,Section 2.3.2
+grid_disc_min,"the smallest $D$ was about ${}$, and none",,Section 2.3.2
+alloc_ne,conventional one in {} of the 120,,Section 3.2
+alloc_n,conventional one in 19 of the {} combinations,,Section 3.2
+alloc_excess_max,"by at most {} and mostly with $r < 1$, and the power",,Section 3.2
+mismatch_n2_exact,combination with $n_2 = {}$ in Section,,Section 3.3
+cost_rel_closed,the largest relative error was about ${}\%$.,100,Section 3.3
+dec_rel_anchor_max,"has relative errors of up to about ${}\%$, which come",100,Section 3.3
+dec_rel_first_max,"reduces the largest error to about ${}\%$, and the quadratic",100,Section 3.3
+dec_rel_proposed_max,reduces it to about ${}\%$. The second-order,100,Section 3.3
+grid_n,"extend the comparison to {} designs, with",,Section 3.3
+grid_rel_max_lo,was about ${}\%$ for $\rho \leq 0.9$,100,Section 3.3
+grid_rel_max_rho95,"${}\%$ at $\rho = 0.95$, and about $1.1\%$ at $\rho = 0.99$, and the error",100,Section 3.3
+grid_rel_max_rho99,"and about ${}\%$ at $\rho = 0.99$, and the error",100,Section 3.3
+n_cells,on the {} combinations of Section,,Section 3.4
+cost_eval_conv_median,evaluated $\Phitwo$ a median of ${}$ times,,Section 3.4
+cost_eval_newton_median,a median of {} and 7 times,,Section 3.4
+cost_eval_uniroot_median,a median of 20 and {} times,,Section 3.4
+cost_match_newton,latter gave the conventional sample size in all {} combinations,,Section 3.4
+cost_ext_converged,stopping rule in all {} combinations examined,,Section 3.4
+cost_ext_rel_closed,proposed formula reached about ${}\%$.,100,Section 3.4
+rmax_k1_80,"against $\Rmax(1, 0.20) \approx {}\%$",100,Section 3.5
+red_cont_k1_rho03_80,the reduction is about ${}\%$ at $\rho = 0.3$,100,Section 3.5
+red_cont_k1_rho05_80,"0.3$, ${}\%$ at $\rho = 0.5$, and",100,Section 3.5
+red_cont_k1_rho08_80,"and ${}\%$ at $\rho = 0.8$, against",100,Section 3.5
+N_k1_80_rho8,the total sample size of {} planned at,,Section 3.5
+plan_A_pow_p08_t0,gives a power of about ${}$ when the true,,Section 3.5
+sens_rmax_es020,where $\Rmax$ ranges from about ${}\%$ to,100,Section 4
+sens_rmax_es030,"to about ${}\%$, whereas",100,Section 4
+sens_red_rho05_max,0.5$ is at most about ${}\%$.,100,Section 4
+plan_E1_pow_p0_tm03,would give a power of about ${}$ (Table,,Section 4
+grid_rel_max_rho99,reached about ${}\%$ at $\rho = 0.99$,100,Section 5
+cost_n,methods on the {} combinations of Table~2,,Section S5
+cost_eval_newton_median,needed a median of {} and 7 evaluations,,Section S5
+cost_eval_uniroot_median,a median of 20 and {} evaluations,,Section S5
+cost_eval_conv_median,against {} for the sequential search,,Section S5
+cost_match_uniroot,sequential search in all {} combinations,,Section S5
+cost_match_closed,gave the same total in {} combinations,,Section S5
+cost_ext_converged,stopping rule in all {} combinations given,,Section S5
+cost_ext_rel_closed,"closed form rose to about ${}\%$, in line",100,Section S5
+dec_rel_anchor_max,has relative errors of up to about ${}\%$. At,100,Section S6
+dec_rel_first_max,"reduces the largest error to about ${}\%$, or about",100,Section S6
+dec_rel_first_max_lo,"or about ${}\%$ for $\rho \leq 0.8$, and the quadratic",100,Section S6
+dec_rel_proposed_max,"reduces it to about ${}\%$, or about",100,Section S6
+dec_rel_proposed_max_lo,or about ${}\%$ for $\rho \leq 0.8$. The correction,100,Section S6
+grid_n,exact root to ${}$ designs,,Section S6
+grid_rel_max_lo,is about ${}\%$ for $\rho \leq 0.9$,100,Section S6
+grid_rel_max_rho95,"${}\%$ at $\rho = 0.95$, and about $1.1\%$ at $\rho = 0.99$. It",100,Section S6
+grid_rel_max_rho99,and about ${}\%$ at $\rho = 0.99$. It,100,Section S6
+grid_disc_min,"over the grid was about ${}$, and no design",,Section S6
+alloc_ne,sequential search in {} of the 120,,Section S7
+alloc_n,sequential search in 19 of the {} combinations,,Section S7
+alloc_excess_max,"by at most {} and mostly with $r < 1$, and never",,Section S7
+alloc_round_same,"closed form in {} of the 120 combinations, so",,Section S7
+alloc_n,"closed form in 118 of the {} combinations, so",,Section S7
+alloc_n,the target in all {} combinations.,,Section S7
+trial_kappa,EXPEDITION~1 with $\kappa = {}$. When,,Section S8
+plan_A_pow_p08_t0,true correlation of zero is about ${}$ against,,Section S8
+plan_E1_pow_p08_t0,for EXPEDITION~1 is about ${}$ against,,Section S8
+plan_A_pow_p0_tm03,where the power is about ${}$ for design A,,Section S8
+plan_E1_pow_p0_tm03,and about ${}$ for EXPEDITION~1.,,Section S8
+sens_rmax_es020,falls from about ${}\%$ to about,100,Section S8
+sens_rmax_es030,"to about ${}\%$, and it equals",100,Section S8
+sens_es2_kstar05,"effect size of about ${}$, which lies",,Section S8
+sens_red_rho05_max,is at most about ${}\%$ over this range,100,Section S8
+-,"\beta = {}$, $0.85$, and $0.90$. The solid lines s",,"input, literature or label (main)"
+-,"0.80$, ${}$, and $0.90$. The solid",,"input, literature or label (main)"
+-,"$, and ${}$. The sol",,"input, literature or label (main)"
+-,eights ${}$ a,,"input, literature or label (main)"
+-,5$ and ${}$. ,,"input, literature or label (main)"
+-,0$. The significance level is $\alpha = {}$ (,,"input, literature or label (main)"
+-,"\beta = {}$, $0.85$, and $0.90$. The horizontal do",,"input, literature or label (main)"
+-,"0.80$, ${}$, and $0.90$. The horiz",,"input, literature or label (main)"
+-,"$, and ${}$. The hor",,"input, literature or label (main)"
+-,\Rmax = {}\%$,,"input, literature or label (main)"
+-," 5\%$, ${}\%$",,"input, literature or label (main)"
+-,"$, and ${}\%$. T",,"input, literature or label (main)"
+-,%$. The significance level is $\alpha = {}$ (,,"input, literature or label (main)"
+-,"in \{1, {}, 1",,"input, literature or label (main)"
+-,"1, 1.1, {}, 1",,"input, literature or label (main)"
+-,"1, 1.2, {}, 1",,"input, literature or label (main)"
+-,"2, 1.3, {}, 2",,"input, literature or label (main)"
+-,\beta = {}$ (,,"input, literature or label (main)"
+-,t) and ${}$ (,,"input, literature or label (main)"
+-,}). The significance level is $\alpha = {}$ (,,"input, literature or label (main)"
+-,s up to {} to,,"input, literature or label (main)"
+-,"s up to {}, i",,"input, literature or label (main)"
+-,xample ${}^2 ,,"input, literature or label (main)"
+-, power ${}$~\,,"input, literature or label (main)"
+-," level ${}$, ",,"input, literature or label (main)"
+-,powers ${}$ a,,"input, literature or label (main)"
+-,"0$ and ${}$, 15 ",,"input, literature or label (main)"
+-,"alpha = {}$, the",,"input, literature or label (main)"
+-,"\beta = {}$, $0.85$, and $0.90$. F",,"input, literature or label (main)"
+-,"0.80$, ${}$, and $0.90$. F",,"input, literature or label (main)"
+-,"$, and ${}$. For",,"input, literature or label (main)"
+-,o| \leq {}$ a,,"input, literature or label (main)"
+-,alpha = {}$ and $1 -,,"input, literature or label (main)"
+-,"\beta = {}$, (\r",,"input, literature or label (main)"
+-,"Rmax(1, {}) \approx 23.8\%$. At fi",,"input, literature or label (main)"
+-,"alpha = {}$, $\kappa \in [1, 3]$, and $1 - \beta \",,"input, literature or label (main)"
+-,"a \in \{{}, 0.80",,"input, literature or label (main)"
+-,"\{0.70, {}, 0",,"input, literature or label (main)"
+-,", 0.80, {}, 0",,"input, literature or label (main)"
+-,", 0.85, {}, 0",,"input, literature or label (main)"
+-,", 0.87, {}\}$",,"input, literature or label (main)"
+-,"alpha = {}$, $1 - \beta = ",,"input, literature or label (main)"
+-,"\beta = {}$, and",,"input, literature or label (main)"
+-,"silon = {}$, (\r",,"input, literature or label (main)"
+-,t most ${}\%$ re,,"input, literature or label (main)"
+-,alpha = {}$ and thre,,"input, literature or label (main)"
+-,"\beta = {}$, $0.85$, and $0.90$. E",,"input, literature or label (main)"
+-,"0.80$, ${}$, and $0.90$. E",,"input, literature or label (main)"
+-,"$, and ${}$. Eig",,"input, literature or label (main)"
+-," \in \{({}, 0",,"input, literature or label (main)"
+-,"\{(0.3, {}),\",,"input, literature or label (main)"
+-,".3),\, ({}, 0",,"input, literature or label (main)"
+-,", (0.7, {})\}",,"input, literature or label (main)"
+-,",\, (1, {})\}",,"input, literature or label (main)"
+-,"a_2) = ({}, 0",,"input, literature or label (main)"
+-,"= (0.3, {}, 1, 1)$, ",,"input, literature or label (main)"
+-,"$ for $({}, 0.5, 1, 1)$, $",,"input, literature or label (main)"
+-," $(0.7, {}, 1, 1)$, ",,"input, literature or label (main)"
+-,"$ for $({}, 0.3,",,"input, literature or label (main)"
+-," $(0.3, {}, 1, 1.5)$",,"input, literature or label (main)"
+-,"0.3, 1, {})$, an",,"input, literature or label (main)"
+-,"$ for $({}, 0.5, 1, 1.5)$.",,"input, literature or label (main)"
+-," $(0.7, {}, 1, 1.5)$",,"input, literature or label (main)"
+-,"0.5, 1, {})$.",,"input, literature or label (main)"
+-," \{0,\, {},\,",,"input, literature or label (main)"
+-," 0.3,\, {},\,",,"input, literature or label (main)"
+-," 0.5,\, {}\}$",,"input, literature or label (main)"
+-,kappa = {}$ and $2.1,,"input, literature or label (main)"
+-,"5$ and ${}$, ",,"input, literature or label (main)"
+-,kappa = {}$ e,,"input, literature or label (main)"
+-,"\beta = {}$, so ",,"input, literature or label (main)"
+-,version {}.1~,,"input, literature or label (main)"
+-,\beta = {}$ a,,"input, literature or label (main)"
+-,"0$ and ${}$, and in ",,"input, literature or label (main)"
+-,\beta = {}$. In ,,"input, literature or label (main)"
+-,"rho) = ({}, 0",,"input, literature or label (main)"
+-,"= (0.3, {}, 1, 1, 1,",,"input, literature or label (main)"
+-,", 1, 1, {})$ at ",,"input, literature or label (main)"
+-,"\beta = {}$, the pro",,"input, literature or label (main)"
+-,"\beta = {}$, fro",,"input, literature or label (main)"
+-,"44$ at ${}$, ",,"input, literature or label (main)"
+-,40$ at ${}$. ,,"input, literature or label (main)"
+-,"ratios ${}$, ",,"input, literature or label (main)"
+-,"0.25$, ${}$, ",,"input, literature or label (main)"
+-,"$0.5$, ${}$, $2.",,"input, literature or label (main)"
+-,"$1.5$, ${}$, ",,"input, literature or label (main)"
+-,", r) = ({}, 0",,"input, literature or label (main)"
+-,"= (0.3, {}, 1, 1, 1)",,"input, literature or label (main)"
+-,$\rho = {}$ when $1 ,,"input, literature or label (main)"
+-,"\beta = {}$, a r",,"input, literature or label (main)"
+-,\beta = {}$. Whe,,"input, literature or label (main)"
+-,"ttern $({}, 0.5,",,"input, literature or label (main)"
+-," $(0.7, {}, 1, 1.5, ",,"input, literature or label (main)"
+-,"0.5, 1, {}, 1",,"input, literature or label (main)"
+-,$\rho = {}$ is at most $4\,,"input, literature or label (main)"
+-,"alpha = {}$, $\kappa \in [1, 3]$, $\rho \in \{0, 0",,"input, literature or label (main)"
+-,"3]$, $\rho \in \{0, {}, 0",,"input, literature or label (main)"
+-,"]$, $\rho \in \{0, 0.3, {}, 0",,"input, literature or label (main)"
+-,"3]$, $\rho \in \{0, 0.3, 0.5, {}, 0",,"input, literature or label (main)"
+-,"]$, $\rho \in \{0, 0.3, 0.5, 0.8, {}\}$",,"input, literature or label (main)"
+-,"a \in \{{}, 0.90\}$. The a",,"input, literature or label (main)"
+-,"\{0.80, {}\}$. The a",,"input, literature or label (main)"
+-,"ho \leq {}$, the rem",,"input, literature or label (main)"
+-,ly at $\rho = {}$.,,"input, literature or label (main)"
+-,"$ from ${}$ to $0.95$, $\a",,"input, literature or label (main)"
+-,"70$ to ${}$, $\a",,"input, literature or label (main)"
+-,"a \in \{{}, 0.01, 0.025, 0.05\}$, and $\rho$ from ",,"input, literature or label (main)"
+-,"{0.005, {}, 0.025, 0.05\}$, and $\",,"input, literature or label (main)"
+-,", 0.01, {}, 0.05\}$, and $",,"input, literature or label (main)"
+-," 0.025, {}\}$, and $",,"input, literature or label (main)"
+-,o$ from $-{}$ t,,"input, literature or label (main)"
+-,$ from $-0.5$ to ${}$. ,,"input, literature or label (main)"
+-,"was about $0.14\%$ for $\rho \leq {}$, ",,"input, literature or label (main)"
+-,"$\rho = {}$, and about $1.1\%$ at $\rho = 0.99$, a",,"input, literature or label (main)"
+-,"$\rho = {}$, and the",,"input, literature or label (main)"
+-,"ho \leq {}$, the power at the continuous closed-fo",,"input, literature or label (main)"
+-,Tables~{} an,,"input, literature or label (main)"
+-,4.3 and~{} of,,"input, literature or label (main)"
+-,"alpha = {}$, $1 - \beta \i",,"input, literature or label (main)"
+-,"a \in \{{}, 0.90\}$,",,"input, literature or label (main)"
+-,"\{0.80, {}\}$, 1",,"input, literature or label (main)"
+-,etween ${}$ and $2.0,,"input, literature or label (main)"
+-,"0$ and ${}$, and the",,"input, literature or label (main)"
+-,"s $0$, ${}$, ",,"input, literature or label (main)"
+-,"$0.2$, ${}$, ",,"input, literature or label (main)"
+-,"$0.3$, ${}$, $0.",,"input, literature or label (main)"
+-,"$0.5$, ${}$, $0.",,"input, literature or label (main)"
+-,"$0.7$, ${}$, ",,"input, literature or label (main)"
+-,"$, and ${}$. In ",,"input, literature or label (main)"
+-,"ho \leq {}$, the clo",,"input, literature or label (main)"
+-,s than ${}\%$,,"input, literature or label (main)"
+-,"$\rho = {}$, 20 ",,"input, literature or label (main)"
+-,wer of ${}$ w,,"input, literature or label (main)"
+-,"\beta = {}$, $0.85$, and $0.90$, r",,"input, literature or label (main)"
+-,"0.80$, ${}$, and $0.90$, r",,"input, literature or label (main)"
+-,"$, and ${}$, res",,"input, literature or label (main)"
+-,es and ${}\%$,,"input, literature or label (main)"
+-, up to ${}\%$,,"input, literature or label (main)"
+-,"Rmax(1, {})\}",,"input, literature or label (main)"
+-,"\beta = {}$, $0.85$, and $0.90$, i",,"input, literature or label (main)"
+-,"0.80$, ${}$, and $0.90$, i",,"input, literature or label (main)"
+-,"$, and ${}$, in ",,"input, literature or label (main)"
+-,"\beta = {}$, the red",,"input, literature or label (main)"
+-,"$\rho = {}$, $5.",,"input, literature or label (main)"
+-,"$\rho = {}$, and $11",,"input, literature or label (main)"
+-,"$\rho = {}$, aga",,"input, literature or label (main)"
+-,"Rmax(1, {}) \approx 23.8\%$, and i",,"input, literature or label (main)"
+-,"n \in \{{},\,",,"input, literature or label (main)"
+-,"0.05,\, {},\,",,"input, literature or label (main)"
+-,"0.10,\, {}\}$",,"input, literature or label (main)"
+-,"\beta = {}$, the thr",,"input, literature or label (main)"
+-,silon = {}$ t,,"input, literature or label (main)"
+-,"silon = {}$, and",,"input, literature or label (main)"
+-,\beta = {}$ from,,"input, literature or label (main)"
+-,t most ${}\%$ at,,"input, literature or label (main)"
+-,\beta = {}$ t,,"input, literature or label (main)"
+-,$\rho = {}$ is about,,"input, literature or label (main)"
+-, sizes ${}$ a,,"input, literature or label (main)"
+-,4$ and ${}$ a,,"input, literature or label (main)"
+-,5$ and ${}\%$,,"input, literature or label (main)"
+-, about ${}\%$ wh,,"input, literature or label (main)"
+-," $\Rmax({}, 0.20) \approx 9.1\%$ c",,"input, literature or label (main)"
+-,"x(1.25, {}) \",,"input, literature or label (main)"
+-,\beta = {}$ e,,"input, literature or label (main)"
+-,"ttern $({}, 0.3,",,"input, literature or label (main)"
+-," $(0.3, {}, 1, 1, 1)",,"input, literature or label (main)"
+-,"\beta = {}$, the tot",,"input, literature or label (main)"
+-,$\rho = {}$ g,,"input, literature or label (main)"
+-,lta_1 = {}$ o,,"input, literature or label (main)"
+-,lta_2 = {}$ o,,"input, literature or label (main)"
+-,"ize as ${}$, ",,"input, literature or label (main)"
+-,s with ${}$ r,,"input, literature or label (main)"
+-,n with ${} / ,,"input, literature or label (main)"
+-,alpha = {}$ (i.e,,"input, literature or label (main)"
+-,"alpha = {}$),",,"input, literature or label (main)"
+-,ted as ${}$ f,,"input, literature or label (main)"
+-,11 and ${}$ f,,"input, literature or label (main)"
+-,wer of ${} \t,,"input, literature or label (main)"
+-, \times {} = ,,"input, literature or label (main)"
+-,\beta = {}$ for ,,"input, literature or label (main)"
+-,"y $0$, ${}$, ",,"input, literature or label (main)"
+-,"$0.3$, ${}$, and",,"input, literature or label (main)"
+-,"$, and ${}$. At ",,"input, literature or label (main)"
+-,target ${}$ w,,"input, literature or label (main)"
+-,"$0$ to ${}$, ",,"input, literature or label (main)"
+-,"\beta = {}$, $\R",,"input, literature or label (main)"
+-,$\rho = {}$ r,,"input, literature or label (main)"
+-,$\rho = {}$ is $,,"input, literature or label (main)"
+-,$\rho = {}$ bein,,"input, literature or label (main)"
+-,silon = {}$ a,,"input, literature or label (main)"
+-,\beta = {}$ g,,"input, literature or label (main)"
+-,ow the ${}\%$,,"input, literature or label (main)"
+-,"t size ${}$, ",,"input, literature or label (main)"
+-,"ppa^{*}({}, 0.13)$, ",,"input, literature or label (main)"
+-,"}(0.05, {})$,",,"input, literature or label (main)"
+-, below ${}\%$,,"input, literature or label (main)"
+-,L from ${}$ t,,"input, literature or label (main)"
+-,"20$ to ${}$, whe",,"input, literature or label (main)"
+-,$\rho = {}$ is at most about $3.7\%$. The correspo,,"input, literature or label (main)"
+-,silon = {}$ i,,"input, literature or label (main)"
+-,ve the ${}\%$,,"input, literature or label (main)"
+-,\rho = -{}$ t,,"input, literature or label (main)"
+-,get of ${}$ b,,"input, literature or label (main)"
+-,ho \leq {}$ t,,"input, literature or label (main)"
+-," up to ${}$, ",,"input, literature or label (main)"
+-,s from ${}$ to $0.05,,"input, literature or label (main)"
+-,"05$ to ${}$, ",,"input, literature or label (main)"
+-,s from ${}$ to $0.95,,"input, literature or label (main)"
+-,"70$ to ${}$, and",,"input, literature or label (main)"
+-, from $-{}$ to $0.99$ (Sec,,"input, literature or label (main)"
+-,.5$ to ${}$ (,,"input, literature or label (main)"
+-,"alpha = {}$, nea",,"input, literature or label (main)"
+-,etween ${}$ and $0.4,,"input, literature or label (main)"
+-,2$ and ${}$ w,,"input, literature or label (main)"
+-,wer of ${}$ a,,"input, literature or label (main)"
+-,vel of ${}$. ,,"input, literature or label (main)"
+-,$\rho = {}$ (,,"input, literature or label (main)"
+-,de Opus {} (A,,"input, literature or label (main)"
+-,version {}.0),,"input, literature or label (main)"
+-,opfraction}{{}},,"input, literature or label (SI)"
+-,xtfraction}{{}},,"input, literature or label (SI)"
+-,gefraction}{{}},,"input, literature or label (SI)"
+-," \{-1, -{}, \ldots, 4\}$, ",,"input, literature or label (SI)"
+-," \{-1, -{}, \ldots, 8\}$, ",,"input, literature or label (SI)"
+-," \in \{-{}, -0.7, \l",,"input, literature or label (SI)"
+-,"{-0.8, -{}, \",,"input, literature or label (SI)"
+-,"\ldots, {}\}$ ($",,"input, literature or label (SI)"
+-,"o| \leq {}$, ",,"input, literature or label (SI)"
+-,o| \leq {}$. ,,"input, literature or label (SI)"
+-,\rho| < {}$ a,,"input, literature or label (SI)"
+-,Section~{}.1 ,,"input, literature or label (SI)"
+-,"Section~{}.2,",,"input, literature or label (SI)"
+-,Section~{} of the main article). T,,"input, literature or label (SI)"
+-,Section~{} of the main article.,,"input, literature or label (SI)"
+-,"alpha = {}$, $\kappa$ from",,"input, literature or label (SI)"
+-,"eps of ${}$, $\r",,"input, literature or label (SI)"
+-,"01$, $\rho \in \{0, {}, 0",,"input, literature or label (SI)"
+-,"1$, $\rho \in \{0, 0.3, {}, 0",,"input, literature or label (SI)"
+-,"01$, $\rho \in \{0, 0.3, 0.5, {}, 0",,"input, literature or label (SI)"
+-,"1$, $\rho \in \{0, 0.3, 0.5, 0.8, {}\}$",,"input, literature or label (SI)"
+-,"a \in \{{}, 0.90\}$. Five ",,"input, literature or label (SI)"
+-,"\{0.80, {}\}$. F",,"input, literature or label (SI)"
+-,"ho \leq {}$, and",,"input, literature or label (SI)"
+-,ho \leq {}$. ,,"input, literature or label (SI)"
+-,"ho \leq {}$, the err",,"input, literature or label (SI)"
+-,$\rho = {}$ the two ,,"input, literature or label (SI)"
+-,"in \{0, {}, 0.5, 0.8, 0.95\}$ (col",,"input, literature or label (SI)"
+-,"0, 0.3, {}, 0.8, 0.95\}$ (",,"input, literature or label (SI)"
+-,"3, 0.5, {}, 0.95\}$ ",,"input, literature or label (SI)"
+-,"5, 0.8, {}\}$ (c",,"input, literature or label (SI)"
+-,"a \in \{{}, 0.90\}$ ",,"input, literature or label (SI)"
+-,"\{0.80, {}\}$ (r",,"input, literature or label (SI)"
+-,}$. The significance level is $\alpha = {}$ (,,"input, literature or label (SI)"
+-,"eps of ${}$, $1 ",,"input, literature or label (SI)"
+-,$ from ${}$ to $0.95$ in s,,"input, literature or label (SI)"
+-,70$ to ${}$ i,,"input, literature or label (SI)"
+-,"eps of ${}$, $\a",,"input, literature or label (SI)"
+-,"a \in \{{}, 0.01, 0.025, 0.05\}$, and nine correla",,"input, literature or label (SI)"
+-,"{0.005, {}, 0.025, 0.05\}$, and ni",,"input, literature or label (SI)"
+-,", 0.01, {}, 0.05\}$, and n",,"input, literature or label (SI)"
+-," 0.025, {}\}$, and n",,"input, literature or label (SI)"
+-,ns from $-{}$ to $0.99$. The,,"input, literature or label (SI)"
+-,s from $-0.5$ to ${}$. ,,"input, literature or label (SI)"
+-," is about $0.14\%$ for $\rho \leq {}$, ",,"input, literature or label (SI)"
+-,"$\rho = {}$, and about $1.1\%$ at $\rho = 0.99$. I",,"input, literature or label (SI)"
+-,$\rho = {}$. It ,,"input, literature or label (SI)"
+-,"ho \leq {}$, the power at the continuous $n_2$ of ",,"input, literature or label (SI)"
+-,ls. The significance level is $\alpha = {}$ (,,"input, literature or label (SI)"
+-,"r \in \{{}, 0",,"input, literature or label (SI)"
+-,"\{0.25, {}, 1",,"input, literature or label (SI)"
+-,"5, 0.5, {}, 2",,"input, literature or label (SI)"
+-,"5, 1.5, {}, 4",,"input, literature or label (SI)"
+-,"in \{0, {}, 0.8\",,"input, literature or label (SI)"
+-,"0, 0.5, {}\}$",,"input, literature or label (SI)"
+-,"a \in \{{}, 0.90\}$. The c",,"input, literature or label (SI)"
+-,"\{0.80, {}\}$. The c",,"input, literature or label (SI)"
+-,"plan} = {}$, ",,"input, literature or label (SI)"
+-,"target ${}$, ",,"input, literature or label (SI)"
+-,gainst ${}$. ,,"input, literature or label (SI)"
+-,"\rho = -{}$, ",,"input, literature or label (SI)"
+-,1 from ${}$ t,,"input, literature or label (SI)"
+-,"20$ to ${}$, whi",,"input, literature or label (SI)"
+-,$ from ${}$ to $1.5$,,"input, literature or label (SI)"
+-,".0$ to ${}$, ",,"input, literature or label (SI)"
+-,erance ${}\%$,,"input, literature or label (SI)"
+-, value ${}$ s,,"input, literature or label (SI)"
+-,ue $0.25$ stated in the protocol and the value ${}/12,,"input, literature or label (SI)"
+-,$\rho = {}$ is at most about $3.7\%$ over this ran,,"input, literature or label (SI)"
+-,xceeds ${}\%$,,"input, literature or label (SI)"
+-,d from ${}$ to $0.30,,"input, literature or label (SI)"
+-,20$ to ${}$ a,,"input, literature or label (SI)"
+-,"\beta = {}$, $r ",,"input, literature or label (SI)"
+-,alpha = {}$).,,"input, literature or label (SI)"
+-,"in \{0, {}, 0.5, 0.8\}$. T",,"input, literature or label (SI)"
+-,"0, 0.3, {}, 0.8\",,"input, literature or label (SI)"
+-,"3, 0.5, {}\}$. T",,"input, literature or label (SI)"
+-,"o \in \{{}, 0.5, 0.8\}$ an",,"input, literature or label (SI)"
+-," \{0.3, {}, 0",,"input, literature or label (SI)"
+-,"3, 0.5, {}\}$ an",,"input, literature or label (SI)"
+-,t size ${}$ s,,"input, literature or label (SI)"
+-,ze $0.25$ stated in the protocol and the value ${}/12,,"input, literature or label (SI)"
+-,"ppa^{*}({}, 0.13)$.}",,"input, literature or label (SI)"
+-,"}(0.05, {})$.",,"input, literature or label (SI)"
+-,h $\rho = {}$.,,"input, literature or label (SI)"
+-,$\rho = {}$ in T,,"input, literature or label (SI)"
+-,wer of ${}$. ,,"input, literature or label (SI)"

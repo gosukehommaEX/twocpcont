@@ -152,6 +152,24 @@
   P_1 and P_2 against numerical derivatives, the agreement of the
   quadratic correction with `twocpcont_ss()`, the roots of the power
   equations, and the sign of the discriminant.
+- `inst/validation/validate_claims_supplement.R` checks the statements
+  of Section 3 and of Sections S5 to S8 of the Supporting Information
+  that are not single numbers: the closed form evaluates no bivariate
+  normal distribution function and is not faster than `uniroot()`, the
+  structure of the errors of Figures S1 and S2 and Table S2, the
+  direction of the differences in Table S3, and the power in Table S4
+  when the planning correlation differs from the true one.
+- The part `phi2` of `data_generate_main.R`, which counted the
+  evaluations of the bivariate normal distribution function of the
+  sequential search, is removed, together with the ledger keys
+  `phi2_median`, `phi2_min`, `phi2_max` and `phi2_argmax_kappa` and the
+  file `inst/scripts/data/phi2_evaluations.rds`. The same counts are part
+  of Table S1 (`cost_comparison.rds`), and the check that the closed form
+  makes no such evaluation reads that file.
+- In the ledger of the Supporting Information, the medians of the
+  evaluations in Table S1 are written with as many decimals as they have,
+  and the digits of `grid_rel_max_rho95` and `grid_disc_min` follow the
+  text. The section of the software example is Section S9.
 
 ## Infrastructure
 

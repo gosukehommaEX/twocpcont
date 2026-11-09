@@ -7,7 +7,7 @@
 # those of inst/scripts/data_generate_main.R.
 #
 # Parts (logical vector RUN_SI; all TRUE by default)
-#   s5      Section S5: code and output of the software example
+#   s5      Section S9: code and output of the software example
 #   decomp  Error of the noncentrality parameter by approximation step:
 #           anchor only, first-order correction, proposed quadratic
 #           correction, exact root of the Gauss-Legendre power equation
@@ -41,7 +41,7 @@
 # computing times of the part cost depend on the computer.
 #
 # Outputs (relative to the package root)
-#   inst/sup_info/data/software_example.rds      Section S5 (code and output)
+#   inst/sup_info/data/software_example.rds      Section S9 (code and output)
 #   inst/sup_info/data/error_decomposition.rds   part decomp
 #   inst/sup_info/data/accuracy_grid.rds         part grid
 #   inst/sup_info/data/cost_comparison.rds       part cost
@@ -190,10 +190,10 @@ lambda_package <- function(kappa, rho, beta, alpha) {
 }
 
 # =============================================================================
-# Section S5: software example for the EXPEDITION 1 design with rho = 0.5
+# Section S9: software example for the EXPEDITION 1 design with rho = 0.5
 # =============================================================================
 if (RUN_SI[["s5"]]) {
-  # Code shown in Section S5, one element per console input. The first
+  # Code shown in Section S9, one element per console input. The first
   # element is displayed but not evaluated, because the package has already
   # been loaded above.
   chunks <- c(

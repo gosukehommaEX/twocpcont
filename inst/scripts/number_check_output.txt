@@ -1,530 +1,982 @@
 ==================================================================
  Number check: manuscript versus ledger
- 2026-11-09 16:21:58 JST
+ 2026-11-09 17:35:50 JST
 ==================================================================
 
 [1] Ledgers
-  inst/scripts/results/manuscript_numbers.csv (82 numbers, 2026-11-09 16:08:48)
+  inst/scripts/results/manuscript_numbers.csv (78 numbers, 2026-11-09 17:35:43)
   PASS  the ledger is newer than its .rds files and its rendering script
-  inst/sup_info/results/supplement_numbers.csv (56 numbers, 2026-11-09 16:21:58)
+  inst/sup_info/results/supplement_numbers.csv (56 numbers, 2026-11-09 17:35:50)
   PASS  the ledger is newer than its .rds files and its rendering script
 
-[2] Manuscript files and locations (110 rows in inst/scripts/number_locations.csv)
+[2] Manuscript files and locations (476 rows in inst/scripts/number_locations.csv)
   found     ../../Manuscript/Main_body/main.tex
   found     ../../Manuscript/Supp_info/supporting_information.tex
 
 [3] Numbers at the registered locations
-   key                 location     in_text   recomputed  expected  status note
-   n_cells             main.tex:53  96        96          96        PASS       
-   n_match_total       main.tex:53  95        95          95        PASS       
-   pub_lo_n            main.tex:53  180       180         180       PASS       
-   intro_power_indep   main.tex:62  0.64      0.64        0.64      PASS       
-   n_cells             main.tex:68  96        96          96        PASS       
-   pub_n               main.tex:68  210       210         210       PASS       
-   w_gap_max           main.tex:170 0.09      0.09246254  0.09      PASS       
-   w_one_kappa_80      main.tex:170 1.41      1.41044     1.41      PASS       
-   w_one_kappa_85      main.tex:170 1.36      1.358456    1.36      PASS       
-   w_one_kappa_90      main.tex:170 1.30      1.3045      1.30      PASS       
-   rmax_k1_80          main.tex:238 23.8      23.8459     23.8      PASS       
-   kstar_05_80         main.tex:259 1.37      1.36926     1.37      PASS       
-   kstar_05_80         main.tex:259 1.37      1.36926     1.37      PASS       
-   kappa_p1            main.tex:266 1.0       1           1.0       PASS       
-   kappa_p2            main.tex:266 1.4       1.4         1.4       PASS       
-   kappa_p3            main.tex:266 1.5       1.5         1.5       PASS       
-   kappa_p4            main.tex:266 2.1       2.1         2.1       PASS       
-   n_cells             main.tex:266 96        96          96        PASS       
-   n_match_80_85       main.tex:270 32        32          32        PASS       
-   n_match_90          main.tex:270 31        31          31        PASS       
-   n_cells_per_power   main.tex:270 32        32          32        PASS       
-   mismatch_N_prop     main.tex:270 556       556         556       PASS       
-   mismatch_N_conv     main.tex:270 558       558         558       PASS       
-   mismatch_n2_exact   main.tex:270 278.0009  278.0009    278.0009  PASS       
-   mismatch_n2_cf      main.tex:270 277.9970  277.997     277.9970  PASS       
-   mismatch_n2_diff    main.tex:270 0.004     0.003907437 0.004     PASS       
-   mismatch_N_prop     main.tex:270 556       556         556       PASS       
-   mismatch_power      main.tex:270 0.8999989 0.8999989   0.8999989 PASS       
-   n_match_total       main.tex:270 95        95          95        PASS       
-   pow_min_80          main.tex:270 0.8000    0.800047    0.8000    PASS       
-   pow_max_80          main.tex:270 0.8078    0.8078282   0.8078    PASS       
-   pow_min_85          main.tex:270 0.8501    0.8500771   0.8501    PASS       
-   pow_max_85          main.tex:270 0.8544    0.8544131   0.8544    PASS       
-   pow_min_90          main.tex:270 0.9000    0.900035    0.9000    PASS       
-   pow_max_90          main.tex:270 0.9040    0.9039951   0.9040    PASS       
-   n_r2_match          main.tex:270 48        48          48        PASS       
-   N_k1_80_rho0        main.tex:272 460       460         460       PASS       
-   N_k1_80_rho8        main.tex:272 408       408         408       PASS       
-   red_k1_80           main.tex:272 11        11.30435    11        PASS       
-   N_k1_90_rho0        main.tex:272 574       574         574       PASS       
-   N_k1_90_rho8        main.tex:272 530       530         530       PASS       
-   red_k1_90           main.tex:272 8         7.665505    8         PASS       
-   kappa_p4            main.tex:272 2.1       2.1         2.1       PASS       
-   kappa_p2            main.tex:272 1.4       1.4         1.4       PASS       
-   kappa_p3            main.tex:272 1.5       1.5         1.5       PASS       
-   red_mid_max         main.tex:272 4         4           4         PASS       
-   pub_exact_match     main.tex:276 210       210         210       PASS       
-   pub_lo_n            main.tex:276 180       180         180       PASS       
-   pub_lo_match        main.tex:276 177       177         177       PASS       
-   pub_hi_match        main.tex:276 20        20          20        PASS       
-   pub_hi_n            main.tex:276 30        30          30        PASS       
-   pub_hi_maxdev       main.tex:276 0.002     0.002       0.002     PASS       
-   trial_kappa         main.tex:276 1.292     1.291667    1.292     PASS       
-   n_cells             main.tex:278 96        96          96        PASS       
-   phi2_median         main.tex:278 31.5      31.5        31.5      PASS       
-   phi2_min            main.tex:278 2         2           2         PASS       
-   phi2_max            main.tex:278 125       125         125       PASS       
-   phi2_argmax_kappa   main.tex:278 1.5       1.5         1.5       PASS       
-   n_cells             main.tex:278 96        96          96        PASS       
-   rmax_k1_80          main.tex:282 23.8      23.8459     23.8      PASS       
-   rmax_k1_85          main.tex:282 21.3      21.33148    21.3      PASS       
-   rmax_k1_90          main.tex:282 18.6      18.57095    18.6      PASS       
-   cs_increase_90      main.tex:282 22.8      22.8063     22.8      PASS       
-   hw_ratio_80         main.tex:282 1.31      1.313127    1.31      PASS       
-   hw_ratio_85         main.tex:282 1.27      1.271156    1.27      PASS       
-   hw_ratio_90         main.tex:282 1.23      1.228063    1.23      PASS       
-   kstar_05_80         main.tex:284 1.37      1.36926     1.37      PASS       
-   kstar_15_80         main.tex:284 1.13      1.132132    1.13      PASS       
-   kstar_05_90         main.tex:284 1.24      1.239413    1.24      PASS       
-   kstar_15_90         main.tex:284 1.05      1.046721    1.05      PASS       
-   kstar_05_max        main.tex:284 1.4       1.36926     1.4       PASS       
-   red_k1_80           main.tex:284 11        11.30435    11        PASS       
-   kappa_p4            main.tex:284 2.1       2.1         2.1       PASS       
-   kappa_varga         main.tex:284 1.25      1.25        1.25      PASS       
-   rmax_varga          main.tex:284 9.1       9.128052    9.1       PASS       
-   rmax_k1_80          main.tex:284 23.8      23.8459     23.8      PASS       
-   rmax_k1_80_r0       main.tex:286 24        23.8459     24        PASS       
-   trial_es1           main.tex:290 0.200     0.2         0.200     PASS       
-   trial_es2           main.tex:290 0.258     0.2583333   0.258     PASS       
-   trial_kappa         main.tex:290 1.292     1.291667    1.292     PASS       
-   trial_power_product main.tex:290 0.87      0.8722      0.87      PASS       
-   trial_N_rho0        main.tex:292 1000      1000        1000      PASS       
-   trial_N_rho0        main.tex:292 1000      1000        1000      PASS       
-   trial_N_rho8        main.tex:292 960       960         960       PASS       
-   trial_N_red         main.tex:292 40        40          40        PASS       
-   trial_red           main.tex:292 4         4           4         PASS       
-   trial_kappa         main.tex:294 1.292     1.291667    1.292     PASS       
-   trial_rmax          main.tex:294 4.6       4.618346    4.6       PASS       
-   trial_red_1         main.tex:294 4.0       4           4.0       PASS       
-   trial_recover       main.tex:294 87        86.61109    87        PASS       
-   trial_red_cont      main.tex:294 3.9       3.9367      3.9       PASS       
-   trial_kstar_05      main.tex:294 1.279     1.279183    1.279     PASS       
-   trial_kappa         main.tex:294 1.292     1.291667    1.292     PASS       
-   trial_kappa_round   main.tex:294 1.25      1.25        1.25      PASS       
-   trial_rmax_round    main.tex:294 6.0       5.981702    6.0       PASS       
-   trial_kstar_01      main.tex:294 1.494     1.494314    1.494     PASS       
-   trial_kappa         main.tex:294 1.292     1.291667    1.292     PASS       
-   trial_N_rho0        main.tex:296 1000      1000        1000      PASS       
-   trial_gain_bound    main.tex:296 46        46.18346    46        PASS       
-   trial_N_rho0        main.tex:296 1000      1000        1000      PASS       
-   trial_rmax          main.tex:296 4.6       4.618346    4.6       PASS       
-   trial_kappa         main.tex:296 1.292     1.291667    1.292     PASS       
-   trial_rmax_round    main.tex:296 6.0       5.981702    6.0       PASS       
-   trial_kappa_round   main.tex:296 1.25      1.25        1.25      PASS       
-   n_match_total       main.tex:302 95        95          95        PASS       
-   n_cells             main.tex:302 96        96          96        PASS       
-   trial_rmax_r0       main.tex:306 5         4.618346    5         PASS       
-   trial_rmax_round_r0 main.tex:306 6         5.981702    6         PASS       
-   pub_hi_match        main.tex:308 20        20          20        PASS       
-   pub_hi_n            main.tex:308 30        30          30        PASS       
-  PASS 110, FAIL 0, SKIP 0
+   key                      location                       in_text   recomputed  expected  status
+   n_cells                  main.tex:59                    96        96          96        PASS  
+   n_match_total            main.tex:59                    95        95          95        PASS  
+   pub_lo_n                 main.tex:59                    180       180         180       PASS  
+   intro_power_indep        main.tex:68                    0.64      0.64        0.64      PASS  
+   n_cells                  main.tex:74                    96        96          96        PASS  
+   pub_n                    main.tex:74                    210       210         210       PASS  
+   w_gap_max                main.tex:176                   0.09      0.09246254  0.09      PASS  
+   w_one_kappa_80           main.tex:176                   1.41      1.41044     1.41      PASS  
+   w_one_kappa_85           main.tex:176                   1.36      1.358456    1.36      PASS  
+   w_one_kappa_90           main.tex:176                   1.30      1.3045      1.30      PASS  
+   rmax_k1_80               main.tex:244                   23.8      23.8459     23.8      PASS  
+   kstar_05_80              main.tex:265                   1.37      1.36926     1.37      PASS  
+   kstar_05_80              main.tex:265                   1.37      1.36926     1.37      PASS  
+   kappa_p1                 main.tex:272                   1.0       1           1.0       PASS  
+   kappa_p2                 main.tex:272                   1.4       1.4         1.4       PASS  
+   kappa_p3                 main.tex:272                   1.5       1.5         1.5       PASS  
+   kappa_p4                 main.tex:272                   2.1       2.1         2.1       PASS  
+   n_cells                  main.tex:272                   96        96          96        PASS  
+   n_match_80_85            main.tex:276                   32        32          32        PASS  
+   n_match_90               main.tex:276                   31        31          31        PASS  
+   n_cells_per_power        main.tex:276                   32        32          32        PASS  
+   mismatch_N_prop          main.tex:276                   556       556         556       PASS  
+   mismatch_N_conv          main.tex:276                   558       558         558       PASS  
+   mismatch_n2_exact        main.tex:276                   278.0009  278.0009    278.0009  PASS  
+   mismatch_n2_cf           main.tex:276                   277.9970  277.997     277.9970  PASS  
+   mismatch_n2_diff         main.tex:276                   0.004     0.003907437 0.004     PASS  
+   mismatch_N_prop          main.tex:276                   556       556         556       PASS  
+   mismatch_power           main.tex:276                   0.8999989 0.8999989   0.8999989 PASS  
+   n_match_total            main.tex:276                   95        95          95        PASS  
+   pow_min_80               main.tex:276                   0.8000    0.800047    0.8000    PASS  
+   pow_max_80               main.tex:276                   0.8078    0.8078282   0.8078    PASS  
+   pow_min_85               main.tex:276                   0.8501    0.8500771   0.8501    PASS  
+   pow_max_85               main.tex:276                   0.8544    0.8544131   0.8544    PASS  
+   pow_min_90               main.tex:276                   0.9000    0.900035    0.9000    PASS  
+   pow_max_90               main.tex:276                   0.9040    0.9039951   0.9040    PASS  
+   n_r2_match               main.tex:276                   48        48          48        PASS  
+   N_k1_80_rho0             main.tex:278                   460       460         460       PASS  
+   N_k1_80_rho8             main.tex:278                   408       408         408       PASS  
+   red_k1_80                main.tex:278                   11        11.30435    11        PASS  
+   N_k1_90_rho0             main.tex:278                   574       574         574       PASS  
+   N_k1_90_rho8             main.tex:278                   530       530         530       PASS  
+   red_k1_90                main.tex:278                   8         7.665505    8         PASS  
+   kappa_p4                 main.tex:278                   2.1       2.1         2.1       PASS  
+   kappa_p2                 main.tex:278                   1.4       1.4         1.4       PASS  
+   kappa_p3                 main.tex:278                   1.5       1.5         1.5       PASS  
+   red_mid_max              main.tex:278                   4         4           4         PASS  
+   pub_exact_match          main.tex:290                   210       210         210       PASS  
+   pub_lo_n                 main.tex:290                   180       180         180       PASS  
+   pub_lo_match             main.tex:290                   177       177         177       PASS  
+   pub_hi_match             main.tex:290                   20        20          20        PASS  
+   pub_hi_n                 main.tex:290                   30        30          30        PASS  
+   pub_hi_maxdev            main.tex:290                   0.002     0.002       0.002     PASS  
+   trial_kappa              main.tex:290                   1.292     1.291667    1.292     PASS  
+   n_cells                  main.tex:282                   96        96          96        PASS  
+   rmax_k1_80               main.tex:296                   23.8      23.8459     23.8      PASS  
+   rmax_k1_85               main.tex:296                   21.3      21.33148    21.3      PASS  
+   rmax_k1_90               main.tex:296                   18.6      18.57095    18.6      PASS  
+   cs_increase_90           main.tex:296                   22.8      22.8063     22.8      PASS  
+   hw_ratio_80              main.tex:296                   1.31      1.313127    1.31      PASS  
+   hw_ratio_85              main.tex:296                   1.27      1.271156    1.27      PASS  
+   hw_ratio_90              main.tex:296                   1.23      1.228063    1.23      PASS  
+   kstar_05_80              main.tex:300                   1.37      1.36926     1.37      PASS  
+   kstar_15_80              main.tex:300                   1.13      1.132132    1.13      PASS  
+   kstar_05_90              main.tex:300                   1.24      1.239413    1.24      PASS  
+   kstar_15_90              main.tex:300                   1.05      1.046721    1.05      PASS  
+   kstar_05_max             main.tex:300                   1.4       1.36926     1.4       PASS  
+   red_k1_80                main.tex:300                   11        11.30435    11        PASS  
+   kappa_p4                 main.tex:300                   2.1       2.1         2.1       PASS  
+   kappa_varga              main.tex:300                   1.25      1.25        1.25      PASS  
+   rmax_varga               main.tex:300                   9.1       9.128052    9.1       PASS  
+   rmax_k1_80               main.tex:300                   23.8      23.8459     23.8      PASS  
+   rmax_k1_80_r0            main.tex:302                   24        23.8459     24        PASS  
+   trial_es1                main.tex:306                   0.200     0.2         0.200     PASS  
+   trial_es2                main.tex:306                   0.258     0.2583333   0.258     PASS  
+   trial_kappa              main.tex:306                   1.292     1.291667    1.292     PASS  
+   trial_power_product      main.tex:306                   0.87      0.8722      0.87      PASS  
+   trial_N_rho0             main.tex:308                   1000      1000        1000      PASS  
+   trial_N_rho0             main.tex:308                   1000      1000        1000      PASS  
+   trial_N_rho8             main.tex:308                   960       960         960       PASS  
+   trial_N_red              main.tex:308                   40        40          40        PASS  
+   trial_red                main.tex:308                   4         4           4         PASS  
+   trial_kappa              main.tex:310                   1.292     1.291667    1.292     PASS  
+   trial_rmax               main.tex:310                   4.6       4.618346    4.6       PASS  
+   trial_red_1              main.tex:310                   4.0       4           4.0       PASS  
+   trial_recover            main.tex:310                   87        86.61109    87        PASS  
+   trial_red_cont           main.tex:310                   3.9       3.9367      3.9       PASS  
+   trial_kstar_05           main.tex:310                   1.279     1.279183    1.279     PASS  
+   trial_kappa              main.tex:310                   1.292     1.291667    1.292     PASS  
+   trial_kappa_round        main.tex:310                   1.25      1.25        1.25      PASS  
+   trial_rmax_round         main.tex:310                   6.0       5.981702    6.0       PASS  
+   trial_kstar_01           main.tex:310                   1.494     1.494314    1.494     PASS  
+   trial_kappa              main.tex:310                   1.292     1.291667    1.292     PASS  
+   trial_N_rho0             main.tex:312                   1000      1000        1000      PASS  
+   trial_gain_bound         main.tex:312                   46        46.18346    46        PASS  
+   trial_N_rho0             main.tex:312                   1000      1000        1000      PASS  
+   trial_rmax               main.tex:312                   4.6       4.618346    4.6       PASS  
+   trial_kappa              main.tex:312                   1.292     1.291667    1.292     PASS  
+   trial_rmax_round         main.tex:312                   6.0       5.981702    6.0       PASS  
+   trial_kappa_round        main.tex:312                   1.25      1.25        1.25      PASS  
+   n_match_total            main.tex:318                   95        95          95        PASS  
+   n_cells                  main.tex:318                   96        96          96        PASS  
+   trial_rmax_r0            main.tex:322                   5         4.618346    5         PASS  
+   trial_rmax_round_r0      main.tex:322                   6         5.981702    6         PASS  
+   grid_n                   main.tex:59                    21816     21816       21816     PASS  
+   grid_rel_max_lo          main.tex:59                    0.14      0.1415765   0.14      PASS  
+   grid_n                   main.tex:192                   21816     21816       21816     PASS  
+   grid_disc_min            main.tex:192                   0.01      0.009706868 0.01      PASS  
+   alloc_ne                 main.tex:276                   19        19          19        PASS  
+   alloc_n                  main.tex:276                   120       120         120       PASS  
+   alloc_excess_max         main.tex:276                   2         2           2         PASS  
+   mismatch_n2_exact        main.tex:282                   278.0009  278.0009    278.0009  PASS  
+   cost_rel_closed          main.tex:282                   0.02      0.02238518  0.02      PASS  
+   dec_rel_anchor_max       main.tex:284                   21        20.79819    21        PASS  
+   dec_rel_first_max        main.tex:284                   3.2       3.20879     3.2       PASS  
+   dec_rel_proposed_max     main.tex:284                   0.08      0.07729125  0.08      PASS  
+   grid_n                   main.tex:286                   21816     21816       21816     PASS  
+   grid_rel_max_lo          main.tex:286                   0.14      0.1415765   0.14      PASS  
+   grid_rel_max_rho95       main.tex:286                   0.26      0.2556875   0.26      PASS  
+   grid_rel_max_rho99       main.tex:286                   1.1       1.099603    1.1       PASS  
+   n_cells                  main.tex:292                   96        96          96        PASS  
+   cost_eval_conv_median    main.tex:292                   31.5      31.5        31.5      PASS  
+   cost_eval_newton_median  main.tex:292                   20        20          20        PASS  
+   cost_eval_uniroot_median main.tex:292                   7         7           7         PASS  
+   cost_match_newton        main.tex:292                   96        96          96        PASS  
+   cost_ext_converged       main.tex:292                   40        40          40        PASS  
+   cost_ext_rel_closed      main.tex:292                   1.9       1.921037    1.9       PASS  
+   rmax_k1_80               main.tex:298                   23.8      23.8459     23.8      PASS  
+   red_cont_k1_rho03_80     main.tex:298                   2.5       2.518015    2.5       PASS  
+   red_cont_k1_rho05_80     main.tex:298                   5.0       5.04252     5.0       PASS  
+   red_cont_k1_rho08_80     main.tex:298                   11.1      11.14451    11.1      PASS  
+   N_k1_80_rho8             main.tex:302                   408       408         408       PASS  
+   plan_A_pow_p08_t0        main.tex:302                   0.736     0.7355893   0.736     PASS  
+   sens_rmax_es020          main.tex:310                   20.3      20.26877    20.3      PASS  
+   sens_rmax_es030          main.tex:310                   1.0       0.9516164   1.0       PASS  
+   sens_red_rho05_max       main.tex:310                   3.7       3.662815    3.7       PASS  
+   plan_E1_pow_p0_tm03      main.tex:312                   0.869     0.8689254   0.869     PASS  
+   grid_rel_max_rho99       main.tex:324                   1.1       1.099603    1.1       PASS  
+   cost_n                   supporting_information.tex:179 96        96          96        PASS  
+   cost_eval_newton_median  supporting_information.tex:181 20        20          20        PASS  
+   cost_eval_uniroot_median supporting_information.tex:181 7         7           7         PASS  
+   cost_eval_conv_median    supporting_information.tex:181 31.5      31.5        31.5      PASS  
+   cost_match_uniroot       supporting_information.tex:181 96        96          96        PASS  
+   cost_match_closed        supporting_information.tex:181 95        95          95        PASS  
+   cost_ext_converged       supporting_information.tex:181 40        40          40        PASS  
+   cost_ext_rel_closed      supporting_information.tex:181 1.9       1.921037    1.9       PASS  
+   dec_rel_anchor_max       supporting_information.tex:191 21        20.79819    21        PASS  
+   dec_rel_first_max        supporting_information.tex:191 3.2       3.20879     3.2       PASS  
+   dec_rel_first_max_lo     supporting_information.tex:191 1.2       1.189235    1.2       PASS  
+   dec_rel_proposed_max     supporting_information.tex:191 0.08      0.07729125  0.08      PASS  
+   dec_rel_proposed_max_lo  supporting_information.tex:191 0.02      0.02238518  0.02      PASS  
+   grid_n                   supporting_information.tex:200 21816     21816       21816     PASS  
+   grid_rel_max_lo          supporting_information.tex:200 0.14      0.1415765   0.14      PASS  
+   grid_rel_max_rho95       supporting_information.tex:200 0.26      0.2556875   0.26      PASS  
+   grid_rel_max_rho99       supporting_information.tex:200 1.1       1.099603    1.1       PASS  
+   grid_disc_min            supporting_information.tex:200 0.01      0.009706868 0.01      PASS  
+   alloc_ne                 supporting_information.tex:213 19        19          19        PASS  
+   alloc_n                  supporting_information.tex:213 120       120         120       PASS  
+   alloc_excess_max         supporting_information.tex:213 2         2           2         PASS  
+   alloc_round_same         supporting_information.tex:213 118       118         118       PASS  
+   alloc_n                  supporting_information.tex:213 120       120         120       PASS  
+   alloc_n                  supporting_information.tex:213 120       120         120       PASS  
+   trial_kappa              supporting_information.tex:219 1.292     1.291667    1.292     PASS  
+   plan_A_pow_p08_t0        supporting_information.tex:219 0.736     0.7355893   0.736     PASS  
+   plan_E1_pow_p08_t0       supporting_information.tex:219 0.855     0.8545802   0.855     PASS  
+   plan_A_pow_p0_tm03       supporting_information.tex:219 0.795     0.7946735   0.795     PASS  
+   plan_E1_pow_p0_tm03      supporting_information.tex:219 0.869     0.8689254   0.869     PASS  
+   sens_rmax_es020          supporting_information.tex:221 20.3      20.26877    20.3      PASS  
+   sens_rmax_es030          supporting_information.tex:221 1.0       0.9516164   1.0       PASS  
+   sens_es2_kstar05         supporting_information.tex:221 0.256     0.2558366   0.256     PASS  
+   sens_red_rho05_max       supporting_information.tex:221 3.7       3.662815    3.7       PASS  
+   -                        main.tex:39                    0.80                            SKIP  
+   -                        main.tex:39                    0.85                            SKIP  
+   -                        main.tex:39                    0.90                            SKIP  
+   -                        main.tex:39                    0.5                             SKIP  
+   -                        main.tex:39                    1.0                             SKIP  
+   -                        main.tex:39                    0.025                           SKIP  
+   -                        main.tex:40                    0.80                            SKIP  
+   -                        main.tex:40                    0.85                            SKIP  
+   -                        main.tex:40                    0.90                            SKIP  
+   -                        main.tex:40                    5                               SKIP  
+   -                        main.tex:40                    10                              SKIP  
+   -                        main.tex:40                    15                              SKIP  
+   -                        main.tex:40                    0.025                           SKIP  
+   -                        main.tex:41                    1.1                             SKIP  
+   -                        main.tex:41                    1.2                             SKIP  
+   -                        main.tex:41                    1.3                             SKIP  
+   -                        main.tex:41                    1.5                             SKIP  
+   -                        main.tex:41                    0.80                            SKIP  
+   -                        main.tex:41                    0.90                            SKIP  
+   -                        main.tex:41                    0.025                           SKIP  
+   -                        main.tex:59                    0.8                             SKIP  
+   -                        main.tex:59                    0.9                             SKIP  
+   -                        main.tex:68                    0.8                             SKIP  
+   -                        main.tex:68                    0.80                            SKIP  
+   -                        main.tex:70                    0.025                           SKIP  
+   -                        main.tex:70                    0.80                            SKIP  
+   -                        main.tex:70                    0.90                            SKIP  
+   -                        main.tex:101                   0.025                           SKIP  
+   -                        main.tex:176                   0.80                            SKIP  
+   -                        main.tex:176                   0.85                            SKIP  
+   -                        main.tex:176                   0.90                            SKIP  
+   -                        main.tex:188                   0.8                             SKIP  
+   -                        main.tex:244                   0.025                           SKIP  
+   -                        main.tex:244                   0.80                            SKIP  
+   -                        main.tex:244                   0.20                            SKIP  
+   -                        main.tex:253                   0.025                           SKIP  
+   -                        main.tex:253                   0.70                            SKIP  
+   -                        main.tex:253                   0.80                            SKIP  
+   -                        main.tex:253                   0.85                            SKIP  
+   -                        main.tex:253                   0.87                            SKIP  
+   -                        main.tex:253                   0.90                            SKIP  
+   -                        main.tex:265                   0.025                           SKIP  
+   -                        main.tex:265                   0.80                            SKIP  
+   -                        main.tex:265                   0.05                            SKIP  
+   -                        main.tex:265                   5                               SKIP  
+   -                        main.tex:272                   0.025                           SKIP  
+   -                        main.tex:272                   0.80                            SKIP  
+   -                        main.tex:272                   0.85                            SKIP  
+   -                        main.tex:272                   0.90                            SKIP  
+   -                        main.tex:272                   0.3                             SKIP  
+   -                        main.tex:272                   0.3                             SKIP  
+   -                        main.tex:272                   0.7                             SKIP  
+   -                        main.tex:272                   0.5                             SKIP  
+   -                        main.tex:272                   1.5                             SKIP  
+   -                        main.tex:272                   0.3                             SKIP  
+   -                        main.tex:272                   0.3                             SKIP  
+   -                        main.tex:272                   0.7                             SKIP  
+   -                        main.tex:272                   0.5                             SKIP  
+   -                        main.tex:272                   0.3                             SKIP  
+   -                        main.tex:272                   0.3                             SKIP  
+   -                        main.tex:272                   1.5                             SKIP  
+   -                        main.tex:272                   0.7                             SKIP  
+   -                        main.tex:272                   0.5                             SKIP  
+   -                        main.tex:272                   1.5                             SKIP  
+   -                        main.tex:272                   0.3                             SKIP  
+   -                        main.tex:272                   0.5                             SKIP  
+   -                        main.tex:272                   0.8                             SKIP  
+   -                        main.tex:272                   1.5                             SKIP  
+   -                        main.tex:272                   2.1                             SKIP  
+   -                        main.tex:272                   1.4                             SKIP  
+   -                        main.tex:272                   0.80                            SKIP  
+   -                        main.tex:272                   4.6                             SKIP  
+   -                        main.tex:276                   0.80                            SKIP  
+   -                        main.tex:276                   0.85                            SKIP  
+   -                        main.tex:276                   0.90                            SKIP  
+   -                        main.tex:276                   0.3                             SKIP  
+   -                        main.tex:276                   0.3                             SKIP  
+   -                        main.tex:276                   0.5                             SKIP  
+   -                        main.tex:276                   0.90                            SKIP  
+   -                        main.tex:276                   0.80                            SKIP  
+   -                        main.tex:276                   0.85                            SKIP  
+   -                        main.tex:276                   0.90                            SKIP  
+   -                        main.tex:276                   0.25                            SKIP  
+   -                        main.tex:276                   0.5                             SKIP  
+   -                        main.tex:276                   1.5                             SKIP  
+   -                        main.tex:276                   2.5                             SKIP  
+   -                        main.tex:278                   0.3                             SKIP  
+   -                        main.tex:278                   0.3                             SKIP  
+   -                        main.tex:278                   0.8                             SKIP  
+   -                        main.tex:278                   0.80                            SKIP  
+   -                        main.tex:278                   0.90                            SKIP  
+   -                        main.tex:278                   0.7                             SKIP  
+   -                        main.tex:278                   0.5                             SKIP  
+   -                        main.tex:278                   1.5                             SKIP  
+   -                        main.tex:278                   0.8                             SKIP  
+   -                        main.tex:284                   0.025                           SKIP  
+   -                        main.tex:284                   0.3                             SKIP  
+   -                        main.tex:284                   0.5                             SKIP  
+   -                        main.tex:284                   0.8                             SKIP  
+   -                        main.tex:284                   0.95                            SKIP  
+   -                        main.tex:284                   0.80                            SKIP  
+   -                        main.tex:284                   0.90                            SKIP  
+   -                        main.tex:284                   0.8                             SKIP  
+   -                        main.tex:284                   0.95                            SKIP  
+   -                        main.tex:286                   0.70                            SKIP  
+   -                        main.tex:286                   0.95                            SKIP  
+   -                        main.tex:286                   0.005                           SKIP  
+   -                        main.tex:286                   0.01                            SKIP  
+   -                        main.tex:286                   0.025                           SKIP  
+   -                        main.tex:286                   0.05                            SKIP  
+   -                        main.tex:286                   0.5                             SKIP  
+   -                        main.tex:286                   0.99                            SKIP  
+   -                        main.tex:286                   0.9                             SKIP  
+   -                        main.tex:286                   0.95                            SKIP  
+   -                        main.tex:286                   0.99                            SKIP  
+   -                        main.tex:286                   0.9                             SKIP  
+   -                        main.tex:290                   4.3                             SKIP  
+   -                        main.tex:290                   4.4                             SKIP  
+   -                        main.tex:290                   0.025                           SKIP  
+   -                        main.tex:290                   0.80                            SKIP  
+   -                        main.tex:290                   0.90                            SKIP  
+   -                        main.tex:290                   1.00                            SKIP  
+   -                        main.tex:290                   2.00                            SKIP  
+   -                        main.tex:290                   0.2                             SKIP  
+   -                        main.tex:290                   0.3                             SKIP  
+   -                        main.tex:290                   0.5                             SKIP  
+   -                        main.tex:290                   0.7                             SKIP  
+   -                        main.tex:290                   0.8                             SKIP  
+   -                        main.tex:290                   0.95                            SKIP  
+   -                        main.tex:290                   0.8                             SKIP  
+   -                        main.tex:290                   0.03                            SKIP  
+   -                        main.tex:290                   0.95                            SKIP  
+   -                        main.tex:290                   0.87                            SKIP  
+   -                        main.tex:296                   0.80                            SKIP  
+   -                        main.tex:296                   0.85                            SKIP  
+   -                        main.tex:296                   0.90                            SKIP  
+   -                        main.tex:296                   90                              SKIP  
+   -                        main.tex:296                   23                              SKIP  
+   -                        main.tex:296                   0.10                            SKIP  
+   -                        main.tex:296                   0.80                            SKIP  
+   -                        main.tex:296                   0.85                            SKIP  
+   -                        main.tex:296                   0.90                            SKIP  
+   -                        main.tex:298                   0.80                            SKIP  
+   -                        main.tex:298                   0.3                             SKIP  
+   -                        main.tex:298                   0.5                             SKIP  
+   -                        main.tex:298                   0.8                             SKIP  
+   -                        main.tex:298                   0.20                            SKIP  
+   -                        main.tex:300                   0.05                            SKIP  
+   -                        main.tex:300                   0.10                            SKIP  
+   -                        main.tex:300                   0.15                            SKIP  
+   -                        main.tex:300                   0.80                            SKIP  
+   -                        main.tex:300                   0.05                            SKIP  
+   -                        main.tex:300                   0.15                            SKIP  
+   -                        main.tex:300                   0.90                            SKIP  
+   -                        main.tex:300                   5                               SKIP  
+   -                        main.tex:300                   0.80                            SKIP  
+   -                        main.tex:300                   0.8                             SKIP  
+   -                        main.tex:300                   0.4                             SKIP  
+   -                        main.tex:300                   0.5                             SKIP  
+   -                        main.tex:300                   80                              SKIP  
+   -                        main.tex:300                   10                              SKIP  
+   -                        main.tex:300                   1.25                            SKIP  
+   -                        main.tex:300                   0.20                            SKIP  
+   -                        main.tex:302                   0.80                            SKIP  
+   -                        main.tex:302                   0.3                             SKIP  
+   -                        main.tex:302                   0.3                             SKIP  
+   -                        main.tex:302                   0.80                            SKIP  
+   -                        main.tex:302                   0.8                             SKIP  
+   -                        main.tex:306                   1.8                             SKIP  
+   -                        main.tex:306                   3.1                             SKIP  
+   -                        main.tex:306                   0.25                            SKIP  
+   -                        main.tex:306                   0.25                            SKIP  
+   -                        main.tex:306                   3.1                             SKIP  
+   -                        main.tex:306                   0.05                            SKIP  
+   -                        main.tex:306                   0.025                           SKIP  
+   -                        main.tex:306                   0.89                            SKIP  
+   -                        main.tex:306                   0.98                            SKIP  
+   -                        main.tex:306                   0.89                            SKIP  
+   -                        main.tex:306                   0.98                            SKIP  
+   -                        main.tex:308                   0.87                            SKIP  
+   -                        main.tex:308                   0.3                             SKIP  
+   -                        main.tex:308                   0.5                             SKIP  
+   -                        main.tex:308                   0.8                             SKIP  
+   -                        main.tex:308                   0.87                            SKIP  
+   -                        main.tex:308                   0.8                             SKIP  
+   -                        main.tex:310                   0.87                            SKIP  
+   -                        main.tex:310                   0.8                             SKIP  
+   -                        main.tex:310                   0.8                             SKIP  
+   -                        main.tex:310                   0.8                             SKIP  
+   -                        main.tex:310                   0.05                            SKIP  
+   -                        main.tex:310                   0.87                            SKIP  
+   -                        main.tex:310                   5                               SKIP  
+   -                        main.tex:310                   0.25                            SKIP  
+   -                        main.tex:310                   0.05                            SKIP  
+   -                        main.tex:310                   0.13                            SKIP  
+   -                        main.tex:310                   5                               SKIP  
+   -                        main.tex:310                   0.20                            SKIP  
+   -                        main.tex:310                   0.30                            SKIP  
+   -                        main.tex:310                   0.5                             SKIP  
+   -                        main.tex:310                   0.01                            SKIP  
+   -                        main.tex:310                   1                               SKIP  
+   -                        main.tex:312                   0.3                             SKIP  
+   -                        main.tex:318                   0.90                            SKIP  
+   -                        main.tex:318                   0.8                             SKIP  
+   -                        main.tex:318                   0.9                             SKIP  
+   -                        main.tex:322                   0.005                           SKIP  
+   -                        main.tex:322                   0.05                            SKIP  
+   -                        main.tex:322                   0.70                            SKIP  
+   -                        main.tex:322                   0.95                            SKIP  
+   -                        main.tex:322                   0.5                             SKIP  
+   -                        main.tex:322                   0.99                            SKIP  
+   -                        main.tex:324                   0.025                           SKIP  
+   -                        main.tex:324                   0.2                             SKIP  
+   -                        main.tex:324                   0.4                             SKIP  
+   -                        main.tex:324                   0.80                            SKIP  
+   -                        main.tex:324                   0.025                           SKIP  
+   -                        main.tex:324                   0.99                            SKIP  
+   -                        main.tex:338                   5.5                             SKIP  
+   -                        main.tex:353                   0.2                             SKIP  
+   -                        supporting_information.tex:18  0.9                             SKIP  
+   -                        supporting_information.tex:19  0.07                            SKIP  
+   -                        supporting_information.tex:20  0.9                             SKIP  
+   -                        supporting_information.tex:119 0.75                            SKIP  
+   -                        supporting_information.tex:119 0.75                            SKIP  
+   -                        supporting_information.tex:119 0.8                             SKIP  
+   -                        supporting_information.tex:119 0.7                             SKIP  
+   -                        supporting_information.tex:119 0.8                             SKIP  
+   -                        supporting_information.tex:119 0.8                             SKIP  
+   -                        supporting_information.tex:119 0.8                             SKIP  
+   -                        supporting_information.tex:119 0.7                             SKIP  
+   -                        supporting_information.tex:119 2.4                             SKIP  
+   -                        supporting_information.tex:175 2.4                             SKIP  
+   -                        supporting_information.tex:181 3.2                             SKIP  
+   -                        supporting_information.tex:187 3.2                             SKIP  
+   -                        supporting_information.tex:189 0.025                           SKIP  
+   -                        supporting_information.tex:189 0.01                            SKIP  
+   -                        supporting_information.tex:189 0.3                             SKIP  
+   -                        supporting_information.tex:189 0.5                             SKIP  
+   -                        supporting_information.tex:189 0.8                             SKIP  
+   -                        supporting_information.tex:189 0.95                            SKIP  
+   -                        supporting_information.tex:189 0.80                            SKIP  
+   -                        supporting_information.tex:189 0.90                            SKIP  
+   -                        supporting_information.tex:191 0.8                             SKIP  
+   -                        supporting_information.tex:191 0.8                             SKIP  
+   -                        supporting_information.tex:191 0.8                             SKIP  
+   -                        supporting_information.tex:191 0.95                            SKIP  
+   -                        supporting_information.tex:196 0.3                             SKIP  
+   -                        supporting_information.tex:196 0.5                             SKIP  
+   -                        supporting_information.tex:196 0.8                             SKIP  
+   -                        supporting_information.tex:196 0.95                            SKIP  
+   -                        supporting_information.tex:196 0.80                            SKIP  
+   -                        supporting_information.tex:196 0.90                            SKIP  
+   -                        supporting_information.tex:196 0.025                           SKIP  
+   -                        supporting_information.tex:200 0.02                            SKIP  
+   -                        supporting_information.tex:200 0.70                            SKIP  
+   -                        supporting_information.tex:200 0.95                            SKIP  
+   -                        supporting_information.tex:200 0.05                            SKIP  
+   -                        supporting_information.tex:200 0.005                           SKIP  
+   -                        supporting_information.tex:200 0.01                            SKIP  
+   -                        supporting_information.tex:200 0.025                           SKIP  
+   -                        supporting_information.tex:200 0.05                            SKIP  
+   -                        supporting_information.tex:200 0.5                             SKIP  
+   -                        supporting_information.tex:200 0.99                            SKIP  
+   -                        supporting_information.tex:200 0.9                             SKIP  
+   -                        supporting_information.tex:200 0.95                            SKIP  
+   -                        supporting_information.tex:200 0.99                            SKIP  
+   -                        supporting_information.tex:200 0.9                             SKIP  
+   -                        supporting_information.tex:207 0.025                           SKIP  
+   -                        supporting_information.tex:213 0.25                            SKIP  
+   -                        supporting_information.tex:213 0.5                             SKIP  
+   -                        supporting_information.tex:213 1.5                             SKIP  
+   -                        supporting_information.tex:213 2.5                             SKIP  
+   -                        supporting_information.tex:213 0.5                             SKIP  
+   -                        supporting_information.tex:213 0.8                             SKIP  
+   -                        supporting_information.tex:213 0.80                            SKIP  
+   -                        supporting_information.tex:213 0.90                            SKIP  
+   -                        supporting_information.tex:219 0.8                             SKIP  
+   -                        supporting_information.tex:219 0.80                            SKIP  
+   -                        supporting_information.tex:219 0.87                            SKIP  
+   -                        supporting_information.tex:219 0.3                             SKIP  
+   -                        supporting_information.tex:221 0.20                            SKIP  
+   -                        supporting_information.tex:221 0.30                            SKIP  
+   -                        supporting_information.tex:221 1.0                             SKIP  
+   -                        supporting_information.tex:221 1.5                             SKIP  
+   -                        supporting_information.tex:221 5                               SKIP  
+   -                        supporting_information.tex:221 0.25                            SKIP  
+   -                        supporting_information.tex:221 3.1                             SKIP  
+   -                        supporting_information.tex:221 0.5                             SKIP  
+   -                        supporting_information.tex:221 5                               SKIP  
+   -                        supporting_information.tex:228 0.20                            SKIP  
+   -                        supporting_information.tex:228 0.30                            SKIP  
+   -                        supporting_information.tex:228 0.87                            SKIP  
+   -                        supporting_information.tex:228 0.025                           SKIP  
+   -                        supporting_information.tex:228 0.3                             SKIP  
+   -                        supporting_information.tex:228 0.5                             SKIP  
+   -                        supporting_information.tex:228 0.8                             SKIP  
+   -                        supporting_information.tex:228 0.3                             SKIP  
+   -                        supporting_information.tex:228 0.5                             SKIP  
+   -                        supporting_information.tex:228 0.8                             SKIP  
+   -                        supporting_information.tex:228 0.25                            SKIP  
+   -                        supporting_information.tex:228 3.1                             SKIP  
+   -                        supporting_information.tex:228 0.05                            SKIP  
+   -                        supporting_information.tex:228 0.13                            SKIP  
+   -                        supporting_information.tex:236 0.5                             SKIP  
+   -                        supporting_information.tex:238 0.5                             SKIP  
+   -                        supporting_information.tex:238 0.87                            SKIP  
+   note                       
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+   not in the ledger by design
+  PASS 170, FAIL 0, SKIP 306
 
 [4] Unregistered numbers (decimals and percentages not covered by number_locations.csv)
-   location                       number
-   main.tex:39                    0.80  
-   main.tex:39                    0.85  
-   main.tex:39                    0.90  
-   main.tex:39                    0.5   
-   main.tex:39                    1.0   
-   main.tex:39                    0.025 
-   main.tex:40                    0.80  
-   main.tex:40                    0.85  
-   main.tex:40                    0.90  
-   main.tex:40                    5     
-   main.tex:40                    10    
-   main.tex:40                    15    
-   main.tex:40                    0.025 
-   main.tex:53                    0.8   
-   main.tex:62                    0.8   
-   main.tex:62                    0.80  
-   main.tex:64                    0.025 
-   main.tex:64                    0.80  
-   main.tex:64                    0.90  
-   main.tex:95                    0.025 
-   main.tex:170                   0.80  
-   main.tex:170                   0.85  
-   main.tex:170                   0.90  
-   main.tex:182                   0.8   
-   main.tex:182                   0.95  
-   main.tex:238                   0.025 
-   main.tex:238                   0.80  
-   main.tex:238                   0.20  
-   main.tex:247                   0.025 
-   main.tex:247                   0.70  
-   main.tex:247                   0.80  
-   main.tex:247                   0.85  
-   main.tex:247                   0.87  
-   main.tex:247                   0.90  
-   main.tex:259                   0.025 
-   main.tex:259                   0.80  
-   main.tex:259                   0.05  
-   main.tex:259                   5     
-   main.tex:266                   0.025 
-   main.tex:266                   0.80  
-   main.tex:266                   0.85  
-   main.tex:266                   0.90  
-   main.tex:266                   0.3   
-   main.tex:266                   0.3   
-   main.tex:266                   0.7   
-   main.tex:266                   0.5   
-   main.tex:266                   1.5   
-   main.tex:266                   0.3   
-   main.tex:266                   0.3   
-   main.tex:266                   0.7   
-   main.tex:266                   0.5   
-   main.tex:266                   0.3   
-   main.tex:266                   0.3   
-   main.tex:266                   1.5   
-   main.tex:266                   0.7   
-   main.tex:266                   0.5   
-   main.tex:266                   1.5   
-   main.tex:266                   0.3   
-   main.tex:266                   0.5   
-   main.tex:266                   0.8   
-   main.tex:266                   4.6   
-   main.tex:270                   0.80  
-   main.tex:270                   0.85  
-   main.tex:270                   0.90  
-   main.tex:270                   0.3   
-   main.tex:270                   0.3   
-   main.tex:270                   0.5   
-   main.tex:270                   0.90  
-   main.tex:270                   0.80  
-   main.tex:270                   0.85  
-   main.tex:270                   0.90  
-   main.tex:272                   0.3   
-   main.tex:272                   0.3   
-   main.tex:272                   0.8   
-   main.tex:272                   0.80  
-   main.tex:272                   0.90  
-   main.tex:272                   0.7   
-   main.tex:272                   0.5   
-   main.tex:272                   1.5   
-   main.tex:272                   0.8   
-   main.tex:276                   0.025 
-   main.tex:276                   0.80  
-   main.tex:276                   0.90  
-   main.tex:276                   1.00  
-   main.tex:276                   2.00  
-   main.tex:276                   0.2   
-   main.tex:276                   0.3   
-   main.tex:276                   0.5   
-   main.tex:276                   0.7   
-   main.tex:276                   0.8   
-   main.tex:276                   0.95  
-   main.tex:276                   0.8   
-   main.tex:276                   0.03  
-   main.tex:276                   0.95  
-   main.tex:276                   0.87  
-   main.tex:282                   0.80  
-   main.tex:282                   0.85  
-   main.tex:282                   0.90  
-   main.tex:282                   90    
-   main.tex:282                   23    
-   main.tex:282                   0.10  
-   main.tex:282                   0.80  
-   main.tex:282                   0.85  
-   main.tex:282                   0.90  
-   main.tex:284                   0.05  
-   main.tex:284                   0.10  
-   main.tex:284                   0.15  
-   main.tex:284                   0.80  
-   main.tex:284                   0.05  
-   main.tex:284                   0.15  
-   main.tex:284                   0.90  
-   main.tex:284                   5     
-   main.tex:284                   0.80  
-   main.tex:284                   0.8   
-   main.tex:284                   0.4   
-   main.tex:284                   0.5   
-   main.tex:284                   80    
-   main.tex:284                   10    
-   main.tex:284                   1.25  
-   main.tex:284                   0.20  
-   main.tex:286                   0.80  
-   main.tex:290                   1.8   
-   main.tex:290                   3.1   
-   main.tex:290                   0.25  
-   main.tex:290                   0.25  
-   main.tex:290                   3.1   
-   main.tex:290                   0.05  
-   main.tex:290                   0.025 
-   main.tex:290                   0.89  
-   main.tex:290                   0.98  
-   main.tex:290                   0.89  
-   main.tex:290                   0.98  
-   main.tex:292                   0.87  
-   main.tex:292                   0.3   
-   main.tex:292                   0.5   
-   main.tex:292                   0.8   
-   main.tex:292                   0.87  
-   main.tex:292                   0.8   
-   main.tex:294                   0.87  
-   main.tex:294                   0.8   
-   main.tex:294                   0.8   
-   main.tex:294                   0.8   
-   main.tex:294                   0.05  
-   main.tex:294                   0.87  
-   main.tex:294                   5     
-   main.tex:294                   0.25  
-   main.tex:294                   0.05  
-   main.tex:294                   0.13  
-   main.tex:294                   5     
-   main.tex:294                   0.01  
-   main.tex:294                   1     
-   main.tex:302                   0.90  
-   main.tex:302                   0.8   
-   main.tex:306                   0.025 
-   main.tex:306                   0.80  
-   main.tex:306                   0.90  
-   main.tex:306                   0.8   
-   main.tex:306                   0.95  
-   main.tex:308                   0.025 
-   main.tex:308                   0.2   
-   main.tex:308                   0.4   
-   main.tex:308                   0.80  
-   main.tex:308                   0.025 
-   main.tex:308                   0.8   
-   main.tex:308                   0.95  
-   main.tex:308                   0.025 
-   main.tex:308                   0.95  
-   main.tex:322                   5.5   
-   supporting_information.tex:39  0.80  
-   supporting_information.tex:39  0.85  
-   supporting_information.tex:39  0.90  
-   supporting_information.tex:39  0.5   
-   supporting_information.tex:39  1.0   
-   supporting_information.tex:39  0.025 
-   supporting_information.tex:40  0.80  
-   supporting_information.tex:40  0.85  
-   supporting_information.tex:40  0.90  
-   supporting_information.tex:40  5     
-   supporting_information.tex:40  10    
-   supporting_information.tex:40  15    
-   supporting_information.tex:40  0.025 
-   supporting_information.tex:112 0.75  
-   supporting_information.tex:112 0.75  
-   supporting_information.tex:112 0.8   
-   supporting_information.tex:112 0.7   
-   supporting_information.tex:112 0.8   
-   supporting_information.tex:112 0.8   
-   supporting_information.tex:112 0.8   
-   supporting_information.tex:112 0.95  
-   supporting_information.tex:112 3.3   
-   supporting_information.tex:112 2.4   
-   supporting_information.tex:168 2.4   
-   supporting_information.tex:174 0.5   
-   supporting_information.tex:176 0.5   
-   supporting_information.tex:176 0.87  
-   snippet                                                                            
-    three target powers, $1 - \\beta = 0.80$, $0.85$, and $0.90$. The horizont        
-   arget powers, $1 - \\beta = 0.80$, $0.85$, and $0.90$. The horizontal dotte        
-   , $1 - \\beta = 0.80$, $0.85$, and $0.90$. The horizontal dotted lines mark        
-   izontal dotted lines mark $w^{*} = 0.5$ and $w^{*} = 1.0$. The significan          
-   es mark $w^{*} = 0.5$ and $w^{*} = 1.0$. The significance level is $\\alph         
-   he significance level is $\\alpha = 0.025$ (one-sided).}                           
-    three target powers, $1 - \\beta = 0.80$, $0.85$, and $0.90$. The horizont        
-   arget powers, $1 - \\beta = 0.80$, $0.85$, and $0.90$. The horizontal dotte        
-   , $1 - \\beta = 0.80$, $0.85$, and $0.90$. The horizontal dotted lines mark        
-   izontal dotted lines mark $\\Rmax = 5\\%$, $10\\%$, and $15\\%$. The signif        
-    dotted lines mark $\\Rmax = 5\\%$, $10\\%$, and $15\\%$. The significance l       
-   s mark $\\Rmax = 5\\%$, $10\\%$, and $15\\%$. The significance level is $\\al      
-   he significance level is $\\alpha = 0.025$ (one-sided).}                           
-   d constants for correlations up to 0.8 to within one unit in the third de          
-   he individual powers, for example $0.8^2 = 0.64$ when each endpoint has p          
-   .64$ when each endpoint has power $0.80$~\\cite{FDA2022}. When the endpoint        
-    the one-sided significance level $0.025$, target powers $0.80$ and $0.90$,        
-   ance level $0.025$, target powers $0.80$ and $0.90$, 15 effect size ratios         
-   $0.025$, target powers $0.80$ and $0.90$, 15 effect size ratios, and 7 cor         
-   d at the one-sided level $\\alpha = 0.025$, the conventional level for confi       
-   1.36$, and $1.30$ for $1 - \\beta = 0.80$, $0.85$, and $0.90$. For larger $        
-   nd $1.30$ for $1 - \\beta = 0.80$, $0.85$, and $0.90$. For larger $\\kappa$,       
-   r $1 - \\beta = 0.80$, $0.85$, and $0.90$. For larger $\\kappa$, the clippin       
-    throughout the range $|\\rho| \\leq 0.8$, which contains every correlation        
-   \\ref{sec:numerical} except $\\rho = 0.95$ in Section~\\ref{sec:published}, a      
-   For example, at $\\alpha = 0.025$ and $1 - \\beta = 0.80$, (\\ref{eq:              
-    $\\alpha = 0.025$ and $1 - \\beta = 0.80$, (\\ref{eq:Rmax_kappa1}) gives $\\R     
-   f{eq:Rmax_kappa1}) gives $\\Rmax(1, 0.20) \\approx 23.8\\%$. At fixed $\\lambd     
-   ho = 0$ is not zero. For $\\alpha = 0.025$, $\\kappa \\in [1, 3]$, and $1 - \\b    
-    \\in [1, 3]$, and $1 - \\beta \\in \\{0.70, 0.80, 0.85, 0.87, 0.90\\}$, the ma    
-   1, 3]$, and $1 - \\beta \\in \\{0.70, 0.80, 0.85, 0.87, 0.90\\}$, the maximum      
-   , and $1 - \\beta \\in \\{0.70, 0.80, 0.85, 0.87, 0.90\\}$, the maximum reduct     
-   $1 - \\beta \\in \\{0.70, 0.80, 0.85, 0.87, 0.90\\}$, the maximum reduction ra     
-   beta \\in \\{0.70, 0.80, 0.85, 0.87, 0.90\\}$, the maximum reduction rates ob      
-   pporting Information. At $\\alpha = 0.025$, $1 - \\beta = 0.80$, and $\\epsilo     
-    At $\\alpha = 0.025$, $1 - \\beta = 0.80$, and $\\epsilon = 0.05$, (\\ref{eq:     
-   1 - \\beta = 0.80$, and $\\epsilon = 0.05$, (\\ref{eq:kappa_star}) gives $\\ka     
-   e required sample size by at most $5\\%$ relative to the value at $\\rho           
-   sided significance level $\\alpha = 0.025$ and three target powers, $1 - \\be      
-    three target powers, $1 - \\beta = 0.80$, $0.85$, and $0.90$. Eight design        
-   arget powers, $1 - \\beta = 0.80$, $0.85$, and $0.90$. Eight design pattern        
-   , $1 - \\beta = 0.80$, $0.85$, and $0.90$. Eight design patterns were forme        
-   ences $(\\delta_1, \\delta_2) \\in \\{(0.3, 0.3),\\, (0.7, 0.5)\\}$, two pairs     
-    $(\\delta_1, \\delta_2) \\in \\{(0.3, 0.3),\\, (0.7, 0.5)\\}$, two pairs of st    
-   _1, \\delta_2) \\in \\{(0.3, 0.3),\\, (0.7, 0.5)\\}$, two pairs of standard de     
-   delta_2) \\in \\{(0.3, 0.3),\\, (0.7, 0.5)\\}$, two pairs of standard deviati      
-   a_1, \\sigma_2) \\in \\{(1, 1),\\, (1, 1.5)\\}$, and two allocation ratios $r      
-   , \\delta_2, \\sigma_1, \\sigma_2) = (0.3, 0.3, 1, 1)$, $\\kappa = 1.4$ for $      
-   lta_2, \\sigma_1, \\sigma_2) = (0.3, 0.3, 1, 1)$, $\\kappa = 1.4$ for $(0.7,       
-    0.3, 1, 1)$, $\\kappa = 1.4$ for $(0.7, 0.5, 1, 1)$, $\\kappa = 1.5$ for $        
-    1, 1)$, $\\kappa = 1.4$ for $(0.7, 0.5, 1, 1)$, $\\kappa = 1.5$ for $(0.3,        
-    0.5, 1, 1)$, $\\kappa = 1.5$ for $(0.3, 0.3, 1, 1.5)$, and $\\kappa = 2.1$        
-    1, 1)$, $\\kappa = 1.5$ for $(0.3, 0.3, 1, 1.5)$, and $\\kappa = 2.1$ for         
-    $\\kappa = 1.5$ for $(0.3, 0.3, 1, 1.5)$, and $\\kappa = 2.1$ for $(0.7, 0        
-   1, 1.5)$, and $\\kappa = 2.1$ for $(0.7, 0.5, 1, 1.5)$. Because the standa         
-   5)$, and $\\kappa = 2.1$ for $(0.7, 0.5, 1, 1.5)$. Because the standard de         
-    $\\kappa = 2.1$ for $(0.7, 0.5, 1, 1.5)$. Because the standard deviations         
-   n was varied over $\\rho \\in \\{0,\\, 0.3,\\, 0.5,\\, 0.8\\}$, which gives 96 c   
-   aried over $\\rho \\in \\{0,\\, 0.3,\\, 0.5,\\, 0.8\\}$, which gives 96 combinat   
-   ver $\\rho \\in \\{0,\\, 0.3,\\, 0.5,\\, 0.8\\}$, which gives 96 combinations of   
-   re performed in \\texttt{R} version 4.6.1~\\cite{R2026}.                           
-   ll 32 combinations at $1 - \\beta = 0.80$ and $0.85$, and in 31 of the 32 c        
-   nations at $1 - \\beta = 0.80$ and $0.85$, and in 31 of the 32 combinations        
-   he 32 combinations at $1 - \\beta = 0.90$. In the remaining combination, $(        
-   2, \\sigma_1, \\sigma_2, r, \\rho) = (0.3, 0.3, 1, 1, 1, 0.5)$ at $1 - \\beta      
-   igma_1, \\sigma_2, r, \\rho) = (0.3, 0.3, 1, 1, 1, 0.5)$ at $1 - \\beta = 0.       
-   _2, r, \\rho) = (0.3, 0.3, 1, 1, 1, 0.5)$ at $1 - \\beta = 0.90$, the propo        
-   .3, 1, 1, 1, 0.5)$ at $1 - \\beta = 0.90$, the proposed total sample size i        
-   .8000$ to $0.8078$ at $1 - \\beta = 0.80$, from $0.8501$ to $0.8544$ at $0.        
-   80$, from $0.8501$ to $0.8544$ at $0.85$, and from $0.9000$ to $0.9040$ at         
-    and from $0.9000$ to $0.9040$ at $0.90$. The excess over the target comes         
-   delta_2, \\sigma_1, \\sigma_2, r) = (0.3, 0.3, 1, 1, 1)$ with $\\kappa = 1$,       
-   _2, \\sigma_1, \\sigma_2, r) = (0.3, 0.3, 1, 1, 1)$ with $\\kappa = 1$, the        
-    at $\\rho = 0$ to $408$ at $\\rho = 0.8$ when $1 - \\beta = 0.80$, a reduct       
-    at $\\rho = 0.8$ when $1 - \\beta = 0.80$, a reduction of about $11\\%$, and      
-   0$, about $8\\%$, when $1 - \\beta = 0.90$. When the effect size ratio is la       
-    weaker endpoint. In the pattern $(0.7, 0.5, 1, 1.5, 1)$ with $\\kappa = 2         
-   er endpoint. In the pattern $(0.7, 0.5, 1, 1.5, 1)$ with $\\kappa = 2.1$,          
-   int. In the pattern $(0.7, 0.5, 1, 1.5, 1)$ with $\\kappa = 2.1$, the tota         
-   duction from $\\rho = 0$ to $\\rho = 0.8$ is at most $4\\%$. In every patter       
-   gimoto2012} for $K = 2$, $\\alpha = 0.025$, $1 - \\beta \\in \\{0.80, 0.90\\}$,    
-   $\\alpha = 0.025$, $1 - \\beta \\in \\{0.80, 0.90\\}$, 15 effect size ratios be    
-   a = 0.025$, $1 - \\beta \\in \\{0.80, 0.90\\}$, 15 effect size ratios between      
-   }$, 15 effect size ratios between $1.00$ and $2.00$, and the correlations          
-   ct size ratios between $1.00$ and $2.00$, and the correlations $0$, $0.2$,         
-   $2.00$, and the correlations $0$, $0.2$, $0.3$, $0.5$, $0.7$, $0.8$, and           
-    and the correlations $0$, $0.2$, $0.3$, $0.5$, $0.7$, $0.8$, and $0.95$.          
-   e correlations $0$, $0.2$, $0.3$, $0.5$, $0.7$, $0.8$, and $0.95$. In the          
-   lations $0$, $0.2$, $0.3$, $0.5$, $0.7$, $0.8$, and $0.95$. In the presen          
-    $0$, $0.2$, $0.3$, $0.5$, $0.7$, $0.8$, and $0.95$. In the present notat          
-   , $0.3$, $0.5$, $0.7$, $0.8$, and $0.95$. In the present notation, this co         
-   For the 180 values with $\\rho \\leq 0.8$, the closed-form value agreed wit        
-   ~(\\ref{eq:ss_final}) by less than $0.03\\%$. At $\\rho = 0.95$, outside the       
-    by less than $0.03\\%$. At $\\rho = 0.95$, outside the range used elsewhere       
-   as designed for a target power of $0.87$ with an effect size ratio of $1.2         
-   \\%$, and $18.6\\%$ for $1 - \\beta = 0.80$, $0.85$, and $0.90$, respectively      
-    $18.6\\%$ for $1 - \\beta = 0.80$, $0.85$, and $0.90$, respectively, and it       
-   r $1 - \\beta = 0.80$, $0.85$, and $0.90$, respectively, and it decreases q        
-   that, with equal effect sizes and $90\\%$ power, two co-primary endpoints          
-   imary endpoints can require up to $23\\%$ more patients than a single end          
-   ho \\to 1$, and $1 / \\{1 - \\Rmax(1, 0.10)\\} - 1 \\approx 22.8\\%$. The same q   
-   1.27$, and $1.23$ for $1 - \\beta = 0.80$, $0.85$, and $0.90$, in agreement        
-   nd $1.23$ for $1 - \\beta = 0.80$, $0.85$, and $0.90$, in agreement with Fi        
-   r $1 - \\beta = 0.80$, $0.85$, and $0.90$, in agreement with Figure~1 of Hu        
-   silon, \\beta)$ for $\\epsilon \\in \\{0.05,\\, 0.10,\\, 0.15\\}$. At $1 - \\beta  
-   beta)$ for $\\epsilon \\in \\{0.05,\\, 0.10,\\, 0.15\\}$. At $1 - \\beta = 0.80$,  
-   or $\\epsilon \\in \\{0.05,\\, 0.10,\\, 0.15\\}$. At $1 - \\beta = 0.80$, the thr  
-   , 0.10,\\, 0.15\\}$. At $1 - \\beta = 0.80$, the threshold decreases from $1.      
-   creases from $1.37$ at $\\epsilon = 0.05$ to $1.13$ at $\\epsilon = 0.15$, a       
-   n = 0.05$ to $1.13$ at $\\epsilon = 0.15$, and at $1 - \\beta = 0.90$ from $       
-   silon = 0.15$, and at $1 - \\beta = 0.90$ from $1.24$ to $1.05$. Once the s        
-   e required sample size by at most $5\\%$ at these target powers. This is           
-   comparison}, where at $1 - \\beta = 0.80$ the reduction from $\\rho = 0$ to        
-   duction from $\\rho = 0$ to $\\rho = 0.8$ is about $11\\%$ at $\\kappa = 1$ a      
-   at, for standardized effect sizes $0.4$ and $0.5$ and $80\\%$ power, the s         
-   andardized effect sizes $0.4$ and $0.5$ and $80\\%$ power, the sample size         
-    effect sizes $0.4$ and $0.5$ and $80\\%$ power, the sample size can be r          
-   size can be reduced by only about $10\\%$ when the correlation is close t          
-   s give $\\kappa = 1.25$, and $\\Rmax(1.25, 0.20) \\approx 9.1\\%$ confirms the     
-    $\\kappa = 1.25$, and $\\Rmax(1.25, 0.20) \\approx 9.1\\%$ confirms their fig     
-   pa$ and $\\rho$, so at $1 - \\beta = 0.80$ even a perfectly known correlatio       
-   eatment differences of $\\delta_1 = 1.8$ on ADAS-Cog11 and $\\delta_2 = 3.1        
-   1.8$ on ADAS-Cog11 and $\\delta_2 = 3.1$ on ADCS-ADL, with common standard         
-   scribes the second effect size as $0.25$, and its table of marginal powers         
-   le of marginal powers agrees with $0.25$ rather than with $3.1 / 12$. The          
-   rees with $0.25$ rather than with $3.1 / 12$. The consequence of this rou          
-   sided significance level $\\alpha = 0.05$ (i.e., one-sided significance lev        
-   sided significance level $\\alpha = 0.025$), equal allocation $r = 1$, and 5       
-   he marginal powers were stated as $0.89$ for ADAS-Cog11 and $0.98$ for ADC         
-   ated as $0.89$ for ADAS-Cog11 and $0.98$ for ADCS-ADL. The protocol then r         
-   ed an overall co-primary power of $0.89 \\times 0.98 = 0.87$, which is the         
-   l co-primary power of $0.89 \\times 0.98 = 0.87$, which is the product of t        
-   losed-form formula at $1 - \\beta = 0.87$ for four values of $\\rho$, namely       
-   our values of $\\rho$, namely $0$, $0.3$, $0.5$, and $0.8$. At $\\rho = 0$         
-   ues of $\\rho$, namely $0$, $0.3$, $0.5$, and $0.8$. At $\\rho = 0$ the clo        
-   o$, namely $0$, $0.3$, $0.5$, and $0.8$. At $\\rho = 0$ the closed-form fo         
-   ribed by the protocol. The target $0.87$ was itself obtained from the marg         
-   . As $\\rho$ increases from $0$ to $0.8$, the total sample size decreases          
-    $\\kappa = 1.292$ and $1 - \\beta = 0.87$, $\\Rmax$ is approximately $4.6\\%$     
-   er reduction of $4.0\\%$ at $\\rho = 0.8$ recovers roughly $87\\%$ of the an       
-   :R_def}), the reduction at $\\rho = 0.8$ is $3.9\\%$, so the gap to $\\Rmax$       
-   e gap to $\\Rmax$ is due to $\\rho = 0.8$ being below one, and the ceiling         
-   ref{eq:kappa_star}) at $\\epsilon = 0.05$ and $1 - \\beta = 0.87$ gives a th       
-   $\\epsilon = 0.05$ and $1 - \\beta = 0.87$ gives a threshold $\\kappa^{*} \\ap     
-    maximum reduction lies below the $5\\%$ tolerance at this $\\kappa$. The          
-   he protocol's rounded effect size $0.25$, the effect size ratio is $\\kappa        
-   $\\kappa = 1.25$, below $\\kappa^{*}(0.05, 0.13)$, and $\\Rmax$ is approximat      
-   a = 1.25$, below $\\kappa^{*}(0.05, 0.13)$, and $\\Rmax$ is approximately $6       
-    the maximum reduction lies below $5\\%$ therefore depends on how the ef           
-    the tighter tolerance $\\epsilon = 0.01$ is $\\kappa^{*} \\approx 1.494$, wh      
-    maximum reduction lies above the $1\\%$ tolerance.                                
-   power fell short of the target of $0.90$ by about $10^{-6}$. The formula a         
-   al.~\\cite{Sozu2015} for $\\rho \\leq 0.8$ to within one unit in the third d       
-   cy was examined here for $\\alpha = 0.025$, $0.80 \\leq 1 - \\beta \\leq 0.90$,    
-   amined here for $\\alpha = 0.025$, $0.80 \\leq 1 - \\beta \\leq 0.90$, and $0      
-    0.025$, $0.80 \\leq 1 - \\beta \\leq 0.90$, and $0 \\leq \\rho \\leq 0.8$, with   
-    \\leq 0.90$, and $0 \\leq \\rho \\leq 0.8$, with an additional comparison at      
-   n additional comparison at $\\rho = 0.95$ against the published tables. Its        
-   e, about two patients at $\\alpha = 0.025$, nearly always gives the exact sa       
-   standardized effect sizes between $0.2$ and $0.4$ with a target power of           
-   ed effect sizes between $0.2$ and $0.4$ with a target power of $0.80$ at           
-    and $0.4$ with a target power of $0.80$ at a one-sided level of $0.025$.          
-   of $0.80$ at a one-sided level of $0.025$. Adding such an increment to~(\\re       
-    by simulation. Third, for $\\rho > 0.8$ the accuracy of the formula was e         
-   rmula was examined only at $\\rho = 0.95$ against the published tables, and        
-   or significance levels other than $0.025$. At $\\rho = 0.95$, the closed for       
-   els other than $0.025$. At $\\rho = 0.95$, the closed form reproduced 20 of        
-   Claude Opus 5.5 (Anthropic) was used to assist in                                  
-    three target powers, $1 - \\beta = 0.80$, $0.85$, and $0.90$. The horizont        
-   arget powers, $1 - \\beta = 0.80$, $0.85$, and $0.90$. The horizontal dotte        
-   , $1 - \\beta = 0.80$, $0.85$, and $0.90$. The horizontal dotted lines mark        
-   izontal dotted lines mark $w^{*} = 0.5$ and $w^{*} = 1.0$. The significan          
-   es mark $w^{*} = 0.5$ and $w^{*} = 1.0$. The significance level is $\\alph         
-   he significance level is $\\alpha = 0.025$ (one-sided).}                           
-    three target powers, $1 - \\beta = 0.80$, $0.85$, and $0.90$. The horizont        
-   arget powers, $1 - \\beta = 0.80$, $0.85$, and $0.90$. The horizontal dotte        
-   , $1 - \\beta = 0.80$, $0.85$, and $0.90$. The horizontal dotted lines mark        
-   izontal dotted lines mark $\\Rmax = 5\\%$, $10\\%$, and $15\\%$. The signif        
-    dotted lines mark $\\Rmax = 5\\%$, $10\\%$, and $15\\%$. The significance l       
-   s mark $\\Rmax = 5\\%$, $10\\%$, and $15\\%$. The significance level is $\\al      
-   he significance level is $\\alpha = 0.025$ (one-sided).}                           
-   rature over the grid $a \\in \\{-1, -0.75, \\ldots, 4\\}$, $b \\in \\{-1, -0.75,   
-   -0.75, \\ldots, 4\\}$, $b \\in \\{-1, -0.75, \\ldots, 8\\}$, and $\\rho \\in \\{-0.
-   75, \\ldots, 8\\}$, and $\\rho \\in \\{-0.8, -0.7, \\ldots, 0.8\\}$ ($13209$ poi   
-   dots, 8\\}$, and $\\rho \\in \\{-0.8, -0.7, \\ldots, 0.8\\}$ ($13209$ points),     
-   nd $\\rho \\in \\{-0.8, -0.7, \\ldots, 0.8\\}$ ($13209$ points), which covers      
-   g in this article for $|\\rho| \\leq 0.8$, and was found to remain below $1        
-    throughout the range $|\\rho| \\leq 0.8$, which contains every correlation        
-   gation in Section~3 except $\\rho = 0.95$ in Section~3.3, and every correla        
-   ~3 except $\\rho = 0.95$ in Section~3.3, and every correlation used in the         
-    maximum reduction rate in Section~2.4.1 is defined through the exact pow          
-    > 1 - \\beta$. As noted in Section~2.4.2, (20) is used for $\\epsilon < \\R       
-   1 design of Section~4 with $\\rho = 0.5$.                                          
-    agrees with the value for $\\rho = 0.5$ in Table~4, and the co-primary po         
-   , is at least the target power of $0.87$. The call to \\texttt{sapply} repr        
+  (none)
 
-[5] Ledger keys not cited in the manuscript: 59 of 138 (for information)
+[5] Ledger keys not cited in the manuscript: 24 of 134 (for information)
 
 ==================================================================
- Result: ALL CHECKS PASSED; 195 unregistered number(s) to review
+ Result: ALL CHECKS PASSED; 0 unregistered number(s) to review
 ==================================================================
 
 R version 4.6.1 (2026-06-24 ucrt)
@@ -545,15 +997,14 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] twocpcont_0.1.0.9000 mvtnorm_1.4-2        ggplot2_4.0.3        pbivnorm_0.6.0       testthat_3.3.2      
+[1] ggplot2_4.0.3        pbivnorm_0.6.0       twocpcont_0.1.0.9000 testthat_3.3.2      
 
 loaded via a namespace (and not attached):
- [1] generics_0.1.4     xml2_1.6.0         digest_0.6.39      magrittr_2.0.5     evaluate_1.0.5     grid_4.6.1        
- [7] RColorBrewer_1.1-3 pkgload_1.5.2      fastmap_1.2.0      rprojroot_2.1.1    processx_3.9.0     pkgbuild_1.4.8    
-[13] sessioninfo_1.2.3  brio_1.1.5         rcmdcheck_1.4.0    purrr_1.2.2        scales_1.4.0       cli_3.6.6         
-[19] rlang_1.3.0        ellipsis_0.3.3     withr_3.0.2        cachem_1.1.0       devtools_2.5.2     otel_0.2.0        
-[25] tools_4.6.1        memoise_2.0.1      dplyr_1.2.1        curl_7.1.0         vctrs_0.7.3        R6_2.6.1          
-[31] lifecycle_1.0.5    fs_2.1.0           xopen_1.0.1        usethis_3.2.1      pkgconfig_2.0.3    waldo_0.6.2       
-[37] desc_1.4.3         callr_3.7.6        pillar_1.11.1      gtable_0.3.6       glue_1.8.1         xfun_0.61         
-[43] tibble_3.3.1       tidyselect_1.2.1   rstudioapi_0.18.0  knitr_1.52         farver_2.1.2       labeling_0.4.3    
-[49] compiler_4.6.1     prettyunits_1.2.0  S7_0.2.2           roxygen2_8.0.0    
+ [1] gtable_0.3.6       dplyr_1.2.1        compiler_4.6.1     brio_1.1.5         tidyselect_1.2.1   xml2_1.6.0        
+ [7] scales_1.4.0       fastmap_1.2.0      R6_2.6.1           labeling_0.4.3     generics_0.1.4     knitr_1.52        
+[13] tibble_3.3.1       desc_1.4.3         rprojroot_2.1.1    pillar_1.11.1      RColorBrewer_1.1-3 rlang_1.3.0       
+[19] cachem_1.1.0       roxygen2_8.0.0     xfun_0.61          fs_2.1.0           S7_0.2.2           pkgload_1.5.2     
+[25] otel_0.2.0         memoise_2.0.1      cli_3.6.6          withr_3.0.2        magrittr_2.0.5     grid_4.6.1        
+[31] rstudioapi_0.18.0  devtools_2.5.2     lifecycle_1.0.5    vctrs_0.7.3        evaluate_1.0.5     glue_1.8.1        
+[37] farver_2.1.2       sessioninfo_1.2.3  pkgbuild_1.4.8     purrr_1.2.2        tools_4.6.1        usethis_3.2.1     
+[43] pkgconfig_2.0.3    ellipsis_0.3.3    

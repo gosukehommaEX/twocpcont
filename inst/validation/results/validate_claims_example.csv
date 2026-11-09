@@ -9,4 +9,4 @@
 "protocol_power_table_matches_0.25","The protocol's table of marginal powers agrees with the effect size 0.25 and not with 3.1 / 12","PASS","0.20: 81/85/89; 0.25: 94/96/98; 3.1/12: 95/97/98"
 "schouten_increment_about_two","z_alpha^2 / 2 at alpha = 0.025 is about two patients","PASS","z_alpha^2 / 2 = 1.9207"
 "shortfall_fixed_by_one_power_check","Increasing n2 by one when the target is missed gives the conventional sample size in the shortfall of Section 3.2","PASS","n2 = 279, N = 558, power = 0.9011910"
-"software_example_matches_table4","In Section S5 the total sample size equals that of Table 4 at rho = 0.5 and the co-primary power is at least 0.87","PASS","N = 980 (Table 4: 980), power = 0.870242"
+"software_example_matches_table4","In Section S9 the total sample size equals that of Table 4 at rho = 0.5 and the co-primary power is at least 0.87","PASS","N = 980 (Table 4: 980), power = 0.870242"
