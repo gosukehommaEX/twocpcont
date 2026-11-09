@@ -421,7 +421,8 @@ target_labels <- lapply(power_set, function(p) {
 })
 
 # Closed-form w* (solid) and the exact root of (S2) (dashed) for each
-# target power
+# target power. The axis and the legend name no symbol, so that the figure
+# does not depend on the notation of the weight; the caption gives it.
 df_fig1_long <- rbind(
   data.frame(kappa = df_fig1$kappa, target = df_fig1$target,
              w = df_fig1$w_star, curve = "closed"),
@@ -439,17 +440,18 @@ p1 <- ggplot(df_fig1_long, aes(x = kappa, y = w, colour = target,
   geom_line(linewidth = 0.6) +
   scale_colour_manual(values = color_set, labels = target_labels) +
   scale_linetype_manual(values = c(closed = "solid", exact = "dashed"),
-                        labels = c(closed = expression(italic(w)^"*"),
+                        labels = c(closed = "Closed form",
                                    exact = "Exact root")) +
   scale_x_continuous(breaks = seq(1, 4, by = 0.5)) +
   scale_y_continuous(limits = c(0.30, 1.05),
                      breaks = seq(0.3, 1.0, by = 0.1)) +
-  labs(x = expression(kappa),
-       y = expression(italic(w))) +
+  labs(x = expression(kappa), y = "Anchor weight") +
   theme_paper() +
   theme(legend.text      = element_text(size = 9),
         legend.key.width = unit(1.0, "cm"),
-        legend.box       = "vertical")
+        legend.box       = "vertical",
+        legend.spacing.y = unit(2, "pt"),
+        legend.margin    = margin(0, 0, 0, 0))
 save_figure(p1, "figure1_anchor_weight", width = FIG_WIDTH,
             height = 100 / 25.4)
 

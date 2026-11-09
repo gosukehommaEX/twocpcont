@@ -430,8 +430,10 @@ pS2 <- ggplot(dS2, aes(x = kappa, y = 100 * rel_n2, colour = power_lab)) +
   geom_hline(yintercept = 0, linetype = "dotted", colour = "#888888",
              linewidth = 0.4) +
   geom_line(linewidth = 0.5) +
+  # rho as a number, so that a negative value is set with a minus sign
   facet_wrap(~ rho_lab, ncol = 3, scales = "free_y",
-             labeller = label_bquote(rho == .(as.character(rho_lab)))) +
+             labeller = label_bquote(
+               rho == .(as.numeric(as.character(rho_lab))))) +
   scale_colour_manual(values = OKABE_ITO[seq_along(power_set_grid)],
                       labels = power_labels_S2) +
   scale_x_continuous(breaks = seq(1, 3, by = 0.5)) +
@@ -710,13 +712,6 @@ for (m in METHOD_ORDER) {
           sprintf("Time per design (ms), %s", m),
           "cost_comparison.rds: timing")
 }
-add_num("cost_ratio_newton", s1_of("newton", "ms") / s1_of("univariate", "ms"),
-        0, "Time of the Newton-Raphson algorithm relative to the closed form",
-        "cost_comparison.rds: timing")
-add_num("cost_ratio_uniroot",
-        s1_of("uniroot", "ms") / s1_of("univariate", "ms"), 0,
-        "Time of Brent's method relative to the closed form",
-        "cost_comparison.rds: timing")
 for (m in c("newton", "uniroot", "univariate")) {
   nm <- c(newton = "newton", uniroot = "uniroot", univariate = "closed")[[m]]
   add_num(sprintf("cost_match_%s", nm), s1_of(m, "n_match"), 0,
@@ -726,7 +721,7 @@ for (m in c("newton", "uniroot", "univariate")) {
 add_num("cost_rel_closed", s1_of("univariate", "rel_max"), 4,
         "Largest relative error of the continuous n2, closed form",
         "cost_comparison.rds: data$rel_n2")
-add_num("cost_rel_newton", s1_of("newton", "rel_max"), 6,
+add_num("cost_rel_newton", s1_of("newton", "rel_max"), 7,
         "Largest relative error of the continuous n2, Newton-Raphson",
         "cost_comparison.rds: data$rel_n2")
 add_num("cost_ext_n", nrow(ext), 0,
