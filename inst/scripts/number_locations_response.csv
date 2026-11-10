@@ -1,0 +1,234 @@
+key,context,scale,note
+-,ections~{} and~3.4 o,,section number
+-,3.3 and~{} of,,section number
+-,ections~{} and~3.5 o,,section number
+-,3.4 and~{} of,,section number
+-,Section~{} and Section~S6 ,,section number
+-,of 21816 designs with one-sided significance levels from ${}$ t,,as in the manuscript: s from ${}$ to $0.05
+-,"f 21816 designs with one-sided significance levels from $0.005$ to ${}$, ",,"as in the manuscript: 05$ to ${}$, "
+-,"h one-sided significance levels from $0.005$ to $0.05$, target powers from ${}$ to $0.95$, and",,as in the manuscript: s from ${}$ to $0.95
+-,"h one-sided significance levels from $0.005$ to $0.05$, target powers from $0.70$ to ${}$, and",,"as in the manuscript: 70$ to ${}$, and"
+-, from $-{}$ to $0.99$ (Tab,,"input or label, as in the manuscript"
+-,.5$ to ${}$ (Tab,,as in the manuscript: .5$ to ${}$ (
+-,"Section~{}.2, the Di",,section number
+-,\rho| < {}$ and that,,as in the manuscript: \rho| < {}$ a
+-,"Section~{}, the nume",,section number
+-,\rho| < {}$ and inte,,as in the manuscript: \rho| < {}$ a
+-,Section {} do,,section number
+-,Section~{} and the n,,section number
+-,"Section~{}, n",,section number
+-,la (Section~{}).},,section number
+-,"Section {}.1, $w",,section number
+-,"kappa = {}$ and 2.1,",,reviewer's comment
+-,".5$ and {}, a",,reviewer's comment
+-,kappa = {}$ except at 80\%,,as in the manuscript: kappa = {}$ e
+-,cept at {}\% ,,reviewer's comment
+-,Section~{} now states that the 96 ,,section number
+-,"eps of ${}$, and",,grid step of kappa in Figure S1 (input)
+-,eps of ${}$ (,,grid step of kappa in Table S2 (input)
+-,Section~{} and Section~S6),,section number
+-,kappa = {}$ and $2.1,,as in the manuscript: kappa = {}$ and $2.1
+-,"5$ and ${}$, ",,"as in the manuscript: 5$ and ${}$, "
+-,kappa = {}$ except at $1 -,,as in the manuscript: kappa = {}$ e
+-,"\beta = {}$, so ",,"as in the manuscript: \beta = {}$, so "
+-,a$ in Section~{}.},,section number
+-, $n_2 = {}$ in Section 3.2,,reviewer's comment
+-,Section {} sh,,section number
+-,Section {}. T,,section number
+-,"alpha = {}$, $1 ",,reviewer's comment
+-,"between {} and 0.90,",,reviewer's comment
+-,".80 and {}, a",,reviewer's comment
+-,n 0 and {} (a,,reviewer's comment
+-,$\rho = {}$ in t,,reviewer's comment
+-,Section~{} me,,section number
+cost_rel_closed, about ${}\%$. Table,100,largest relative error over the 96 combinations (Section 3.3)
+-,to 21816 designs with one-sided significance levels from ${}$ t,,as in the manuscript: s from ${}$ to $0.05
+-,"o 21816 designs with one-sided significance levels from $0.005$ to ${}$, ",,"as in the manuscript: 05$ to ${}$, "
+-,"s from ${}$ to $0.95$, $\k",,as in the manuscript: s from ${}$ to $0.95
+-,"70$ to ${}$, $\k",,"input or label, as in the manuscript"
+-,ns from $-{}$ to $0.99$. The,,as in the manuscript: ns from $-{}$ to $0.99$. The
+-,.5$ to ${}$. The largest relative error was about ,,as in the manuscript: s from $-0.5$ to ${}$. 
+grid_rel_max_lo,or was about ${}\%$,100,as in the manuscript: was about ${}\%$ for $\rho \leq 0.9$
+-,"r was about $0.14\%$ for $\rho \leq {}$, ",,"as in the manuscript: was about $0.14\%$ for $\rho \leq {}$, "
+grid_rel_max_rho95,"or was about $0.14\%$ for $\rho \leq 0.9$, about ${}\%$",100,same number in the manuscript
+-,"r was about $0.14\%$ for $\rho \leq 0.9$, about $0.26\%$ at $\rho = {}$, ",,"as in the manuscript: $\rho = {}$, and about $1.1\%$ at $\rho = 0.99$, a"
+grid_rel_max_rho99," about ${}\%$ at $\rho = 0.99$, and for $\rho \leq",100,same number in the manuscript
+-,"$\rho = {}$, and for",,"input or label, as in the manuscript"
+-,ho \leq {}$ t,,"input or label, as in the manuscript"
+-,ho \leq {}$.,,"input or label, as in the manuscript"
+-,"s up to {}, i",,"as in the manuscript: s up to {}, i"
+grid_rel_max_lo,t about {}\%.,100,same number in the manuscript
+-,Section~{} ``,,section number
+mismatch_n2_exact, $n_2 = {}$ in Section~3.2,,as in the manuscript: combination with $n_2 = {}$ in Section
+-,Section~{} shows. Th,,section number
+-,efined in Section~{}.},,section number
+-,$ from ${}$ to $0.95,,"as in the manuscript: $ from ${}$ to $0.95$, $\a"
+-,"70$ to ${}$, $\a",,"as in the manuscript: 70$ to ${}$, $\a"
+-,"a \in \{{}, 0.01",,"as in the manuscript: a \in \{{}, 0.01, 0.025, 0.05\}$, and $\rho$ from "
+-,"{0.005, {}, 0",,"as in the manuscript: {0.005, {}, 0.025, 0.05\}$, and $\"
+-,", 0.01, {}, 0",,"as in the manuscript: , 0.01, {}, 0.05\}$, and $"
+-," 0.025, {}\}$",,"as in the manuscript:  0.025, {}\}$, and $"
+-,o$ from $-{}$ t,,as in the manuscript: o$ from $-{}$ t
+-,.5$ to ${}$. The largest relative error of the con,,as in the manuscript: $ from $-0.5$ to ${}$. 
+grid_rel_max_lo,2$ was about ${}\%$,100,as in the manuscript: was about ${}\%$ for $\rho \leq 0.9$
+-,"$ was about $0.14\%$ for $\rho \leq {}$, ",,"as in the manuscript: was about $0.14\%$ for $\rho \leq {}$, "
+grid_rel_max_rho95,"2$ was about $0.14\%$ for $\rho \leq 0.9$, about ${}\%$",100,"as in the manuscript: ${}\%$ at $\rho = 0.95$, and about $1.1\%$ at $\rho = 0.99$,"
+-,"$ was about $0.14\%$ for $\rho \leq 0.9$, about $0.26\%$ at $\rho = {}$, ",,"as in the manuscript: $\rho = {}$, and about $1.1\%$ at $\rho = 0.99$, a"
+grid_rel_max_rho99," about ${}\%$ at $\rho = 0.99$, and the error was ",100,"as in the manuscript: and about ${}\%$ at $\rho = 0.99$, and the error"
+-,"$\rho = {}$, and the",,"as in the manuscript: $\rho = {}$, and the"
+-,"alpha = {}$, $0.",,"input or label, as in the manuscript"
+-,".025$, ${} \l",,"input or label, as in the manuscript"
+-,"ta \leq {}$, ",,"input or label, as in the manuscript"
+-,"ho \leq {}$, wit",,"input or label, as in the manuscript"
+-,$\rho = {}$ against the published tables.}{Its acc,,"input or label, as in the manuscript"
+-,r one-sided significance levels from ${}$ t,,as in the manuscript: s from ${}$ to $0.05
+-,"or one-sided significance levels from $0.005$ to ${}$, ",,"as in the manuscript: 05$ to ${}$, "
+-,"r one-sided significance levels from $0.005$ to $0.05$, target powers from ${}$ t",,as in the manuscript: s from ${}$ to $0.95
+-,"r one-sided significance levels from $0.005$ to $0.05$, target powers from $0.70$ to ${}$, ",,"as in the manuscript: 70$ to ${}$, and"
+-, from $-{}$ to $0.99$ (Sec,,as in the manuscript:  from $-{}$ to $0.99$ (Sec
+-,.5$ to ${}$ (Sec,,as in the manuscript: .5$ to ${}$ (
+-,$0.99$ (Section~{}).},,section number
+-,$\rho > {}$ t,,"input or label, as in the manuscript"
+-,"$\rho = {}$ against the published tables, and it w",,"input or label, as in the manuscript"
+-,r than ${}$. ,,"input or label, as in the manuscript"
+grid_rel_max_rho99, about ${}\%$ at $\rho = 0.99$ (Se,100,as in the manuscript: reached about ${}\%$ at $\rho = 0.99$
+-,$\rho = {}$ (,,as in the manuscript: $\rho = {}$ (
+-, 0.99$ (Section~{}).},,section number
+-,Section {} de,,section number
+-,Section {}.2 pre,,section number
+-,"Section {}.1, ho",,section number
+-,Section {}.2 its,,section number
+-,"Section {}, a",,section number
+-,"Section {}.1, ju",,section number
+-,Section~{}.2 now state tha,,section number
+-,"at $\lambda_w^{*}$ attains the target power only approximately, with the accuracy examined in Section~{}.",,section number
+-,amined in Section~{}.},,section number
+-,$\rho = {}$ is 2,,reviewer's comment
+-,"0.5$ is {}\%,",,reviewer's comment
+-,"f about {}\%,",,reviewer's comment
+-,= 1$ at {}\% ,,reviewer's comment
+-,s about {}\% ,,reviewer's comment
+-,"$\rho = {}$, against 23.8\",,reviewer's comment
+-,against {}\%.,,reviewer's comment
+-,Section {} fo,,section number
+-,"Section {}), ",,section number
+-,Section {} ar,,section number
+-,Section~{}.1 now states that $\Rma,,as in the manuscript: Section~{}.1 
+-,Section~{} shows the,,section number
+-,\beta = {}$ i,,"input or label, as in the manuscript"
+red_cont_k1_rho05_80," about ${}\%$ at $\rho = 0.5$, aga",100,same number in the manuscript
+-,"$\rho = {}$, against $\Rmax$ of ab",,"input or label, as in the manuscript"
+rmax_k1_80, about ${}\%$. The l,100,same number in the manuscript
+-,Section~{} now states that a ratio,,section number
+-,Section~{} now a,,section number
+-,"ttern $({}, 0.3, 1, 1, 1)$ of Table~2 with $\kappa",,"as in the manuscript: ttern $({}, 0.3,"
+-," $(0.3, {}, 1, 1, 1)$ of Table~2 w",,"as in the manuscript:  $(0.3, {}, 1, 1, 1)"
+-,"\beta = {}$, the total sample size planned at $\rh",,"as in the manuscript: \beta = {}$, the tot"
+-,ze planned at $\rho = {}$ g,,as in the manuscript: $\rho = {}$ g
+plan_A_pow_p08_t0, about ${}$ when the true correlation is zero.,,as in the manuscript: gives a power of about ${}$ when the true
+-,ections~{}.1 and~3.5 now s,,section number
+-,4.1 and~{} no,,section number
+-,Section~{}). ,,section number
+-,"\beta = {}$, the red",,"as in the manuscript: \beta = {}$, the red"
+red_cont_k1_rho03_80," about ${}\%$ at $\rho = 0.3$, $5.",100,as in the manuscript: the reduction is about ${}\%$ at $\rho = 0.3$
+-,"$\rho = {}$, $5.",,"as in the manuscript: $\rho = {}$, $5."
+red_cont_k1_rho05_80," 0.3$, ${}\%$",100,"as in the manuscript: 0.3$, ${}\%$ at $\rho = 0.5$, and"
+-,"$\rho = {}$, and $11",,"as in the manuscript: $\rho = {}$, and $11"
+red_cont_k1_rho08_80,"$, and ${}\%$",100,"as in the manuscript: and ${}\%$ at $\rho = 0.8$, against"
+-,"$\rho = {}$, against $\Rmax(1, 0.2",,"as in the manuscript: $\rho = {}$, aga"
+-,"Rmax(1, {}) \",,"as in the manuscript: Rmax(1, {}) \approx 23.8\%$, and i"
+rmax_k1_80,\approx {}\%$,100,"as in the manuscript: against $\Rmax(1, 0.20) \approx {}\%$"
+-,"ttern $({}, 0.3, 1, 1, 1)$ of Table~2 at $1 - \bet",,"as in the manuscript: ttern $({}, 0.3,"
+-," $(0.3, {}, 1, 1, 1)$ of Table~2 a",,"as in the manuscript:  $(0.3, {}, 1, 1, 1)"
+-,"\beta = {}$, the total sample size of 408 planned ",,"as in the manuscript: \beta = {}$, the tot"
+-,08 planned at $\rho = {}$ g,,as in the manuscript: $\rho = {}$ g
+plan_A_pow_p08_t0, about ${}$ when the true correlation is zero (Tab,,as in the manuscript: gives a power of about ${}$ when the true
+-,f Section~{}.},,section number
+-,"2$. Over the 21816 designs of Section~{}, the smallest $D$ was about $0.01$ and ",,section number
+grid_disc_min, about ${}$ and none was negative. If $D$ is negat,,same number in the manuscript
+-,"Section~{}, the smallest $D$ was about $0.01$, and",,section number
+grid_disc_min," about ${}$, and non",,"as in the manuscript: the smallest $D$ was about ${}$, and none"
+-,Section {}. F,,section number
+-, for the shortfall in Section~{}.,,section number
+-,"Section~{}, w",,section number
+-,"Section~{}, a",,section number
+-,Section~{} reports the err,,section number
+-,ections~{} and~S,,section number
+-,s below {}\% ,,reviewer's comment
+-,Section~{}.1),,section number
+-,d from ${}$ t,,as in the manuscript: d from ${}$ to $0.30
+-,20$ to ${}$. ,,"input or label, as in the manuscript"
+sens_rmax_es020, about ${}\%$ to about $1.0\%$ and,100,as in the manuscript: falls from about ${}\%$ to about
+sens_rmax_es030, about ${}\%$ an,100,R_max at effect size 0.30 (Figure S3)
+-,erance ${}\%$,,as in the manuscript: erance ${}\%$
+sens_es2_kstar05," about ${}$, whe",,same number in the manuscript
+-,$\rho = {}$ is at most about $3.7\%$ (Section~4 an,,"input or label, as in the manuscript"
+sens_red_rho05_max, about ${}\%$ (S,100,same number in the manuscript
+-,Section~{} now c,,section number
+-,ections~{} and~4,,section number
+-,L from ${}$ t,,as in the manuscript: L from ${}$ t
+-,"20$ to ${}$, ",,"as in the manuscript: 20$ to ${}$, whe"
+sens_rmax_es020," about ${}\%$ to about $1.0\%$, wh",100,as in the manuscript: where $\Rmax$ ranges from about ${}\%$ to
+sens_rmax_es030," about ${}\%$, whereas the",100,"as in the manuscript: to about ${}\%$, whereas"
+-,$\rho = {}$ is at most about $3.7\%$.},,"input or label, as in the manuscript"
+sens_red_rho05_max,st about ${}\%$.},100,as in the manuscript: 0.5$ is at most about ${}\%$.
+-,\rho = -{}$ t,,as in the manuscript: \rho = -{}$ t
+plan_E1_pow_p0_tm03, about ${}$ (,,as in the manuscript: would give a power of about ${}$ (Table
+-,Section~{} and Section~S6.,,section number
+-,"alpha = {}$, $\kappa$ from",,"as in the manuscript: alpha = {}$, $\kappa$ from"
+-,"eps of ${}$, fiv",,grid step of kappa in Figure S1 (input)
+dec_rel_anchor_max, about ${}\%$ for th,100,same number in the manuscript
+dec_rel_first_max, about ${}\%$ after one Ne,100,same number in the manuscript
+dec_rel_proposed_max, about ${}\%$ after the qu,100,same number in the manuscript
+-,"ho \leq {}$, the",,"as in the manuscript: ho \leq {}$, the rem"
+-,ly at $\rho = {}$.,,as in the manuscript: ly at $\rho = {}$.
+-,Section~{} st,,section number
+grid_rel_max_lo," about ${}\%$ for $\rho \leq 0.9$, and the power a",100,same number in the manuscript
+-,"ho \leq {}$, and",,"input or label, as in the manuscript"
+grid_rel_max_rho95, about ${}\%$ at $\rho = 0.95$ and,100,same number in the manuscript
+-,$\rho = {}$ and ,,"input or label, as in the manuscript"
+grid_rel_max_rho99, about ${}\%$ at $\rho = 0.99$. Be,100,same number in the manuscript
+-,$\rho = {}$. ,,"input or label, as in the manuscript"
+-,s from ${}$ to $4$ (,,"input or label, as in the manuscript"
+-,"alpha = {}$, $\kappa \in [",,"as in the manuscript: alpha = {}$, $\kappa \in [1, 3]$, $\rho \in \{0, 0"
+-,"in \{0, {}, 0",,"as in the manuscript: 3]$, $\rho \in \{0, {}, 0"
+-,"0, 0.3, {}, 0",,"as in the manuscript: ]$, $\rho \in \{0, 0.3, {}, 0"
+-,"3, 0.5, {}, 0",,"as in the manuscript: 3]$, $\rho \in \{0, 0.3, 0.5, {}, 0"
+-,"5, 0.8, {}\}$",,"as in the manuscript: ]$, $\rho \in \{0, 0.3, 0.5, 0.8, {}\}$"
+-,"a \in \{{}, 0.90",,"as in the manuscript: a \in \{{}, 0.90\}$. The a"
+-,"\{0.80, {}\}$",,"as in the manuscript: \{0.80, {}\}$. The a"
+dec_rel_anchor_max," about ${}\%$, which come from the linear approxim",100,"as in the manuscript: has relative errors of up to about ${}\%$, which come"
+dec_rel_first_max," about ${}\%$, a",100,"as in the manuscript: reduces the largest error to about ${}\%$, and the quadratic"
+dec_rel_proposed_max,to about ${}\%$.},100,same number in the manuscript
+cost_ext_rel_closed, about ${}\%$. A,100,same number in the manuscript
+-,Section~{} and the Discussion now ,,section number
+cost_ext_rel_closed,ed about ${}\%$.},100,as in the manuscript: proposed formula reached about ${}\%$.
+-,ections~{}.1 and~3.5 and t,,section number
+-,4.1 and~{} an,,section number
+-,Section~{} di,,section number
+-,Section~{}.2 now giv,,section number
+-,"ly. Over the 21816 designs of Section~{}, t",,section number
+grid_disc_min, about ${}$ and none was negative. The text also g,,same number in the manuscript
+grid_disc_min," about ${}$, and no ",,"as in the manuscript: over the grid was about ${}$, and no design"
+-,"ratios ${}$, $0.5$, $1.5$, $2.5$, and $4$, with th",,"as in the manuscript: ratios ${}$, "
+-,"0.25$, ${}$, $1.5$, $2.5$, and $4$, with the four ",,"as in the manuscript: 0.25$, ${}$, "
+-,"$0.5$, ${}$, $2.5$, and $4$, with ",,"as in the manuscript: $0.5$, ${}$, $2."
+-,"$1.5$, ${}$, and $4$, with",,"as in the manuscript: $1.5$, ${}$, "
+-,Section~{} now r,,section number
+-,"ratios ${}$, $0.5$, $1.5$, $2.5$, and $4$. The pro",,"as in the manuscript: ratios ${}$, "
+-,"0.25$, ${}$, $1.5$, $2.5$, and $4$. The proposed t",,"as in the manuscript: 0.25$, ${}$, "
+-,"$0.5$, ${}$, $2.5$, and $4$. The p",,"as in the manuscript: $0.5$, ${}$, $2."
+-,"$1.5$, ${}$, and $4$. The ",,"as in the manuscript: $1.5$, ${}$, "
+-,Section~{}.1 now states that~(16) ,,as in the manuscript: Section~{}.1 
+-,Section~{}.2 sta,,section number
+-,Section~{} and the Discussion plac,,section number
+-,Section~{}.1 des,,section number
+w_gap_max, about ${}$ and reac,,same number in the manuscript
+w_one_kappa_80,"\approx {}$, ",,"as in the manuscript: reaches one at $\kappa \approx {}$, $"
+w_one_kappa_85,"1.41$, ${}$, ",,"as in the manuscript: \approx 1.41$, ${}$, and"
+w_one_kappa_90,"36$, and ${}$.",,same number in the manuscript
+dec_rel_anchor_max," about ${}\%$, which come from the error of $\thet",100,same number in the manuscript
+dec_rel_proposed_max," about ${}\%$, whereas a f",100,same number in the manuscript
+dec_rel_first_max, about ${}\%$. S,100,same number in the manuscript
+-,Section~{}.2 now states th,,section number
+-,Section~{} reports the dec,,section number

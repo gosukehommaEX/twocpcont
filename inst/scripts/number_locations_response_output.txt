@@ -1,0 +1,279 @@
+==================================================================
+ Number check: manuscript versus ledger
+ 2026-11-10 11:55:50 JST
+==================================================================
+
+[1] Ledgers
+  inst/scripts/results/manuscript_numbers.csv (78 numbers, 2026-11-09 17:35:43)
+  PASS  the ledger is newer than its .rds files and its rendering script
+  inst/sup_info/results/supplement_numbers.csv (56 numbers, 2026-11-09 17:35:50)
+  PASS  the ledger is newer than its .rds files and its rendering script
+
+[2] Manuscript files and locations (233 rows in inst/scripts/number_locations_response.csv)
+  found     ../../Manuscript/Response/response_to_reviewers.tex
+
+[3] Numbers at the registered locations
+   key                  location                      in_text  recomputed  expected status note                       
+   -                    response_to_reviewers.tex:38  3.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:38  3.4                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:38  3.4                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:38  3.5                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:43  3.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:43  0.005                         SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:43  0.05                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:43  0.70                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:43  0.95                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:43  0.5                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:43  0.99                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:64  2.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:64  0.7                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:64  2.2                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:73  0.7                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:76  3.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:79  3.4                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:81  3.1                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:83  3.4                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:87  2.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:87  1.5                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:87  2.1                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:87  1.4                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:87  80                            SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:90  3.1                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:90  0.01                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:90  0.02                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:90  3.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:92  1.5                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:92  2.1                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:92  1.4                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:92  0.80                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:92  3.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:95  278.0009                      SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:95  3.2                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:95  3.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:95  0.025                         SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:95  0.80                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:95  0.90                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:95  0.8                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:95  0.95                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:98  3.3                           SKIP   not in the ledger by design
+   cost_rel_closed      response_to_reviewers.tex:98  0.02     0.02238518  0.02     PASS                              
+   -                    response_to_reviewers.tex:98  0.005                         SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:98  0.05                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:98  0.70                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:98  0.95                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:98  0.5                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:98  0.99                          SKIP   not in the ledger by design
+   grid_rel_max_lo      response_to_reviewers.tex:98  0.14     0.1415765   0.14     PASS                              
+   -                    response_to_reviewers.tex:98  0.9                           SKIP   not in the ledger by design
+   grid_rel_max_rho95   response_to_reviewers.tex:98  0.26     0.2556875   0.26     PASS                              
+   -                    response_to_reviewers.tex:98  0.95                          SKIP   not in the ledger by design
+   grid_rel_max_rho99   response_to_reviewers.tex:98  1.1      1.099603    1.1      PASS                              
+   -                    response_to_reviewers.tex:98  0.99                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:98  0.9                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:98  0.9                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:100 0.9                           SKIP   not in the ledger by design
+   grid_rel_max_lo      response_to_reviewers.tex:100 0.14     0.1415765   0.14     PASS                              
+   -                    response_to_reviewers.tex:101 3.3                           SKIP   not in the ledger by design
+   mismatch_n2_exact    response_to_reviewers.tex:102 278.0009 278.0009    278.0009 PASS                              
+   -                    response_to_reviewers.tex:102 3.2                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:102 2.4                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:103 0.70                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:103 0.95                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:103 0.005                         SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:103 0.01                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:103 0.025                         SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:103 0.05                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:103 0.5                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:103 0.99                          SKIP   not in the ledger by design
+   grid_rel_max_lo      response_to_reviewers.tex:103 0.14     0.1415765   0.14     PASS                              
+   -                    response_to_reviewers.tex:103 0.9                           SKIP   not in the ledger by design
+   grid_rel_max_rho95   response_to_reviewers.tex:103 0.26     0.2556875   0.26     PASS                              
+   -                    response_to_reviewers.tex:103 0.95                          SKIP   not in the ledger by design
+   grid_rel_max_rho99   response_to_reviewers.tex:103 1.1      1.099603    1.1      PASS                              
+   -                    response_to_reviewers.tex:103 0.99                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:104 0.025                         SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:104 0.80                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:104 0.90                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:104 0.8                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:104 0.95                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:104 0.005                         SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:104 0.05                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:104 0.70                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:104 0.95                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:104 0.5                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:104 0.99                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:104 3.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:105 0.8                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:105 0.95                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:105 0.025                         SKIP   not in the ledger by design
+   grid_rel_max_rho99   response_to_reviewers.tex:105 1.1      1.099603    1.1      PASS                              
+   -                    response_to_reviewers.tex:105 0.99                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:105 3.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:109 2.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:109 2.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:109 2.4                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:109 2.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:109 2.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:109 2.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:112 2.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:112 3.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:117 3.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:120 0.5                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:120 2                             SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:120 4.6                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:120 80                            SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:120 5                             SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:120 0.5                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:120 23.8                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:120 3.4                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:120 3.4                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:120 2.4                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:123 2.4                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:123 3.5                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:123 0.80                          SKIP   not in the ledger by design
+   red_cont_k1_rho05_80 response_to_reviewers.tex:123 5.0      5.04252     5.0      PASS                              
+   -                    response_to_reviewers.tex:123 0.5                           SKIP   not in the ledger by design
+   rmax_k1_80           response_to_reviewers.tex:123 23.8     23.8459     23.8     PASS                              
+   -                    response_to_reviewers.tex:123 3.5                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:125 3.5                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:125 0.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:125 0.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:125 0.80                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:125 0.8                           SKIP   not in the ledger by design
+   plan_A_pow_p08_t0    response_to_reviewers.tex:125 0.736    0.7355893   0.736    PASS                              
+   -                    response_to_reviewers.tex:127 2.4                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:127 3.5                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:130 3.5                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:132 0.80                          SKIP   not in the ledger by design
+   red_cont_k1_rho03_80 response_to_reviewers.tex:132 2.5      2.518015    2.5      PASS                              
+   -                    response_to_reviewers.tex:132 0.3                           SKIP   not in the ledger by design
+   red_cont_k1_rho05_80 response_to_reviewers.tex:132 5.0      5.04252     5.0      PASS                              
+   -                    response_to_reviewers.tex:132 0.5                           SKIP   not in the ledger by design
+   red_cont_k1_rho08_80 response_to_reviewers.tex:132 11.1     11.14451    11.1     PASS                              
+   -                    response_to_reviewers.tex:132 0.8                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:132 0.20                          SKIP   not in the ledger by design
+   rmax_k1_80           response_to_reviewers.tex:132 23.8     23.8459     23.8     PASS                              
+   -                    response_to_reviewers.tex:134 0.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:134 0.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:134 0.80                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:134 0.8                           SKIP   not in the ledger by design
+   plan_A_pow_p08_t0    response_to_reviewers.tex:134 0.736    0.7355893   0.736    PASS                              
+   -                    response_to_reviewers.tex:145 2.2                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:161 3.3                           SKIP   not in the ledger by design
+   grid_disc_min        response_to_reviewers.tex:161 0.01     0.009706868 0.01     PASS                              
+   -                    response_to_reviewers.tex:164 3.3                           SKIP   not in the ledger by design
+   grid_disc_min        response_to_reviewers.tex:164 0.01     0.009706868 0.01     PASS                              
+   -                    response_to_reviewers.tex:188 3.2                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:191 3.2                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:193 3.2                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:193 3.2                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:199 3.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:208 3.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:212 5                             SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:217 2.4                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:217 0.20                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:217 0.30                          SKIP   not in the ledger by design
+   sens_rmax_es020      response_to_reviewers.tex:217 20.3     20.26877    20.3     PASS                              
+   sens_rmax_es030      response_to_reviewers.tex:217 1.0      0.9516164   1.0      PASS                              
+   -                    response_to_reviewers.tex:217 5                             SKIP   not in the ledger by design
+   sens_es2_kstar05     response_to_reviewers.tex:217 0.256    0.2558366   0.256    PASS                              
+   -                    response_to_reviewers.tex:217 0.5                           SKIP   not in the ledger by design
+   sens_red_rho05_max   response_to_reviewers.tex:217 3.7      3.662815    3.7      PASS                              
+   -                    response_to_reviewers.tex:217 3.5                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:217 3.5                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:219 0.20                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:219 0.30                          SKIP   not in the ledger by design
+   sens_rmax_es020      response_to_reviewers.tex:219 20.3     20.26877    20.3     PASS                              
+   sens_rmax_es030      response_to_reviewers.tex:219 1.0      0.9516164   1.0      PASS                              
+   -                    response_to_reviewers.tex:219 0.5                           SKIP   not in the ledger by design
+   sens_red_rho05_max   response_to_reviewers.tex:219 3.7      3.662815    3.7      PASS                              
+   -                    response_to_reviewers.tex:220 0.3                           SKIP   not in the ledger by design
+   plan_E1_pow_p0_tm03  response_to_reviewers.tex:220 0.869    0.8689254   0.869    PASS                              
+   -                    response_to_reviewers.tex:231 3.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:233 0.025                         SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:233 0.01                          SKIP   not in the ledger by design
+   dec_rel_anchor_max   response_to_reviewers.tex:233 21       20.79819    21       PASS                              
+   dec_rel_first_max    response_to_reviewers.tex:233 3.2      3.20879     3.2      PASS                              
+   dec_rel_proposed_max response_to_reviewers.tex:233 0.08     0.07729125  0.08     PASS                              
+   -                    response_to_reviewers.tex:233 0.8                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:233 0.95                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:235 3.3                           SKIP   not in the ledger by design
+   grid_rel_max_lo      response_to_reviewers.tex:235 0.14     0.1415765   0.14     PASS                              
+   -                    response_to_reviewers.tex:235 0.9                           SKIP   not in the ledger by design
+   grid_rel_max_rho95   response_to_reviewers.tex:237 0.26     0.2556875   0.26     PASS                              
+   -                    response_to_reviewers.tex:237 0.95                          SKIP   not in the ledger by design
+   grid_rel_max_rho99   response_to_reviewers.tex:237 1.1      1.099603    1.1      PASS                              
+   -                    response_to_reviewers.tex:237 0.99                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:237 0.25                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:240 0.025                         SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:240 0.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:240 0.5                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:240 0.8                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:240 0.95                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:240 0.80                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:240 0.90                          SKIP   not in the ledger by design
+   dec_rel_anchor_max   response_to_reviewers.tex:240 21       20.79819    21       PASS                              
+   dec_rel_first_max    response_to_reviewers.tex:240 3.2      3.20879     3.2      PASS                              
+   dec_rel_proposed_max response_to_reviewers.tex:240 0.08     0.07729125  0.08     PASS                              
+   cost_ext_rel_closed  response_to_reviewers.tex:247 1.9      1.921037    1.9      PASS                              
+   -                    response_to_reviewers.tex:247 3.4                           SKIP   not in the ledger by design
+   cost_ext_rel_closed  response_to_reviewers.tex:250 1.9      1.921037    1.9      PASS                              
+   -                    response_to_reviewers.tex:257 2.4                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:257 3.5                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:257 3.5                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:265 2.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:265 3.3                           SKIP   not in the ledger by design
+   grid_disc_min        response_to_reviewers.tex:265 0.01     0.009706868 0.01     PASS                              
+   grid_disc_min        response_to_reviewers.tex:268 0.01     0.009706868 0.01     PASS                              
+   -                    response_to_reviewers.tex:274 0.25                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:274 0.5                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:274 1.5                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:274 2.5                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:274 3.2                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:276 0.25                          SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:276 0.5                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:276 1.5                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:276 2.5                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:283 2.4                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:283 2.4                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:294 3.4                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:301 2.3                           SKIP   not in the ledger by design
+   w_gap_max            response_to_reviewers.tex:301 0.09     0.09246254  0.09     PASS                              
+   w_one_kappa_80       response_to_reviewers.tex:301 1.41     1.41044     1.41     PASS                              
+   w_one_kappa_85       response_to_reviewers.tex:301 1.36     1.358456    1.36     PASS                              
+   w_one_kappa_90       response_to_reviewers.tex:301 1.30     1.3045      1.30     PASS                              
+   dec_rel_anchor_max   response_to_reviewers.tex:310 21       20.79819    21       PASS                              
+   dec_rel_proposed_max response_to_reviewers.tex:310 0.08     0.07729125  0.08     PASS                              
+   dec_rel_first_max    response_to_reviewers.tex:310 3.2      3.20879     3.2      PASS                              
+   -                    response_to_reviewers.tex:310 2.3                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:310 3.3                           SKIP   not in the ledger by design
+  PASS 48, FAIL 0, SKIP 185
+
+[4] Unregistered numbers (decimals and percentages not covered by number_locations.csv)
+  (none)
+
+[5] Ledger keys not cited in the manuscript: 110 of 134 (for information)
+
+==================================================================
+ Result: ALL CHECKS PASSED; 0 unregistered number(s) to review
+==================================================================
+
+R version 4.6.1 (2026-06-24 ucrt)
+Platform: x86_64-w64-mingw32/x64
+Running under: Windows 11 x64 (build 26200)
+
+Matrix products: default
+  LAPACK version 3.12.1
+
+locale:
+[1] LC_COLLATE=Japanese_Japan.utf8  LC_CTYPE=Japanese_Japan.utf8    LC_MONETARY=Japanese_Japan.utf8
+[4] LC_NUMERIC=C                    LC_TIME=Japanese_Japan.utf8    
+
+time zone: Asia/Tokyo
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+loaded via a namespace (and not attached):
+[1] compiler_4.6.1    tools_4.6.1       rstudioapi_0.18.0
