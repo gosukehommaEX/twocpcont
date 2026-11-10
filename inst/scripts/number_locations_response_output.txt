@@ -1,6 +1,6 @@
 ==================================================================
  Number check: manuscript versus ledger
- 2026-11-10 11:55:50 JST
+ 2026-11-10 12:58:00 JST
 ==================================================================
 
 [1] Ledgers
@@ -9,7 +9,7 @@
   inst/sup_info/results/supplement_numbers.csv (56 numbers, 2026-11-09 17:35:50)
   PASS  the ledger is newer than its .rds files and its rendering script
 
-[2] Manuscript files and locations (233 rows in inst/scripts/number_locations_response.csv)
+[2] Manuscript files and locations (236 rows in inst/scripts/number_locations_response.csv)
   found     ../../Manuscript/Response/response_to_reviewers.tex
 
 [3] Numbers at the registered locations
@@ -71,8 +71,8 @@
    -                    response_to_reviewers.tex:98  0.99                          SKIP   not in the ledger by design
    -                    response_to_reviewers.tex:98  0.9                           SKIP   not in the ledger by design
    -                    response_to_reviewers.tex:98  0.9                           SKIP   not in the ledger by design
-   -                    response_to_reviewers.tex:100 0.9                           SKIP   not in the ledger by design
    grid_rel_max_lo      response_to_reviewers.tex:100 0.14     0.1415765   0.14     PASS                              
+   -                    response_to_reviewers.tex:100 0.9                           SKIP   not in the ledger by design
    -                    response_to_reviewers.tex:101 3.3                           SKIP   not in the ledger by design
    mismatch_n2_exact    response_to_reviewers.tex:102 278.0009 278.0009    278.0009 PASS                              
    -                    response_to_reviewers.tex:102 3.2                           SKIP   not in the ledger by design
@@ -216,11 +216,14 @@
    dec_rel_first_max    response_to_reviewers.tex:240 3.2      3.20879     3.2      PASS                              
    dec_rel_proposed_max response_to_reviewers.tex:240 0.08     0.07729125  0.08     PASS                              
    cost_ext_rel_closed  response_to_reviewers.tex:247 1.9      1.921037    1.9      PASS                              
+   -                    response_to_reviewers.tex:247 0.999                         SKIP   not in the ledger by design
    -                    response_to_reviewers.tex:247 3.4                           SKIP   not in the ledger by design
    cost_ext_rel_closed  response_to_reviewers.tex:250 1.9      1.921037    1.9      PASS                              
+   -                    response_to_reviewers.tex:250 0.999                         SKIP   not in the ledger by design
    -                    response_to_reviewers.tex:257 2.4                           SKIP   not in the ledger by design
    -                    response_to_reviewers.tex:257 3.5                           SKIP   not in the ledger by design
    -                    response_to_reviewers.tex:257 3.5                           SKIP   not in the ledger by design
+   -                    response_to_reviewers.tex:265 2.3                           SKIP   not in the ledger by design
    -                    response_to_reviewers.tex:265 2.3                           SKIP   not in the ledger by design
    -                    response_to_reviewers.tex:265 3.3                           SKIP   not in the ledger by design
    grid_disc_min        response_to_reviewers.tex:265 0.01     0.009706868 0.01     PASS                              
@@ -247,7 +250,7 @@
    dec_rel_first_max    response_to_reviewers.tex:310 3.2      3.20879     3.2      PASS                              
    -                    response_to_reviewers.tex:310 2.3                           SKIP   not in the ledger by design
    -                    response_to_reviewers.tex:310 3.3                           SKIP   not in the ledger by design
-  PASS 48, FAIL 0, SKIP 185
+  PASS 48, FAIL 0, SKIP 188
 
 [4] Unregistered numbers (decimals and percentages not covered by number_locations.csv)
   (none)

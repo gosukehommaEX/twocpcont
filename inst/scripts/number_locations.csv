@@ -102,8 +102,8 @@ n_match_total,sample size in {} of the 96,,Section 5
 n_cells,in 95 of the {} combinations of design,,Section 5
 trial_rmax_r0,exceed about ${}\%$ to,100,Section 5
 trial_rmax_round_r0,"\%$ to ${}\%$, depending",100,Section 5
-grid_n,Over {} designs with correlations,,Abstract
-grid_rel_max_lo,was at most about {}\%. We also,100,Abstract
+grid_n,"Over {} designs, its relative error",,Abstract
+grid_rel_max_lo,at most about {}\% for correlations up to 0.9. We also,100,Abstract
 grid_n,Over the {} designs of Section,,Section 2.3.2
 grid_disc_min,"the smallest $D$ was about ${}$, and none",,Section 2.3.2
 alloc_ne,conventional one in {} of the 120,,Section 3.2
@@ -124,7 +124,7 @@ cost_eval_newton_median,a median of {} and 7 times,,Section 3.4
 cost_eval_uniroot_median,a median of 20 and {} times,,Section 3.4
 cost_match_newton,latter gave the conventional sample size in all {} combinations,,Section 3.4
 cost_ext_converged,stopping rule in all {} combinations examined,,Section 3.4
-cost_ext_rel_closed,proposed formula reached about ${}\%$.,100,Section 3.4
+cost_ext_rel_closed,proposed formula reached about ${}\%$ at $\rho = 0.999$,100,Section 3.4
 rmax_k1_80,"against $\Rmax(1, 0.20) \approx {}\%$",100,Section 3.5
 red_cont_k1_rho03_80,the reduction is about ${}\%$ at $\rho = 0.3$,100,Section 3.5
 red_cont_k1_rho05_80,"0.3$, ${}\%$ at $\rho = 0.5$, and",100,Section 3.5
@@ -143,7 +143,7 @@ cost_eval_conv_median,against {} for the sequential search,,Section S5
 cost_match_uniroot,sequential search in all {} combinations,,Section S5
 cost_match_closed,gave the same total in {} combinations,,Section S5
 cost_ext_converged,stopping rule in all {} combinations given,,Section S5
-cost_ext_rel_closed,"closed form rose to about ${}\%$, in line",100,Section S5
+cost_ext_rel_closed,closed form rose to about ${}\%$ at $\rho = 0.999$,100,Section S5
 dec_rel_anchor_max,has relative errors of up to about ${}\%$. At,100,Section S6
 dec_rel_first_max,"reduces the largest error to about ${}\%$, or about",100,Section S6
 dec_rel_first_max_lo,"or about ${}\%$ for $\rho \leq 0.8$, and the quadratic",100,Section S6
@@ -190,7 +190,7 @@ sens_red_rho05_max,is at most about ${}\%$ over this range,100,Section S8
 -,t) and ${}$ (,,"input, literature or label (main)"
 -,}). The significance level is $\alpha = {}$ (,,"input, literature or label (main)"
 -,s up to {} to,,"input, literature or label (main)"
--,"s up to {}, i",,"input, literature or label (main)"
+-,for correlations up to {}. We also,,"input, literature or label (main)"
 -,xample ${}^2 ,,"input, literature or label (main)"
 -, power ${}$~\,,"input, literature or label (main)"
 -," level ${}$, ",,"input, literature or label (main)"
@@ -475,3 +475,5 @@ sens_red_rho05_max,is at most about ${}\%$ over this range,100,Section S8
 -,h $\rho = {}$.,,"input, literature or label (SI)"
 -,$\rho = {}$ in T,,"input, literature or label (SI)"
 -,wer of ${}$. ,,"input, literature or label (SI)"
+-,at $\rho = {}$ and was much smaller at the negative correlations.,,input (Section 3.4)
+-,"at $\rho = {}$ and was much smaller at the negative correlations, in line",,input (Section S5)

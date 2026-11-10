@@ -56,8 +56,8 @@ grid_rel_max_rho99," about ${}\%$ at $\rho = 0.99$, and for $\rho \leq",100,same
 -,"$\rho = {}$, and for",,"input or label, as in the manuscript"
 -,ho \leq {}$ t,,"input or label, as in the manuscript"
 -,ho \leq {}$.,,"input or label, as in the manuscript"
--,"s up to {}, i",,"as in the manuscript: s up to {}, i"
-grid_rel_max_lo,t about {}\%.,100,same number in the manuscript
+grid_rel_max_lo,t about {}\% ,100,same number in the manuscript
+-,s up to {}.},,"input or label, as in the manuscript"
 -,Section~{} ``,,section number
 mismatch_n2_exact, $n_2 = {}$ in Section~3.2,,as in the manuscript: combination with $n_2 = {}$ in Section
 -,Section~{} shows. Th,,section number
@@ -144,7 +144,7 @@ rmax_k1_80,\approx {}\%$,100,"as in the manuscript: against $\Rmax(1, 0.20) \app
 -,08 planned at $\rho = {}$ g,,as in the manuscript: $\rho = {}$ g
 plan_A_pow_p08_t0, about ${}$ when the true correlation is zero (Tab,,as in the manuscript: gives a power of about ${}$ when the true
 -,f Section~{}.},,section number
--,"2$. Over the 21816 designs of Section~{}, the smallest $D$ was about $0.01$ and ",,section number
+-,"ly. Over the 21816 designs of Section~{}, the smallest $D$ was about $0.01$ and ",,section number
 grid_disc_min, about ${}$ and none was negative. If $D$ is negat,,same number in the manuscript
 -,"Section~{}, the smallest $D$ was about $0.01$, and",,section number
 grid_disc_min," about ${}$, and non",,"as in the manuscript: the smallest $D$ was about ${}$, and none"
@@ -186,7 +186,7 @@ dec_rel_proposed_max, about ${}\%$ after the qu,100,same number in the manuscrip
 grid_rel_max_lo," about ${}\%$ for $\rho \leq 0.9$, and the power a",100,same number in the manuscript
 -,"ho \leq {}$, and",,"input or label, as in the manuscript"
 grid_rel_max_rho95, about ${}\%$ at $\rho = 0.95$ and,100,same number in the manuscript
--,$\rho = {}$ and ,,"input or label, as in the manuscript"
+-,$\rho = {}$ and abou,,"input or label, as in the manuscript"
 grid_rel_max_rho99, about ${}\%$ at $\rho = 0.99$. Be,100,same number in the manuscript
 -,$\rho = {}$. ,,"input or label, as in the manuscript"
 -,s from ${}$ to $4$ (,,"input or label, as in the manuscript"
@@ -200,14 +200,17 @@ grid_rel_max_rho99, about ${}\%$ at $\rho = 0.99$. Be,100,same number in the man
 dec_rel_anchor_max," about ${}\%$, which come from the linear approxim",100,"as in the manuscript: has relative errors of up to about ${}\%$, which come"
 dec_rel_first_max," about ${}\%$, a",100,"as in the manuscript: reduces the largest error to about ${}\%$, and the quadratic"
 dec_rel_proposed_max,to about ${}\%$.},100,same number in the manuscript
-cost_ext_rel_closed, about ${}\%$. A,100,same number in the manuscript
+cost_ext_rel_closed,he formula reached about ${}\%$,100,same number in the manuscript
+-,he formula reached about $1.9\%$ at $\rho = {}$ a,,as in the manuscript: at $\rho = {}$ and was much smaller at the negative correlat
 -,Section~{} and the Discussion now ,,section number
-cost_ext_rel_closed,ed about ${}\%$.},100,as in the manuscript: proposed formula reached about ${}\%$.
+cost_ext_rel_closed,ed formula reached about ${}\%$,100,as in the manuscript: proposed formula reached about ${}\%$ at $\rho = 0.999$
+-,ed formula reached about $1.9\%$ at $\rho = {}$ a,,as in the manuscript: at $\rho = {}$ and was much smaller at the negative correlat
 -,ections~{}.1 and~3.5 and t,,section number
 -,4.1 and~{} an,,section number
 -,Section~{} di,,section number
 -,Section~{}.2 now giv,,section number
--,"ly. Over the 21816 designs of Section~{}, t",,section number
+-,Section~{}.2 now states. O,,section number
+-,"es. Over the 21816 designs of Section~{}, t",,section number
 grid_disc_min, about ${}$ and none was negative. The text also g,,same number in the manuscript
 grid_disc_min," about ${}$, and no ",,"as in the manuscript: over the grid was about ${}$, and no design"
 -,"ratios ${}$, $0.5$, $1.5$, $2.5$, and $4$, with th",,"as in the manuscript: ratios ${}$, "
