@@ -336,7 +336,7 @@ sens_red_rho05_max,is at most about ${}\%$ over this range,100,Section S8
 -,"ttern $({}, 0.3,",,"input, literature or label (main)"
 -," $(0.3, {}, 1, 1, 1)",,"input, literature or label (main)"
 -,"\beta = {}$, the tot",,"input, literature or label (main)"
--,$\rho = {}$ g,,"input, literature or label (main)"
+-,$\rho = {}$ gives a power,,"input, literature or label (main)"
 -,lta_1 = {}$ o,,"input, literature or label (main)"
 -,lta_2 = {}$ o,,"input, literature or label (main)"
 -,"ize as ${}$, ",,"input, literature or label (main)"
