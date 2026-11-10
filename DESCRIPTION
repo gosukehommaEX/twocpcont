@@ -2,7 +2,7 @@ Package: twocpcont
 Type: Package
 Title: Noniterative Closed-Form Sample Size for Trials with Two
     Co-Primary Continuous Endpoints
-Version: 0.1.0.9000
+Version: 0.2.0
 Authors@R:
     person("Gosuke", "Homma",
            email = "my.name.is.gosuke@gmail.com",
